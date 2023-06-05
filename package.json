@@ -1,22 +1,18 @@
 {
-  "name": "solemn-city",
+  "name": "tech-friends",
   "version": "1.0.0",
   "description": "",
-  "main": "server/server.js",
+  "main": "server/app.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server/app.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "apollo-server-express": "^3.5.0",
-    "path": "^0.12.7"
-  },
   "devDependencies": {
     "concurrently": "^5.1.0"
   }
