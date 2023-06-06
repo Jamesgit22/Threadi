@@ -11,8 +11,8 @@ const typeDefs = gql`
 
   type Review {
     _id: ID!
-    reviewAuthor: User
-    reviewText: String
+    reviewAuthor: User!
+    reviewText: String!
     reviewRating: Int
     reviewLikes: Int
     reviewComments: [Comment]
@@ -20,10 +20,10 @@ const typeDefs = gql`
   }
 
   type Comment {
-    _id: ID
-    commentAuthor: String
-    commentText: String
-    commentLikes: Int
+    _id: ID!
+    commentAuthor: String!
+    commentText: String!
+    commentLikes: Int!
     commentComments: [Comment]
   }
 

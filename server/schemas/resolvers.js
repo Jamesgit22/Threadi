@@ -67,6 +67,42 @@ const resolvers = {
     deleteThread: async (parent, { threadId }) => {
       return Thread.findOneAndDelete({ threadId });
     },
+    addThreadComment: async (
+      parent,
+      { threadId, commentText, commentAuthor }
+    ) => {
+      try {
+        const addedThreadComment = await Thread.findOneAndUpdate(
+          { _id: threadId },
+          { $addToSet: { comments: { commentAuthor, commentText } } },
+          { new: true }
+        );
+        return addedThreadComment;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    deleteThreadComment: async (parent, { threadId, commentId }) => {
+      return Thread.findOneAndDelete(
+        { _id: threadId },
+        { $pull: { comments: { _id: commentId } } },
+        { new: true }
+      );
+    },
+    addFriend: async (parent, { userId, friendId }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
+        { $addToSet: { friends: { _id: friendId } } },
+        { new: true }
+      );
+    },
+    deleteFriend: async (parent, { userId, friendId }) => {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { friends: { _id: friendId } } },
+          { new: true }
+        );
+      },
   },
 };
 
