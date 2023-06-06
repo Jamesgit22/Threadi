@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const reviewSchema = new Schema({
   author: userschema,
@@ -19,4 +19,6 @@ const reviewSchema = new Schema({
   comments: [commentSchema],
 });
 
-module.exports = reviewSchema;
+const Review = model('Review', reviewSchema);
+
+module.exports = Review;
