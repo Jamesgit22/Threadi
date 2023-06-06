@@ -12,9 +12,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    admin: {
-        type: Boolean,
-    }
+    friends: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'User',
+      }
+    ]
   },
   {
     // access virtual
