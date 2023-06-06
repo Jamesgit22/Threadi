@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    sharedThreads: [Thread]
   }
 
   type Review {
@@ -33,6 +34,7 @@ const typeDefs = gql`
 
   type Thread {
     _id: ID!
+    threadAuthor: 
     threadTitle: String!
     threadReviews: [Review]
   }
@@ -41,9 +43,9 @@ const typeDefs = gql`
     reviews: [Review]
     threadComments(thread: String!): [Comment]
     userComments(username: String!): [Comment]
-    threads: [Thread]
+    allThreads: [Thread]
     thread(_id: ID!): Thread
-    threads(username: String!): [Thread]
+    userThreads(username: String!): [Thread]
     friends: [User]
     friend(_id: String): User
   }
@@ -51,9 +53,9 @@ const typeDefs = gql`
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    likeThread(_id: ID!): Thread
+    likeThread(threadId: ID!): Thread
     shareThread(friendId: ID!, threadId: ID!): Thread
-    deleteThread(_id: ID!): Thread
+    deleteThread(threadId: ID!): Thread
     addThreadComment(threadId: ID!, commentText: String!, commentAuthor: String!): Comment
     deleteThreadComment(threadId: ID!, commentId: ID!): Thread
     addFriend(userId: ID!, friendId: ID!): User

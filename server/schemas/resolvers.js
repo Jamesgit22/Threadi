@@ -1,8 +1,19 @@
-const { User } = require('../models');
+const { User, Thread } = require('../models');
 
 const resolvers = {
   Query: {
-    
+    thread: async (parent, { threadId }) => {
+      return Thread.findOne({ _id: threadId });
+    },
+    threads: async (parent, { userId }) => {
+      return Thread.find({ threadAuthor: userId });
+    },
+    friend: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
+    },
+    friends: async (parent, { userId }) => {
+      return User.findOne({ _id: userId }).populate('friends');
+    },
   },
 
   Mutation: {
@@ -29,7 +40,34 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-}
+    likeThread: async (parent, { threadId }) => {
+      try {
+        const updatedThread = await Thread.findOneAndUpdate(
+          { _id: threadId },
+          { $inc: { likes: 1 } },
+          { new: true }
+        );
+        return updatedThread;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    shareThread: async (parent, { friendId, threadId }) => {
+      try {
+        const sharedThread = await User.findOneAndUpdate(
+          { _id: friendId },
+          { $addToSet: { sharedThreads: threadId } },
+          { new: true }
+        );
+        return sharedThread;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    deleteThread: async (parent, { threadId }) => {
+      return Thread.findOneAndDelete({ threadId });
+    },
+  },
 };
 
 module.exports = resolvers;
