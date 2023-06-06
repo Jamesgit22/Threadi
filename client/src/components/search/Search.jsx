@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import MovieResults from "../movieresults/MovieResults"; // Import the MovieResults component
+import MovieResults from "../movieresults/MovieResults";
+import "./Search.css";
 
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -12,7 +13,8 @@ const SearchBar = () => {
     axios
       .get(`http://www.omdbapi.com/?apikey=be77788b&s=${searchInput}`)
       .then((res) => {
-        setMovies(res.data.Search || []); // Assuming the API response contains a 'Search' property
+        console.log(res.data);
+        setMovies(res.data.Search || []);
       })
       .catch((err) => {
         console.log(err);
@@ -24,7 +26,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className="searchBar">
       <form onSubmit={handleSubmit}>
         <input
           type="search"
@@ -34,11 +36,13 @@ const SearchBar = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <div className="movie-results">
-        {movies.map((movie) => (
-          <MovieResults key={movie.imdbID} movie={movie} />
-        ))}
-      </div>
+      {movies.length > 0 && (
+        <div className="movie-results-dropdown">
+          {movies.map((movie) => (
+            <MovieResults key={movie.imdbID} movie={movie} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

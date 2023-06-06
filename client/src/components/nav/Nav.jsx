@@ -23,10 +23,6 @@ export default function Nav() {
                 <div className={`bar3 bars ${isOpen ? 'open' : ''}`}></div>
               </div>
               <div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.2 }}
-                exit={{ opacity: 0 }}
                 id='mobile-menu'
                 className={`${isOpen ? 'open' : ''}`}
               >
