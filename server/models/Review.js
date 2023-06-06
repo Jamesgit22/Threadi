@@ -1,7 +1,9 @@
 const { Schema, model } = require('mongoose');
+const User = require('./User');
+const Comment = require('./Comment');
 
 const reviewSchema = new Schema({
-  author: userschema,
+  author: User.schema,
   text: {
     type: String,
     required: true,
@@ -16,7 +18,7 @@ const reviewSchema = new Schema({
   dateWatched: {
     type: Date,
   },
-  comments: [commentSchema],
+  comments: [Comment.schema],
 });
 
 const Review = model('Review', reviewSchema);
