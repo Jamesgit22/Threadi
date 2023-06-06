@@ -1,3 +1,4 @@
+const {Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
@@ -11,9 +12,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    admin: {
-        type: Boolean,
-    }
+    friends: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'User',
+      }
+    ]
   },
   {
     // access virtual
