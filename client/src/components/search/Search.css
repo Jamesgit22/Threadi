@@ -1,0 +1,12 @@
+.searchBar {
+    text-align: center;
+  }
+  
+  .movie-results-dropdown {
+    max-height: 300px; /* Set the maximum height for the dropdown */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ccc; /* Add a border for the dropdown */
+    border-radius: 4px; /* Add border-radius for a rounded appearance */
+    padding: 5px; /* Add padding for spacing */
+  }
+  

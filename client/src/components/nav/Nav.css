@@ -1,7 +1,7 @@
 nav {
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
   background-color: transparent;
-  position: fixed;
+  /* position: fixed; */
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
   z-index: 2;
