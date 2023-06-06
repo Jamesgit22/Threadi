@@ -12,7 +12,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "apollo-server-express": "^3.5.0",
+    "path": "^0.12.7"
+  },
   "devDependencies": {
     "concurrently": "^5.1.0"
   }
