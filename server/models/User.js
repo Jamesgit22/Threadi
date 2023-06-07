@@ -17,6 +17,32 @@ const userSchema = new Schema(
         type: SchemaTypes.ObjectId,
         ref: 'User',
       }
+    ],
+    likes: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Com'
+      },
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Thread'
+      },
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Review'
+      }
+    ],
+    coms: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Com'
+      }
+    ],
+    savedThreads: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Thread'
+      }
     ]
   },
   {

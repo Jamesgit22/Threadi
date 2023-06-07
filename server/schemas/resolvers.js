@@ -52,14 +52,74 @@ const resolvers = {
         console.error(err);
       }
     },
-    shareThread: async (parent, { friendId, threadId }) => {
+    unlikeThread: async (parent, { threadId }) => {
       try {
-        const sharedThread = await User.findOneAndUpdate(
-          { _id: friendId },
-          { $addToSet: { sharedToThreads: threadId } },
+        const updatedThread = await Thread.findOneAndUpdate(
+          { _id: threadId },
+          { $inc: { likes: -1 } },
           { new: true }
         );
-        return sharedThread;
+        return updatedThread;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    likeCom: async (parent, { comId }) => {
+      try {
+        const updatedCom = await Com.findOneAndUpdate(
+          { _id: comId },
+          { $inc: { likes: 1 } },
+          { new: true }
+        );
+        return updatedCom;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    unlikeCom: async (parent, { comId }) => {
+      try {
+        const updatedCom = await Com.findOneAndUpdate(
+          { _id: comId },
+          { $inc: { likes: -1 } },
+          { new: true }
+        );
+        return updatedCom;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    likeReview: async (parent, { reviewId }) => {
+      try {
+        const updatedReview = await Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $inc: { likes: 1 } },
+          { new: true }
+        );
+        return updatedReview;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    unlikeReview: async (parent, { reviewId }) => {
+      try {
+        const updatedReview = await Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $inc: { likes: -1 } },
+          { new: true }
+        );
+        return updatedReview;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    saveThread: async (parent, { userId, threadId }) => {
+      try {
+        const savedThread = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { savedThreads: { _id: threadId } } },
+          { new: true }
+        );
+        return savedThread;
       } catch (err) {
         console.error(err);
       }
@@ -67,26 +127,26 @@ const resolvers = {
     deleteThread: async (parent, { threadId }) => {
       return Thread.findOneAndDelete({ threadId });
     },
-    addThreadComment: async (
+    addThreadCom: async (
       parent,
-      { threadId, commentText, commentAuthor }
+      { threadId, comText, comAuthor }
     ) => {
       try {
-        const addedThreadComment = await Thread.findOneAndUpdate(
+        const addedThreadCom = await Thread.findOneAndUpdate(
           { _id: threadId },
-          { $addToSet: { comments: { commentAuthor, commentText } } },
+          { $addToSet: { com: { _id: comId } } },
           { new: true }
         );
-        return addedThreadComment;
+        return addedThreadCom;
       } catch (err) {
         console.error(err);
       }
     },
     //  
-    deleteThreadComment: async (parent, { threadId, commentId }) => {
+    deleteThreadCom: async (parent, { threadId, comId }) => {
       return Thread.findOneAndDelete(
         { _id: threadId },
-        { $pull: { comments: { _id: commentId } } },
+        { $pull: { com: { _id: comId } } },
         { new: true }
       );
     },

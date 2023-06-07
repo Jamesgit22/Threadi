@@ -9,16 +9,15 @@ const threadSchema = new Schema({
     type: Types.ObjectId,
     ref: 'User'
   },
-  reviews: [{
-    reviewer: {
-      type: String,
-      required: true
-    },
-    body: {
-      type: String,
-      required: true
+  likes: {
+    type: Number,
+  },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Review'
     }
-  }]
+  ]
 });
 
 const Thread = model('Thread', threadSchema);
