@@ -12,8 +12,8 @@ export default function Nav() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < window.innerHeight) {
-        setIsMobile(true);
+      if (window.innerWidth < 1430) {
+        setIsMobile(!isMobile);
       } else {
         setIsMobile(false);
       }
@@ -60,8 +60,11 @@ export default function Nav() {
                       }}
                     >
                       My Lists
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 0.6}}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -70,8 +73,11 @@ export default function Nav() {
                       }}
                     >
                       Friends
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 0.8}}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -80,8 +86,11 @@ export default function Nav() {
                       }}
                     >
                       Following
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 1}}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -90,8 +99,9 @@ export default function Nav() {
                       }}
                     >
                       Logout
-                    </button>
+                    </motion.button>
                   </motion.div>
+
                 </div>
               </div>
             )}
@@ -105,9 +115,9 @@ export default function Nav() {
                   <button className="desktop-nav-btns">
                   <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                   </button>
-                  <div className="desktop-nav-btns">
+                  {/* <div className="desktop-nav-btns">
                     <Search />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="desktopSignOn">
                   <button className="desktop-signin-btns">Sign In</button>
