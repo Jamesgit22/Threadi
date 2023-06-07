@@ -2,9 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./Nav.css";
 import Search from "../search/Search";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +12,7 @@ export default function Nav() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1430) {
+      if (window.innerWidth < 1480) {
         setIsMobile(!isMobile);
       } else {
         setIsMobile(false);
@@ -29,16 +29,15 @@ export default function Nav() {
 
   return (
     <>
-      <div className="header container-fluid">
-        <div className="row">
-          <nav id="nav-container" className="col-12">
-            <div id="logo-container" className="col-4">
-              <h2 id="nav-logo" className="light-txt">
-                THREADI
-              </h2>
-            </div>
-
-            {isMobile && (
+      {isMobile ? (
+        <div className="header container-fluid">
+          <div className="row">
+            <nav id="mobile-nav-container" className="col-12">
+              <div id="logo-container" className="col-4">
+                <h2 id="mobile-nav-logo" className="light-txt">
+                  THREADI
+                </h2>
+              </div>
               <div className="mobile">
                 <div id="nav-links" className="col-8">
                   <div id="hamburger-icon" onClick={() => toggleMenu()}>
@@ -48,9 +47,9 @@ export default function Nav() {
                   </div>
                   <div id="mobile-menu" className={`${isOpen ? "open" : ""}`}>
                     <motion.button
-                      initial={{opacity: 0}}
-                      whileInView={{opacity: 1}}
-                      transition={{duration: 0.4, delay: 0.4}}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 0.4 }}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -61,9 +60,9 @@ export default function Nav() {
                       My Lists
                     </motion.button>
                     <motion.button
-                    initial={{opacity: 0}}
-                    whileInView={{opacity: 1}}
-                    transition={{duration: 0.4, delay: 0.6}}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 0.6 }}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -74,9 +73,9 @@ export default function Nav() {
                       Friends
                     </motion.button>
                     <motion.button
-                    initial={{opacity: 0}}
-                    whileInView={{opacity: 1}}
-                    transition={{duration: 0.4, delay: 0.8}}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 0.8 }}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -87,9 +86,9 @@ export default function Nav() {
                       Following
                     </motion.button>
                     <motion.button
-                    initial={{opacity: 0}}
-                    whileInView={{opacity: 1}}
-                    transition={{duration: 0.4, delay: 1}}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 1 }}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -102,16 +101,25 @@ export default function Nav() {
                   </div>
                 </div>
               </div>
-            )}
-
-            {!isMobile && (
+            </nav>
+          </div>
+        </div>
+      ) : (
+        <div className="header container-fluid">
+          <div className="row">
+            <nav id="nav-container" className="col-12">
+              <div id="logo-container" className="col-4">
+                <h2 id="nav-logo" className="light-txt">
+                  THREADI
+                </h2>
+              </div>
               <div className="desktop">
                 <div className="desktopNav">
                   <button className="desktop-nav-btns">Social</button>
                   <button className="desktop-nav-btns">Profile</button>
                   <button className="desktop-nav-btns">Browse</button>
                   <button className="desktop-nav-btns">
-                  <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                   </button>
                   {/* <div className="desktop-nav-btns">
                     <Search />
@@ -122,10 +130,10 @@ export default function Nav() {
                   <button className="desktop-signup-btns">Sign Up</button>
                 </div>
               </div>
-            )}
-          </nav>
+            </nav>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

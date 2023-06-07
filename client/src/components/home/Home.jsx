@@ -32,11 +32,18 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="top">
-        <h1>Rate all the entertainment you watch</h1>
-        <button>Sign Up</button>
+        <div className="subtitleOne">
+          <h1 className="firstHeader">Rate all the entertainment you watch</h1>
+          <button>Sign Up</button>
+        </div>
         {moviePosters.length > 0 && (
           <div className="movie-poster">
-            <img className="movie-img" src={`https://image.tmdb.org/t/p/w500/${moviePosters[0].poster_path}`} alt={moviePosters[0].title} />
+            <img
+              className="movie-img"
+              id="posterOne"
+              src={`https://image.tmdb.org/t/p/w500/${moviePosters[0].poster_path}`}
+              alt={moviePosters[0].title}
+            />
           </div>
         )}
       </div>
@@ -45,7 +52,11 @@ const Home = () => {
         <button>Sign Up</button>
         {moviePosters.length > 1 && (
           <div className="movie-poster">
-            <img className="movie-img" src={`https://image.tmdb.org/t/p/w500/${moviePosters[1].poster_path}`} alt={moviePosters[1].title} />
+            <img
+              className="movie-img"
+              src={`https://image.tmdb.org/t/p/w500/${moviePosters[1].poster_path}`}
+              alt={moviePosters[1].title}
+            />
           </div>
         )}
       </div>
@@ -54,7 +65,11 @@ const Home = () => {
         <button>Sign Up</button>
         {moviePosters.length > 2 && (
           <div className="movie-poster">
-            <img className="movie-img" src={`https://image.tmdb.org/t/p/w500/${moviePosters[2].poster_path}`} alt={moviePosters[2].title} />
+            <img
+              className="movie-img"
+              src={`https://image.tmdb.org/t/p/w500/${moviePosters[2].poster_path}`}
+              alt={moviePosters[2].title}
+            />
           </div>
         )}
       </div>
