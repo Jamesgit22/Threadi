@@ -1,19 +1,16 @@
-
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Nav.css';
 
-
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < window.innerHeight) {
-        setIsMobile(!isMobile);
+        setIsMobile(true);
       } else {
         setIsMobile(false);
       }
@@ -26,19 +23,19 @@ export default function Nav() {
   const toggleMenu = () => {
     setIsOpen((open) => !open);
   };
+
   return (
     <>
-
       <div className="header container-fluid">
         <div className="row">
           <nav id="nav-container" className="col-12">
             <div id="logo-container" className="col-4">
               <h2 id="nav-logo" className="light-txt">
                 THREADI
-
               </h2>
             </div>
-            {isMobile && ( // add conditional statement here
+
+            {isMobile && (
               <div className="mobile">
                 <div id="nav-links" className="col-8">
                   <div id="hamburger-icon" onClick={() => toggleMenu()}>
@@ -90,66 +87,9 @@ export default function Nav() {
                   </div>
                 </div>
               </div>
-
-              <div
-                id='mobile-menu'
-                className={`${isOpen ? 'open' : ''}`}
-              >
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                  className='mobile-nav-btns'
-                  href='/'
-                  onClick={() => {
-                    // handleViewChange('Projects');
-                    toggleMenu();
-                  }}
-                >
-                  My Lists
-                </motion.button>
-                <motion.button
-                initial={{opacity: 0}}
-                whileInView={{opacity: 1}}
-                transition={{duration: 0.4, delay: 0.4 }}
-                  className='mobile-nav-btns'
-                  href='/'
-                  onClick={() => {
-                    // handleViewChange('About');
-                    toggleMenu();
-                  }}
-                >
-                  Friends
-                </motion.button>
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.6  }}
-                  className='mobile-nav-btns'
-                  href='/'
-                  onClick={() => {
-                    // handleViewChange('Contact');
-                    toggleMenu();
-                  }}
-                >
-                  Following
-                </motion.button>
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.8  }}
-                  className='mobile-nav-btns'
-                  href='/'
-                  onClick={() => {
-                    // handleViewChange('Home');
-                    toggleMenu();
-                  }}
-                >
-                  Logout
-                </motion.button>
-
             )}
-            {!isMobile && ( // add conditional statement here
+
+            {!isMobile && (
               <div className="desktop">
                 <div className="desktopNav">
                   <button className="desktop-nav-btns">Social</button>
@@ -160,7 +100,6 @@ export default function Nav() {
                   <button className="desktop-signin-btns">Sign In</button>
                   <button className="desktop-signup-btns">Sign Up</button>
                 </div>
-
               </div>
             )}
           </nav>
