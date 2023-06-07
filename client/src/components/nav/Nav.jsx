@@ -4,11 +4,10 @@ import "./Nav.css";
 import Search from "../search/Search";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
+import { motion } from 'framer-motion';
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -27,6 +26,7 @@ export default function Nav() {
   const toggleMenu = () => {
     setIsOpen((open) => !open);
   };
+
   return (
     <>
       <div className="header container-fluid">
@@ -37,7 +37,8 @@ export default function Nav() {
                 THREADI
               </h2>
             </div>
-            {isMobile && ( // add conditional statement here
+
+            {isMobile && (
               <div className="mobile">
                 <div id="nav-links" className="col-8">
                   <div id="hamburger-icon" onClick={() => toggleMenu()}>
@@ -90,7 +91,8 @@ export default function Nav() {
                 </div>
               </div>
             )}
-            {!isMobile && ( // add conditional statement here
+
+            {!isMobile && (
               <div className="desktop">
                 <div className="desktopNav">
                   <button className="desktop-nav-btns">Social</button>
