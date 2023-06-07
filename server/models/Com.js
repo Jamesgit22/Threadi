@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 const User = require('./User');
 
-const commentObjectSchema = new Schema({
+const comObjectSchema = new Schema({
     author: User,
     text: {
       type: String,
@@ -12,9 +12,9 @@ const commentObjectSchema = new Schema({
     },
   });
   
-  const commentSchema = new Schema({
-    comments: [commentObjectSchema],
+  const comSchema = new Schema({
+    coms: [comObjectSchema],
   });
   
 
-module.exports = commentSchema;
+module.exports = comSchema;

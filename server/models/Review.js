@@ -1,41 +1,34 @@
 const { Schema, model } = require('mongoose');
 const User = require('./User');
-const Comment = require('./Comment');
+const Com = require('./Com');
 
-const authorSchema = new Schema({
-    author: {
+const reviewSchema = new Schema({
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  text: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  likes: {
+    type: Number,
+  },
+  dateWatched: {
+    type: Date,
+  },
+  comments: [
+    {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'Com'
     }
-  });
-  
-  const commentSchema = new Schema({
-    comment: {
-      type: Schema.Types.ObjectId,
-      ref: 'Comment'
-    }
-  });
-  
-  
-  const reviewSchema = new Schema({
-    author: authorSchema,
-    text: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
-    },
-    likes: {
-      type: Number,
-    },
-    dateWatched: {
-      type: Date,
-    },
-    comments: [commentSchema],
-  });
-  
+  ],
+});
+
 
 const Review = model('Review', reviewSchema);
 
