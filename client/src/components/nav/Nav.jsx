@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import './Nav.css';
 
 export default function Nav() {
@@ -14,7 +15,9 @@ export default function Nav() {
         <div className='row'>
           <nav id='nav-container' className='col-12'>
             <div id='logo-container' className='col-4'>
-              <h2 id='nav-logo' className='light-txt'>Logo</h2>
+              <h2 id='nav-logo' className='light-txt'>
+                Logo
+              </h2>
             </div>
             <div id='nav-links' className='col-8'>
               <div id='hamburger-icon' onClick={() => toggleMenu()}>
@@ -23,14 +26,13 @@ export default function Nav() {
                 <div className={`bar3 bars ${isOpen ? 'open' : ''}`}></div>
               </div>
               <div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.2 }}
-                exit={{ opacity: 0 }}
                 id='mobile-menu'
                 className={`${isOpen ? 'open' : ''}`}
               >
-                <button
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
                   className='mobile-nav-btns'
                   href='/'
                   onClick={() => {
@@ -39,8 +41,11 @@ export default function Nav() {
                   }}
                 >
                   My Lists
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                initial={{opacity: 0}}
+                whileInView={{opacity: 1}}
+                transition={{duration: 0.4, delay: 0.4 }}
                   className='mobile-nav-btns'
                   href='/'
                   onClick={() => {
@@ -49,8 +54,11 @@ export default function Nav() {
                   }}
                 >
                   Friends
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.6  }}
                   className='mobile-nav-btns'
                   href='/'
                   onClick={() => {
@@ -59,8 +67,11 @@ export default function Nav() {
                   }}
                 >
                   Following
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.8  }}
                   className='mobile-nav-btns'
                   href='/'
                   onClick={() => {
@@ -69,7 +80,7 @@ export default function Nav() {
                   }}
                 >
                   Logout
-                </button>
+                </motion.button>
               </div>
             </div>
           </nav>
