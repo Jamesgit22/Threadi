@@ -1,0 +1,8 @@
+.movie {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 37rem;
+    border: 2px black solid;
+}
