@@ -2,14 +2,16 @@ import React from 'react'
 import  './footer.css';
 export default function footer() {
     
-  
+  function gitHub(url) {
+    window.location.href = url;
+  }
   return (
     <>
     <footer>
-      <a  href="https://github.com/Jamesgit22/Threadi">
-       <button class="footerTitle" ></button>
-    </a>
-    <a class="footer" href="https://github.com/Jamesgit22">
+       <button onClick= {() => gitHub('https://github.com/Jamesgit22/Threadi')} class="footerTitle" ></button>
+       <div class="columns">
+       <div class="column">
+        <a class="footer"  href="https://github.com/Jamesgit22">
      James
     </a>
     <a class="footer" href="https://github.com/rahargrave">
@@ -24,6 +26,24 @@ export default function footer() {
     <a  class="footer" id="footerEnd" href="https://github.com/JoseTorres26">
      Jose
     </a>
+       </div>
+       <div class="column">
+        <a class="footer"  href="/">
+     Home
+    </a>
+    <a class="footer" href="/">
+     Sign in
+    </a>
+    <a class="footer" href="/">
+     About
+    </a>
+    <a class="footer" href="/">
+     Profile
+    </a>
+       </div>
+       </div>
+     
+    <p class="copy">©2023 HomeRow Homies | Rights Reserved | Threadi</p>
     </footer>
       
     </>
