@@ -52,14 +52,51 @@ const resolvers = {
         console.error(err);
       }
     },
+    unlikeThread: async (parent, { threadId }) => {
+      try {
+        const updatedThread = await Thread.findOneAndUpdate(
+          { _id: threadId },
+          { $dec: { likes: 1 } },
+          { new: true }
+        );
+        return updatedThread;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    likeCom: async (parent, { comId }) => {
+      try {
+        const updatedCom = await Com.findOneAndUpdate(
+          { _id: comId },
+          { $inc: { likes: 1 } },
+          { new: true }
+        );
+        return updatedCom;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    unlikeCom: async (parent, { comId }) => {
+      try {
+        const updatedCom = await Com.findOneAndUpdate(
+          { _id: comId },
+          { $dec: { likes: 1 } },
+          { new: true }
+        );
+        return updatedCom;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
     shareThread: async (parent, { friendId, threadId }) => {
       try {
-        const sharedThread = await User.findOneAndUpdate(
+        const sharedCom = await User.findOneAndUpdate(
           { _id: friendId },
           { $addToSet: { sharedToThreads: threadId } },
           { new: true }
         );
-        return sharedThread;
+        return sharedCom;
       } catch (err) {
         console.error(err);
       }
@@ -67,26 +104,26 @@ const resolvers = {
     deleteThread: async (parent, { threadId }) => {
       return Thread.findOneAndDelete({ threadId });
     },
-    addThreadComment: async (
+    addThreadCom: async (
       parent,
-      { threadId, commentText, commentAuthor }
+      { threadId, comText, comAuthor }
     ) => {
       try {
-        const addedThreadComment = await Thread.findOneAndUpdate(
+        const addedThreadCom = await Thread.findOneAndUpdate(
           { _id: threadId },
-          { $addToSet: { comments: { commentAuthor, commentText } } },
+          { $addToSet: { coms: { comAuthor, comtText } } },
           { new: true }
         );
-        return addedThreadComment;
+        return addedThreadCom;
       } catch (err) {
         console.error(err);
       }
     },
     //  
-    deleteThreadComment: async (parent, { threadId, commentId }) => {
+    deleteThreadCom: async (parent, { threadId, comId }) => {
       return Thread.findOneAndDelete(
         { _id: threadId },
-        { $pull: { comments: { _id: commentId } } },
+        { $pull: { com: { _id: comId } } },
         { new: true }
       );
     },

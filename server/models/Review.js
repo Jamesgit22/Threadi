@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const User = require('./User');
-const Comment = require('./Comment');
+const Com = require('./Com');
 
 const authorSchema = new Schema({
     author: {
@@ -9,7 +9,7 @@ const authorSchema = new Schema({
     }
   });
   
-  const commentSchema = new Schema({
+  const comSchema = new Schema({
     comment: {
       type: Schema.Types.ObjectId,
       ref: 'Comment'
