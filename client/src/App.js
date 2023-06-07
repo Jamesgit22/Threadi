@@ -4,6 +4,8 @@ import Nav from "./components/nav/Nav";
 import ProfilePage from "./components/profile/Profile";
 import Home from "./components/home/Home";
 import "./App.css";
+import SearchBar from "./components/search/Search";
+import Login from "./components/login/Login";
 
 
 function App() {
@@ -16,6 +18,9 @@ function App() {
           <Route exact path="/">
             <SearchBar />
             <Home />
+          </Route>
+          <Route exact path="/login">
+          <Login />
           </Route>
           <Route path="/profile">
             <ProfilePage />

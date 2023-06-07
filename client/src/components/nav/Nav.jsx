@@ -46,7 +46,11 @@ export default function Nav() {
                     <div className={`bar2 bars ${isOpen ? "open" : ""}`}></div>
                     <div className={`bar3 bars ${isOpen ? "open" : ""}`}></div>
                   </div>
-                  <div id="mobile-menu" className={`${isOpen ? "open" : ""}`}>
+                  <motion.div
+                  initial={{opacity: 0}}
+                  whileInView={{opacity: 1}}
+                  transition={{duration: 0.2}}
+                  id="mobile-menu" className={`${isOpen ? "open" : ""}`}>
                     <button
                       className="mobile-nav-btns"
                       href="/"
@@ -87,7 +91,7 @@ export default function Nav() {
                     >
                       Logout
                     </button>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             )}
