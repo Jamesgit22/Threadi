@@ -1,6 +1,4 @@
-const { Schema, model } = require('mongoose');
-const reviewSchema = require('./Review');
-
+const { Schema, Types, model } = require('mongoose');
 
 const threadSchema = new Schema({
   title: {
@@ -8,10 +6,19 @@ const threadSchema = new Schema({
     required: true,
   },
   threadAuthor: {
-    type: SchemaTypes.ObjectId,
+    type: Types.ObjectId,
     ref: 'User'
   },
-  reviews: [reviewSchema],
+  reviews: [{
+    reviewer: {
+      type: String,
+      required: true
+    },
+    body: {
+      type: String,
+      required: true
+    }
+  }]
 });
 
 const Thread = model('Thread', threadSchema);
