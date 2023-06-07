@@ -88,15 +88,14 @@ const resolvers = {
         console.error(err);
       }
     },
-
-    shareThread: async (parent, { friendId, threadId }) => {
+    saveThread: async (parent, { userId, threadId }) => {
       try {
-        const sharedCom = await User.findOneAndUpdate(
-          { _id: friendId },
-          { $addToSet: { sharedToThreads: threadId } },
+        const savedThread = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { savedThreads: { _id: threadId } } },
           { new: true }
         );
-        return sharedCom;
+        return savedThread;
       } catch (err) {
         console.error(err);
       }
@@ -111,7 +110,7 @@ const resolvers = {
       try {
         const addedThreadCom = await Thread.findOneAndUpdate(
           { _id: threadId },
-          { $addToSet: { coms: { comAuthor, comtText } } },
+          { $addToSet: { com: { _id: comId } } },
           { new: true }
         );
         return addedThreadCom;

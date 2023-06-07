@@ -31,6 +31,18 @@ const userSchema = new Schema(
         type: SchemaTypes.ObjectId,
         ref: 'Review'
       }
+    ],
+    coms: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Com'
+      }
+    ],
+    savedThreads: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Thread'
+      }
     ]
   },
   {
