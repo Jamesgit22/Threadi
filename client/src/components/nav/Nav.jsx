@@ -13,8 +13,8 @@ export default function Nav() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < window.innerHeight) {
-        setIsMobile(true);
+      if (window.innerWidth < 1430) {
+        setIsMobile(!isMobile);
       } else {
         setIsMobile(false);
       }
@@ -47,6 +47,7 @@ export default function Nav() {
                     <div className={`bar2 bars ${isOpen ? 'open' : ''}`}></div>
                     <div className={`bar3 bars ${isOpen ? 'open' : ''}`}></div>
                   </div>
+
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -54,46 +55,68 @@ export default function Nav() {
                     id='mobile-menu'
                     className={`${isOpen ? 'open' : ''}`}
                   >
-                    <button
-                      className='mobile-nav-btns'
-                      href='/'
+          
+                  
+                    <motion.button
+                      initial={{opacity: 0}}
+                      whileInView={{opacity: 1}}
+                      transition={{duration: 0.4, delay: 0.4}}
+                      className="mobile-nav-btns"
+                      href="/"
+
                       onClick={() => {
                         // handleViewChange('Projects');
                         toggleMenu();
                       }}
                     >
                       My Lists
-                    </button>
-                    <button
-                      className='mobile-nav-btns'
-                      href='/'
+
+                    </motion.button>
+
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 0.6}}
+                      className="mobile-nav-btns"
+                      href="/"
+
                       onClick={() => {
                         // handleViewChange('About');
                         toggleMenu();
                       }}
                     >
                       Friends
-                    </button>
-                    <button
-                      className='mobile-nav-btns'
-                      href='/'
+
+                    </motion.button>
+                    
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 0.8}}
+                      className="mobile-nav-btns"
+                      href="/"
+
                       onClick={() => {
                         // handleViewChange('Contact');
                         toggleMenu();
                       }}
                     >
                       Following
-                    </button>
-                    <button
-                      className='mobile-nav-btns'
-                      href='/'
+                    </motion.button>
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 1}}
+                      className="mobile-nav-btns"
+                      href="/"
                       onClick={() => {
                         // handleViewChange('Home');
                         toggleMenu();
                       }}
                     >
                       Logout
-                    </button>
+
+                    </motion.button>
                   </motion.div>
                 </div>
               </div>
@@ -108,9 +131,10 @@ export default function Nav() {
                   <button className='desktop-nav-btns'>
                     <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                   </button>
-                  <div className='desktop-nav-btns'>
+
+                  {/* <div className="desktop-nav-btns">
                     <Search />
-                  </div>
+                  </div> */}
                 </div>
                 <div className='desktopSignOn'>
                   <button className='desktop-signin-btns'>Sign In</button>
