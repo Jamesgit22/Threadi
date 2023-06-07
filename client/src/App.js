@@ -10,12 +10,13 @@ import Login from "./components/login/Login";
 function App() {
   return (
     <>
-
       <Nav />
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route exact path="/"></Route>
+            <Route exact path="/">
+              <Home />
+             </Route>
             <Route exact path="/login">
               <Login />
             </Route>
