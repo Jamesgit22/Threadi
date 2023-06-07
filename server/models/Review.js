@@ -12,7 +12,7 @@ const authorSchema = new Schema({
   const comSchema = new Schema({
     comment: {
       type: Schema.Types.ObjectId,
-      ref: 'Comment'
+      ref: 'Com'
     }
   });
   
@@ -33,7 +33,7 @@ const authorSchema = new Schema({
     dateWatched: {
       type: Date,
     },
-    comments: [commentSchema],
+    comments: [comSchema],
   });
   
 
