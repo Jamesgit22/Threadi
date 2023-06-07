@@ -6,7 +6,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    sharedThreads: [Thread]
+    sharedToThreads: [Thread]
   }
 
   type Review {
@@ -34,7 +34,7 @@ const typeDefs = gql`
 
   type Thread {
     _id: ID!
-    threadAuthor: 
+    threadAuthor: [User]
     threadTitle: String!
     threadReviews: [Review]
   }
@@ -43,7 +43,6 @@ const typeDefs = gql`
     reviews: [Review]
     threadComments(thread: String!): [Comment]
     userComments(username: String!): [Comment]
-    allThreads: [Thread]
     thread(_id: ID!): Thread
     userThreads(username: String!): [Thread]
     friends: [User]
