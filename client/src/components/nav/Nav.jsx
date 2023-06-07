@@ -55,47 +55,40 @@ export default function Nav() {
                     id='mobile-menu'
                     className={`${isOpen ? 'open' : ''}`}
                   >
-          
-                  
                     <motion.button
-                      initial={{opacity: 0}}
-                      whileInView={{opacity: 1}}
-                      transition={{duration: 0.4, delay: 0.4}}
-                      className="mobile-nav-btns"
-                      href="/"
-
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 0.4 }}
+                      className='mobile-nav-btns'
+                      href='/'
                       onClick={() => {
                         // handleViewChange('Projects');
                         toggleMenu();
                       }}
                     >
                       My Lists
-
                     </motion.button>
 
                     <motion.button
-                    initial={{opacity: 0}}
-                    whileInView={{opacity: 1}}
-                    transition={{duration: 0.4, delay: 0.6}}
-                      className="mobile-nav-btns"
-                      href="/"
-
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 0.6 }}
+                      className='mobile-nav-btns'
+                      href='/'
                       onClick={() => {
                         // handleViewChange('About');
                         toggleMenu();
                       }}
                     >
                       Friends
-
                     </motion.button>
-                    
-                    <motion.button
-                    initial={{opacity: 0}}
-                    whileInView={{opacity: 1}}
-                    transition={{duration: 0.4, delay: 0.8}}
-                      className="mobile-nav-btns"
-                      href="/"
 
+                    <motion.button
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 0.8 }}
+                      className='mobile-nav-btns'
+                      href='/'
                       onClick={() => {
                         // handleViewChange('Contact');
                         toggleMenu();
@@ -104,18 +97,17 @@ export default function Nav() {
                       Following
                     </motion.button>
                     <motion.button
-                    initial={{opacity: 0}}
-                    whileInView={{opacity: 1}}
-                    transition={{duration: 0.4, delay: 1}}
-                      className="mobile-nav-btns"
-                      href="/"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 1 }}
+                      className='mobile-nav-btns'
+                      href='/'
                       onClick={() => {
                         // handleViewChange('Home');
                         toggleMenu();
                       }}
                     >
                       Logout
-
                     </motion.button>
                   </motion.div>
                 </div>

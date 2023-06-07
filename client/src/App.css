@@ -14,9 +14,11 @@
 }
 
 body {
-  background-color: var(--dark-col)!important;
+  background-color: var(--dark-col) !important;
 }
 
 .light-txt {
   color: var(--light-col);
 }
+
+/* adding to resolve conflict */
