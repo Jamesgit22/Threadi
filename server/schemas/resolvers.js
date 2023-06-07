@@ -56,7 +56,7 @@ const resolvers = {
       try {
         const updatedThread = await Thread.findOneAndUpdate(
           { _id: threadId },
-          { $dec: { likes: 1 } },
+          { $inc: { likes: -1 } },
           { new: true }
         );
         return updatedThread;
@@ -80,10 +80,34 @@ const resolvers = {
       try {
         const updatedCom = await Com.findOneAndUpdate(
           { _id: comId },
-          { $dec: { likes: 1 } },
+          { $inc: { likes: -1 } },
           { new: true }
         );
         return updatedCom;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    likeReview: async (parent, { reviewId }) => {
+      try {
+        const updatedReview = await Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $inc: { likes: 1 } },
+          { new: true }
+        );
+        return updatedReview;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    unlikeReview: async (parent, { reviewId }) => {
+      try {
+        const updatedReview = await Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $inc: { likes: -1 } },
+          { new: true }
+        );
+        return updatedReview;
       } catch (err) {
         console.error(err);
       }
