@@ -47,7 +47,10 @@ export default function Nav() {
                     <div className={`bar3 bars ${isOpen ? "open" : ""}`}></div>
                   </div>
                   <div id="mobile-menu" className={`${isOpen ? "open" : ""}`}>
-                    <button
+                    <motion.button
+                      initial={{opacity: 0}}
+                      whileInView={{opacity: 1}}
+                      transition={{duration: 0.4, delay: 0.4}}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -56,8 +59,11 @@ export default function Nav() {
                       }}
                     >
                       My Lists
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 0.6}}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -66,8 +72,11 @@ export default function Nav() {
                       }}
                     >
                       Friends
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 0.8}}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -76,8 +85,11 @@ export default function Nav() {
                       }}
                     >
                       Following
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                    initial={{opacity: 0}}
+                    whileInView={{opacity: 1}}
+                    transition={{duration: 0.4, delay: 1}}
                       className="mobile-nav-btns"
                       href="/"
                       onClick={() => {
@@ -86,7 +98,7 @@ export default function Nav() {
                       }}
                     >
                       Logout
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
               </div>

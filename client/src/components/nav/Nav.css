@@ -52,11 +52,11 @@ nav {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50px;
+  top: 92px;
   left: 0;
   height: calc(100vh - 50px);
   width: 100%;
-  padding-top: 50px;
+  padding-top: 60px;
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 2;
