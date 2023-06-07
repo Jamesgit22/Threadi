@@ -1,0 +1,35 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #9997a5;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .footerTitle {
+    background-image: url(./github-mark.png);
+    background-size: contain;
+    width:50px;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+
+  }
+  .footer {
+    margin: 10px;
+    display:flex;
+    flex-direction: column;
+    color: black;
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+  }
+  #footerEnd::after {
+    content: "";
+    display: block;
+    margin: 20px;;
+    height: 1px;
+    background-color: #000;
+  }
