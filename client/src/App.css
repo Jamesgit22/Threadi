@@ -13,7 +13,7 @@
 }
 
 body {
-  background-color: var(--dark-col);
+  background-color: var(--dark-col)!important;
 }
 
 .light-txt {

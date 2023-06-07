@@ -1,0 +1,11 @@
+.movie-img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.05);
+    }
+}
