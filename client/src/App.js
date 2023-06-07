@@ -12,7 +12,9 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route exact path="/"></Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
             <Route path="/profile">
               <ProfilePage />
             </Route>

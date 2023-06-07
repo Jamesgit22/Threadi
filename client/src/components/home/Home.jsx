@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import SignUpModal from "../signupmodal/Signupmodal";
 import "./Home.css";
 
 const Home = () => {
   const [moviePosters, setMoviePosters] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Fetch popular movies from Movie Database API
@@ -29,37 +31,60 @@ const Home = () => {
     fetchPopularMovies();
   }, []);
 
+  const openModal = () => {
+    console.log("Open modal");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="home-container">
       <div className="top">
         <h1>Rate all the entertainment you watch</h1>
-        <button>Sign Up</button>
+        <button onClick={openModal}>Sign Up</button>
         {moviePosters.length > 0 && (
           <div className="movie-poster">
-            <img className="movie-img" src={`https://image.tmdb.org/t/p/w500/${moviePosters[0].poster_path}`} alt={moviePosters[0].title} />
+            <img
+              className="movie-img"
+              src={`https://image.tmdb.org/t/p/w500/${moviePosters[0].poster_path}`}
+              alt={moviePosters[0].title}
+            />
           </div>
         )}
       </div>
       <div className="middle">
         <h1>Share what you watch with your friends</h1>
-        <button>Sign Up</button>
+        <button onClick={openModal}>Sign Up</button>
         {moviePosters.length > 1 && (
           <div className="movie-poster">
-            <img className="movie-img" src={`https://image.tmdb.org/t/p/w500/${moviePosters[1].poster_path}`} alt={moviePosters[1].title} />
+            <img
+              className="movie-img"
+              src={`https://image.tmdb.org/t/p/w500/${moviePosters[1].poster_path}`}
+              alt={moviePosters[1].title}
+            />
           </div>
         )}
       </div>
       <div className="bottom">
         <h1>See what your friends rated</h1>
-        <button>Sign Up</button>
+        <button onClick={openModal}>Sign Up</button>
         {moviePosters.length > 2 && (
           <div className="movie-poster">
-            <img className="movie-img" src={`https://image.tmdb.org/t/p/w500/${moviePosters[2].poster_path}`} alt={moviePosters[2].title} />
+            <img
+              className="movie-img"
+              src={`https://image.tmdb.org/t/p/w500/${moviePosters[2].poster_path}`}
+              alt={moviePosters[2].title}
+            />
           </div>
         )}
       </div>
+      {isModalOpen && <SignUpModal closeModal={closeModal} />}
     </div>
   );
 };
 
 export default Home;
+
