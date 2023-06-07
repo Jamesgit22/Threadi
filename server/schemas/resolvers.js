@@ -5,7 +5,7 @@ const resolvers = {
     thread: async (parent, { threadId }) => {
       return Thread.findOne({ _id: threadId });
     },
-    threads: async (parent, { userId }) => {
+    userThreads: async (parent, { userId }) => {
       return Thread.find({ threadAuthor: userId });
     },
     friend: async (parent, { userId }) => {
@@ -56,7 +56,7 @@ const resolvers = {
       try {
         const sharedThread = await User.findOneAndUpdate(
           { _id: friendId },
-          { $addToSet: { sharedThreads: threadId } },
+          { $addToSet: { sharedToThreads: threadId } },
           { new: true }
         );
         return sharedThread;
@@ -82,6 +82,7 @@ const resolvers = {
         console.error(err);
       }
     },
+    //  
     deleteThreadComment: async (parent, { threadId, commentId }) => {
       return Thread.findOneAndDelete(
         { _id: threadId },
@@ -89,6 +90,7 @@ const resolvers = {
         { new: true }
       );
     },
+    // Add a friend
     addFriend: async (parent, { userId, friendId }) => {
       return User.findOneAndUpdate(
         { _id: userId },
@@ -96,6 +98,7 @@ const resolvers = {
         { new: true }
       );
     },
+    // Delete a friend
     deleteFriend: async (parent, { userId, friendId }) => {
         return User.findOneAndUpdate(
           { _id: userId },
