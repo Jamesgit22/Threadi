@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './Nav.css';
@@ -6,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 
+
 // resolve conflicts.
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +15,7 @@ export default function Nav() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1430) {
+      if (window.innerWidth < 1480) {
         setIsMobile(!isMobile);
       } else {
         setIsMobile(false);
@@ -30,24 +32,23 @@ export default function Nav() {
 
   return (
     <>
-      <div className='header container-fluid'>
-        <div className='row'>
-          <nav id='nav-container' className='col-12'>
-            <div id='logo-container' className='col-4'>
-              <h2 id='nav-logo' className='light-txt'>
-                THREADI
-              </h2>
-            </div>
 
-            {isMobile && (
-              <div className='mobile'>
-                <div id='nav-links' className='col-8'>
-                  <div id='hamburger-icon' onClick={() => toggleMenu()}>
-                    <div className={`bar1 bars ${isOpen ? 'open' : ''}`}></div>
-                    <div className={`bar2 bars ${isOpen ? 'open' : ''}`}></div>
-                    <div className={`bar3 bars ${isOpen ? 'open' : ''}`}></div>
+      {isMobile ? (
+        <div className="header container-fluid">
+          <div className="row">
+            <nav id="mobile-nav-container" className="col-12">
+              <div id="logo-container" className="col-4">
+                <h2 id="mobile-nav-logo" className="light-txt">
+                  THREADI
+                </h2>
+              </div>
+              <div className="mobile">
+                <div id="nav-links" className="col-8">
+                  <div id="hamburger-icon" onClick={() => toggleMenu()}>
+                    <div className={`bar1 bars ${isOpen ? "open" : ""}`}></div>
+                    <div className={`bar2 bars ${isOpen ? "open" : ""}`}></div>
+                    <div className={`bar3 bars ${isOpen ? "open" : ""}`}></div>
                   </div>
-
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -112,18 +113,26 @@ export default function Nav() {
                   </motion.div>
                 </div>
               </div>
-            )}
-
-            {!isMobile && (
-              <div className='desktop'>
-                <div className='desktopNav'>
-                  <button className='desktop-nav-btns'>Social</button>
-                  <button className='desktop-nav-btns'>Profile</button>
-                  <button className='desktop-nav-btns'>Browse</button>
-                  <button className='desktop-nav-btns'>
+            </nav>
+          </div>
+        </div>
+      ) : (
+        <div className="header container-fluid">
+          <div className="row">
+            <nav id="nav-container" className="col-12">
+              <div id="logo-container" className="col-4">
+                <h2 id="nav-logo" className="light-txt">
+                  THREADI
+                </h2>
+              </div>
+              <div className="desktop">
+                <div className="desktopNav">
+                  <button className="desktop-nav-btns">Social</button>
+                  <button className="desktop-nav-btns">Profile</button>
+                  <button className="desktop-nav-btns">Browse</button>
+                  <button className="desktop-nav-btns">
                     <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                   </button>
-
                   {/* <div className="desktop-nav-btns">
                     <Search />
                   </div> */}
@@ -133,10 +142,10 @@ export default function Nav() {
                   <button className='desktop-signup-btns'>Sign Up</button>
                 </div>
               </div>
-            )}
-          </nav>
+            </nav>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

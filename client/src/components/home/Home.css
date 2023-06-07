@@ -1,6 +1,5 @@
 .movie-img {
-    width: 50%;
-    height: 50%;
+    width: 250px;
     object-fit: cover;
     border-radius: 0.5rem;
     transition: all 0.2s ease-in-out;
@@ -8,4 +7,28 @@
     &:hover {
       transform: scale(1.05);
     }
+}
+
+.home-container {
+   margin-top: 100px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  box-shadow: 1px 15px 15px rgba(0, 0, 0, 0.3);
+}
+
+.firstHeader{
+    font-family: "Brice";
+    color: white;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+}
+
+.subtitleOne
+
+#posterOne {
+  
 }

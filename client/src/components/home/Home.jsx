@@ -43,8 +43,11 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="top">
-        <h1>Rate all the entertainment you watch</h1>
-        <button onClick={openModal}>Sign Up</button>
+        <div className="subtitleOne">
+          <h1 className="firstHeader">Rate all the entertainment you watch</h1>
+          <button>Sign Up</button>
+        </div>
+
         {moviePosters.length > 0 && (
           <div className="movie-poster">
             <img

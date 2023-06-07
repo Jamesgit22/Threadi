@@ -12,7 +12,16 @@ nav {
   padding-left: 15%;
   padding-right: 15%;
   align-items: center;
-  position: sticky;
+  position: fixed;
+  top: 0;
+}
+
+#mobile-nav-container {
+  display: flex;
+  padding-left: 15%;
+  padding-right: 15%;
+  align-items: center;
+  position: fixed;
   top: 0;
   justify-content: space-between;
 }
@@ -21,6 +30,14 @@ nav {
   margin: 8px;
   font-family: 'Brice';
   font-size: 4em;
+  color: var(--dark-col);
+  text-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+#mobile-nav-logo {
+  margin: 8px;
+  font-family: "Brice";
+  font-size: 2em;
   color: var(--dark-col);
   text-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
