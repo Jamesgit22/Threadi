@@ -5,24 +5,24 @@ import ProfilePage from "./components/profile/Profile";
 import Home from "./components/home/Home";
 import "./App.css";
 
-
 function App() {
   return (
     <>
-    <Nav />
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route exact path="/">
-            <SearchBar />
-            <Home />
-          </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+      <Nav />
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <Route exact path="/"></Route>
+            <Route path="/profile">
+              <ProfilePage />
+            </Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Mallanna&display=swap');
+      </style>
     </>
   );
 }

@@ -1,16 +1,26 @@
 nav {
   background-color: var(--gray-col);
   width: 100%;
+  box-shadow: 1px 15px 15px rgba(0, 0, 0, 0.3);
 }
 
 #nav-container {
   display: flex;
   padding-left: 15%;
   padding-right: 15%;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  justify-content: space-between;
 }
+
 
 #nav-logo {
   margin: 8px;
+  font-family: "Brice";
+  font-size: 4em;
+  color: var(--dark-col);
+  text-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 #hamburger-icon {
@@ -63,7 +73,8 @@ nav {
   background: none;
   color: var(--light-col);
   border: none;
-  padding: 1.5em;
+  padding-left: 1.5em;
+  font-size: 1.5em;
 }
 
 .desktopSignOn {
@@ -71,17 +82,28 @@ nav {
 }
 
 .desktop-signin-btns {
-  background: none;
+  background-color: var(--gray-col);
+  border: 1px solid var(--dark-col);
+  border-radius: 10px;
+  padding-left: .5em;
+  padding-right: .5em;
   color: var(--light-col);
-  border: none;
-  padding: 1.5em;
+  font-family: var(--font);
+  font-size: 1.5em;
+  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .desktop-signup-btns {
-  background: none;
+  background-color: var(--dark-col);
+  border: 1px solid var(--dark-col);
+  border-radius: 10px;
   color: var(--light-col);
-  border: none;
-  padding: 1.5em;
+  margin-left: 1.5em;
+  padding-left: .5em;
+  padding-right: .5em;
+  font-family: var(--font);
+  font-size: 1.5em;
+  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .desktop {
@@ -89,6 +111,7 @@ nav {
   justify-content: space-between;
   width: 100%;
   flex-wrap: nowrap; /* Prevent flex items from wrapping */
+  align-items: center;
 }
 
 .desktopNav {
