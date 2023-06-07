@@ -1,21 +1,16 @@
 nav {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
-  background-color: transparent;
-  /* position: fixed; */
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  z-index: 2;
+  background-color: var(--gray-col);
   width: 100%;
 }
 
-
 #nav-container {
   display: flex;
-  justify-content: space-between;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 #nav-logo {
-    margin: 8px;
+  margin: 8px;
 }
 
 #hamburger-icon {
@@ -58,10 +53,41 @@ nav {
 }
 
 .mobile-nav-btns {
-    background: none;
-    color: var(--light-col);
-    border: none;
-    padding: 1.5em;
+  background: none;
+  color: var(--light-col);
+  border: none;
+  padding: 1.5em;
+}
+
+.desktop-nav-btns {
+  background: none;
+  color: var(--light-col);
+  border: none;
+  padding: 1.5em;
+}
+
+.desktopSignOn {
+  justify-self: end;
+}
+
+.desktop-signin-btns {
+  background: none;
+  color: var(--light-col);
+  border: none;
+  padding: 1.5em;
+}
+
+.desktop-signup-btns {
+  background: none;
+  color: var(--light-col);
+  border: none;
+  padding: 1.5em;
+}
+
+.desktop {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 #mobile-nav {
