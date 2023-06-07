@@ -88,6 +88,11 @@ nav {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  flex-wrap: nowrap; /* Prevent flex items from wrapping */
+}
+
+.desktopNav {
+  flex: 1;
 }
 
 #mobile-nav {

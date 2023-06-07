@@ -1,6 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Nav.css";
+import Search from "../search/Search";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,6 +96,12 @@ export default function Nav() {
                   <button className="desktop-nav-btns">Social</button>
                   <button className="desktop-nav-btns">Profile</button>
                   <button className="desktop-nav-btns">Browse</button>
+                  <button className="desktop-nav-btns">
+                  <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+                  </button>
+                  <div className="desktop-nav-btns">
+                    <Search />
+                  </div>
                 </div>
                 <div className="desktopSignOn">
                   <button className="desktop-signin-btns">Sign In</button>
