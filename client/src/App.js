@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Nav from "./components/nav/Nav";
 import SearchBar from "./components/search/Search";
 import ProfilePage from "./components/profile/Profile";
+import Home from "./components/home/Home";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <SearchBar />
+            <Home />
           </Route>
           <Route path="/profile">
             <ProfilePage />

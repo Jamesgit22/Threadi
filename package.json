@@ -14,8 +14,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1",
     "apollo-server-express": "^3.5.0",
+    "express": "^4.17.1",
+    "framer-motion": "^10.12.16",
     "path": "^0.12.7"
   },
   "devDependencies": {
