@@ -7,13 +7,9 @@ const SignUpModal = ({ closeModal }) => {
       <div className="modal-content">
         <h2>Sign Up</h2>
         <form>
-          <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" placeholder="Username" />
-          <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" placeholder="Email" />
-          <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Password" />
-          <label htmlFor="confirm-password">Confirm Password</label>
           <input
             type="password"
             id="confirm-password"
