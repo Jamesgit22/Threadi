@@ -2,7 +2,10 @@ const { Schema } = require('mongoose');
 const User = require('./User');
 
 const comObjectSchema = new Schema({
-  author: User,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   text: {
     type: String,
     required: true,
@@ -10,10 +13,14 @@ const comObjectSchema = new Schema({
   likes: {
     type: Number,
   },
+  parent: {
+    type: Schema.Types.ObjectId,
+    ref: 'Parent'
+  },
   coms: [
     {
-    type: Schema.Types.ObjectId,
-    ref: 'Com'
+      type: Schema.Types.ObjectId,
+      ref: 'Com'
     }
   ],
 });

@@ -21,6 +21,13 @@ const typeDefs = gql`
     com: Com
   }
 
+  type Parent {
+    _id: ID!
+    review: Review
+    thread: Thread
+    com: Com
+  }
+
   type Review {
     _id: ID!
     author: User!
@@ -36,6 +43,7 @@ const typeDefs = gql`
     _id: ID!
     author: User!
     text: String!
+    parent: Parent!
     likes: Int!
     coms: [Com]
   }
