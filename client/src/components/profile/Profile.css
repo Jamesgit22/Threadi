@@ -1,70 +1,117 @@
-.card-container {
-	background-color: white;
-	min-width: 350px;
-	max-width: 600px;
-	height: auto;
-	border-radius: 14px;
-	box-shadow: 0px 10px 30px hsl(185, 75%, 35%);
-    margin: auto;
+.container-fluid {
+	color:  #393939;
+	background-color: rgb(12, 12, 12);
 }
 
-header {
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
-	background-size: contain;
-	text-align: center;
-	border-top-left-radius: 14px;
-	border-top-right-radius: 14px;
+#profile-card {
+	border: 1px solid #393939;
+	margin: 10em auto 4em auto;
+	border-radius: 8px;
 }
 
-profileImg {
-	margin: auto;
-	width: 100px;
-	border: solid white 4px;
-	border-radius: 50%;
-	margin-top: 75px;
+#profile-img-container {
+	width: 95%;
 }
 
-.bold-text {
-	font-weight: bold;
-	font-size: 1.1rem;
-	text-align: center;
-	padding: 10px 20px 0px 20px;
+#username-container {
+	border-top: 1px solid  #393939;
+	color: var(--light-col);
 }
 
-.normal-text {
-	font-weight: normal;
-	font-size: 0.95rem;
-	color: hsl(0, 0%, 50%);
-	text-align: center;
-	padding-bottom: 10px;
+#menu-container {
+	border: 1px solid  #393939;
+	border-radius: 8px;
 }
 
-/* SOCIAL STATS */
-.smaller-text {
-	font-weight: normal;
-	font-size: 0.7rem;
-	color: hsl(0, 0%, 50%);
-	text-align: center;
-	letter-spacing: 1px;
-	padding-bottom: 20px;
-	line-height: 5px;
+#menu-s-threads {
+	border-bottom: 1px solid  #393939;
+	transition: 0.2s;
 }
 
-.social-container {
-	display: flex;
-	border-top: solid rgb(206, 206, 206) 1px;
-	text-align: center;
+#menu-s-threads:hover {
+	background-color: #39393932;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
 }
 
-.followers {
-	flex: 1;
+#menu-friends:hover {
+	background-color: #39393932;
 }
 
-.likes {
-	flex: 1;
+#menu-comments {
+	border-bottom: 1px solid  #393939;
 }
 
-.photos {
-	flex: 1;
+#menu-comments:hover {
+	background-color: #39393932;
+
 }
+
+.menu-btns {
+	color: var(--light-col);
+}
+
+
+#threads-container {
+	border-left: 1px solid  #fdcb00;
+	color: var(--light-col);
+}
+
+.li-thread {
+	border-radius: 8px;
+	border: 1px solid  #393939;
+}
+
+.thread-title{
+	padding-top: 5px;
+}
+
+.thread-img-container {
+	padding: 0!important;
+
+}
+
+.thread-img {
+	width: 100%;
+	mask-image: linear-gradient(to right, transparent, black 100%, transparent);
+	border-radius: 8px;
+	padding: 0!important;
+
+}
+
+.thread-p {
+	font-size: 15px;
+}
+
+@media screen and (min-width: 850px) {
+	#profile-container {
+		width: 80%!important;
+		background-color: rgb(18, 18, 18);
+	}
+
+	#profile-parent {
+		display: flex;
+		justify-content: center;
+	}
+
+	#profile-card {
+		width: 60%;
+	}
+
+	#menu-container {
+		width: 50%;
+	}
+
+	ul {
+		padding-left: 0!important;
+	}
+
+	.gold-border {
+		border-bottom: 1px solid #ffaa01;
+		width: 5px!important;
+		padding-top: 120%;
+	}
+}
+
+
+/* /images/pexels-mike-bird-114820.jpg */

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Nav from './components/nav/Nav';
-import ProfilePage from './components/profile/Profile';
+import Profile from './components/profile/Profile';
 import Home from './components/home/Home';
 import './App.css';
 import SearchBar from './components/search/Search';
@@ -29,7 +29,7 @@ function App() {
                 <Login />
               </Route>
               <Route path='/profile'>
-                <ProfilePage />
+                <Profile />
               </Route>
             </Switch>
           </div>
