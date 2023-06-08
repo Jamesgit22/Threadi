@@ -1,4 +1,4 @@
-const { Schema, Types, model } = require('mongoose');
+const {Schema, model, SchemaTypes} = require('mongoose');
 
 const threadSchema = new Schema({
   title: {
@@ -6,7 +6,7 @@ const threadSchema = new Schema({
     required: true,
   },
   author: {
-    type: Types.ObjectId,
+    type: SchemaTypes.ObjectId,
     ref: 'User'
   },
   likes: {
@@ -14,13 +14,13 @@ const threadSchema = new Schema({
   },
   reviews: [
     {
-      type: Schema.Types.ObjectId,
+      type: SchemaTypes.ObjectId,
       ref: 'Review'
     }
   ],
   coms: [
     {
-      type: Schema.Types.ObjectId,
+      type: SchemaTypes.ObjectId,
       ref: 'Com'
     }
   ]

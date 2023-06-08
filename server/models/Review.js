@@ -1,10 +1,8 @@
-const { Schema, model } = require('mongoose');
-const User = require('./User');
-const Com = require('./Com');
+const {Schema, model, SchemaTypes} = require('mongoose');
 
 const reviewSchema = new Schema({
   author: {
-    type: Schema.Types.ObjectId,
+    type: SchemaTypes.ObjectId,
     ref: 'User'
   },
   text: {
@@ -27,12 +25,11 @@ const reviewSchema = new Schema({
   },
   coms: [
     {
-      type: Schema.Types.ObjectId,
+      type: SchemaTypes.ObjectId,
       ref: 'Com'
     }
   ],
 });
-
 
 const Review = model('Review', reviewSchema);
 

@@ -1,8 +1,8 @@
-const { Schema } = require('mongoose');
+const {Schema, model, SchemaTypes} = require('mongoose');
 
 const parentObjectSchema = new Schema({
     review: {
-        type: Schema.Types.ObjectId,
+        type: SchemaTypes.ObjectId,
         ref: 'Review'
     },
     thread: {
@@ -19,4 +19,6 @@ const parentSchema = new Schema({
     parent: [parentObjectSchema],
 });
 
-module.exports = parentSchema;
+const Parent = model('Parent', parentSchema);
+
+module.exports = Parent;
