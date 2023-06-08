@@ -8,6 +8,7 @@ const typeDefs = gql`
     password: String!
     friends: [User]
     reviews: [Review]
+    userThreads: [Thread]
     savedThreads: [Thread]
     likes: [Like!]!
     coms: [Com]

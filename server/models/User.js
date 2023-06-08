@@ -43,7 +43,7 @@ const userSchema = new Schema(
         ref: 'Review'
       }
     ],
-    userThread: [
+    userThreads: [
       {
         type: SchemaTypes.ObjectId,
         ref: 'Thread'
