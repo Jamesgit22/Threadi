@@ -6,25 +6,46 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    sharedToThreads: [Thread]
+    friends: [User]
+    reviews: [Review]
+    savedThreads: [Thread]
+    likes: [Like!]!
+    coms: [Com]
+  }
+
+  type Like {
+    _id: ID!
+    user: User!
+    review: Review
+    thread: Thread
+    com: Com
+  }
+
+  type Parent {
+    _id: ID!
+    review: Review
+    thread: Thread
+    com: Com
   }
 
   type Review {
     _id: ID!
-    reviewAuthor: User!
-    reviewText: String!
-    reviewRating: Int
-    reviewLikes: Int
-    reviewComments: [Comment]
-    dateWatched: String
+    author: User!
+    text: String!
+    rating: Int
+    likes: Int
+    thread: Thread!
+    coms: [Com]
+    date: String!
   }
 
-  type Comment {
+  type Com {
     _id: ID!
-    commentAuthor: String!
-    commentText: String!
-    commentLikes: Int!
-    commentComments: [Comment]
+    author: User!
+    text: String!
+    parent: Parent!
+    likes: Int!
+    coms: [Com]
   }
 
   type Auth {
@@ -34,15 +55,17 @@ const typeDefs = gql`
 
   type Thread {
     _id: ID!
-    threadAuthor: [User]
-    threadTitle: String!
-    threadReviews: [Review]
+    title: String!
+    author: User!
+    likes: Int!
+    reviews: [Review]
+    coms: [Com]
   }
 
   type Query {
     reviews: [Review]
-    threadComments(thread: String!): [Comment]
-    userComments(username: String!): [Comment]
+    threadCom(thread: String!): [Com]
+    userCom(username: String!): [Com]
     thread(_id: ID!): Thread
     userThreads(username: String!): [Thread]
     friends: [User]
@@ -55,8 +78,8 @@ const typeDefs = gql`
     likeThread(threadId: ID!): Thread
     shareThread(friendId: ID!, threadId: ID!): Thread
     deleteThread(threadId: ID!): Thread
-    addThreadComment(threadId: ID!, commentText: String!, commentAuthor: String!): Comment
-    deleteThreadComment(threadId: ID!, commentId: ID!): Thread
+    addThreadCom(threadId: ID!, comText: String!, comAuthor: String!): Com
+    deleteThreadCom(threadId: ID!, comId: ID!): Thread
     addFriend(userId: ID!, friendId: ID!): User
     deleteFriend(userId: ID!, friendId: ID!): User
 
