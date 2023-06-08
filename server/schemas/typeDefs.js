@@ -6,7 +6,19 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    sharedToThreads: [Thread]
+    friends: [User]
+    reviews: [Review]
+    savedThreads: [Thread]
+    likes: [Like!]!
+    coms: [Com]
+  }
+
+  type Like {
+    _id: ID!
+    user: User!
+    review: Review
+    thread: Thread
+    com: Com
   }
 
   type Review {
@@ -15,16 +27,16 @@ const typeDefs = gql`
     reviewText: String!
     reviewRating: Int
     reviewLikes: Int
-    reviewComments: [Comment]
+    reviewComments: [Com]
     dateWatched: String
   }
 
-  type Comment {
+  type Com {
     _id: ID!
-    commentAuthor: String!
-    commentText: String!
-    commentLikes: Int!
-    commentComments: [Comment]
+    comAuthor: String!
+    comText: String!
+    comLikes: Int!
+    comCom: [Com]
   }
 
   type Auth {
@@ -41,8 +53,8 @@ const typeDefs = gql`
 
   type Query {
     reviews: [Review]
-    threadComments(thread: String!): [Comment]
-    userComments(username: String!): [Comment]
+    threadCom(thread: String!): [Com]
+    userCom(username: String!): [Com]
     thread(_id: ID!): Thread
     userThreads(username: String!): [Thread]
     friends: [User]
@@ -55,8 +67,8 @@ const typeDefs = gql`
     likeThread(threadId: ID!): Thread
     shareThread(friendId: ID!, threadId: ID!): Thread
     deleteThread(threadId: ID!): Thread
-    addThreadComment(threadId: ID!, commentText: String!, commentAuthor: String!): Comment
-    deleteThreadComment(threadId: ID!, commentId: ID!): Thread
+    addThreadCom(threadId: ID!, comText: String!, comAuthor: String!): Com
+    deleteThreadCom(threadId: ID!, comId: ID!): Thread
     addFriend(userId: ID!, friendId: ID!): User
     deleteFriend(userId: ID!, friendId: ID!): User
 
