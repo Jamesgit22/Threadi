@@ -31,9 +31,12 @@ const typeDefs = gql`
   type Review {
     _id: ID!
     author: User!
+    timestamp: String!
+    type: String!
+    title: String!
     text: String!
     rating: Int
-    likes: Int
+    likes: Int!
     thread: Thread!
     coms: [Com]
     date: String!
@@ -42,6 +45,7 @@ const typeDefs = gql`
   type Com {
     _id: ID!
     author: User!
+    timestamp: String!
     text: String!
     parent: Parent!
     likes: Int!
@@ -55,6 +59,7 @@ const typeDefs = gql`
 
   type Thread {
     _id: ID!
+    timestamp: String!
     title: String!
     author: User!
     likes: Int!

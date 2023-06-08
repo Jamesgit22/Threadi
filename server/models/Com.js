@@ -5,12 +5,18 @@ const comObjectSchema = new Schema({
     type: SchemaTypes.ObjectId,
     ref: 'User'
   },
+  timestamp: {
+    type: String,
+    required: true
+  },
   text: {
     type: String,
     required: true,
   },
   likes: {
     type: Number,
+    required: true,
+    defaultValue: 0
   },
   parent: {
     type: SchemaTypes.ObjectId,
