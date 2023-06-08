@@ -1,22 +1,13 @@
-.movie-img {
-  width: 250px;
-  object-fit: cover;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
 .home-container {
-  margin-top: 100px;
+  margin-top: 54px;
 }
 
 .top {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.3);
+  background-color: black;
+  height: 50vh;
+  border-bottom: 4px solid #212122;
 }
 
 .firstHeader {
@@ -26,8 +17,7 @@
   grid-column-end: 3;
   text-align: left;
   margin: 0 auto;
-  margin-left: 30%;
-  margin-right: 20%;
+  width: 30%
 }
 
 .subtitleOne {
@@ -35,13 +25,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
 }
 
 .firstButton {
   margin-top: 30px;
   margin-bottom: 10px;
-  margin-left: 30%;
-  margin-right: 20%;
+  margin-left: 25%;
+  margin-right: 25%;
   background-color: var(--gray-col);
   border: 1px solid var(--dark-col);
   border-radius: 10px;
@@ -58,21 +49,30 @@
   flex-direction: column;
   margin-left: 20%;
   margin-right: 30%;
+  align-items: center;
+  justify-content: center;
 }
 
 .movie-img1 {
   align-self: center;
-  position: relative;
-  top: 75px;
+  position: static;
   box-shadow: 1px 40px 10px rgba(0, 0, 0, 0.3);
-  width: 250px;
+  width: 100%;
+  height: 50vh;
   object-fit: cover;
-  border-radius: 0.5rem;
+  object-position: top; 
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-  }
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 100%
+  );
 }
 
 .subtitleTwo {
@@ -83,31 +83,40 @@
 }
 
 .middle {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: 75px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: black;
+  height: 50vh;
+  border-bottom: 4px solid #212122;
 }
 
 .movie-poster2 {
   display: flex;
   flex-direction: column;
-  margin-left: 30%;
-  margin-right: 20%;
+  align-items: center;
+  justify-content: center;
 }
 
 .movie-img2 {
   align-self: center;
-  position: relative;
-  top: 75px;
+  position: static;
   box-shadow: 1px 40px 10px rgba(0, 0, 0, 0.3);
-  width: 250px;
+  width: 100%;
+  height: 50vh;
   object-fit: cover;
-  border-radius: 0.5rem;
+  object-position: top; 
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-  }
+  mask-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 100%
+  );
 }
 
 .secondHeader {
@@ -117,15 +126,14 @@
   grid-column-end: 3;
   text-align: left;
   margin: 0 auto;
-  margin-left: 20%;
-  margin-right: 30%;
+  width: 30%
 }
 
 .secondButton {
   margin-top: 30px;
   margin-bottom: 10px;
-  margin-left: 20%;
-  margin-right: 30%;
+  margin-left: 25%;
+  margin-right: 25%;
   background-color: var(--gray-col);
   border: 1px solid var(--dark-col);
   border-radius: 10px;
@@ -138,24 +146,42 @@
 }
 
 .bottom {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    background-color: #1c1c29;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: black;
+  height: 50vh;
+  border-bottom: 4px solid #212122;
+}
+
+.movie-poster3 {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20%;
+  margin-right: 30%;
+  align-items: center;
+  justify-content: center;
 }
 
 .movie-img3 {
   align-self: center;
-  position: relative;
-  top: 75px;
+  position: static;
   box-shadow: 1px 40px 10px rgba(0, 0, 0, 0.3);
-  width: 250px;
+  width: 100%;
+  height: 50vh;
   object-fit: cover;
-  border-radius: 0.5rem;
+  object-position: top; 
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-  }
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 100%
+  );
 }
 
 .thirdHeader {
@@ -165,8 +191,23 @@
   grid-column-end: 3;
   text-align: left;
   margin: 0 auto;
-  margin-left: 30%;
-  margin-right: 20%;
+  width: 30%
+}
+
+.thirdButton {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: 25%;
+  margin-right: 25%;
+  background-color: var(--gray-col);
+  border: 1px solid var(--dark-col);
+  border-radius: 10px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: var(--light-col);
+  font-family: var(--font);
+  font-size: 1.5em;
+  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .subtitleThree {
