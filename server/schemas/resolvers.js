@@ -124,9 +124,18 @@ const resolvers = {
         console.error(err);
       }
     },
+
+    // FIXED---------------------------------------------------------------------
     deleteThread: async (parent, { threadId }) => {
-      return Thread.findOneAndDelete({ threadId });
+      try {
+        const deletedThread = await Thread.findOneAndDelete({ _id: threadId });
+        return deletedThread;
+      } catch (err) {
+        console.error(err);
+      }
     },
+    // FIXED---------------------------------------------------------------------
+
     addThreadCom: async (
       parent,
       { threadId, comText, comAuthor }
@@ -168,6 +177,7 @@ const resolvers = {
       },
 
       // create a thread
+      // FIXED---------------------------------------------------------------------
       addThread: async (parent, { title, username }) => {
         try {
           // Find the user by username
@@ -195,6 +205,7 @@ const resolvers = {
           console.error(err);
         }
       },
+      // FIXED---------------------------------------------------------------------
   },
 };
 

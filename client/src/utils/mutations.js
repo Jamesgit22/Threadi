@@ -44,6 +44,12 @@ mutation AddThread($title: String!, $username: String!) {
   }
 }`;
 
+export const DELETE_THREAD = gql`
+mutation Mutation($threadId: ID!) {
+  deleteThread(threadId: $threadId) {
+    _id
+  }
+}`;
 
 
 
