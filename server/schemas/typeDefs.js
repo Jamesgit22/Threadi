@@ -23,12 +23,13 @@ const typeDefs = gql`
 
   type Review {
     _id: ID!
-    reviewAuthor: User!
-    reviewText: String!
-    reviewRating: Int
-    reviewLikes: Int
-    reviewComments: [Com]
-    dateWatched: String
+    author: User!
+    text: String!
+    rating: Int
+    likes: Int
+    thread: Thread!
+    coms: [Com]
+    date: String!
   }
 
   type Com {

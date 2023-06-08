@@ -21,7 +21,11 @@ const reviewSchema = new Schema({
   dateWatched: {
     type: Date,
   },
-  comments: [
+  thread: {
+    type: SchemaTypes.ObjectId,
+    ref: 'Thread'
+  },
+  coms: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Com'
