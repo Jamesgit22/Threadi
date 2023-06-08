@@ -6,9 +6,9 @@
   padding: 0 !important;
 }
 
-/* #login-main {
+#login-main {
   background-color: #1c1c296f;
-} */
+}
 
 #login {
   color: var(--light-col);
@@ -27,8 +27,8 @@
 }
 
 .inputs:focus {
-    outline-color: var(--primary-col)!important;
-    scale: 1.01;
+  outline-color: var(--primary-col) !important;
+  scale: 1.01;
 }
 
 #login-btn {
@@ -61,7 +61,7 @@
 }
 
 #welcome-container {
-    display: none;
+  display: none;
 }
 
 @media screen and (min-width: 600px) {
@@ -121,5 +121,9 @@
 
   #welcome-msg {
     font-size: 2em;
+  }
+
+  #login-main {
+    background-color: transparent;
   }
 }
