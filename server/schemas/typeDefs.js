@@ -56,7 +56,7 @@ const typeDefs = gql`
   type Thread {
     _id: ID!
     title: String!
-    author: User!
+    author: User
     likes: Int!
     reviews: [Review]
     coms: [Com]
@@ -78,10 +78,17 @@ const typeDefs = gql`
     likeThread(threadId: ID!): Thread
     shareThread(friendId: ID!, threadId: ID!): Thread
     deleteThread(threadId: ID!): Thread
-    addThreadCom(threadId: ID!, comText: String!, comAuthor: String!): Com
     deleteThreadCom(threadId: ID!, comId: ID!): Thread
     addFriend(userId: ID!, friendId: ID!): User
     deleteFriend(userId: ID!, friendId: ID!): User
+    unlikeThread(threadId: ID!): Thread
+    likeCom(comId: ID!): Com
+    unlikeCom(comId: ID!): Com
+    likeReview(reviewId: ID!): Review
+    unlikeReview(reviewId: ID!): Review
+    saveThread(userId: ID!, threadId: ID!): User
+    addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
+    addThread(title: String!, username: String!): Thread
 
 
   }
