@@ -7,7 +7,12 @@
 }
 
 #login-main {
-  background-color: #1c1c296f;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 8, 0.95),
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.95)
+  );
 }
 
 #login {
@@ -60,6 +65,10 @@
   color: var(--light-col);
 }
 
+.nav-btns:hover {
+    color: var(--primary-col);
+}
+
 #welcome-container {
   display: none;
 }
@@ -96,9 +105,9 @@
     justify-content: flex-start !important;
   }
 
-  #login-card {
+  /* #login-card {
     background-color: #00000088;
-  }
+  } */
 
   #welcome-card {
     color: var(--light-col);
@@ -113,7 +122,7 @@
   }
 
   #welcome-container {
-    background-color: #00000088;
+    /* background-color: #00000088; */
     height: 100vh;
     display: flex;
     align-items: center;
@@ -125,5 +134,30 @@
 
   #login-main {
     background-color: transparent;
+  }
+
+  #forgot-pass {
+    color: var(--light-col);
+  }
+
+  #forgot-pass:hover {
+    color: var(--primary-col);
+  }
+
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: var(--primary-col);
+  }
+
+  a:active {
+    text-decoration: none;
   }
 }
