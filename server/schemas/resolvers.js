@@ -40,116 +40,116 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    likeThread: async (parent, { threadId }) => {
-      try {
-        const updatedThread = await Thread.findOneAndUpdate(
-          { _id: threadId },
-          { $inc: { likes: 1 } },
-          { new: true }
-        );
-        return updatedThread;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    unlikeThread: async (parent, { threadId }) => {
-      try {
-        const updatedThread = await Thread.findOneAndUpdate(
-          { _id: threadId },
-          { $inc: { likes: -1 } },
-          { new: true }
-        );
-        return updatedThread;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    likeCom: async (parent, { comId }) => {
-      try {
-        const updatedCom = await Com.findOneAndUpdate(
-          { _id: comId },
-          { $inc: { likes: 1 } },
-          { new: true }
-        );
-        return updatedCom;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    unlikeCom: async (parent, { comId }) => {
-      try {
-        const updatedCom = await Com.findOneAndUpdate(
-          { _id: comId },
-          { $inc: { likes: -1 } },
-          { new: true }
-        );
-        return updatedCom;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    likeReview: async (parent, { reviewId }) => {
-      try {
-        const updatedReview = await Review.findOneAndUpdate(
-          { _id: reviewId },
-          { $inc: { likes: 1 } },
-          { new: true }
-        );
-        return updatedReview;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    unlikeReview: async (parent, { reviewId }) => {
-      try {
-        const updatedReview = await Review.findOneAndUpdate(
-          { _id: reviewId },
-          { $inc: { likes: -1 } },
-          { new: true }
-        );
-        return updatedReview;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    saveThread: async (parent, { userId, threadId }) => {
-      try {
-        const savedThread = await User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { savedThreads: { _id: threadId } } },
-          { new: true }
-        );
-        return savedThread;
-      } catch (err) {
-        console.error(err);
-      }
-    },
+    // likeThread: async (parent, { threadId }) => {
+    //   try {
+    //     const updatedThread = await Thread.findOneAndUpdate(
+    //       { _id: threadId },
+    //       { $inc: { likes: 1 } },
+    //       { new: true }
+    //     );
+    //     return updatedThread;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
+    // unlikeThread: async (parent, { threadId }) => {
+    //   try {
+    //     const updatedThread = await Thread.findOneAndUpdate(
+    //       { _id: threadId },
+    //       { $inc: { likes: -1 } },
+    //       { new: true }
+    //     );
+    //     return updatedThread;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
+    // likeCom: async (parent, { comId }) => {
+    //   try {
+    //     const updatedCom = await Com.findOneAndUpdate(
+    //       { _id: comId },
+    //       { $inc: { likes: 1 } },
+    //       { new: true }
+    //     );
+    //     return updatedCom;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
+    // unlikeCom: async (parent, { comId }) => {
+    //   try {
+    //     const updatedCom = await Com.findOneAndUpdate(
+    //       { _id: comId },
+    //       { $inc: { likes: -1 } },
+    //       { new: true }
+    //     );
+    //     return updatedCom;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
+    // likeReview: async (parent, { reviewId }) => {
+    //   try {
+    //     const updatedReview = await Review.findOneAndUpdate(
+    //       { _id: reviewId },
+    //       { $inc: { likes: 1 } },
+    //       { new: true }
+    //     );
+    //     return updatedReview;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
+    // unlikeReview: async (parent, { reviewId }) => {
+    //   try {
+    //     const updatedReview = await Review.findOneAndUpdate(
+    //       { _id: reviewId },
+    //       { $inc: { likes: -1 } },
+    //       { new: true }
+    //     );
+    //     return updatedReview;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
+    // saveThread: async (parent, { userId, threadId }) => {
+    //   try {
+    //     const savedThread = await User.findOneAndUpdate(
+    //       { _id: userId },
+    //       { $addToSet: { savedThreads: { _id: threadId } } },
+    //       { new: true }
+    //     );
+    //     return savedThread;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
     deleteThread: async (parent, { threadId }) => {
       return Thread.findOneAndDelete({ threadId });
     },
-    addThreadCom: async (
-      parent,
-      { threadId, comText, comAuthor }
-    ) => {
-      try {
-        const addedThreadCom = await Thread.findOneAndUpdate(
-          { _id: threadId },
-          { $addToSet: { com: { _id: comId } } },
-          { new: true }
-        );
-        return addedThreadCom;
-      } catch (err) {
-        console.error(err);
-      }
-    },
+    // addThreadCom: async (
+    //   parent,
+    //   { threadId, comText, comAuthor }
+    // ) => {
+    //   try {
+    //     const addedThreadCom = await Thread.findOneAndUpdate(
+    //       { _id: threadId },
+    //       { $addToSet: { com: { _id: comId } } },
+    //       { new: true }
+    //     );
+    //     return addedThreadCom;
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
     //  
-    deleteThreadCom: async (parent, { threadId, comId }) => {
-      return Thread.findOneAndDelete(
-        { _id: threadId },
-        { $pull: { com: { _id: comId } } },
-        { new: true }
-      );
-    },
+    // deleteThreadCom: async (parent, { threadId, comId }) => {
+    //   return Thread.findOneAndDelete(
+    //     { _id: threadId },
+    //     { $pull: { com: { _id: comId } } },
+    //     { new: true }
+    //   );
+    // },
     // Add a friend
     addFriend: async (parent, { userId, friendId }) => {
       return User.findOneAndUpdate(
