@@ -7,17 +7,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: /^([a-zA-Z0-9_-]{3,16})$/,
+      // match: /^([a-zA-Z0-9_-]{3,16})$/,
     },
     password: {
       type: String,
       required: true,
-      match: /^([a-zA-Z0-9!@#$%^&*-+=_`~]{8,24})$/,
+      // match: /^([a-zA-Z0-9!@#$%^&*-+=_`~]{8,24})$/,
     },
     email: {
       type: String,
       required: true,
-      match: /^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/,
+      // match: /^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/,
     },
     friends: [
       {
