@@ -33,10 +33,10 @@ const typeDefs = gql`
 
   type Com {
     _id: ID!
-    comAuthor: String!
-    comText: String!
-    comLikes: Int!
-    comCom: [Com]
+    author: User!
+    text: String!
+    likes: Int!
+    coms: [Com]
   }
 
   type Auth {
@@ -46,9 +46,11 @@ const typeDefs = gql`
 
   type Thread {
     _id: ID!
-    threadAuthor: [User]
-    threadTitle: String!
-    threadReviews: [Review]
+    title: String!
+    author: User!
+    likes: Int!
+    reviews: [Review]
+    coms: [Com]
   }
 
   type Query {
