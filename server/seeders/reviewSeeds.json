@@ -1,0 +1,56 @@
+[
+  {
+    "author": "JimothyS",
+    "timestamp": "2023-05-18T14:10:30Z",
+    "type": "Movie",
+    "title": "The Mario Movie",
+    "text": "It do be mario.",
+    "rating": 4,
+    "date": "2023-01-19"
+  },
+  {
+    "author": "JimothyS",
+    "timestamp": "2023-05-19T18:02:24Z",
+    "type": "Movie",
+    "title": "John Wick 4",
+    "text": "He, like, John Wicked all over those guys.",
+    "rating": 5,
+    "date": "2023-01-30"
+  },
+  {
+    "author": "JimothyS",
+    "timestamp": "2023-05-20T12:02:59Z",
+    "type": "Video Game",
+    "title": "Dark Souls",
+    "text": "It is my favorite game ever.",
+    "rating": 5,
+    "date": "2023-02-14"
+  },
+  {
+    "author": "Eden",
+    "timestamp": "2023-05-26T19:43:28Z",
+    "type": "Music",
+    "title": "Rise: The PRIMALS",
+    "text": "Gobbies gonna rise up boom like thunder.",
+    "rating": 5,
+    "date": "2023-03-20"
+  },
+  {
+    "author": "Eden",
+    "timestamp": "2023-05-26T09:25:14Z",
+    "type": "Manga",
+    "title": "Oyasumi no Punpun",
+    "text": "It's doomed.",
+    "rating": 5,
+    "date": "2023-03-21"
+  },
+  {
+    "author": "Eden",
+    "timestamp": "2023-05-30T22:19:50Z",
+    "type": "Anime",
+    "title": "REDLINE",
+    "text": "Sweet JP is my spirit animal.",
+    "rating": 5,
+    "date": "2023-04-14"
+  }
+]

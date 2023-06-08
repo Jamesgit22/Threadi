@@ -1,112 +1,127 @@
-const { faker } = require('@faker-js/faker');
-const mongoose = require('mongoose');
-const User = require('../models/User');
-const Like = require('../models/Like');
-const Parent = require('../models/Parent');
-const Review = require('../models/Review');
-const Com = require('../models/Com');
-const Thread = require('../models/Thread');
-const ObjectId = mongoose.Types.ObjectId;
+const db = require('../config/connection');
+const { User, Com, Review, Thread, Parent, Like } = require('../models');
+const userSeeds = require('./userSeeds.json');
+const threadSeeds = require('./threadSeeds.json');
+const reviewSeeds = require('./reviewSeeds.json');
+const comSeeds = require('./comSeeds.json');
 
-// Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/threadieDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+db.once('open', async () => {
+  try {
+    await User.deleteMany({});
+    await Com.deleteMany({});
+    await Thread.deleteMany({});
+    await Review.deleteMany({});
+    await Parent.deleteMany({});
+    await Like.deleteMany({});
 
-// Generate fake data for the User type
-const generateUser = () => new User({
-  _id: new ObjectId(),
-  username: faker.internet.userName(),
-  email: faker.internet.email(),
-  password: faker.internet.password(),
-  friends: [],
-  reviews: [],
-  savedThreads: [],
-  likes: [],
-  coms: [],
-});
+    await User.create(userSeeds);
 
-// Generate fake data for the Like type
-const generateLike = () => new Like({
-  _id: new ObjectId(),
-  user: generateUser(),
-  review: null, // Fill this in with relevant data if needed
-  thread: null, // Fill this in with relevant data if needed
-  com: null, // Fill this in with relevant data if needed
-});
+    //index map:
+    //0: Jame's thread
+    //1: Kolt's thread
+    //2-7: reviews
+    //8-15: comments
+    var threadIDs = [];
+    var parentIDs = [];
 
-// Generate fake data for the Parent type
-const generateParent = () => new Parent({
-  _id: new ObjectId(),
-  review: null, // Fill this in with relevant data if needed
-  thread: null, // Fill this in with relevant data if needed
-  com: null, // Fill this in with relevant data if needed
-});
+    for (let i = 0; i < threadSeeds.length; i++) {
+      const { _id, author } = await Thread.create(threadSeeds[i]);
 
-// Generate fake data for the Review type
-const generateReview = () => new Review({
-  _id: new ObjectId(),
-  author: generateUser(),
-  text: faker.lorem.paragraph(),
-  rating: faker.number.int({ min: 1, max: 5 }),
-  likes: faker.number.int({ min: 0, max: 100 }),
-  thread: null, // Fill this in with relevant data if needed
-  coms: [], // Fill this in with relevant data if needed
-  date: faker.date.recent().toISOString(),
-});
+      const user = await User.findOneAndupdate(
+        { username: author },
+        {
+          $addToSet: {
+            userThreads: _id
+          }
+        }
+      );
 
-// Generate fake data for the Com type
-const generateCom = () => new Com({
-  _id: new ObjectId(),
-  author: generateUser(),
-  text: faker.lorem.sentence(),
-  parent: generateParent(),
-  likes: faker.number.int({ min: 0, max: 100 }),
-  coms: [], // Fill this in with relevant data if needed
-});
+      const parent = await Parent.create(
+        {
+          thread: _id
+        }
+      );
 
-// Generate fake data for the Thread type
-const generateThread = () => new Thread({
-  _id: new ObjectId(),
-  title: faker.lorem.sentence(),
-  author: generateUser(),
-  likes: faker.number.int({ min: 0, max: 100 }),
-  reviews: [], // Fill this in with relevant data if needed
-  coms: [], // Fill this in with relevant data if needed
-});
+      threadIDs.push(_id);
+      parentIDs.push(parent._id);
+    };
 
-// Generate fake data for the entire schema
-const generateData = async () => {
-  const user = generateUser();
-  const like = generateLike();
-  const parent = generateParent();
-  const review = generateReview();
-  const com = generateCom();
-  const thread = generateThread();
+    for (let i = 0; i < reviewSeeds.length; i++) {
+      const { _id, author } = await Review.create(reviewSeeds[i]);
 
-  // Save the instances to the database
-  await Promise.all([
-    user.save(),
-    like.save(),
-    parent.save(),
-    review.save(),
-    com.save(),
-    thread.save(),
-  ]);
+      const threadID = (author === "JimothyS") ? 0 : (author === "Eden") ? 1 : null;
 
-  return {
-    User: user,
-    Like: like,
-    Parent: parent,
-    Review: review,
-    Com: com,
-    Thread: thread,
-  };
-};
+      const user = await User.findOneAndupdate(
+        { username: author },
+        {
+          $addToSet: {
+            reviews: _id
+          }
+        }
+      );
 
-// Example usage:
-generateData()
-  .then(fakeData => console.log(fakeData))
-  .catch(error => console.error(error));
+      const thread = await Thread.findOneAndupdate(
+        { _id: threadIDs[threadID]},
+        {
+          $addToSet: {
+            reviews: _id
+          }
+        }
+      );
+
+      const parent = await Parent.create(
+        {
+          review: _id
+        }
+      );
+
+      parentIDs.push(parent._id);
+    }
+
+    for (let i = 0; i < comSeeds.length; i++) {
+      const { _id, author } = await Com.create(comSeeds[i]);
+
+      const user = await User.findOneAndupdate(
+        { username: author },
+        {
+          $addToSet: {
+            coms: _id
+          }
+        }
+      );
+
+      const parent = await Parent.create(
+        {
+          comment: _id
+        }
+      );
+
+      parentIDs.push(parent._id);
+
+      const currentParent = Math.floor(Math.random() * (parentIDs.length - 1));
+
+      const com = await Com.findOneAndupdate(
+        { _id: parentIDs[parentIDs.length - 1]},
+        {
+          parent: parentIDs[currentParent]
+        }
+      );
+
+      const updatedParent = await Parent.findOneAndupdate(
+        { _id: parentIDs[currentParent] },
+        {
+          $addToSet: {
+            coms: _id
+          }
+        }
+      )
+    }
+    
+    console.log('all done!');
+    process.exit(0);
+  } catch (err) {
+    throw err;
+  }
+
+
 

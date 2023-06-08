@@ -5,6 +5,18 @@ const reviewSchema = new Schema({
     type: SchemaTypes.ObjectId,
     ref: 'User'
   },
+  timestamp: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true,
+  },
   text: {
     type: String,
     required: true,
@@ -15,9 +27,12 @@ const reviewSchema = new Schema({
   },
   likes: {
     type: Number,
+    required: true,
+    default: 0
   },
   dateWatched: {
-    type: Date,
+    type: String,
+    required: true,
   },
   thread: {
     type: SchemaTypes.ObjectId,

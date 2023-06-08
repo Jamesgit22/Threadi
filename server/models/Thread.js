@@ -5,12 +5,18 @@ const threadSchema = new Schema({
     type: String,
     required: true,
   },
+  timestamp: {
+    type: String,
+    required: true
+  },
   author: {
     type: SchemaTypes.ObjectId,
     ref: 'User'
   },
   likes: {
     type: Number,
+    required: true,
+    default: 0
   },
   reviews: [
     {
