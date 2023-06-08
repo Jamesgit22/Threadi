@@ -21,6 +21,7 @@ db.once('open', async () => {
     //1: Kolt's thread
     //2-7: reviews
     //8-15: comments
+    var threadIDs = [];
     var parentIDs = [];
 
     for (let i = 0; i < threadSeeds.length; i++) {
@@ -33,9 +34,16 @@ db.once('open', async () => {
             userThreads: _id
           }
         }
-      )
+      );
 
-      parentIDs.push(_id);
+      const parent = await Parent.create(
+        {
+          thread: _id
+        }
+      );
+
+      threadIDs.push(_id);
+      parentIDs.push(parent._id);
     };
 
     for (let i = 0; i < reviewSeeds.length; i++) {
@@ -53,7 +61,7 @@ db.once('open', async () => {
       );
 
       const thread = await Thread.findOneAndupdate(
-        { _id: parentIDs[threadID]},
+        { _id: threadIDs[threadID]},
         {
           $addToSet: {
             reviews: _id
@@ -61,7 +69,13 @@ db.once('open', async () => {
         }
       );
 
-      parentIDs.push(_id);
+      const parent = await Parent.create(
+        {
+          review: _id
+        }
+      );
+
+      parentIDs.push(parent._id);
     }
 
     for (let i = 0; i < comSeeds.length; i++) {
@@ -75,6 +89,32 @@ db.once('open', async () => {
           }
         }
       );
+
+      const parent = await Parent.create(
+        {
+          comment: _id
+        }
+      );
+
+      parentIDs.push(parent._id);
+
+      const currentParent = Math.floor(Math.random() * (parentIDs.length - 1));
+
+      const com = await Com.findOneAndupdate(
+        { _id: parentIDs[parentIDs.length - 1]},
+        {
+          parent: parentIDs[currentParent]
+        }
+      );
+
+      const updatedParent = await Parent.findOneAndupdate(
+        { _id: parentIDs[currentParent] },
+        {
+          $addToSet: {
+            coms: _id
+          }
+        }
+      )
     }
     
     console.log('all done!');

@@ -48,7 +48,7 @@ const typeDefs = gql`
     author: User!
     timestamp: String!
     text: String!
-    parent: Parent!
+    parent: Parent
     likes: Int!
     coms: [Com]
   }
