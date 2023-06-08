@@ -45,7 +45,7 @@ const Home = () => {
       <div className="top">
         <div className="subtitleOne">
           <h1 className="firstHeader">Rate all the entertainment you watch</h1>
-          <button className="firstButton">Sign Up</button>
+          <button onClick={openModal}>Sign Up</button>
         </div>
         {moviePosters.length > 0 && (
           <div className="movie-poster1">

@@ -17,8 +17,8 @@ const SignUpModal = ({ closeModal }) => {
             placeholder="Confirm Password"
           />
           <button type="submit">Sign Up</button>
+          <button onClick={closeModal}>Close</button>
         </form>
-        <button onClick={closeModal}>Close</button>
       </div>
     </div>
   );
