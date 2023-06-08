@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import MovieResults from "../movieresults/MovieResults";
 import "./Search.css";
+import {motion} from 'framer-motion';
 
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -28,13 +29,17 @@ const SearchBar = () => {
   return (
     <div className="searchBar">
       <form onSubmit={handleSubmit}>  
-        <input
+        <motion.input
+          initial={{width: '0%'}}
+          whileInView={{width: '70%'}}
+          transition={{duration: 0.8}}
+          id="search-input"
           type="search"
           placeholder="Search Movie"
           onChange={handleChange}
           value={searchInput}
         />
-        <button type="submit">Search</button>
+        <button id="search-submit" type="submit">Search</button>
       </form>
       {movies.length > 0 && (
         <div className="movie-results-dropdown">

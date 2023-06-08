@@ -10,8 +10,6 @@ nav {
 
 #nav-container {
   display: flex;
-  padding-left: 15%;
-  padding-right: 15%;
   align-items: center;
   position: fixed;
   top: 0;
@@ -19,8 +17,6 @@ nav {
 
 #mobile-nav-container {
   display: flex;
-  padding-left: 15%;
-  padding-right: 15%;
   align-items: center;
   position: fixed;
   top: 0;
@@ -30,7 +26,7 @@ nav {
 #nav-logo {
   margin: 8px;
   font-family: 'Brice';
-  font-size: 4em;
+  font-size: 2em;
   color: white;
   text-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
@@ -105,28 +101,38 @@ nav {
 }
 
 .desktop-signin-btns {
-  background-color: var(--gray-col);
-  border: 1px solid var(--dark-col);
+  background-color: transparent;
+  border: 1px solid var(--light-col);
   border-radius: 10px;
   padding-left: 0.5em;
   padding-right: 0.5em;
   color: var(--light-col);
   font-family: var(--font);
-  font-size: 1.5em;
-  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
+  font-size: 1.3em;
+  transition: 0.15s;
+  /* box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3); */
+}
+.desktop-signin-btns:hover {
+  background-color: var(--light-col);
+  color: #212122;
 }
 
 .desktop-signup-btns {
-  background-color: var(--dark-col);
-  border: 1px solid var(--dark-col);
+  background-color: transparent;
+  border: 1px solid var(--primary-col);
   border-radius: 10px;
-  color: var(--light-col);
-  margin-left: 1.5em;
+  color: var(--primary-col);
   padding-left: 0.5em;
   padding-right: 0.5em;
   font-family: var(--font);
-  font-size: 1.5em;
-  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
+  font-size: 1.3em;
+  transition: 0.15s;
+  /* box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3); */
+}
+
+.desktop-signup-btns:hover {
+  background-color: var(--primary-col);
+  color: #212122;
 }
 
 .desktop {
@@ -160,4 +166,15 @@ nav {
   -webkit-transform: rotate(45deg) translate(-6px, -8px);
   transform: rotate(45deg) translate(-6px, -8px);
   background-color: white;
+}
+
+/* search bar */
+
+#search-bar {
+  display: none;
+}
+
+.open#search-bar {
+  display: block;
+  font-size: 1em;
 }

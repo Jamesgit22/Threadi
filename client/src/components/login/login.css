@@ -73,7 +73,7 @@
   display: none;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 850px) {
   #login {
     margin-bottom: 1em;
     font-size: 3em;
