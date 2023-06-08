@@ -45,27 +45,25 @@ const Home = () => {
       <div className="top">
         <div className="subtitleOne">
           <h1 className="firstHeader">Rate all the entertainment you watch</h1>
-          <button onClick={openModal}>Sign Up</button>
+          <button className="firstButton" onClick={openModal}>
+            Sign Up
+          </button>
         </div>
         {moviePosters.length > 0 && (
-          <div className="movie-poster1">
-            <img
-              className="movie-img1"
-              src={`https://image.tmdb.org/t/p/w500/${moviePosters[0].poster_path}`}
-              alt={moviePosters[0].title}
-            />
-          </div>
+          <img
+            className="movie-img1"
+            src={`https://image.tmdb.org/t/p/w500/${moviePosters[0].poster_path}`}
+            alt={moviePosters[0].title}
+          />
         )}
       </div>
       <div className="middle">
         {moviePosters.length > 1 && (
-          <div className="movie-poster2">
-            <img
-              className="movie-img2"
-              src={`https://image.tmdb.org/t/p/w500/${moviePosters[1].poster_path}`}
-              alt={moviePosters[1].title}
-            />
-          </div>
+          <img
+            className="movie-img2"
+            src={`https://image.tmdb.org/t/p/w500/${moviePosters[1].poster_path}`}
+            alt={moviePosters[1].title}
+          />
         )}
         <div className="subtitleTwo">
           <h1 className="secondHeader">
@@ -79,16 +77,16 @@ const Home = () => {
       <div className="bottom">
         <div className="subtitleThree">
           <h1 className="thirdHeader">See what your friends rated</h1>
-          <button className="thirdButton" onClick={openModal}>Sign Up</button>
+          <button className="thirdButton" onClick={openModal}>
+            Sign Up
+          </button>
         </div>
         {moviePosters.length > 2 && (
-          <div className="movie-poster3">
-            <img
-              className="movie-img3"
-              src={`https://image.tmdb.org/t/p/w500/${moviePosters[2].poster_path}`}
-              alt={moviePosters[2].title}
-            />
-          </div>
+          <img
+            className="movie-img3"
+            src={`https://image.tmdb.org/t/p/w500/${moviePosters[2].poster_path}`}
+            alt={moviePosters[2].title}
+          />
         )}
       </div>
       {isModalOpen && <SignUpModal closeModal={closeModal} />}
