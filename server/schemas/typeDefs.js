@@ -90,7 +90,6 @@ const typeDefs = gql`
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
     addThread(title: String!, username: String!): Thread
 
-
   }
 `;
 

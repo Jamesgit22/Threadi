@@ -206,6 +206,43 @@ const resolvers = {
         }
       },
       // FIXED---------------------------------------------------------------------
+
+      // ADDED---------------------------------------------------------------------
+      // addReview: async (parent, { authorId, text, rating, threadId }) => {
+      //   try {
+      //     const author = await User.findById(authorId);
+      //     if (!author) {
+      //       throw new Error('Author not found');
+      //     }
+  
+      //     const thread = await Thread.findById(threadId);
+      //     if (!thread) {
+      //       throw new Error('Thread not found');
+      //     }
+  
+      //     const review = new Review({
+      //       author,
+      //       text,
+      //       rating,
+      //       thread,
+      //     });
+  
+      //     await review.save();
+  
+      //     // Update references
+      //     author.reviews.push(review);
+      //     await author.save();
+  
+      //     thread.reviews.push(review);
+      //     await thread.save();
+  
+      //     return review;
+      //   } catch (error) {
+      //     console.error(error);
+      //     throw new Error('Failed to add review');
+      //   }
+      // },
+      // ADDED---------------------------------------------------------------------
   },
 };
 
