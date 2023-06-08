@@ -5,7 +5,7 @@ const threadSchema = new Schema({
     type: String,
     required: true,
   },
-  threadAuthor: {
+  author: {
     type: Types.ObjectId,
     ref: 'User'
   },
@@ -16,6 +16,12 @@ const threadSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'Review'
+    }
+  ],
+  coms: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Com'
     }
   ]
 });
