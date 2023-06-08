@@ -1,6 +1,19 @@
 .searchBar {
     text-align: center;
   }
+
+  #search-input {
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+
+  #search-submit {
+     background-color: var(--primary-col);
+     margin-left: 5px;
+     border: none;
+     border-radius: 5em;
+     padding: 4px 10px;
+  }
   
   .movie-results-dropdown {
     max-height: 300px; /* Set the maximum height for the dropdown */

@@ -23,14 +23,12 @@ mutation Mutation($userId: ID!, $friendId: ID!) {
     }
   }`;
 
-export const LOGIN = gql`
+export const LOGIN_USER = gql`
 mutation Mutation($username: String!, $password: String!) {
     login(username: $username, password: $password) {
       token
       user {
         _id
-        email
-        password
         username
       }
     }

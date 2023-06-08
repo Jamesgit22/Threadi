@@ -3,12 +3,45 @@ import { useState } from 'react';
 import './login.css';
 import { motion } from 'framer-motion';
 import Auth from '../../utils/auth';
-import { useMutation} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 
 export default function Login() {
-  const [formState, setFormState] = useState({ username: '', password: '' });
+  const [userFormData, setUserFormData] = useState({
+    username: '',
+    password: '',
+  });
+  const [validated] = useState(true);
   const [login, { error, data }] = useMutation(LOGIN_USER);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    try {
+      const { data } = await login({
+        variables: { ...userFormData },
+      });
+      Auth.login(data.login.token);
+    } catch (err) {
+      console.log(err);
+    }
+
+    setUserFormData({
+      username: '',
+      password: '',
+    });
+  };
 
   return (
     <>
@@ -71,13 +104,17 @@ export default function Login() {
                 whileInView={{ opacity: [0, 1], x: '0px' }}
                 transition={{ duration: 1, delay: 2 }}
               >
-                <form id='form-card'>
+                <form id='form-card' noValidate validated={validated} onSubmit={handleFormSubmit}>
                   <div className='row justify-content-center pb-3'>
                     <div className='col-10'>
                       <input
                         className='inputs'
                         type='text'
                         placeholder='username'
+                        name='username-input'
+                        onChange={handleInputChange}
+                        value={userFormData.username}
+                        required
                       />
                     </div>
                   </div>
@@ -87,6 +124,10 @@ export default function Login() {
                         className='inputs'
                         type='text'
                         placeholder='password'
+                        name='password-input'
+                        onChange={handleInputChange}
+                        value={userFormData.password}
+                        required
                       />
                     </div>
                   </div>
@@ -97,7 +138,13 @@ export default function Login() {
                     transition={{ duration: 1, delay: 2 }}
                   >
                     <div className='col-8 text-center pt-4'>
-                      <button id='login-btn' type='submit'>
+                      <button
+                        id='login-btn'
+                        type='submit'
+                        disabled={
+                          !(userFormData.username && userFormData.password)
+                        }
+                      >
                         Login
                       </button>
                     </div>

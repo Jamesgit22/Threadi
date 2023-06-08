@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './Nav.css';
@@ -7,11 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 
-
 // resolve conflicts.
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,24 +29,30 @@ export default function Nav() {
     setIsOpen((open) => !open);
   };
 
+  const toggleSearch = () => {
+    setIsSearch((open) => !open);
+  };
+
   return (
     <>
-
       {isMobile ? (
-        <div className="header container-fluid">
-          <div className="row">
-            <nav id="mobile-nav-container" className="col-12">
-              <div id="logo-container" className="col-4">
-                <h2 id="mobile-nav-logo" className="light-txt">
+        <div className='header container-fluid'>
+          <div className='row'>
+            <nav
+              id='mobile-nav-container'
+              className='col-12 d-flex justify-content-between'
+            >
+              <div id='logo-container' className='col-4 '>
+                <h2 id='mobile-nav-logo' className='light-txt '>
                   THREADI
                 </h2>
               </div>
-              <div className="mobile">
-                <div id="nav-links" className="col-8">
-                  <div id="hamburger-icon" onClick={() => toggleMenu()}>
-                    <div className={`bar1 bars ${isOpen ? "open" : ""}`}></div>
-                    <div className={`bar2 bars ${isOpen ? "open" : ""}`}></div>
-                    <div className={`bar3 bars ${isOpen ? "open" : ""}`}></div>
+              <div className='mobile'>
+                <div id='nav-links' className='col-8'>
+                  <div id='hamburger-icon' onClick={() => toggleMenu()}>
+                    <div className={`bar1 bars ${isOpen ? 'open' : ''}`}></div>
+                    <div className={`bar2 bars ${isOpen ? 'open' : ''}`}></div>
+                    <div className={`bar3 bars ${isOpen ? 'open' : ''}`}></div>
                   </div>
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -117,31 +122,36 @@ export default function Nav() {
           </div>
         </div>
       ) : (
-        <div className="header container-fluid">
-          <div className="row">
-            <nav id="nav-container" className="col-12">
-              <div id="logo-container" className="col-4">
-                <h2 id="nav-logo" className="light-txt">
-                  THREADI
-                </h2>
+        <div className='header container-fluid'>
+          <div className='row'>
+            <nav id='nav-container' className='col-12'>
+              <div id='logo-container' className='col-2 d-flex'>
+                <div className='col-12'>
+                  <h2 id='nav-logo' className='light-txt'>
+                    THREADI
+                  </h2>
+                </div>
               </div>
-              <div className="desktop">
-                <div className="desktopNav">
-                  <button className="desktop-nav-btns">Social</button>
-                  <button className="desktop-nav-btns">Profile</button>
-                  <button className="desktop-nav-btns">Browse</button>
-                  <button className="desktop-nav-btns">
+              <div className='desktop col-8 d-flex'>
+                <div className='desktopNav col-12 d-flex align-items-center justify-content-center'>
+                  <button className='desktop-nav-btns'>Social</button>
+                  <button className='desktop-nav-btns'>Profile</button>
+                  <button className='desktop-nav-btns'>Browse</button>
+                  <button className='desktop-nav-btns' onClick={toggleSearch}>
                     <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                   </button>
-                  {/* <div className="desktop-nav-btns">
+                  <div
+                    id='search-bar'
+                    className={`desktop-nav-btns ${isSearch ? 'open' : ''}`}
+                  >
                     <Search />
-                  </div> */}
+                  </div>
                 </div>
-                <div className='desktopSignOn'>
+              </div>
+                <div className='desktopSignOn col-2 d-flex justify-content-evenly'>
                   <button className='desktop-signin-btns'>Sign In</button>
                   <button className='desktop-signup-btns'>Sign Up</button>
                 </div>
-              </div>
             </nav>
           </div>
         </div>
