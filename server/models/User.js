@@ -7,10 +7,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      match: /^([a-zA-Z0-9_-]{3,16})$/,
     },
     password: {
       type: String,
       required: true,
+      match: /^([a-zA-Z0-9!@#$%^&*-+=_`~]{8,24})$/,
+    },
+    email: {
+      type: String,
+      required: true,
+      match: /^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/,
     },
     friends: [
       {
@@ -21,21 +28,25 @@ const userSchema = new Schema(
     likes: [
       {
         type: SchemaTypes.ObjectId,
-        ref: 'Com'
+        ref: 'Like'
       },
-      {
-        type: SchemaTypes.ObjectId,
-        ref: 'Thread'
-      },
-      {
-        type: SchemaTypes.ObjectId,
-        ref: 'Review'
-      }
     ],
     coms: [
       {
         type: SchemaTypes.ObjectId,
         ref: 'Com'
+      }
+    ],
+    reviews: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Review'
+      }
+    ],
+    userThread: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: 'Thread'
       }
     ],
     savedThreads: [
