@@ -1,13 +1,12 @@
-const { Schema } = require('mongoose');
-const User = require('./User');
+const {Schema, model, SchemaTypes} = require('mongoose');
 
 const likeObjectSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
+        type: SchemaTypes.ObjectId,
         ref: 'User'
     },
     review: {
-        type: Schema.Types.ObjectId,
+        type: SchemaTypes.ObjectId,
         ref: 'Review'
     },
     thread: {
@@ -24,5 +23,6 @@ const likeSchema = new Schema({
     likes: [likeObjectSchema],
 });
 
+const Like = model('Like', likeSchema);
 
-module.exports = likeSchema;
+module.exports = Like;
