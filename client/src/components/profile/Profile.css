@@ -33,7 +33,7 @@
 }
 
 #menu-s-threads:hover {
-	background-color: #39393932;
+	background-color: #393939;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 }
@@ -77,7 +77,7 @@
 
 .thread-img {
 	width: 100%;
-	mask-image: linear-gradient(to right, transparent, black 100%, transparent);
+	mask-image: linear-gradient(to right, transparent, black 60%, transparent);
 	border-radius: 8px;
 	padding: 0!important;
 

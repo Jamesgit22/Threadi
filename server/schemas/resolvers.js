@@ -24,8 +24,9 @@ const resolvers = {
       console.log(token);
       return { token, user };
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      console.log("backend");
+      const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError('No profile with this email found!');
