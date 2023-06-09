@@ -48,13 +48,13 @@ export default function Nav() {
               id='mobile-nav-container'
               className='col-12 d-flex justify-content-between'
             >
-              <div id='logo-container' className='col-4 '>
+              <div id='logo-container' className='col-6 d-flex'>
                 <h2 id='mobile-nav-logo' className='light-txt '>
                   THREADI
                 </h2>
               </div>
               <div className='mobile'>
-                <div id='nav-links' className='col-8'>
+                <div id='nav-links' className='col-6'>
                   <div id='hamburger-icon' onClick={() => toggleMenu()}>
                     <div className={`bar1 bars ${isOpen ? 'open' : ''}`}></div>
                     <div className={`bar2 bars ${isOpen ? 'open' : ''}`}></div>
@@ -132,10 +132,12 @@ export default function Nav() {
           <div className='row'>
             <nav id='nav-container' className='col-12'>
               <div id='logo-container' className='col-2 d-flex'>
-                <div className='col-12'>
+                <div className='col-12 d-flex align-items-center'>
                   <h2 id='nav-logo' className='light-txt'>
                     THREADI
                   </h2>
+                  <img id='nav-img-logo' src="/images/threadLogo.png" alt="broken"/>
+
                 </div>
               </div>
               <div className='desktop col-8 d-flex'>
