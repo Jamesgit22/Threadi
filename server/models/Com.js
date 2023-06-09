@@ -1,6 +1,6 @@
 const {Schema, model, SchemaTypes} = require('mongoose');
 
-const comObjectSchema = new Schema({
+const comSchema = new Schema({
   author: {
     type: SchemaTypes.ObjectId,
     ref: 'User'
@@ -16,14 +16,16 @@ const comObjectSchema = new Schema({
   likes: {
     type: Number,
     required: true,
-    defaultValue: 0
+    default: 0
   },
   parent: {
     type: SchemaTypes.ObjectId,
+    required: true,
     refPath: 'parentType'
   },
   parentType: {
     type: String,
+    required: true,
     enum: ['Review', 'Com', 'Thread']
   },
   coms: [
@@ -32,10 +34,6 @@ const comObjectSchema = new Schema({
       ref: 'Com'
     }
   ],
-});
-
-const comSchema = new Schema({
-  coms: [comObjectSchema],
 });
 
 const Com = model('Com', comSchema);
