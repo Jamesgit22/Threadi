@@ -37,16 +37,22 @@ const typeDefs = gql`
   }
 
   type Com {
-    _id: ID!
-    author: User
+    author: User!
     timestamp: String!
     text: String!
-    parent: ParentType
     likes: Int!
+    parent: ParentType!
+    parentType: ParentTypeEnum!
     coms: [Com]
   }
 
-  union ParentType = Review | Com | Thread
+  union ParentType = Review | Thread | Com
+
+  enum ParentTypeEnum {
+    Review
+    Thread
+    Com
+  }
 
   type Auth {
     token: ID!

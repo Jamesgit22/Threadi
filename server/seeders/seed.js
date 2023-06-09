@@ -112,8 +112,14 @@ db.once("open", async () => {
         const currentParent = Math.floor(
           Math.random() * (parentIDs.length)
         );
+
         const { timestamp, text } = comSeeds[i];
-        const { _id } = await Com.create({ timestamp, text, parent: parentIDs[currentParent].id, parentType: parentIDs[currentParent].type });
+        const { _id } = await Com.create({ 
+          timestamp, 
+          text, 
+          parent: parentIDs[currentParent].id, 
+          parentType: parentIDs[currentParent].type 
+        });
 
         let currentUser = userIDs[Math.floor(Math.random() * 2)];
 
@@ -128,13 +134,9 @@ db.once("open", async () => {
 
         parentIDs.push({ id: _id, type: "Com" });
 
-       
-
         const com = await Com.findOneAndUpdate(
           { _id: parentIDs[parentIDs.length - 1].id },
           {
-            // parent: parentIDs[currentParent].id, 
-            // parentType: parentIDs[currentParent].type,
             author: currentUser,
           },
           { new: true }
@@ -149,7 +151,7 @@ db.once("open", async () => {
                 { _id: parentIDs[currentParent].id },
                 {
                   $addToSet: {
-                    com: _id,
+                    coms: _id,
                   },
                 }
               );
@@ -164,7 +166,7 @@ db.once("open", async () => {
                 { _id: parentIDs[currentParent].id },
                 {
                   $addToSet: {
-                    com: _id,
+                    coms: _id,
                   },
                 }
               );
@@ -179,7 +181,7 @@ db.once("open", async () => {
                 { _id: parentIDs[currentParent].id },
                 {
                   $addToSet: {
-                    com: _id,
+                    coms: _id,
                   },
                 }
               );
@@ -200,5 +202,3 @@ db.once("open", async () => {
     throw err;
   }
 });
-
-// const db = require('../config/connection');
