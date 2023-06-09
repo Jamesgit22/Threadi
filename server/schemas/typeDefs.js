@@ -96,6 +96,8 @@ const typeDefs = gql`
     saveThread(userId: ID!, threadId: ID!): User
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
     addThread(title: String!, username: String!): Thread
+    addReview(authorId: ID!, title: String!, text: String!, threadId: ID!): Review!
+    addReviewCom(reviewId: ID!, comText: String!, comAuthor: ID!): Review
   }
 `;
 

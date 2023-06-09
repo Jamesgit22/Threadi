@@ -40,8 +40,8 @@ mutation AddThread($title: String!, $username: String!) {
     title
     author {
       _id
-      username
     }
+    timestamp
   }
 }`;
 
@@ -52,6 +52,33 @@ mutation Mutation($threadId: ID!) {
   }
 }`;
 
+export const ADD_REVIEW = gql`
+mutation Mutation($authorId: ID!, $title: String!, $text: String!, $threadId: ID!) {
+  addReview(authorId: $authorId, title: $title, text: $text, threadId: $threadId) {
+    _id
+    author {
+      _id
+    }
+    timestamp
+    type
+    title
+    text
+    rating
+    likes
+    date
+  }
+}`;
 
+export const ADD_REVIEW_COM = gql`
+mutation Mutation($reviewId: ID!, $comText: String!, $comAuthor: ID!) {
+  addReviewCom(reviewId: $reviewId, comText: $comText, comAuthor: $comAuthor) {
+    _id
+    author {
+      _id
+    }
+    timestamp
+    text
+  }
+}`;
 
 
