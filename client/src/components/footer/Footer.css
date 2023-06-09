@@ -2,18 +2,32 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   background-color: rgb(23, 23, 23);
-  height: 30vh;
+  height:200px;
 }
 
 .firstFooter {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .firstSubFooter {
-    display: flex;
-  }
-  
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerTitle {
+    font-size: 30px;
+    font-family: "Brice";
+}
+
+.footerSubTitle {
+    margin-top: 10px;
+}
+
+.firstSubFooter {
+  display: flex;
+  align-items: center;
+}
+
+.githubLogo {
+  width: 50px;
+  margin-top: 10px;
+}

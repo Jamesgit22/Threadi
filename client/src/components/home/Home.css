@@ -219,10 +219,12 @@
 
 .howSection {
   background-color: rgb(0, 0, 0);
-  height: 25vh;
+  height: 50vh;
   border-bottom: 4px solid #212122;
-  padding-left: 30%;
-  padding-right: 30%;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
 }
 
 .howSectionTitle {
@@ -249,8 +251,4 @@
 .howsignUpText{
   color: white;
   font-size: 20px;
-}
-
-.computerSymbol{
-  
 }
