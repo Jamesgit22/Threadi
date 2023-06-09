@@ -1,33 +1,32 @@
 import React from "react";
-import './Footer.css';
-import Search from '../search/Search';
-
-
+import "./Footer.css";
+import Search from "../search/Search";
 
 function Footer() {
   return (
     <div className="footerContainer">
       <div className="firstFooter">
         <div className="firstSubFooter">
-            <div className="footerTitle">Threadi</div>
+          <div className="footerTitle">Threadi</div>
         </div>
-        <div className="footerSubTitle">Follow Threadi for more exciting content</div>
+        <div className="footerSubTitle">
+          Follow Threadi for more exciting content
+        </div>
         <img className="githubLogo" src="/images/square-github.svg" alt="" />
       </div>
       <div className="secondFooter">
-        <div className="footerSubTitle">Social</div>
-        <div className="footerSubTitle">Profile</div>
-        <div className="footerSubTitle">Browse</div>
+        <button class="footerSubTitle">Social</button>
+        <button class="footerSubTitle">Profile</button>
+        <button class="footerSubTitle">Browse</button>
       </div>
       <div className="firstFooter">
         <div className="firstSubFooter">
-            <div className="footerTitle">Contributors</div>
+          <div className="footerTitle">Contributors</div>
         </div>
-        <div>James Schoeder</div>
-        <div>Kolt Bodzo</div>
-        <div>Roy Hargrave</div>
-        <div>Xaviar Witherspoon</div>
-
+        <button>James Schoeder</button>
+        <button>Kolt Bodzo</button>
+        <button>Roy Hargrave</button>
+        <button>Xaviar Witherspoon</button>
       </div>
     </div>
   );
