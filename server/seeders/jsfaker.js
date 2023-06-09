@@ -31,9 +31,9 @@ const generateUser = () => new User({
 const generateLike = () => new Like({
   _id: new ObjectId(),
   user: generateUser(),
-  review: null, // Fill this in with relevant data if needed
-  thread: null, // Fill this in with relevant data if needed
-  com: null, // Fill this in with relevant data if needed
+  review: [], // Fill this in with relevant data if needed
+  thread: [], // Fill this in with relevant data if needed
+  com: [], // Fill this in with relevant data if needed
 });
 
 // Generate fake data for the Parent type

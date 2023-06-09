@@ -51,6 +51,25 @@ mutation Mutation($threadId: ID!) {
   }
 }`;
 
+export const ADD_REVIEW = gql`
+mutation AddReview($text: String!, $title: String!, $rating: Int!, $threadId: ID!, $userId: ID!) {
+  addReview(text: $text, title: $title, rating: $rating, threadId: $threadId, userId: $userId) {
+    author {
+      _id
+    }
+    timestamp
+    type
+    title
+  }
+}`;
+
+export const DELETE_REVIEW = gql`
+mutation DeleteReview($reviewId: ID!) {
+  deleteReview(reviewId: $reviewId) {
+    _id
+  }
+}`;
+
 
 
 

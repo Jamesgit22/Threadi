@@ -69,11 +69,11 @@ const typeDefs = gql`
   }
 
   type Query {
+    getUserThreads(userId: ID!): [Thread!]!
     reviews: [Review]
     threadCom(thread: String!): [Com]
     userCom(username: String!): [Com]
     thread(_id: ID!): Thread
-    userThreads(username: String!): [Thread]
     friends: [User]
     friend(_id: String): User
   }
@@ -95,6 +95,8 @@ const typeDefs = gql`
     saveThread(userId: ID!, threadId: ID!): User
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
     addThread(title: String!, username: String!): Thread
+    addReview(text: String!, title: String!, rating: Int!, threadId: ID!, userId: ID!): Review
+    deleteReview(reviewId: ID!): Review
 
   }
 `;
