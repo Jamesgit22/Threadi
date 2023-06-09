@@ -17,9 +17,8 @@ const typeDefs = gql`
   type Like {
     _id: ID!
     user: User!
-    review: Review
-    thread: Thread
-    com: Com
+    likedContent: ParentType!
+    parentType: ParentTypeEnum!
   }
 
   type Review {
