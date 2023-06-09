@@ -13,6 +13,10 @@
 	width: 95%;
 }
 
+#profile-default {
+	height: 10em;
+}
+
 #username-container {
 	border-top: 1px solid  #393939;
 	color: var(--light-col);
@@ -35,7 +39,7 @@
 }
 
 #menu-friends:hover {
-	background-color: #39393932;
+	background-color: #393939;
 }
 
 #menu-comments {
