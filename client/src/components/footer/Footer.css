@@ -1,0 +1,19 @@
+.footerContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: rgb(23, 23, 23);
+  height: 30vh;
+}
+
+.firstFooter {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .firstSubFooter {
+    display: flex;
+  }
+  
