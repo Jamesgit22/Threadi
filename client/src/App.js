@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import Profile from './components/profile/Profile';
 import Home from './components/home/Home';
+import Footer from './components/footer/Footer';
 import './App.css';
 import Login from './components/login/Login';
 import { ApolloProvider } from '@apollo/client';
@@ -41,6 +42,7 @@ function App() {
             </Switch>
           </div>
         </BrowserRouter>
+        <Footer />
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Mallanna&display=swap');

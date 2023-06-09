@@ -1,11 +1,12 @@
 nav {
-  background-color: #212122;
+  background-color: #000000;
   width: 100%;
   box-shadow: 0px 0px 5px black;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 3;
+  border-bottom: 1px solid #212122;
 }
 
 #nav-container {

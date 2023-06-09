@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -17,21 +17,13 @@ const typeDefs = gql`
   type Like {
     _id: ID!
     user: User!
-    review: Review
-    thread: Thread
-    com: Com
-  }
-
-  type Parent {
-    _id: ID!
-    review: Review
-    thread: Thread
-    com: Com
+    likedContent: ParentType!
+    parentType: ParentTypeEnum!
   }
 
   type Review {
     _id: ID!
-    author: User!
+    author: User
     timestamp: String!
     type: String!
     title: String!
@@ -44,13 +36,21 @@ const typeDefs = gql`
   }
 
   type Com {
-    _id: ID!
     author: User!
     timestamp: String!
     text: String!
-    parent: Parent
     likes: Int!
+    parent: ParentType!
+    parentType: ParentTypeEnum!
     coms: [Com]
+  }
+
+  union ParentType = Review | Thread | Com
+
+  enum ParentTypeEnum {
+    Review
+    Thread
+    Com
   }
 
   type Auth {
@@ -62,20 +62,14 @@ const typeDefs = gql`
     _id: ID!
     timestamp: String!
     title: String!
-    author: User!
+    author: User
     likes: Int!
     reviews: [Review]
     coms: [Com]
   }
 
   type Query {
-    reviews: [Review]
-    threadCom(thread: String!): [Com]
-    userCom(username: String!): [Com]
-    thread(_id: ID!): Thread
-    userThreads(username: String!): [Thread]
-    friends: [User]
-    friend(_id: String): User
+    threads: [Thread]
   }
 
   type Mutation {
@@ -84,12 +78,23 @@ const typeDefs = gql`
     likeThread(threadId: ID!): Thread
     shareThread(friendId: ID!, threadId: ID!): Thread
     deleteThread(threadId: ID!): Thread
-    addThreadCom(threadId: ID!, comText: String!, comAuthor: String!): Com
     deleteThreadCom(threadId: ID!, comId: ID!): Thread
     addFriend(userId: ID!, friendId: ID!): User
     deleteFriend(userId: ID!, friendId: ID!): User
-
-
+    unlikeThread(threadId: ID!): Thread
+    likeCom(comId: ID!): Com
+    unlikeCom(comId: ID!): Com
+    likeReview(reviewId: ID!): Review
+    unlikeReview(reviewId: ID!): Review
+    saveThread(userId: ID!, threadId: ID!): User
+    addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
+    addThread(title: String!, username: String!): Thread
+    addReview(authorId: ID!, title: String!, text: String!, threadId: ID!): Review!
+    addReviewCom(reviewId: ID!, comText: String!, comAuthor: ID!): Review
+    deleteReview(reviewId: ID!): Review
+    deleteReviewCom(reviewId: ID!, comId: ID!): Review
+    updateReview(reviewId: ID!, title: String!, text: String!): Review
+    updateThread(threadId: ID!, title: String!): Thread
   }
 `;
 

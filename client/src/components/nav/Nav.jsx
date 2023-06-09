@@ -5,12 +5,14 @@ import Search from '../search/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
+import SignupModal from '../signupmodal/Signupmodal'
 
 // resolve conflicts.
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,6 +33,10 @@ export default function Nav() {
 
   const toggleSearch = () => {
     setIsSearch((open) => !open);
+  };
+
+  const handleSignupClick = () => {
+    setShowModal(true);
   };
 
   return (
@@ -150,7 +156,8 @@ export default function Nav() {
               </div>
                 <div className='desktopSignOn col-2 d-flex justify-content-evenly'>
                   <button className='desktop-signin-btns'>Sign In</button>
-                  <button className='desktop-signup-btns'>Sign Up</button>
+                  <button className='desktop-signup-btns' onClick={handleSignupClick}>Sign Up</button>
+                  {showModal && <SignupModal setShowModal={setShowModal} />}
                 </div>
             </nav>
           </div>

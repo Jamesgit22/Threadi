@@ -1,26 +1,20 @@
 const {Schema, model, SchemaTypes} = require('mongoose');
 
-const likeObjectSchema = new Schema({
+const likeSchema = new Schema({
     user: {
         type: SchemaTypes.ObjectId,
         ref: 'User'
     },
-    review: {
+    likedContent: {
         type: SchemaTypes.ObjectId,
-        ref: 'Review'
+        required: true,
+        ref: 'parentType'
     },
-    thread: {
-        type: SchemaTypes.ObjectId,
-        ref: 'Thread'
-    },
-    comment: {
-        type: SchemaTypes.ObjectId,
-        ref: 'Com'
+    parentType: {
+        type: String,
+        required: true,
+        enum: ['Review', 'Com', 'Thread']
     }
-});
-
-const likeSchema = new Schema({
-    likes: [likeObjectSchema],
 });
 
 const Like = model('Like', likeSchema);

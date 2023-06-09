@@ -1,0 +1,49 @@
+.footerContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: rgb(0, 0, 0);
+  height:200px;
+}
+
+.firstFooter {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.secondFooter {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid #212122;
+    border-left: 2px solid #212122;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+.footerTitle {
+    font-size: 30px;
+    font-family: "Brice";
+}
+
+.footerSubTitle {
+    margin-top: 10px;
+}
+
+.firstSubFooter {
+  display: flex;
+  align-items: center;
+}
+
+.githubLogo {
+  height: 70px;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  object-fit: cover;
+  object-position: top; 
+  clip-path: inset(8px 2px 8px 2px);
+}
