@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SignUpModal from "../signupmodal/Signupmodal";
 import "./Home.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLaptop } from "@fortawesome/free-solid-svg-icons";
+import { faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faPerson } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const [moviePosters, setMoviePosters] = useState([]);
@@ -94,15 +96,34 @@ const Home = () => {
       {isModalOpen && <SignUpModal closeModal={closeModal} />}
       <div className="howSection">
         <div className="howSectionTitle">How Threadi Works</div>
-        <div>
-        <FontAwesomeIcon icon={faLaptop} className="computerSymbol" beat size="2xl" style={{color: "#ffffff",}} />
-        <div>Sign Up for Free</div>
-        </div>
-        <div>
-
-        </div>
-        <div>
-
+        <div className="howSectionContainer">
+          <div className="howsignUpContainer">
+            <FontAwesomeIcon
+              icon={faLaptop}
+              className="computerSymbol"
+              size="2xl"
+              style={{ color: "#ffffff" }}
+            />
+            <div className="howsignUpText">Sign Up for Free</div>
+          </div>
+          <div className="howsignUpContainer">
+            <FontAwesomeIcon
+              icon={faFilm}
+              className="computerSymbol"
+              size="2xl"
+              style={{ color: "#ffffff" }}
+            />
+            <div className="howsignUpText">Review your Entertainment</div>
+          </div>
+          <div className="howsignUpContainer">
+            <FontAwesomeIcon
+              icon={faPerson}
+              className="computerSymbol"
+              size="2xl"
+              style={{ color: "#ffffff" }}
+            />
+            <div className="howsignUpText">Share with your Friends</div>
+          </div>
         </div>
       </div>
     </div>
