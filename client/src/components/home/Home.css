@@ -216,3 +216,21 @@
   align-items: center;
   justify-content: center;
 }
+
+.howSection {
+  background-color: rgb(0, 0, 0);
+  height: 25vh;
+  border-bottom: 4px solid #212122;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.howSectionTitle {
+  font-family: "Brice";
+  color: white;
+  font-size: 40px;
+  text-align: center; 
+  padding-top: 20px;
+}
+
+.computerSymbol{}

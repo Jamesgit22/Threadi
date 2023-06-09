@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SignUpModal from "../signupmodal/Signupmodal";
 import "./Home.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   const [moviePosters, setMoviePosters] = useState([]);
@@ -90,6 +92,19 @@ const Home = () => {
         )}
       </div>
       {isModalOpen && <SignUpModal closeModal={closeModal} />}
+      <div className="howSection">
+        <div className="howSectionTitle">How Threadi Works</div>
+        <div>
+        <FontAwesomeIcon icon={faLaptop} className="computerSymbol" beat size="2xl" style={{color: "#ffffff",}} />
+        <div>Sign Up for Free</div>
+        </div>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+      </div>
     </div>
   );
 };
