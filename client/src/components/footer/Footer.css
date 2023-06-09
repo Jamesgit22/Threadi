@@ -1,6 +1,6 @@
 .footerContainer {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   background-color: rgb(23, 23, 23);
   height:200px;
 }
@@ -12,6 +12,18 @@
   justify-content: center;
   align-items: center;
 }
+
+.secondFooter {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid rgb(45, 45, 45);
+    border-left: 2px solid rgb(45, 45, 45);
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 
 .footerTitle {
     font-size: 30px;

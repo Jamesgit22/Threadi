@@ -10,10 +10,14 @@ function Footer() {
       <div className="firstFooter">
         <div className="firstSubFooter">
             <div className="footerTitle">Threadi</div>
-            <Search />
         </div>
         <div className="footerSubTitle">Follow Threadi for more exciting content</div>
         <img className="githubLogo" src="/images/square-github.svg" alt="" />
+      </div>
+      <div className="secondFooter">
+        <div className="footerSubTitle">Social</div>
+        <div className="footerSubTitle">Profile</div>
+        <div className="footerSubTitle">Browse</div>
       </div>
       <div className="firstFooter">
         <div className="firstSubFooter">
