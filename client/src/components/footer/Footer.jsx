@@ -1,26 +1,32 @@
 import React from "react";
-import './Footer.css';
-import Search from '../search/Search';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLaptop } from "@fortawesome/free-solid-svg-icons";
-import { faFilm } from "@fortawesome/free-solid-svg-icons";
-import { faPerson } from "@fortawesome/free-solid-svg-icons";
+import "./Footer.css";
+import Search from "../search/Search";
 
 function Footer() {
   return (
     <div className="footerContainer">
       <div className="firstFooter">
         <div className="firstSubFooter">
-            <div>Threadi</div>
-            <Search />
+          <div className="footerTitle">Threadi</div>
         </div>
-        <div>Follow Threadi for more exciting content</div>
-        <div>
-
+        <div className="footerSubTitle">
+          Follow Threadi for more exciting content
         </div>
+        <img className="githubLogo" src="/images/square-github.svg" alt="" />
       </div>
-      <div>
-        yo
+      <div className="secondFooter">
+        <button class="footerSubTitle">Social</button>
+        <button class="footerSubTitle">Profile</button>
+        <button class="footerSubTitle">Browse</button>
+      </div>
+      <div className="firstFooter">
+        <div className="firstSubFooter">
+          <div className="footerTitle">Contributors</div>
+        </div>
+        <button>James Schoeder</button>
+        <button>Kolt Bodzo</button>
+        <button>Roy Hargrave</button>
+        <button>Xaviar Witherspoon</button>
       </div>
     </div>
   );

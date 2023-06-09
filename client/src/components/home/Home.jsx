@@ -116,7 +116,7 @@ const Home = () => {
             <div className="howsignUpText">Review your Entertainment</div>
           </div>
           <div className="howsignUpContainer">
-            <FontAwesomeIcon
+          <FontAwesomeIcon
               icon={faPerson}
               className="computerSymbol"
               size="2xl"
