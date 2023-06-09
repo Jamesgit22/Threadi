@@ -22,16 +22,42 @@ db.once('open', async () => {
     var parentIDs = [];
 
     for (let i = 0; i < threadSeeds.length; i++) {
-      const { _id, author } = await Thread.create(threadSeeds[i]);
+      const { _id } = await Thread.create(threadSeeds[i]);
 
-      const user = await User.findOneAndupdate(
-        { username: author },
-        {
-          $addToSet: {
-            userThreads: _id
+      if ( i === 0 ) {
+        const user = await User.findOneAndupdate(
+          { username: "JimothyS" },
+          {
+            $addToSet: {
+              userThreads: _id
+            }
           }
-        }
-      );
+        );
+
+        const updateThread = await Thread.findOneAndupdate(
+          { _id: _id },
+          {
+            author: user._id
+          }
+        );
+      } else {
+        const user = await User.findOneAndupdate(
+          { username: "Eden" },
+          {
+            $addToSet: {
+              userThreads: _id
+            }
+          }
+        );
+
+        
+        const updateThread = await Thread.findOneAndupdate(
+          { _id: _id },
+          {
+            author: user._id
+          }
+        );
+      };
 
       threadIDs.push(_id);
       parentIDs.push({ id: _id, type: "Thread" });
