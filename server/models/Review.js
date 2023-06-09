@@ -30,7 +30,7 @@ const reviewSchema = new Schema({
     required: true,
     default: 0
   },
-  dateWatched: {
+  date: {
     type: String,
     required: true,
   },

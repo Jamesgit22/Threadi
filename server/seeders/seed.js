@@ -20,12 +20,13 @@ db.once('open', async () => {
     //1: Kolt's thread
     var threadIDs = [];
     var parentIDs = [];
+    var userIDs = [];
 
     for (let i = 0; i < threadSeeds.length; i++) {
       const { _id } = await Thread.create(threadSeeds[i]);
 
       if ( i === 0 ) {
-        const user = await User.findOneAndupdate(
+        const user = await User.findOneAndUpdate(
           { username: "JimothyS" },
           {
             $addToSet: {
@@ -33,14 +34,17 @@ db.once('open', async () => {
             }
           }
         );
-        const updateThread = await Thread.findOneAndupdate(
+        userIDs.push(user._id);
+
+        const updateThread = await Thread.findOneAndUpdate(
+
           { _id: _id },
           {
             author: user._id
           }
         );
       } else {
-        const user = await User.findOneAndupdate(
+        const user = await User.findOneAndUpdate(
           { username: "Eden" },
           {
             $addToSet: {
@@ -49,8 +53,9 @@ db.once('open', async () => {
           }
         );
 
+        userIDs.push(user._id);
         
-        const updateThread = await Thread.findOneAndupdate(
+        const updateThread = await Thread.findOneAndUpdate(
           { _id: _id },
           {
             author: user._id
@@ -76,11 +81,18 @@ db.once('open', async () => {
       );
 
       const thread = await Thread.findOneAndUpdate(
-        { _id: threadIDs[threadID] },
+        { _id: threadIDs[threadID]},
         {
           $addToSet: {
             reviews: _id
           }
+        }
+      );
+
+      const updateReview = await Review.findOneAndUpdate(
+        { _id: _id },
+        {
+          author: userIDs[Math.floor(Math.random() * 2)]
         }
       );
 
@@ -101,17 +113,20 @@ db.once('open', async () => {
 
       parentIDs.push({ id: _id, type: "Com" });
 
-      const currentParent = Math.floor(Math.random() * (parentIDs.length - 2));
+      const currentParent = Math.floor(Math.random() * (parentIDs.length - 1));
 
       const com = await Com.findOneAndUpdate(
-        { _id: parentIDs[parentIDs.length - 1] },
+
+        { _id: parentIDs[parentIDs.length - 1]},
+
         {
-          parent: parentIDs[currentParent].id
+          parent: parentIDs[currentParent].id,
+          author: userIDs[Math.floor(Math.random() * 2)]
         }
       );
       switch(parentIDs[currentParent].type) {
         case "Thread": {
-          const addThread = await Thread.findOneAndupdate(
+          const addThread = await Thread.findOneAndUpdate(
             { _id: parentIDs[currentParent].id},
             {
               $addToSet: {
@@ -122,7 +137,7 @@ db.once('open', async () => {
           break;
         }
         case "Review": {
-          const addReview = await Review.findOneAndupdate(
+          const addReview = await Review.findOneAndUpdate(
             { _id: parentIDs[currentParent].id},
             {
               $addToSet: {
@@ -133,7 +148,7 @@ db.once('open', async () => {
           break;
         }
         case "Com": {
-          const addCom = await Com.findOneAndupdate(
+          const addCom = await Com.findOneAndUpdate(
             { _id: parentIDs[currentParent].id},
             {
               $addToSet: {
