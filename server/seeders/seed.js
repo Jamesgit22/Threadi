@@ -27,7 +27,7 @@ db.once('open', async () => {
     for (let i = 0; i < threadSeeds.length; i++) {
       const { _id, author } = await Thread.create(threadSeeds[i]);
 
-      const user = await User.findOneAndupdate(
+      const user = await User.findOneAndUpdate(
         { username: author },
         {
           $addToSet: {
@@ -44,14 +44,14 @@ db.once('open', async () => {
 
       threadIDs.push(_id);
       parentIDs.push(parent._id);
-    };
+    }
 
     for (let i = 0; i < reviewSeeds.length; i++) {
       const { _id, author } = await Review.create(reviewSeeds[i]);
 
       const threadID = (author === "JimothyS") ? 0 : (author === "Eden") ? 1 : null;
 
-      const user = await User.findOneAndupdate(
+      const user = await User.findOneAndUpdate(
         { username: author },
         {
           $addToSet: {
@@ -60,8 +60,8 @@ db.once('open', async () => {
         }
       );
 
-      const thread = await Thread.findOneAndupdate(
-        { _id: threadIDs[threadID]},
+      const thread = await Thread.findOneAndUpdate(
+        { _id: threadIDs[threadID] },
         {
           $addToSet: {
             reviews: _id
@@ -81,7 +81,7 @@ db.once('open', async () => {
     for (let i = 0; i < comSeeds.length; i++) {
       const { _id, author } = await Com.create(comSeeds[i]);
 
-      const user = await User.findOneAndupdate(
+      const user = await User.findOneAndUpdate(
         { username: author },
         {
           $addToSet: {
@@ -100,21 +100,21 @@ db.once('open', async () => {
 
       const currentParent = Math.floor(Math.random() * (parentIDs.length - 1));
 
-      const com = await Com.findOneAndupdate(
-        { _id: parentIDs[parentIDs.length - 1]},
+      const com = await Com.findOneAndUpdate(
+        { _id: parentIDs[parentIDs.length - 1] },
         {
           parent: parentIDs[currentParent]
         }
       );
 
-      const updatedParent = await Parent.findOneAndupdate(
+      const updatedParent = await Parent.findOneAndUpdate(
         { _id: parentIDs[currentParent] },
         {
           $addToSet: {
             coms: _id
           }
         }
-      )
+      );
     }
     
     console.log('all done!');
@@ -122,6 +122,7 @@ db.once('open', async () => {
   } catch (err) {
     throw err;
   }
+});
 
 
 
