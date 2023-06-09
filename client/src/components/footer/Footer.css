@@ -1,7 +1,7 @@
 .footerContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  background-color: rgb(23, 23, 23);
+  background-color: rgb(0, 0, 0);
   height:200px;
 }
 
@@ -19,8 +19,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-right: 2px solid rgb(45, 45, 45);
-    border-left: 2px solid rgb(45, 45, 45);
+    border-right: 2px solid #212122;
+    border-left: 2px solid #212122;
     margin-top: 15px;
     margin-bottom: 15px;
   }
@@ -42,5 +42,4 @@
 .githubLogo {
   width: 50px;
   margin-top: 10px;
-  fill: white;
 }
