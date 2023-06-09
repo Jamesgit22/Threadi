@@ -164,20 +164,38 @@ const resolvers = {
     },
     // WORKS---------------------------------------------------------------------
 
-    addThreadCom: async (parent, { threadId, comText, comAuthor }) => {
+    // WORKS---------------------------------------------------------------------
+    addThreadCom: async (parent, { threadId, comText, comAuthor }, { models }) => {
       try {
-        const comment = { _id: new ObjectId(), comText, comAuthor }; // Create a new comment object with unique _id
-        const addedThreadCom = await Thread.findOneAndUpdate(
-          { _id: threadId },
-          { $addToSet: { com: comment } },
-          { new: true }
-        );
-        return addedThreadCom;
-      } catch (err) {
-        console.error(err);
+        const thread = await Thread.findById(threadId);
+        if (!thread) {
+          throw new Error('thread not found');
+        }
+      
+        // Create a new comment
+        const comment = new Com({
+          text: comText,
+          author: comAuthor,
+          parentType: 'Thread', // Provide the appropriate value for parentType
+          parent: threadId, // Provide the appropriate value for parent
+          timestamp: new Date(), // Provide the appropriate value for timestamp
+        });
+      
+        await comment.save();
+      
+        // Update the reference in the review
+        thread.coms.push(comment);
+        await thread.save();
+      
+        return comment;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to add comment to thread');
       }
     },
+    // WORKS---------------------------------------------------------------------
      
+    // WORKS---------------------------------------------------------------------
     deleteThreadCom: async (parent, { threadId, comId }) => {
       return Thread.findOneAndDelete(
         { _id: threadId },
@@ -185,6 +203,8 @@ const resolvers = {
         { new: true }
       );
     },
+    // WORKS---------------------------------------------------------------------
+
     // Add a friend
     addFriend: async (parent, { userId, friendId }) => {
       return User.findOneAndUpdate(
@@ -234,6 +254,14 @@ const resolvers = {
       },
       // WORKS---------------------------------------------------------------------
 
+      updateThread: async (parent, { threadId, title }) => {
+        return Thread.findOneAndUpdate(
+          { _id: threadId },
+          { $set: { title } },
+          { new: true }
+        );
+      },
+
       // WORKS---------------------------------------------------------------------
       addReview: async (_, { authorId, title, text, threadId }, { models }) => {
         try {
@@ -274,6 +302,14 @@ const resolvers = {
         }
       },
       // WORKS---------------------------------------------------------------------
+
+      updateReview: async (parent, { reviewId, text }) => {
+        return Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $set: { text } },
+          { new: true }
+        );
+      },
    
       // WORKS---------------------------------------------------------------------
       addReviewCom: async (parent, { reviewId, comText, comAuthor }, { models }) => {
@@ -306,6 +342,33 @@ const resolvers = {
       },
       // WORKS---------------------------------------------------------------------
 
+      // WORKS---------------------------------------------------------------------
+      deleteReview: async (parent, { reviewId }) => {
+        try {
+          // Find the review and store it in deletedReview variable
+          const deletedReview = await Review.findOneAndDelete({ _id: reviewId });
+      
+          // Delete the associated comments
+          await Comment.deleteMany({ reviewId: deletedReview._id });
+      
+          // Return the deleted review
+          return deletedReview;
+        } catch (error) {
+          console.error(error);
+          throw new Error('Failed to delete review');
+        }
+      },
+      // WORKS---------------------------------------------------------------------
+
+      // WORKS---------------------------------------------------------------------
+      deleteReviewCom: async (parent, { reviewId, comId }) => {
+        return Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $pull: { com: { _id: comId } } },
+          { new: true }
+        );
+      },
+      // WORKS---------------------------------------------------------------------
   },
 };
 

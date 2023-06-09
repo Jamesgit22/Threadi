@@ -98,6 +98,10 @@ const typeDefs = gql`
     addThread(title: String!, username: String!): Thread
     addReview(authorId: ID!, title: String!, text: String!, threadId: ID!): Review!
     addReviewCom(reviewId: ID!, comText: String!, comAuthor: ID!): Review
+    deleteReview(reviewId: ID!): Review
+    deleteReviewCom(reviewId: ID!, comId: ID!): Review
+    updateReview(reviewId: ID!, title: String!, text: String!): Review
+    updateThread(threadId: ID!, title: String!): Thread
   }
 `;
 
