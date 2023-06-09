@@ -200,3 +200,5 @@ db.once("open", async () => {
     throw err;
   }
 });
+
+// const db = require('../config/connection');
