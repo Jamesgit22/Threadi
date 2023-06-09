@@ -10,6 +10,7 @@ import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import Browse from './components/browse/Browse';
 import Social from './components/social/Social';
+import ThreadsPage from './components/threadspage/ThreadsPage';
 
 const client = new ApolloClient({
   uri: 'graphql',
@@ -32,6 +33,9 @@ function App() {
               </Route>
               <Route path='/profile'>
                 <Profile />
+              </Route>
+              <Route path='/threadspage'>
+                <ThreadsPage />
               </Route>
               <Route path='/browse'>
                 <Browse />

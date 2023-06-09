@@ -1,0 +1,111 @@
+#threads-main {
+  overflow-x: hidden !important;
+}
+
+#thread-background {
+  background-image: url(../../../public/images/pexels-jonathan-borba-15937622.jpg);
+  background-size: cover;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#threads-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgb(8, 8, 8),
+    rgba(0, 0, 0, 0.668) 80%,
+    rgb(0, 0, 0)
+  );
+}
+
+.thread-card {
+  border: 1px solid rgb(38, 38, 38);
+  margin: 1em auto;
+  border-radius: 8px;
+}
+
+#threads-page-title {
+  margin-top: 14em;
+  margin-bottom: 3em;
+}
+
+#new-thread-btn {
+  background-color: var(--primary-col);
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-bottom: 5em;
+}
+
+#new-thread-btn:hover {
+  background-color: #c6495a;
+}
+
+.thread-title-sec {
+  border-bottom: 1px solid rgb(38, 38, 38) !important;
+  background-color: rgb(24, 24, 24);
+  padding: 4px 10px 4px 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.thread-btns-container {
+  background-color: rgb(24, 24, 24);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+#box-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  border-top: 3px solid rgb(38, 38, 38);
+  border-bottom: 3px solid rgb(38, 38, 38);
+  background-color: rgb(12, 12, 12) !important;
+}
+
+.thread-open-btn {
+  background-color: var(--primary-col);
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin: 4px 0;
+  transition: 0.2s;
+}
+
+.thread-open-btn:hover {
+  background-color: #c6495a;
+}
+
+.item-titles {
+  padding: 5px 5px 5px 10px;
+}
+
+@media screen and (min-width: 850px) {
+
+    .thread-card {
+        margin-bottom: 4em;
+    }
+
+  #my-threads-h2 {
+    font-size: 3.5em;
+    margin-bottom: 1.5em;
+  }
+
+  #new-thread-btn {
+    font-size: 1.5em;
+  }
+
+  #new-thread-btn {
+    margin-bottom: 10em;
+  }
+
+  .threads-imgs {
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent, black 50%, transparent);
+    border-radius: 8px;
+    padding: 0 !important;
+    max-height: 470px;
+  }
+
+  .thread-open-btn {
+    width: 40%;
+  }
+}
