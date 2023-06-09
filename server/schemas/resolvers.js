@@ -1,42 +1,55 @@
-const { User, Thread } = require('../models');
+const { User, Thread, Review, Com } = require('../models');
+const { ObjectId } = require('mongodb');
 
 const resolvers = {
-  Com: {
-    parent: async (com) => {
-      const ParentModel = mongoose.model(com.parentType);
-      return await ParentModel.findById(com.parent);
-    },
-  },
-  Review: {
-    parent: async (com) => {
-      const ParentModel = mongoose.model(com.parentType);
-      return await ParentModel.findById(com.parent);
-    },
-  },
-  Thread: {
-    parent: async (com) => {
-      const ParentModel = mongoose.model(com.parentType);
-      return await ParentModel.findById(com.parent);
-    },
-  },
+  // Com: {
+  //   parent: async (com) => {
+  //     const ParentModel = mongoose.model(com.parentType);
+  //     return await ParentModel.findById(com.parent);
+  //   },
+  // },
+  // Review: {
+  //   parent: async (com) => {
+  //     const ParentModel = mongoose.model(com.parentType);
+  //     return await ParentModel.findById(com.parent);
+  //   },
+  // },
+  // Thread: {
+  //   parent: async (com) => {
+  //     const ParentModel = mongoose.model(com.parentType);
+  //     return await ParentModel.findById(com.parent);
+  //   },
+  // },
 
 
   Query: {
-    thread: async (parent, { threadId }) => {
-      return Thread.findOne({ _id: threadId });
-    },
-    userThreads: async (parent, { userId }) => {
-      return Thread.find({ threadAuthor: userId });
-    },
-    friend: async (parent, { userId }) => {
-      return User.findOne({ _id: userId });
-    },
-    friends: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate('friends');
-    },
+    // thread: async (parent, { threadId }) => {
+    //   return Thread.findOne({ _id: threadId });
+    // },
+    // userThreads: async (parent, { userId }) => {
+    //   return Thread.find({ threadAuthor: userId });
+    // },
+    // friend: async (parent, { userId }) => {
+    //   return User.findOne({ _id: userId });
+    // },
+    // friends: async (parent, { userId }) => {
+    //   return User.findOne({ _id: userId }).populate('friends');
+    // },
+
+    threads: async () => {
+      try {
+        const allThreads = await Thread.find(); // Assuming you have a model called "Thread"
+        return allThreads;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch threads');
+      }
+    }
+
   },
 
   Mutation: {
+    // WORKS---------------------------------------------------------------------
     addUser: async (parent, args) => {
       const user = await User.create(args);
       console.log(user);
@@ -44,6 +57,9 @@ const resolvers = {
       console.log(token);
       return { token, user };
     },
+    // WORKS---------------------------------------------------------------------
+
+    // WORKS---------------------------------------------------------------------
     login: async (parent, { username, password }) => {
       console.log("backend");
       const user = await User.findOne({ username });
@@ -61,6 +77,8 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    // WORKS---------------------------------------------------------------------
+
     likeThread: async (parent, { threadId }) => {
       try {
         const updatedThread = await Thread.findOneAndUpdate(
@@ -146,7 +164,7 @@ const resolvers = {
       }
     },
 
-    // FIXED---------------------------------------------------------------------
+    // WORKS---------------------------------------------------------------------
     deleteThread: async (parent, { threadId }) => {
       try {
         const deletedThread = await Thread.findOneAndDelete({ _id: threadId });
@@ -155,24 +173,40 @@ const resolvers = {
         console.error(err);
       }
     },
-    // FIXED---------------------------------------------------------------------
+    // WORKS---------------------------------------------------------------------
 
-    addThreadCom: async (
-      parent,
-      { threadId, comText, comAuthor }
-    ) => {
+    // WORKS---------------------------------------------------------------------
+    addThreadCom: async (parent, { threadId, comText, comAuthor }, { models }) => {
       try {
-        const addedThreadCom = await Thread.findOneAndUpdate(
-          { _id: threadId },
-          { $addToSet: { com: { _id: comId } } },
-          { new: true }
-        );
-        return addedThreadCom;
-      } catch (err) {
-        console.error(err);
+        const thread = await Thread.findById(threadId);
+        if (!thread) {
+          throw new Error('thread not found');
+        }
+      
+        // Create a new comment
+        const comment = new Com({
+          text: comText,
+          author: comAuthor,
+          parentType: 'Thread', // Provide the appropriate value for parentType
+          parent: threadId, // Provide the appropriate value for parent
+          timestamp: new Date(), // Provide the appropriate value for timestamp
+        });
+      
+        await comment.save();
+      
+        // Update the reference in the review
+        thread.coms.push(comment);
+        await thread.save();
+      
+        return comment;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to add comment to thread');
       }
     },
+    // WORKS---------------------------------------------------------------------
      
+    // WORKS---------------------------------------------------------------------
     deleteThreadCom: async (parent, { threadId, comId }) => {
       return Thread.findOneAndDelete(
         { _id: threadId },
@@ -180,6 +214,8 @@ const resolvers = {
         { new: true }
       );
     },
+    // WORKS---------------------------------------------------------------------
+
     // Add a friend
     addFriend: async (parent, { userId, friendId }) => {
       return User.findOneAndUpdate(
@@ -198,7 +234,7 @@ const resolvers = {
       },
 
       // create a thread
-      // FIXED---------------------------------------------------------------------
+      // WORKS---------------------------------------------------------------------
       addThread: async (parent, { title, username }) => {
         try {
           // Find the user by username
@@ -209,6 +245,7 @@ const resolvers = {
             title,
             author,
             likes: 0,
+            timestamp: Date.now(),
             reviews: [],
             coms: [],
           });
@@ -226,44 +263,123 @@ const resolvers = {
           console.error(err);
         }
       },
-      // FIXED---------------------------------------------------------------------
+      // WORKS---------------------------------------------------------------------
 
-      // ADDED---------------------------------------------------------------------
-      // addReview: async (parent, { authorId, text, rating, threadId }) => {
-      //   try {
-      //     const author = await User.findById(authorId);
-      //     if (!author) {
-      //       throw new Error('Author not found');
-      //     }
-  
-      //     const thread = await Thread.findById(threadId);
-      //     if (!thread) {
-      //       throw new Error('Thread not found');
-      //     }
-  
-      //     const review = new Review({
-      //       author,
-      //       text,
-      //       rating,
-      //       thread,
-      //     });
-  
-      //     await review.save();
-  
-      //     // Update references
-      //     author.reviews.push(review);
-      //     await author.save();
-  
-      //     thread.reviews.push(review);
-      //     await thread.save();
-  
-      //     return review;
-      //   } catch (error) {
-      //     console.error(error);
-      //     throw new Error('Failed to add review');
-      //   }
-      // },
-      // ADDED---------------------------------------------------------------------
+      updateThread: async (parent, { threadId, title }) => {
+        return Thread.findOneAndUpdate(
+          { _id: threadId },
+          { $set: { title } },
+          { new: true }
+        );
+      },
+
+      // WORKS---------------------------------------------------------------------
+      addReview: async (_, { authorId, title, text, threadId }, { models }) => {
+        try {
+          const author = await User.findById(authorId);
+          if (!author) {
+            throw new Error('Author not found');
+          }
+      
+          const thread = await Thread.findById(threadId);
+          if (!thread) {
+            throw new Error('Thread not found');
+          }
+      
+          const review = new Review({
+            author,
+            title,
+            text,
+            thread,
+            date: new Date(), // Example: Set the current date as the value for the 'date' field
+            rating: 0, // Example: Set a rating value
+            type: 'Media', // Example: Set a type value
+            timestamp: Date.now() // Example: Set the current timestamp as the value for the 'timestamp' field
+          });
+      
+          await review.save();
+      
+          // Update references
+          author.reviews.push(review);
+          await author.save();
+      
+          thread.reviews.push(review);
+          await thread.save();
+      
+          return review;
+        } catch (error) {
+          console.error(error);
+          throw new Error('Failed to add review');
+        }
+      },
+      // WORKS---------------------------------------------------------------------
+
+      updateReview: async (parent, { reviewId, text }) => {
+        return Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $set: { text } },
+          { new: true }
+        );
+      },
+   
+      // WORKS---------------------------------------------------------------------
+      addReviewCom: async (parent, { reviewId, comText, comAuthor }, { models }) => {
+        try {
+          const review = await Review.findById(reviewId);
+          if (!review) {
+            throw new Error('Review not found');
+          }
+        
+          // Create a new comment
+          const comment = new Com({
+            text: comText,
+            author: comAuthor,
+            parentType: 'Review', // Provide the appropriate value for parentType
+            parent: reviewId, // Provide the appropriate value for parent
+            timestamp: new Date(), // Provide the appropriate value for timestamp
+          });
+        
+          await comment.save();
+        
+          // Update the reference in the review
+          review.coms.push(comment);
+          await review.save();
+        
+          return comment;
+        } catch (error) {
+          console.error(error);
+          throw new Error('Failed to add comment to review');
+        }
+      },
+      // WORKS---------------------------------------------------------------------
+
+      // WORKS---------------------------------------------------------------------
+      deleteReview: async (parent, { reviewId }) => {
+        try {
+          // Find the review and store it in deletedReview variable
+          const deletedReview = await Review.findOneAndDelete({ _id: reviewId });
+      
+          // Delete the associated comments
+          await Comment.deleteMany({ reviewId: deletedReview._id });
+      
+          // Return the deleted review
+          return deletedReview;
+        } catch (error) {
+          console.error(error);
+          throw new Error('Failed to delete review');
+        }
+      },
+      // WORKS---------------------------------------------------------------------
+
+      // WORKS---------------------------------------------------------------------
+      deleteReviewCom: async (parent, { reviewId, comId }) => {
+        return Review.findOneAndUpdate(
+          { _id: reviewId },
+          { $pull: { com: { _id: comId } } },
+          { new: true }
+        );
+      },
+      // WORKS---------------------------------------------------------------------
   },
 };
 

@@ -69,13 +69,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    reviews: [Review]
-    threadCom(thread: String!): [Com]
-    userCom(username: String!): [Com]
-    thread(_id: ID!): Thread
-    userThreads(username: String!): [Thread]
-    friends: [User]
-    friend(_id: String): User
+    threads: [Thread]
   }
 
   type Mutation {
@@ -95,6 +89,12 @@ const typeDefs = gql`
     saveThread(userId: ID!, threadId: ID!): User
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
     addThread(title: String!, username: String!): Thread
+    addReview(authorId: ID!, title: String!, text: String!, threadId: ID!): Review!
+    addReviewCom(reviewId: ID!, comText: String!, comAuthor: ID!): Review
+    deleteReview(reviewId: ID!): Review
+    deleteReviewCom(reviewId: ID!, comId: ID!): Review
+    updateReview(reviewId: ID!, title: String!, text: String!): Review
+    updateThread(threadId: ID!, title: String!): Thread
   }
 `;
 
