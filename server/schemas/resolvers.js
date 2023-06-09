@@ -1,6 +1,26 @@
 const { User, Thread } = require('../models');
 
 const resolvers = {
+  Com: {
+    parent: async (com) => {
+      const ParentModel = mongoose.model(com.parentType);
+      return await ParentModel.findById(com.parent);
+    },
+  },
+  Review: {
+    parent: async (com) => {
+      const ParentModel = mongoose.model(com.parentType);
+      return await ParentModel.findById(com.parent);
+    },
+  },
+  Thread: {
+    parent: async (com) => {
+      const ParentModel = mongoose.model(com.parentType);
+      return await ParentModel.findById(com.parent);
+    },
+  },
+
+
   Query: {
     thread: async (parent, { threadId }) => {
       return Thread.findOne({ _id: threadId });
