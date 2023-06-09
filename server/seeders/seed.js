@@ -68,12 +68,20 @@ db.once('open', async () => {
     };
 
     for (let i = 0; i < reviewSeeds.length; i++) {
-      const { _id, author } = await Review.create(reviewSeeds[i]);
+      const { _id } = await Review.create(reviewSeeds[i]);
 
-      const threadID = (author === "JimothyS") ? 0 : (author === "Eden") ? 1 : null;
+      let currentUser = userIDs[Math.floor(Math.random() * 2)];
+      let currentThread;
+
+      if (currentUser === userIDs[0]) {
+        currentThread = threadIDs[0];
+      } else {
+        currentThread = threadIDs[1];
+      }
+
 
       const user = await User.findOneAndUpdate(
-        { username: author },
+        { _id: currentUser },
         {
           $addToSet: {
             reviews: _id
@@ -82,7 +90,7 @@ db.once('open', async () => {
       );
 
       const thread = await Thread.findOneAndUpdate(
-        { _id: threadIDs[threadID]},
+        { _id: currentThread},
         {
           $addToSet: {
             reviews: _id
@@ -93,7 +101,7 @@ db.once('open', async () => {
       const updateReview = await Review.findOneAndUpdate(
         { _id: _id },
         {
-          author: userIDs[Math.floor(Math.random() * 2)]
+          author: currentUser
         }
       );
 
@@ -101,10 +109,12 @@ db.once('open', async () => {
     }
 
     for (let i = 0; i < comSeeds.length; i++) {
-      const { _id, author } = await Com.create(comSeeds[i]);
+      const { _id } = await Com.create(comSeeds[i]);
+
+      let currentUser = userIDs[Math.floor(Math.random() * 2)];
 
       const user = await User.findOneAndUpdate(
-        { username: author },
+        { _id: currentUser },
         {
           $addToSet: {
             coms: _id
