@@ -1,0 +1,116 @@
+#browse-main {
+    color: var(--light-col);
+    background-color: black;
+    padding: 0;
+
+}
+
+#browse-overlay {
+    background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 8, 0.95),
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.95)
+  );
+}
+
+#browse-background {
+    background-image: url(../../../public/images/pexels-suzy-hazelwood-2718571.jpg);
+    background-size: cover;
+    margin: 0!important;
+    padding: 0!important;
+}
+
+#browse-msg {
+    padding-top: 5em!important;
+}
+
+#browse-input {
+    width: 100%;
+}
+
+#new {
+    color: var(--primary-col);
+    font-weight: bold;
+}
+
+#browse-search-btn {
+    background-color: var(--primary-col);
+    border: none;
+    border-radius: 4em;
+    padding: 5px 2em;
+    margin-top: 1em;
+}
+
+.browse-username {
+    margin-left: 10px;
+    border-top: 2px solid rgb(38, 38, 38);
+    border-left: 2px solid rgb(38, 38, 38);
+    border-right: 2px solid rgb(38, 38, 38);
+    margin-bottom: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-top: 4px;
+    font-size: 1.2em;
+    
+}
+
+#box-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    border-top: 3px solid rgb(38, 38, 38);
+    border-bottom: 3px solid rgb(38, 38, 38);
+    background-color: rgb(12, 12, 12)!important;
+
+}
+
+.scrollor {
+    flex-direction: row;
+}
+
+.box {
+    border-right: 1px solid rgb(38, 38, 38);
+}
+
+.browse-titles {
+    padding: 1em 0.3em;
+}
+
+.browse-imgs {
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent, black 50%, transparent);
+	border-radius: 8px;
+	padding: 0!important;
+}
+
+
+@media screen and (min-width: 850px) {
+
+    #browse-msg {
+        font-size: 4em;
+        padding-top: 2em!important;
+    }
+
+    #browse-input {
+        width: 40%!important;
+    }
+
+    #browse-search-btn {
+        margin-top: 2em;
+    }
+
+    #browse-intro {
+        font-size: 2em;
+    }
+
+    #box-container {
+        max-height: 30em!important;
+    }
+
+    .browse-imgs {
+        height: 29em;
+    }
+
+
+    
+}

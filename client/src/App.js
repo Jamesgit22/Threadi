@@ -9,6 +9,7 @@ import SearchBar from './components/search/Search';
 import Login from './components/login/Login';
 import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import Browse from './components/browse/Browse';
 
 const client = new ApolloClient({
   uri: 'your_graphql_api_url',
@@ -31,6 +32,9 @@ function App() {
               </Route>
               <Route path='/profile'>
                 <Profile />
+              </Route>
+              <Route path='/browse'>
+                <Browse />
               </Route>
             </Switch>
           </div>

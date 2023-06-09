@@ -12,7 +12,7 @@ export default function Login() {
     password: '',
   });
   const [validated] = useState(true);
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +29,11 @@ export default function Login() {
     }
 
     try {
+      console.log('frontend login call');
       const { data } = await login({
         variables: { ...userFormData },
       });
+      console.log(data);
       Auth.login(data.login.token);
     } catch (err) {
       console.log(err);
@@ -104,14 +106,19 @@ export default function Login() {
                 whileInView={{ opacity: [0, 1], x: '0px' }}
                 transition={{ duration: 1, delay: 2 }}
               >
-                <form id='form-card' noValidate validated={validated} onSubmit={handleFormSubmit}>
+                <form
+                  id='form-card'
+                  noValidate
+                  validated={validated}
+                  onSubmit={handleFormSubmit}
+                >
                   <div className='row justify-content-center pb-3'>
                     <div className='col-10'>
                       <input
                         className='inputs'
                         type='text'
                         placeholder='username'
-                        name='username-input'
+                        name='username'
                         onChange={handleInputChange}
                         value={userFormData.username}
                         required
@@ -122,9 +129,9 @@ export default function Login() {
                     <div className='col-10'>
                       <input
                         className='inputs'
-                        type='text'
+                        type='password'
                         placeholder='password'
-                        name='password-input'
+                        name='password'
                         onChange={handleInputChange}
                         value={userFormData.password}
                         required
