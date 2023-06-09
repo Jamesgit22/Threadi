@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import ProfilePage from './components/profile/Profile';
 import Home from './components/home/Home';
+import Footer from './components/footer/Footer';
 import './App.css';
 import SearchBar from './components/search/Search';
 import Login from './components/login/Login';
@@ -34,6 +35,7 @@ function App() {
             </Switch>
           </div>
         </BrowserRouter>
+        <Footer />
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Mallanna&display=swap');
