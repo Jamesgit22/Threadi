@@ -1,0 +1,83 @@
+* {
+  color: var(--light-col);
+}
+
+#social-main {
+    overflow-x: hidden !important;
+
+}
+
+#social-background {
+  background-image: url(../../../public/images/pexels-tima-miroshnichenko-7991318.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: 1px solid rgb(42, 42, 42);
+}
+
+#social-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 8, 0.95),
+    rgba(0, 0, 0, 0.195) 80%,
+    rgba(0, 0, 0, 0.95)
+  );
+}
+
+#social-title-container {
+  margin-top: 14em;
+  width: 100%;
+  margin-bottom: 3em;
+}
+
+#social-title {
+    font-size: 2.5em;
+}
+
+#social-msg {
+    margin-bottom: 3em!important;
+}
+
+#social-friends {
+    color: var(--primary-col);
+    font-weight: bold;
+}
+
+#feed-container {
+  border: 1px solid rgb(73, 73, 73);
+  border-radius: 8px;
+  background-color: rgb(38, 38, 38);
+  margin-top: 3em;
+}
+
+.like-btn {
+    width: 20px;
+
+}
+
+.feed-username {
+  border-bottom: 1px solid rgb(73, 73, 73);
+}
+
+#social-container2 {
+  background-color: transparent;
+  padding: 0;
+}
+
+.content-container {
+    border-bottom: 1px solid rgb(73, 73, 73);
+}
+
+.social-btns {
+    background-color: var(--primary-col);
+    border: none;
+    border-radius: 8px;
+    padding: 5px 0.5em;
+    margin: 6px 8px 4px 0;
+    font-size: 1em;
+}
+
+@media screen and (min-width: 850px) {
+    
+}

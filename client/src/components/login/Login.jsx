@@ -29,7 +29,6 @@ export default function Login() {
     }
 
     try {
-      console.log('frontend login call');
       const { data } = await login({
         variables: { ...userFormData },
       });

@@ -15,6 +15,7 @@
 
 body {
   background-color: var(--dark-col) !important;
+  overflow-x: hidden !important;
 }
 
 .light-txt {
