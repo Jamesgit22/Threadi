@@ -40,6 +40,10 @@ nav {
   text-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
+#nav-img-logo {
+  height: 30px;
+}
+
 #hamburger-icon {
   margin: auto 0;
   display: block;

@@ -3,6 +3,7 @@
   grid-template-columns: repeat(3, 1fr);
   background-color: rgb(0, 0, 0);
   height:200px;
+  
 }
 
 .firstFooter {
@@ -27,8 +28,8 @@
 
 .footerTitle {
     font-size: 30px;
-    font-family: "Brice";
-}
+    font-family: 'Poppins', sans-serif;
+  }
 
 .footerSubTitle {
     margin-top: 10px;

@@ -11,7 +11,7 @@
 }
 
 .firstHeader {
-  font-family: "Brice";
+  font-family: 'Poppins', sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -120,7 +120,7 @@
 }
 
 .secondHeader {
-  font-family: "Brice";
+  font-family: 'Poppins', sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -185,7 +185,7 @@
 }
 
 .thirdHeader {
-  font-family: "Brice";
+  font-family: 'Poppins', sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
