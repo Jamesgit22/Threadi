@@ -1,4 +1,5 @@
 const { User, Thread } = require('../models');
+const {signToken} = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -29,7 +30,7 @@ const resolvers = {
       const user = await User.findOne({ username });
 
       if (!user) {
-        throw new AuthenticationError('No profile with this email found!');
+        throw new AuthenticationError('No profile with this username found!');
       }
 
       const correctPw = await user.isCorrectPassword(password);

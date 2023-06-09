@@ -4,14 +4,14 @@ import Nav from './components/nav/Nav';
 import Profile from './components/profile/Profile';
 import Home from './components/home/Home';
 import './App.css';
-import SearchBar from './components/search/Search';
 import Login from './components/login/Login';
 import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import Browse from './components/browse/Browse';
+import Social from './components/social/Social';
 
 const client = new ApolloClient({
-  uri: 'your_graphql_api_url',
+  uri: 'graphql',
   cache: new InMemoryCache(),
 });
 
@@ -34,6 +34,9 @@ function App() {
               </Route>
               <Route path='/browse'>
                 <Browse />
+              </Route>
+              <Route>
+                <Social path='social'/>
               </Route>
             </Switch>
           </div>
