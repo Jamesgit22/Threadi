@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, Com, Review, Thread, Parent, Like } = require('../models');
+const { User, Com, Review, Thread, Like } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const threadSeeds = require('./threadSeeds.json');
 const reviewSeeds = require('./reviewSeeds.json');
@@ -11,7 +11,6 @@ db.once('open', async () => {
     await Com.deleteMany({});
     await Thread.deleteMany({});
     await Review.deleteMany({});
-    await Parent.deleteMany({});
     await Like.deleteMany({});
 
     await User.create(userSeeds);
@@ -19,8 +18,6 @@ db.once('open', async () => {
     //index map:
     //0: Jame's thread
     //1: Kolt's thread
-    //2-7: reviews
-    //8-15: comments
     var threadIDs = [];
     var parentIDs = [];
 
@@ -36,14 +33,8 @@ db.once('open', async () => {
         }
       );
 
-      const parent = await Parent.create(
-        {
-          thread: _id
-        }
-      );
-
       threadIDs.push(_id);
-      parentIDs.push(parent._id);
+      parentIDs.push({ id: _id, type: "Thread" });
     };
 
     for (let i = 0; i < reviewSeeds.length; i++) {
@@ -69,13 +60,7 @@ db.once('open', async () => {
         }
       );
 
-      const parent = await Parent.create(
-        {
-          review: _id
-        }
-      );
-
-      parentIDs.push(parent._id);
+      parentIDs.push({ id: _id, type: "Review" });
     }
 
     for (let i = 0; i < comSeeds.length; i++) {
@@ -90,31 +75,52 @@ db.once('open', async () => {
         }
       );
 
-      const parent = await Parent.create(
-        {
-          comment: _id
-        }
-      );
+      parentIDs.push({ id: _id, type: "Com" });
 
-      parentIDs.push(parent._id);
-
-      const currentParent = Math.floor(Math.random() * (parentIDs.length - 1));
+      const currentParent = Math.floor(Math.random() * (parentIDs.length - 2));
 
       const com = await Com.findOneAndupdate(
         { _id: parentIDs[parentIDs.length - 1]},
         {
-          parent: parentIDs[currentParent]
+          parent: parentIDs[currentParent].id
         }
       );
 
-      const updatedParent = await Parent.findOneAndupdate(
-        { _id: parentIDs[currentParent] },
-        {
-          $addToSet: {
-            coms: _id
-          }
+      switch(parentIDs[currentParent].type) {
+        case "Thread": {
+          const addThread = await Thread.findOneAndupdate(
+            { _id: parentIDs[currentParent].id},
+            {
+              $addToSet: {
+                com: _id
+              }
+            }
+          );
+          break;
         }
-      )
+        case "Review": {
+          const addReview = await Review.findOneAndupdate(
+            { _id: parentIDs[currentParent].id},
+            {
+              $addToSet: {
+                com: _id
+              }
+            }
+          );
+          break;
+        }
+        case "Com": {
+          const addCom = await Com.findOneAndupdate(
+            { _id: parentIDs[currentParent].id},
+            {
+              $addToSet: {
+                com: _id
+              }
+            }
+          );
+          break;
+        }
+      }
     }
     
     console.log('all done!');
