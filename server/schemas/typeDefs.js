@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -24,7 +24,7 @@ const typeDefs = gql`
 
   type Review {
     _id: ID!
-    author: User!
+    author: User
     timestamp: String!
     type: String!
     title: String!
@@ -38,7 +38,7 @@ const typeDefs = gql`
 
   type Com {
     _id: ID!
-    author: User!
+    author: User
     timestamp: String!
     text: String!
     parent: ParentType
@@ -90,7 +90,6 @@ const typeDefs = gql`
     saveThread(userId: ID!, threadId: ID!): User
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
     addThread(title: String!, username: String!): Thread
-
   }
 `;
 

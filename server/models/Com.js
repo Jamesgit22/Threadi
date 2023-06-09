@@ -20,7 +20,11 @@ const comObjectSchema = new Schema({
   },
   parent: {
     type: SchemaTypes.ObjectId,
-    ref: 'Parent'
+    refPath: 'parentType'
+  },
+  parentType: {
+    type: String,
+    enum: ['Review', 'Com', 'Thread']
   },
   coms: [
     {

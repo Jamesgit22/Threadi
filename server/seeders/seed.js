@@ -1,11 +1,11 @@
-const db = require('../config/connection');
-const { User, Com, Review, Thread, Like } = require('../models');
-const userSeeds = require('./userSeeds.json');
-const threadSeeds = require('./threadSeeds.json');
-const reviewSeeds = require('./reviewSeeds.json');
-const comSeeds = require('./comSeeds.json');
+const db = require("../config/connection");
+const { User, Com, Review, Thread, Like } = require("../models");
+const userSeeds = require("./userSeeds.json");
+const threadSeeds = require("./threadSeeds.json");
+const reviewSeeds = require("./reviewSeeds.json");
+const comSeeds = require("./comSeeds.json");
 
-db.once('open', async () => {
+db.once("open", async () => {
   try {
     await User.deleteMany({});
     await Com.deleteMany({});
@@ -25,13 +25,13 @@ db.once('open', async () => {
     for (let i = 0; i < threadSeeds.length; i++) {
       const { _id } = await Thread.create(threadSeeds[i]);
 
-      if ( i === 0 ) {
+      if (i === 0) {
         const user = await User.findOneAndUpdate(
           { username: "JimothyS" },
           {
             $addToSet: {
-              userThreads: _id
-            }
+              userThreads: _id,
+            },
           }
         );
 
@@ -40,7 +40,7 @@ db.once('open', async () => {
         const updateThread = await Thread.findOneAndUpdate(
           { _id: _id },
           {
-            author: user._id
+            author: user._id,
           }
         );
       } else {
@@ -48,24 +48,24 @@ db.once('open', async () => {
           { username: "Eden" },
           {
             $addToSet: {
-              userThreads: _id
-            }
+              userThreads: _id,
+            },
           }
         );
 
         userIDs.push(user._id);
-        
+
         const updateThread = await Thread.findOneAndUpdate(
           { _id: _id },
           {
-            author: user._id
+            author: user._id,
           }
         );
-      };
+      }
 
       threadIDs.push(_id);
       parentIDs.push({ id: _id, type: "Thread" });
-    };
+    }
 
     for (let i = 0; i < reviewSeeds.length; i++) {
       const { _id } = await Review.create(reviewSeeds[i]);
@@ -79,29 +79,28 @@ db.once('open', async () => {
         currentThread = threadIDs[1];
       }
 
-
       const user = await User.findOneAndUpdate(
         { _id: currentUser },
         {
           $addToSet: {
-            reviews: _id
-          }
+            reviews: _id,
+          },
         }
       );
 
       const thread = await Thread.findOneAndUpdate(
-        { _id: currentThread},
+        { _id: currentThread },
         {
           $addToSet: {
-            reviews: _id
-          }
+            reviews: _id,
+          },
         }
       );
 
       const updateReview = await Review.findOneAndUpdate(
         { _id: _id },
         {
-          author: currentUser
+          author: currentUser,
         }
       );
 
@@ -109,73 +108,97 @@ db.once('open', async () => {
     }
 
     for (let i = 0; i < comSeeds.length; i++) {
-      const { _id } = await Com.create(comSeeds[i]);
+      try {
+        const currentParent = Math.floor(
+          Math.random() * (parentIDs.length)
+        );
+        const { timestamp, text } = comSeeds[i];
+        const { _id } = await Com.create({ timestamp, text, parent: parentIDs[currentParent].id, parentType: parentIDs[currentParent].type });
 
-      let currentUser = userIDs[Math.floor(Math.random() * 2)];
+        let currentUser = userIDs[Math.floor(Math.random() * 2)];
 
-      const user = await User.findOneAndUpdate(
-        { _id: currentUser },
-        {
-          $addToSet: {
-            coms: _id
+        const user = await User.findOneAndUpdate(
+          { _id: currentUser },
+          {
+            $addToSet: {
+              coms: _id,
+            },
+          }
+        );
+
+        parentIDs.push({ id: _id, type: "Com" });
+
+       
+
+        const com = await Com.findOneAndUpdate(
+          { _id: parentIDs[parentIDs.length - 1].id },
+          {
+            // parent: parentIDs[currentParent].id, 
+            // parentType: parentIDs[currentParent].type,
+            author: currentUser,
+          },
+          { new: true }
+        );
+
+        console.log(com);
+
+        switch (parentIDs[currentParent].type) {
+          case "Thread": {
+            try {
+              const addThread = await Thread.findOneAndUpdate(
+                { _id: parentIDs[currentParent].id },
+                {
+                  $addToSet: {
+                    com: _id,
+                  },
+                }
+              );
+            } catch (err) {
+              console.log(err);
+            }
+            break;
+          }
+          case "Review": {
+            try {
+              const addReview = await Review.findOneAndUpdate(
+                { _id: parentIDs[currentParent].id },
+                {
+                  $addToSet: {
+                    com: _id,
+                  },
+                }
+              );
+            } catch (err) {
+              console.log(err);
+            }
+            break;
+          }
+          case "Com": {
+            try {
+              const addCom = await Com.findOneAndUpdate(
+                { _id: parentIDs[currentParent].id },
+                {
+                  $addToSet: {
+                    com: _id,
+                  },
+                }
+              );
+            } catch (err) {
+              console.log(err);
+            }
+            break;
           }
         }
-      );
-
-      parentIDs.push({ id: _id, type: "Com" });
-
-      const currentParent = Math.floor(Math.random() * (parentIDs.length - 1));
-
-      const com = await Com.findOneAndUpdate(
-        { _id: parentIDs[parentIDs.length - 1]},
-        {
-          parent: parentIDs[currentParent].id,
-          author: userIDs[Math.floor(Math.random() * 2)]
-        }
-      );
-
-      switch(parentIDs[currentParent].type) {
-        case "Thread": {
-          const addThread = await Thread.findOneAndUpdate(
-            { _id: parentIDs[currentParent].id},
-            {
-              $addToSet: {
-                com: _id
-              }
-            }
-          );
-          break;
-        }
-        case "Review": {
-          const addReview = await Review.findOneAndUpdate(
-            { _id: parentIDs[currentParent].id},
-            {
-              $addToSet: {
-                com: _id
-              }
-            }
-          );
-          break;
-        }
-        case "Com": {
-          const addCom = await Com.findOneAndUpdate(
-            { _id: parentIDs[currentParent].id},
-            {
-              $addToSet: {
-                com: _id
-              }
-            }
-          );
-          break;
-        }
+      } catch (err) {
+        console.log(err);
       }
     }
-    
-    console.log('all done!');
+
+    console.log("all done!");
     process.exit(0);
   } catch (err) {
     throw err;
   }
+});
 
-
-
+// const db = require('../config/connection');
