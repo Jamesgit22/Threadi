@@ -70,13 +70,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    reviews: [Review]
-    threadCom(thread: String!): [Com]
-    userCom(username: String!): [Com]
-    thread(_id: ID!): Thread
-    userThreads(username: String!): [Thread]
-    friends: [User]
-    friend(_id: String): User
+    threads: [Thread]
   }
 
   type Mutation {

@@ -23,18 +23,29 @@ const resolvers = {
 
 
   Query: {
-    thread: async (parent, { threadId }) => {
-      return Thread.findOne({ _id: threadId });
-    },
-    userThreads: async (parent, { userId }) => {
-      return Thread.find({ threadAuthor: userId });
-    },
-    friend: async (parent, { userId }) => {
-      return User.findOne({ _id: userId });
-    },
-    friends: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate('friends');
-    },
+    // thread: async (parent, { threadId }) => {
+    //   return Thread.findOne({ _id: threadId });
+    // },
+    // userThreads: async (parent, { userId }) => {
+    //   return Thread.find({ threadAuthor: userId });
+    // },
+    // friend: async (parent, { userId }) => {
+    //   return User.findOne({ _id: userId });
+    // },
+    // friends: async (parent, { userId }) => {
+    //   return User.findOne({ _id: userId }).populate('friends');
+    // },
+
+    threads: async () => {
+      try {
+        const allThreads = await Thread.find(); // Assuming you have a model called "Thread"
+        return allThreads;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch threads');
+      }
+    }
+
   },
 
   Mutation: {
