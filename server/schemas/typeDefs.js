@@ -64,6 +64,7 @@ const typeDefs = gql`
     title: String!
     author: User
     likes: Int!
+    description: String
     reviews: [Review]
     coms: [Com]
   }

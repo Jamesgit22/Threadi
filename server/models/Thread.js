@@ -18,6 +18,11 @@ const threadSchema = new Schema({
     required: true,
     default: 0
   },
+  description: {
+    type: String,
+    default: "",
+    maxlength: 280
+  },
   reviews: [
     {
       type: SchemaTypes.ObjectId,
