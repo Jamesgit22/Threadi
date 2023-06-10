@@ -46,8 +46,43 @@ const resolvers = {
         console.error(error);
         throw new Error('Failed to fetch threads');
       }
-    }
+    },
 
+    userThreads: async (_, { userId }) => {
+      try {
+        const userThreads = await Thread.find({ author: userId });
+        return userThreads;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch user threads');
+      }
+    },
+
+    singleThread: async (_, { threadId }) => {
+      try {
+        const thread = await Thread.findById(threadId)
+          .populate('author')
+          .populate({
+            path: 'reviews',
+            populate: {
+              path: 'coms',
+              populate: {
+                path: 'author',
+              },
+            },
+          })
+          .populate({
+            path: 'coms',
+            populate: {
+              path: 'author',
+            },
+          });
+        return thread;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch thread');
+      }
+    },
   },
 
   Mutation: {
@@ -245,6 +280,7 @@ const resolvers = {
           // Create the thread with the provided title and author
           const thread = new Thread({
             title,
+            description,
             author,
             likes: 0,
             timestamp: Date.now(),
@@ -270,7 +306,7 @@ const resolvers = {
       updateThread: async (parent, { threadId, title }) => {
         return Thread.findOneAndUpdate(
           { _id: threadId },
-          { $set: { title } },
+          { $set: { title, description } },
           { new: true }
         );
       },
