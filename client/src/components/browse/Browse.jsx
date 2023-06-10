@@ -2,13 +2,85 @@ import React from 'react';
 import { useState } from 'react';
 import './Browse.css';
 import { motion } from 'framer-motion';
+import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
 
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  //MAL API URL: https://api.myanimelist.net/v2/(manga or anime)?q=(name of show or manga)
+  //TMDB API URL: 
+  //
+  //
 
   const handleWordChange = (e) => {
     setSelectedWord(e.target.value);
   };
+
+  const handleAPICall = (e) => {
+    switch (selectedWord) {
+      case 'Video Games': {
+        axios
+          .get(`http://www.omdbapi.com/?apikey=be77788b&s=${searchInput}`)
+          .then((res) => {
+            console.log(res.data);
+            setSearchResults(res.data.Search || []);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Movie' || 'Show': {
+
+        axios
+          .get(`http://www.omdbapi.com/?apikey=be77788b&s=${searchInput}`)
+          .then((res) => {
+            console.log(res.data);
+            setMovies(res.data.Search || []);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Anime' || 'Manga': {
+        axios
+          .get(`https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput.replace(' ', '%20')}`, {
+            headers: {
+              'X-MAL-CLIENT-ID':`${process.env.MAL_CLIENT_ID}`
+            }
+          })
+          .then((res) => {
+            console.log(res.data);
+            setSearchResults(res.data[0].node || []);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Book': {
+        axios
+          .get(`http://www.omdbapi.com/?apikey=be77788b&s=${searchInput}`)
+          .then((res) => {
+            console.log(res.data);
+            setMovies(res.data.Search || []);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+          
+        break;
+      }
+    }
+  };
+
+
   return (
     <>
       <div id='browse-main' className='container-fluid'>
