@@ -280,6 +280,7 @@ const resolvers = {
           // Create the thread with the provided title and author
           const thread = new Thread({
             title,
+            description,
             author,
             likes: 0,
             timestamp: Date.now(),
@@ -305,7 +306,7 @@ const resolvers = {
       updateThread: async (parent, { threadId, title }) => {
         return Thread.findOneAndUpdate(
           { _id: threadId },
-          { $set: { title } },
+          { $set: { title, description } },
           { new: true }
         );
       },

@@ -28,6 +28,7 @@ query Query($threadId: ID!) {
       text
       rating
       likes
+      description
     }
     coms {
       author {
