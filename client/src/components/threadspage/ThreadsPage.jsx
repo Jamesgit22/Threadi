@@ -1,7 +1,19 @@
 import React from 'react';
+import { useState } from 'react';
 import './ThreadsPage.css';
+import ThreadsModal from './threadsModal/ThreadsModal';
 
 export default function ThreadsPage() {
+  const [modalTog, setModalTog] = useState('false')
+
+  const handleModalTog = () => {
+    setModalTog((open) => !open);
+  };
+
+  const closeModal = () => {
+    setModalTog(false);
+  }
+
   return (
     <>
       <div id='threads-main' className='container-fluid p-0 m-0'>
@@ -64,7 +76,7 @@ export default function ThreadsPage() {
                 <div className='row'>
                   <div className='col-12 d-flex justify-content-evenly align-items-center thread-btns-container'>
                     <p className='m-0 pt-1 pb-1'>(edit)</p>
-                    <button className='thread-open-btn'>Open</button>
+                    <button className='thread-open-btn' onClick={() => handleModalTog(true)}>Open</button>
                     <p className='m-0 pt-1 pb-1'>(delete)</p>
                   </div>
                 </div>
@@ -180,6 +192,9 @@ export default function ThreadsPage() {
             </div>
           </div>
         </div>
+
+        {modalTog && <ThreadsModal closeModal={closeModal} modalTog={modalTog}/>}
+
       </div>
     </>
   );
