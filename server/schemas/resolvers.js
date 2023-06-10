@@ -44,8 +44,17 @@ const resolvers = {
         console.error(error);
         throw new Error('Failed to fetch threads');
       }
-    }
+    },
 
+    userThreads: async (_, { userId }) => {
+      try {
+        const userThreads = await Thread.find({ author: userId });
+        return userThreads;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch user threads');
+      }
+    }
   },
 
   Mutation: {

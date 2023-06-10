@@ -70,6 +70,7 @@ const typeDefs = gql`
 
   type Query {
     threads: [Thread]
+    userThreads(userId: ID!): [Thread]
   }
 
   type Mutation {
