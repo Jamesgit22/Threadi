@@ -1,5 +1,101 @@
 import { gql } from '@apollo/client';
 
+export const GET_ME = gql`
+query Query {
+  me {
+    _id
+    username
+    email
+    friends {
+      _id
+      username
+    }
+    reviews {
+      _id
+      timestamp
+      type
+      title
+      text
+      rating
+      likes
+    }
+    userThreads {
+      _id
+      timestamp
+      title
+      likes
+    }
+    savedThreads {
+      _id
+      timestamp
+      title
+      likes
+    }
+    likes {
+      _id
+      likedContent {
+        ... on Thread {
+          _id
+          timestamp
+          title
+          likes
+        }
+        ... on Review {
+          _id
+          timestamp
+          type
+          title
+          text
+          rating
+          likes
+        }
+        ... on Com {
+          _id
+          timestamp
+          text
+          likes
+        }
+      }
+      parentType
+    }
+    coms {
+      _id
+      author {
+        _id
+        username
+      }
+      timestamp
+      text
+      likes
+      parent {
+        ... on Thread {
+          _id
+          timestamp
+          title
+          likes
+        }
+        ... on Review {
+          _id
+          timestamp
+          type
+          title
+          text
+          rating
+          likes
+        }
+        ... on Com {
+          _id
+          timestamp
+          text
+          likes
+        }
+      }
+      parentType
+    }
+  }
+}`
+
+
 export const USER_THREADS = gql`
 query Query($userId: ID!) {
   userThreads(userId: $userId) {
@@ -39,5 +135,71 @@ query Query($threadId: ID!) {
   }
 }`
 
+export const REVIEWS = gql`
+query Query {
+  reviews {
+    _id
+    author {
+      _id
+    }
+    timestamp
+    type
+    title
+    text
+    rating
+    likes
+  }
+}`
 
+export const SINGLE_REVIEW = gql`
+query SingleReview($reviewId: ID!) {
+  singleReview(reviewId: $reviewId) {
+    _id
+    author {
+      _id
+    }
+    timestamp
+    type
+    title
+    text
+    rating
+    likes
+    date
+    coms {
+      author {
+        _id
+        username
+      }
+      timestamp
+      text
+      likes
+    }
+  }
+}`
+
+REVIEW_COMS = gql`
+query ReviewComs($reviewId: ID!) {
+  reviewComs(reviewId: $reviewId) {
+    author {
+      _id
+      username
+    }
+    text
+    timestamp
+    likes
+  }
+}`
+
+THREAD_COMS = gql`
+query ThreadComs($threadId: ID!) {
+  threadComs(threadId: $threadId) {
+    author {
+      _id
+      username
+    }
+    text
+    timestamp
+    likes
+  }
+}`
 
