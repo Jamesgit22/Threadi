@@ -1,7 +1,7 @@
 
 const { User, Thread, Review, Com } = require('../models');
 const { ObjectId } = require('mongodb');
-const {signToken} = require('../utils/auth');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   // Com: {
@@ -119,7 +119,7 @@ const resolvers = {
 
     reviews: async () => {
       try {
-        const allReviews = await Review.find(); 
+        const allReviews = await Review.find();
         return allReviews;
       } catch (error) {
         console.error(error);
@@ -332,7 +332,7 @@ const resolvers = {
         if (!thread) {
           throw new Error('thread not found');
         }
-      
+
         // Create a new comment
         const comment = new Com({
           text: comText,
@@ -341,13 +341,13 @@ const resolvers = {
           parent: threadId, // Provide the appropriate value for parent
           timestamp: new Date(), // Provide the appropriate value for timestamp
         });
-      
+
         await comment.save();
-      
+
         // Update the reference in the review
         thread.coms.push(comment);
         await thread.save();
-      
+
         return comment;
       } catch (error) {
         console.error(error);
@@ -355,7 +355,7 @@ const resolvers = {
       }
     },
     // WORKS---------------------------------------------------------------------
-     
+
     // WORKS---------------------------------------------------------------------
     deleteThreadCom: async (parent, { threadId, comId }) => {
       return Thread.findOneAndDelete(
@@ -376,161 +376,284 @@ const resolvers = {
     },
     // Delete a friend
     deleteFriend: async (parent, { userId, friendId }) => {
-        return User.findOneAndUpdate(
-          { _id: userId },
-          { $pull: { friends: { _id: friendId } } },
-          { new: true }
-        );
-      },
+      return User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { friends: { _id: friendId } } },
+        { new: true }
+      );
+    },
 
-      // create a thread
-      // WORKS---------------------------------------------------------------------
-      addThread: async (parent, { title, username }) => {
-        try {
-          // Find the user by username
-          const author = await User.findOne({ username });
-      
-          // Create the thread with the provided title and author
-          const thread = new Thread({
-            title,
-            description,
-            author,
-            likes: 0,
-            timestamp: Date.now(),
-            reviews: [],
-            coms: [],
-          });
-      
-          // Save the thread to the database
-          const savedThread = await thread.save();
-      
-          // Update the savedThreads array for the author
-          author.savedThreads.push(savedThread);
-          await author.save();
-      
-          // Return the created thread
-          return savedThread;
-        } catch (err) {
-          console.error(err);
+    // create a thread
+    // WORKS---------------------------------------------------------------------
+    addThread: async (parent, { title, username }) => {
+      try {
+        // Find the user by username
+        const author = await User.findOne({ username });
+
+        // Create the thread with the provided title and author
+        const thread = new Thread({
+          title,
+          description,
+          author,
+          likes: 0,
+          timestamp: Date.now(),
+          reviews: [],
+          coms: [],
+        });
+
+        // Save the thread to the database
+        const savedThread = await thread.save();
+
+        // Update the savedThreads array for the author
+        author.savedThreads.push(savedThread);
+        await author.save();
+
+        // Return the created thread
+        return savedThread;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    // WORKS---------------------------------------------------------------------
+
+    updateThread: async (parent, { threadId, title }) => {
+      return Thread.findOneAndUpdate(
+        { _id: threadId },
+        { $set: { title, description } },
+        { new: true }
+      );
+    },
+
+    // WORKS---------------------------------------------------------------------
+    addReview: async (_, { authorId, title, text, threadId }, { models }) => {
+      try {
+        const author = await User.findById(authorId);
+        if (!author) {
+          throw new Error('Author not found');
         }
-      },
-      // WORKS---------------------------------------------------------------------
 
-      updateThread: async (parent, { threadId, title }) => {
-        return Thread.findOneAndUpdate(
-          { _id: threadId },
-          { $set: { title, description } },
-          { new: true }
-        );
-      },
-
-      // WORKS---------------------------------------------------------------------
-      addReview: async (_, { authorId, title, text, threadId }, { models }) => {
-        try {
-          const author = await User.findById(authorId);
-          if (!author) {
-            throw new Error('Author not found');
-          }
-      
-          const thread = await Thread.findById(threadId);
-          if (!thread) {
-            throw new Error('Thread not found');
-          }
-      
-          const review = new Review({
-            author,
-            title,
-            text,
-            thread,
-            date: new Date(), // Example: Set the current date as the value for the 'date' field
-            rating: 0, // Example: Set a rating value
-            type: 'Media', // Example: Set a type value
-            timestamp: Date.now() // Example: Set the current timestamp as the value for the 'timestamp' field
-          });
-      
-          await review.save();
-      
-          // Update references
-          author.reviews.push(review);
-          await author.save();
-      
-          thread.reviews.push(review);
-          await thread.save();
-      
-          return review;
-        } catch (error) {
-          console.error(error);
-          throw new Error('Failed to add review');
+        const thread = await Thread.findById(threadId);
+        if (!thread) {
+          throw new Error('Thread not found');
         }
-      },
-      // WORKS---------------------------------------------------------------------
 
-      updateReview: async (parent, { reviewId, text }) => {
-        return Review.findOneAndUpdate(
-          { _id: reviewId },
-          { $set: { text } },
-          { new: true }
-        );
-      },
-   
-      // WORKS---------------------------------------------------------------------
-      addReviewCom: async (parent, { reviewId, comText, comAuthor }, { models }) => {
-        try {
-          const review = await Review.findById(reviewId);
-          if (!review) {
-            throw new Error('Review not found');
-          }
-        
-          // Create a new comment
-          const comment = new Com({
-            text: comText,
-            author: comAuthor,
-            parentType: 'Review', // Provide the appropriate value for parentType
-            parent: reviewId, // Provide the appropriate value for parent
-            timestamp: new Date(), // Provide the appropriate value for timestamp
-          });
-        
-          await comment.save();
-        
-          // Update the reference in the review
-          review.coms.push(comment);
-          await review.save();
-        
-          return comment;
-        } catch (error) {
-          console.error(error);
-          throw new Error('Failed to add comment to review');
+        const review = new Review({
+          author,
+          title,
+          text,
+          thread,
+          date: new Date(), // Example: Set the current date as the value for the 'date' field
+          rating: 0, // Example: Set a rating value
+          type: 'Media', // Example: Set a type value
+          timestamp: Date.now() // Example: Set the current timestamp as the value for the 'timestamp' field
+        });
+
+        await review.save();
+
+        // Update references
+        author.reviews.push(review);
+        await author.save();
+
+        thread.reviews.push(review);
+        await thread.save();
+
+        return review;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to add review');
+      }
+    },
+    // WORKS---------------------------------------------------------------------
+
+    updateReview: async (parent, { reviewId, text }) => {
+      return Review.findOneAndUpdate(
+        { _id: reviewId },
+        { $set: { text } },
+        { new: true }
+      );
+    },
+
+    // WORKS---------------------------------------------------------------------
+    addReviewCom: async (parent, { reviewId, comText, comAuthor }, { models }) => {
+      try {
+        const review = await Review.findById(reviewId);
+        if (!review) {
+          throw new Error('Review not found');
         }
-      },
-      // WORKS---------------------------------------------------------------------
 
-      // WORKS---------------------------------------------------------------------
-      deleteReview: async (parent, { reviewId }) => {
-        try {
-          // Find the review and store it in deletedReview variable
-          const deletedReview = await Review.findOneAndDelete({ _id: reviewId });
-      
-          // Delete the associated comments
-          await Comment.deleteMany({ reviewId: deletedReview._id });
-      
-          // Return the deleted review
-          return deletedReview;
-        } catch (error) {
-          console.error(error);
-          throw new Error('Failed to delete review');
+        // Create a new comment
+        const comment = new Com({
+          text: comText,
+          author: comAuthor,
+          parentType: 'Review', // Provide the appropriate value for parentType
+          parent: reviewId, // Provide the appropriate value for parent
+          timestamp: new Date(), // Provide the appropriate value for timestamp
+        });
+
+        await comment.save();
+
+        // Update the reference in the review
+        review.coms.push(comment);
+        await review.save();
+
+        return comment;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to add comment to review');
+      }
+    },
+    // WORKS---------------------------------------------------------------------
+
+    // WORKS---------------------------------------------------------------------
+    deleteReview: async (parent, { reviewId }) => {
+      try {
+        // Find the review and store it in deletedReview variable
+        const deletedReview = await Review.findOneAndDelete({ _id: reviewId });
+
+        // Delete the associated comments
+        await Comment.deleteMany({ reviewId: deletedReview._id });
+
+        // Return the deleted review
+        return deletedReview;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to delete review');
+      }
+    },
+    // WORKS---------------------------------------------------------------------
+
+    // WORKS---------------------------------------------------------------------
+    deleteReviewCom: async (parent, { reviewId, comId }) => {
+      return Review.findOneAndUpdate(
+        { _id: reviewId },
+        { $pull: { com: { _id: comId } } },
+        { new: true }
+      );
+    },
+    // WORKS---------------------------------------------------------------------
+
+
+
+    //MAL API URL: https://api.myanimelist.net/v2/(manga or anime)?q=(name of show or manga)
+    //TMDB API URL: https://api.themoviedb.org/3/search/('tv' or 'movie')?query=(name of show or movie)&include_adult=false&language=en-US&page=1
+    //RAWG API URL: `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=1&search=(name of game)&exclude_additions=true&page_size=10`
+    //Google Books API URL: https://www.googleapis.com/books/v1/volumes?q=(name of book)
+
+    handleAPICall: async (parent, { searchInput, selectedWord }) => {
+      switch (selectedWord) {
+        case 'Video Games': {
+          axios
+            .get(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=1&search=${searchInput}&exclude_additions=true&page_size=10`)
+            .then((res) => {
+
+              if (!res.ok) {
+                throw new Error('RAWG API ERROR: Something went wrong.');
+              };
+
+              const rawgData = res.results.map((game) => ({
+                type: selectedWord,
+                image: game.background_image,
+                title: game.name,
+                releaseDate: game.released,
+                id: game.id
+              }));
+
+              setSearchResults(rawgData);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          break;
         }
-      },
-      // WORKS---------------------------------------------------------------------
+        case 'Movie' || 'Show': {
+          var searchType;
 
-      // WORKS---------------------------------------------------------------------
-      deleteReviewCom: async (parent, { reviewId, comId }) => {
-        return Review.findOneAndUpdate(
-          { _id: reviewId },
-          { $pull: { com: { _id: comId } } },
-          { new: true }
-        );
-      },
-      // WORKS---------------------------------------------------------------------
+          if (selectedWord === 'Movie') {
+            searchType = 'movie';
+          } else {
+            searchType = 'tv';
+          };
+
+          axios
+            .get(`https://api.themoviedb.org/3/search/${searchType}?query=${searchInput}&include_adult=false&language=en-US&page=1`)
+            .then((res) => {
+
+              if (!res.ok) {
+                throw new Error('TMDb ERROR: Something went wrong.');
+              };
+
+              const tmdbData = res.results.map((media) => ({
+                type: selectedWord,
+                backdrop: `https://image.tmdb.org/t/p/w500/${media.backdrop_path}` || 'No backdrop.',
+                image: `https://image.tmdb.org/t/p/w500/${media.poster_path}` || 'No image.',
+                title: media.name,
+                description: media.overview || 'No description.',
+                releaseDate: media.first_air_date || 'Release date unavailable.'
+              }));
+
+              setSearchResults(tmdbData);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          break;
+        }
+        case 'Anime' || 'Manga': {
+          axios
+            .get(`https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput}`, {
+              headers: {
+                'X-MAL-CLIENT-ID': `${process.env.MAL_CLIENT_ID}`
+              }
+            })
+            .then((res) => {
+
+              if (!res.ok) {
+                throw new Error('MAL_API ERROR: Something went wrong.');
+              };
+
+              const weebData = res.data.map((media) => ({
+                type: selectedWord,
+                title: media.node.title,
+                image: media.node?.main_picture.large || 'No image.'
+              }));
+
+              setSearchResults(weebData);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          break;
+        }
+        case 'Book': {
+          axios
+            .get(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`)
+            .then((res) => {
+
+              if (!res.ok) {
+                throw new Error('BookAPI ERROR: Something went wrong.');
+              };
+
+              const bookData = res.items.map((book) => ({
+                type: selectedWord,
+                authors: book.volumeInfo.authors || ['No author to display'],
+                title: book.volumeInfo.title,
+                description: book.volumeInfo.description,
+                image: book.volumeInfo.imageLinks?.thumbnail || ''
+              }));
+
+              setSearchResults(bookData);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          break;
+        }
+      }
+    }
   },
 };
 
