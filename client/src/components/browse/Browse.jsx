@@ -1,8 +1,14 @@
 import React from 'react';
+import { useState } from 'react';
 import './Browse.css';
 import { motion } from 'framer-motion';
 
 export default function Browse() {
+  const [selectedWord, setSelectedWord] = useState('');
+
+  const handleWordChange = (e) => {
+    setSelectedWord(e.target.value);
+  };
   return (
     <>
       <div id='browse-main' className='container-fluid'>
@@ -13,7 +19,39 @@ export default function Browse() {
               <div className='col-11 pt-5'>
                 <div className='row pt-5'>
                   <div className='col-12 pb-3'>
-                    <h2 id='browse-msg'>Search a book,<br></br> movie, show...</h2>
+                    <div className='row'>
+                      <div className='col-6 d-flex justify-content-end'>
+                        <h2 id='browse-msg'>Search for</h2>
+                      </div>
+                      <div id='browse-switch-container' className='col-6'>
+                        <div className='row'>
+                          <div className='col-12'>
+                            <button id='up-btn'>Up</button>
+                          </div>
+                        </div>
+                        <div className='row'>
+                          <div className='col-12'>
+                            <select id='browse-switch'
+                              value={selectedWord}
+                              onChange={handleWordChange}
+                            >
+                              <option value='movie'>Movie</option>
+                              <option value='show'>Show</option>
+                              <option value='book'>Book</option>
+                              <option value='games'>Video Games</option>
+                              <option value='anime'>Anime</option>
+                              <option value='manga'>Manga</option>
+                            </select>
+                            {/* <h2>{selectedWord}</h2> */}
+                          </div>
+                        </div>
+                        <div className='row'>
+                          <div className='col-12'>
+                            <button id='down-btn'>Down</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className='row justify-content-center'>

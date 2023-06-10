@@ -20,6 +20,22 @@
   padding: 0 !important;
 }
 
+#browse-switch-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 8em;
+  
+}
+
+#browse-switch {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  color: black;
+  
+}
+
 #browse-msg {
   padding-top: 5em !important;
 }
