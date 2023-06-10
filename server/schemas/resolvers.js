@@ -54,7 +54,33 @@ const resolvers = {
         console.error(error);
         throw new Error('Failed to fetch user threads');
       }
-    }
+    },
+
+    singleThread: async (_, { threadId }) => {
+      try {
+        const thread = await Thread.findById(threadId)
+          .populate('author')
+          .populate({
+            path: 'reviews',
+            populate: {
+              path: 'coms',
+              populate: {
+                path: 'author',
+              },
+            },
+          })
+          .populate({
+            path: 'coms',
+            populate: {
+              path: 'author',
+            },
+          });
+        return thread;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch thread');
+      }
+    },
   },
 
   Mutation: {
