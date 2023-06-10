@@ -14,9 +14,11 @@ export default function Browse() {
   //
   //
 
+
   const handleWordChange = (e) => {
     setSelectedWord(e.target.value);
   };
+
 
   const handleAPICall = (e) => {
     switch (selectedWord) {
@@ -80,6 +82,18 @@ export default function Browse() {
     }
   };
 
+  const handleUpClick = () => {
+    const newIndex = (selectedIndex + 1) % searchOptions.length;
+    setSelectedWord(searchOptions[newIndex]);
+    setSelectedIndex(newIndex);
+  };
+
+  const handleDownClick = () => {
+    const newIndex =
+      (selectedIndex - 1 + searchOptions.length) % searchOptions.length;
+    setSelectedWord(searchOptions[newIndex]);
+    setSelectedIndex(newIndex);
+  };
 
   return (
     <>
@@ -91,35 +105,52 @@ export default function Browse() {
               <div className='col-11 pt-5'>
                 <div className='row pt-5'>
                   <div className='col-12 pb-3'>
-                    <div className='row'>
-                      <div className='col-6 d-flex justify-content-end'>
-                        <h2 id='browse-msg'>Search for</h2>
-                      </div>
-                      <div id='browse-switch-container' className='col-6'>
-                        <div className='row'>
-                          <div className='col-12'>
-                            <button id='up-btn'>Up</button>
-                          </div>
+                    <div
+                      id='switch-main'
+                      className='d-flex justify-content-center align-items-center'
+                    >
+                      <div className='row justify-content-center'>
+                        <div className='col-6 d-flex justify-content-end align-items-center'>
+                          <h2 id='browse-msg'>Search for</h2>
                         </div>
-                        <div className='row'>
-                          <div className='col-12'>
-                            <select id='browse-switch'
-                              value={selectedWord}
-                              onChange={handleWordChange}
-                            >
-                              <option value='movie'>Movie</option>
-                              <option value='show'>Show</option>
-                              <option value='book'>Book</option>
-                              <option value='games'>Video Games</option>
-                              <option value='anime'>Anime</option>
-                              <option value='manga'>Manga</option>
-                            </select>
-                            {/* <h2>{selectedWord}</h2> */}
+                        <div id='browse-switch-container' className='col-4'>
+                          <div className='row'>
+                            <div className='col-12'>
+                              <img
+                                src='/images/angle-up-solid.svg'
+                                alt='up arrow'
+                                id='up-btn'
+                                className='arrow'
+                                onClick={handleUpClick}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className='row'>
-                          <div className='col-12'>
-                            <button id='down-btn'>Down</button>
+                          <div className='row'>
+                            <div className='col-12'>
+                              <select
+                                id='browse-switch'
+                                value={selectedWord}
+                                onChange={handleWordChange}
+                                disabled='true'
+                              >
+                                {searchOptions.map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <div className='row'>
+                            <div className='col-12'>
+                              <img
+                                src='/images/angle-down-solid.svg'
+                                alt='down arrow'
+                                id='down-btn'
+                                className='arrow'
+                                onClick={handleDownClick}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -146,7 +177,7 @@ export default function Browse() {
                 <div className='col-12 pt-3 text-center'>
                   <p id='browse-intro'>
                     Scroll through<br></br>custom threads to discover <br></br>
-                    <span id='new'>NEW</span> content bellow.
+                    <span id='new'>NEW</span> content below.
                   </p>
                 </div>
               </div>

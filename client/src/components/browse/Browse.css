@@ -33,6 +33,15 @@
   flex-direction: column;
   text-align: left;
   color: black;
+  font-size: 4em;
+  background-color: transparent;
+  border: none;
+  color: var(--light-col);
+}
+
+.arrow {
+  width: 30px;
+  margin-left: 90px;
   
 }
 
