@@ -70,9 +70,15 @@ const typeDefs = gql`
   }
 
   type Query {
+    me: User
     threads: [Thread]
     userThreads(userId: ID!): [Thread]
     singleThread(threadId: ID!): Thread
+    reviews: [Review]
+    singleReview(reviewId: ID!): Review
+    reviewComs(reviewId: ID!): [Com]
+    threadComs(threadId: ID!): [Com]
+    replyComs(comId: ID!): [Com]
   }
 
   type Mutation {
