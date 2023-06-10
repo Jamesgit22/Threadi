@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './Browse.css';
 import { motion } from 'framer-motion';
 import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
+require('dotenv').config();
 
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('');
