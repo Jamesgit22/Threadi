@@ -3,6 +3,7 @@ const {Schema, model, SchemaTypes} = require('mongoose');
 const likeSchema = new Schema({
     user: {
         type: SchemaTypes.ObjectId,
+        required: true,
         ref: 'User'
     },
     likedContent: {
