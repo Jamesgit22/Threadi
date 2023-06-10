@@ -26,13 +26,13 @@ const Home = () => {
           }
         );
         const data = await response.json();
-        setMoviePosters(data.results.slice(0, 3)); // Retrieve only the first 3 movies
+        return data.results.slice(0, 3); // Retrieve only the first 3 movies
       } catch (error) {
         console.log("Error fetching popular movies:", error);
       }
     };
 
-    fetchPopularMovies();
+    setMoviePosters(fetchPopularMovies());
   }, []);
 
   const openModal = () => {
