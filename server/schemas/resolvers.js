@@ -38,6 +38,39 @@ const resolvers = {
     //   return User.findOne({ _id: userId }).populate('friends');
     // },
 
+    me: async () => {
+      try {
+        const user = await User.findById(userId)
+          .populate('friends', '_id username')
+          .populate('reviews', '_id timestamp type title text rating likes')
+          .populate('userThreads', '_id timestamp title likes')
+          .populate('savedThreads', '_id timestamp title likes')
+          .populate({
+            path: 'likes',
+            populate: {
+              path: 'likedContent',
+              select: '_id timestamp title likes',
+              populate: [
+                { path: 'author', select: '_id username' },
+                { path: 'parent', select: '_id timestamp title likes' }
+              ]
+            }
+          })
+          .populate({
+            path: 'coms',
+            populate: [
+              { path: 'author', select: '_id username' },
+              { path: 'parent', select: '_id timestamp title likes' }
+            ]
+          });
+
+        return user;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch user');
+      }
+    },
+
     threads: async () => {
       try {
         const allThreads = await Thread.find(); // Assuming you have a model called "Thread"
@@ -83,6 +116,86 @@ const resolvers = {
         throw new Error('Failed to fetch thread');
       }
     },
+
+    reviews: async () => {
+      try {
+        const allReviews = await Review.find(); 
+        return allReviews;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch reviews');
+      }
+    },
+
+    singleReview: async (_, { reviewId }) => {
+      try {
+        const review = await Review.findById(reviewId).populate({
+          path: 'coms',
+          populate: {
+            path: 'author',
+            model: 'User'
+          }
+        });
+        if (!review) {
+          throw new Error('Review not found');
+        }
+        return review;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch review');
+      }
+    },
+
+    reviewComs: async (_, { reviewId }) => {
+      try {
+        const review = await Review.findById(reviewId);
+        if (!review) {
+          throw new Error('Review not found');
+        }
+
+        // Fetch comments and replies for the review
+        const comments = await Com.find({
+          parent: reviewId,
+          parentType: 'Review',
+        }).populate('author');
+
+        return comments;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch comments');
+      }
+    },
+
+    threadComs: async (_, { threadId }) => {
+      try {
+        const thread = await Thread.findById(threadId);
+        if (!thread) {
+          throw new Error('Thread not found');
+        }
+
+        // Fetch comments and replies for the thread
+        const comments = await Com.find({
+          parent: threadId,
+          parentType: 'Thread',
+        }).populate('author');
+
+        return comments;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch comments');
+      }
+    },
+
+    replyComs: async (parent, _, { Com }) => {
+      try {
+        const comments = await Com.find({ parent: parent._id, parentType: 'Comment' }).populate('author');
+        return comments;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch comments');
+      }
+    },
+
   },
 
   Mutation: {
