@@ -5,8 +5,9 @@
 #thread-background {
   background-image: url(../../../public/images/pexels-jonathan-borba-15937622.jpg);
   background-size: cover;
-  margin: 0 !important;
+  margin: -120px 0 0 0 !important;
   padding: 0 !important;
+  
 }
 
 #threads-overlay {
@@ -18,6 +19,11 @@
   );
 }
 
+.threads-imgs {
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 50%, transparent);
+}
+
 .thread-card {
   border: 1px solid rgb(38, 38, 38);
   margin: 1em auto;
@@ -25,7 +31,7 @@
 }
 
 #threads-page-title {
-  margin-top: 14em;
+  margin-top: 22em;
   margin-bottom: 3em;
 }
 
@@ -55,11 +61,11 @@
 }
 
 #box-container {
-  overflow-x: auto;
-  white-space: nowrap;
   border-top: 3px solid rgb(38, 38, 38);
   border-bottom: 3px solid rgb(38, 38, 38);
   background-color: rgb(12, 12, 12) !important;
+  /* background-color: darkgrey;
+  outline: 1px solid slategrey; */
 }
 
 .thread-open-btn {
