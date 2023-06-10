@@ -11,7 +11,7 @@ export default function Browse() {
 
   //MAL API URL: https://api.myanimelist.net/v2/(manga or anime)?q=(name of show or manga)
   //TMDB API URL: https://api.themoviedb.org/3/search/('tv' or 'movie')?query=(name of show or movie)&include_adult=false&language=en-US&page=1
-  //RAWG API URL: https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=1&search='Cyberpunk 2077'
+  //RAWG API URL: `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=1&search=(name of game)&exclude_additions=true&page_size=10`
   //Google Books API URL: https://www.googleapis.com/books/v1/volumes?q=(name of book)
 
   const handleWordChange = (e) => {
