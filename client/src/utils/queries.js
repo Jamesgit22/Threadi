@@ -1,74 +1,42 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_THREADS = gql`
-query Reviews($id: ID!) {
-    thread(_id: $id) {
+export const USER_THREADS = gql`
+query Query($userId: ID!) {
+  userThreads(userId: $userId) {
+    _id
+    timestamp
+    title
+    likes
+  }
+}`
+
+export const SINGLE_THREAD = gql`
+query Query($threadId: ID!) {
+  singleThread(threadId: $threadId) {
+    _id
+    timestamp
+    title
+    author {
       _id
-      threadAuthor {
+      username
+    }
+    likes
+    reviews {
+      _id
+      timestamp
+      title
+      text
+      rating
+      likes
+    }
+    coms {
+      author {
+        _id
         username
       }
-      threadTitle
     }
-  }`;
+  }
+}`
 
-export const QUERY_ACTIVITY = gql`
-query Query($thread: String!, $username: String!, $id: ID!, $userThreadsUsername2: String!) {
-  reviews {
-    author {
-      _id
-      username
-      email
-      password
-    }
-    text
-    rating
-    likes
-    date
-  }
-  threadCom(thread: $thread) {
-    text
-    parent {
-      _id
-      review {
-        _id
-        text
-        rating
-        likes
-        date
-      }
-      com {
-        _id
-        text
-        likes
-      }
-    }
-    likes
-    author {
-      username
-    }
-  }
-  userCom(username: $username) {
-    text
-    likes
-    author {
-      username
-    }
-  }
-  thread(_id: $id) {
-    _id
-    title
-    likes
-    author {
-      username
-    }
-  }
-  userThreads(username: $userThreadsUsername2) {
-    _id
-    title
-    likes
-    author {
-      username
-    }
-  }
-}`;
+
 

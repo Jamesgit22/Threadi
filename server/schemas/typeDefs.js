@@ -24,7 +24,7 @@ const typeDefs = gql`
   type Review {
     _id: ID!
     author: User
-    timestamp: String!
+    timestamp: String
     type: String!
     title: String!
     text: String!
@@ -71,6 +71,8 @@ const typeDefs = gql`
 
   type Query {
     threads: [Thread]
+    userThreads(userId: ID!): [Thread]
+    singleThread(threadId: ID!): Thread
   }
 
   type Mutation {
