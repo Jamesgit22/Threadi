@@ -44,12 +44,12 @@ export default function ThreadsPage() {
                 <div className='row'>
                   <div id='box-container' className='col-12 d-flex '>
                     {/* scroll row */}
-                    <div className='col-12 box'>
+                    <div className='col-12 threads-box p-0'>
                       <div className='row'>
                         <div className='col-4'>
                           <h4 className='item-titles'>item Title</h4>
                         </div>
-                        <div className='col-8'>
+                        <div className='col-8 p-0 m-0'>
                           <img
                             className='threads-imgs'
                             src='/images/pexels-tima-miroshnichenko-7991579.jpg'
@@ -59,20 +59,6 @@ export default function ThreadsPage() {
                       </div>
                     </div>
                     {/* scroll row end */}
-                    <div className='col-12 box'>
-                      <div className='row'>
-                        <div className='col-4'>
-                          <h4 className='item-titles'>item Title</h4>
-                        </div>
-                        <div className='col-8'>
-                          <img
-                            className='threads-imgs'
-                            src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                            alt=''
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div className='row'>
