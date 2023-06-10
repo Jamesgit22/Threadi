@@ -15,13 +15,13 @@ const Home = () => {
     const fetchPopularMovies = async () => {
       try {
         const response = await fetch(
-          "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=7841b2501ec16e70277379264ca7ae51",
+          `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${process.env.TMDB_API_KEY}`,
           {
             method: "GET",
             headers: {
               accept: "application/json",
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQxYjI1MDFlYzE2ZTcwMjc3Mzc5MjY0Y2E3YWU1MSIsInN1YiI6IjY0N2ZlNjkwZDJiMjA5MDBjYTFjOTAyZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ytr-twdzRINrY5Loanr3YDvEETjSzmhhE1EydsI7oK4",
+                process.env.TMDB_BEARER_TOKEN,
             },
           }
         );
