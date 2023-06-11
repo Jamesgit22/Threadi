@@ -31,7 +31,7 @@ function App() {
               <Route exact path='/login'>
                 <Login />
               </Route>
-              <Route path='/profile'>
+              <Route path='/profile/:username'>
                 <Profile />
               </Route>
               <Route path='/threadspage'>
