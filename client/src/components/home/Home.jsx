@@ -10,6 +10,7 @@ const Home = () => {
   const [moviePosters, setMoviePosters] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //comment
   useEffect(() => {
     // Fetch popular movies from Movie Database API
     const fetchPopularMovies = async () => {

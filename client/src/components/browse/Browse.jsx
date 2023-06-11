@@ -19,7 +19,7 @@ export default function Browse() {
     setSelectedWord(e.target.value);
   };
 
-
+  //comment
   const handleAPICall = (e) => {
     switch (selectedWord) {
       case 'Video Games': {
