@@ -4,7 +4,7 @@
   width: 95%;
   border-radius: 8px;
   display: none;
-  height: 85%;
+  height: 50%;
   position: fixed;
   top: 70px;
   left: 50%;
@@ -37,20 +37,42 @@
   background-color: rgb(30, 30, 30);
 }
 
-.item-title {
-  border-bottom: 2px solid rgb(52, 52, 52);
-  padding: 4px;
-}
-
-.item-desc {
-  margin-top: -10px;
-}
-
-.item-btn {
-  background-color: var(--primary-col);
-  padding: 4px 8px;
+#new-title {
+  background-color: black;
+  margin: 10px 20px;
+  border: none;
   border-radius: 8px;
-  margin-bottom: 4px;
+  padding: 4px 10px;
+}
+
+span {
+  color: var(--primary-col)
+}
+
+#new-title:focus{
+  outline-color: var(--primary-col);
+  border: none;
+}
+
+#new-desc {
+  background-color: black;
+  border: none;
+  border-radius: 8px;
+  margin: 10px 5px;
+  padding: 4px 10px;
+  width: 95%;
+}
+
+#new-desc:focus{
+  outline-color: var(--primary-col);
+  border: none;
+}
+
+#create-submit-btn {
+  background-color: var(--primary-col);
+  border-radius: 8px;
+  border: none;
+  padding: 4px 10px;
 }
 
 .backdrop {

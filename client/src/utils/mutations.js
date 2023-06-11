@@ -35,8 +35,8 @@ mutation Mutation($username: String!, $password: String!) {
 
 
 export const ADD_THREAD = gql`
-mutation AddThread($title: String!, $username: String!) {
-  addThread(title: $title, username: $username) {
+mutation AddThread($title: String!) {
+  addThread(title: $title) {
     title
     author {
       _id

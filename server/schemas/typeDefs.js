@@ -8,7 +8,7 @@ const typeDefs = gql`
     password: String!
     friends: [User]
     reviews: [Review]
-    userThreads: [Thread]
+    userThreads: [String]
     savedThreads: [Thread]
     likes: [Like!]!
     coms: [Com]
@@ -95,9 +95,9 @@ const typeDefs = gql`
     unlikeCom(comId: ID!): Com
     likeReview(reviewId: ID!): Review
     unlikeReview(reviewId: ID!): Review
-    saveThread(userId: ID!, threadId: ID!): User
+    saveThread(userId: ID!, threadTitle: String!): User
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
-    addThread(title: String!, username: String!): Thread
+    addThread(title: String!): Thread
     addReview(authorId: ID!, title: String!, text: String!, threadId: ID!): Review!
     addReviewCom(reviewId: ID!, comText: String!, comAuthor: ID!): Review
     deleteReview(reviewId: ID!): Review
