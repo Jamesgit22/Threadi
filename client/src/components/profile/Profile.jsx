@@ -3,8 +3,10 @@ import './Profile.css';
 import ProfileComments from '../profilecomments/ProfileComments.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from 'react-router-dom';
 
 function Profile() {
+  const { username } = useParams();
   return (
     <>
       <div id='profile-parent' className='container-fluid'>
@@ -25,7 +27,7 @@ function Profile() {
                   id='username-container'
                   className='col-12 pt-2 pb-3 text-center'
                 >
-                  <h3>username</h3>
+                  <h3>{username}</h3>
                 </div>
               </div>
             </div>

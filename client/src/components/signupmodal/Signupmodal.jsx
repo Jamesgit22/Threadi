@@ -1,41 +1,54 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useState } from 'react';
 import "./Signupmodal.css";
 import { useMutation, gql } from "@apollo/client";
 import { ADD_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 const SignUpModal = ({ closeModal }) => {
-  const history = useHistory(); // React Router history object
+  const history = useHistory(); // Add useHistory hook
 
-  // Define state variables for form inputs
-  const [username, setUsername] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+  // set state for form validation
+  const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
 
-  // Define the mutation hook
-  const [addUser, { loading, error }] = useMutation(ADD_USER);
+  const [createUser, { error }] = useMutation(ADD_USER);
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Call the mutation
-    addUser({ variables: { username, email, password } })
-      .then((result) => {
-        // Handle successful mutation
-        console.log("User added successfully:", result.data);
-  
-        if (result.data.addUser) {
-          console.log("Username:", username);
-          // Redirect the user to the profile page with the username
-          history.push(`/profile/${username}`);
-        } else {
-          console.error("Failed to add user:", result.data);
-        }
-      })
-      .catch((error) => {
-        // Handle mutation error
-        console.error("Failed to add user:", error);
-      });
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log({...userFormData});
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      const { data } = await createUser({variables: {...userFormData}});
+      console.log('here is the data' + data)
+      Auth.login(data.addUser.token);
+      
+    } catch (err) {
+      console.log(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
   };
 
   return (
@@ -44,44 +57,58 @@ const SignUpModal = ({ closeModal }) => {
         <div className="modal-content">
           <div id="modal-overlay">
             <h2 className="modalTitle">Sign Up</h2>
-            <form className="modalForm" onSubmit={handleSubmit}>
-              <input
-                className="modalFormInput"
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                className="modalFormInput"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                className="modalFormInput"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <input
-                className="modalFormInput"
-                type="password"
-                id="confirm-password"
-                name="confirm-password"
-                placeholder="Confirm Password"
-              />
-              <button className="modalSubmit" type="submit">Sign Up</button>
-              <button className="modalClose" onClick={closeModal}>Close</button>
-            </form>
+            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        {/* show alert if server response is bad */}
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Something went wrong with your signup!
+        </Alert>
+
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='username'>Username</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Your username'
+            name='username'
+            onChange={handleInputChange}
+            value={userFormData.username}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Control
+            type='email'
+            placeholder='Your email address'
+            name='email'
+            onChange={handleInputChange}
+            value={userFormData.email}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Your password'
+            name='password'
+            onChange={handleInputChange}
+            value={userFormData.password}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+        </Form.Group>
+        <Button
+          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+          type='submit'
+          variant='success'
+          onClick={() => history.push(`/profile/${userFormData.username}`)}>
+          Submit
+        </Button>
+      </Form>
           </div>
         </div>
       </div>
