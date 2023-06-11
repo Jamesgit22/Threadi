@@ -38,6 +38,123 @@ export default function Browse() {
     setSelectedWord(e.target.value);
   };
 
+  //comment
+  const handleAPICall = (e) => {
+    switch (selectedWord) {
+      case 'Video Games': {
+        axios
+          .get(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=1&search=${searchInput}&exclude_additions=true&page_size=10`)
+          .then((res) => {
+
+            if (!res.ok) {
+              throw new Error('RAWG API ERROR: Something went wrong.');
+            };
+
+            const rawgData = res.results.map((game) => ({
+              type: selectedWord,
+              image: game.background_image,
+              title: game.name,
+              releaseDate: game.released,
+              id: game.id
+            }));
+
+            setSearchResults(rawgData);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Movie' || 'Show': {
+        var searchType;
+        
+        if (selectedWord === 'Movie') {
+          searchType = 'movie';
+        } else {
+          searchType = 'tv';
+        };
+
+        axios
+          .get(`https://api.themoviedb.org/3/search/${searchType}?query=${searchInput}&include_adult=false&language=en-US&page=1`)
+          .then((res) => {
+
+            if (!res.ok) {
+              throw new Error('TMDb ERROR: Something went wrong.');
+            };
+
+            const tmdbData = res.results.map((media) => ({
+              type: selectedWord,
+              backdrop: `https://image.tmdb.org/t/p/w500/${media.backdrop_path}` || 'No backdrop.',
+              image: `https://image.tmdb.org/t/p/w500/${media.poster_path}` || 'No image.',
+              title: media.name,
+              description: media.overview || 'No description.',
+              releaseDate: media.first_air_date || 'Release date unavailable.'
+            }));
+
+            setSearchResults(tmdbData);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Anime' || 'Manga': {
+        axios
+          .get(`https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput}`, {
+            headers: {
+              'X-MAL-CLIENT-ID':`${process.env.MAL_CLIENT_ID}`
+            }
+          })
+          .then((res) => {
+
+            if (!res.ok) {
+              throw new Error('MAL_API ERROR: Something went wrong.');
+            };
+
+            const weebData = res.data.map((media) => ({
+              type: selectedWord,
+              title: media.node.title,
+              image: media.node?.main_picture.large || 'No image.'
+            }));
+
+            setSearchResults(weebData);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Book': {
+        axios
+          .get(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`)
+          .then((res) => {
+
+            if (!res.ok) {
+              throw new Error('BookAPI ERROR: Something went wrong.');
+            };
+
+            const bookData = res.items.map((book) => ({
+              type: selectedWord,
+              authors: book.volumeInfo.authors || ['No author to display'],
+              title: book.volumeInfo.title,
+              description: book.volumeInfo.description,
+              image: book.volumeInfo.imageLinks?.thumbnail || ''
+            }));
+
+            setSearchResults(bookData);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+          
+        break;
+      }
+    }
+  };
+
   const handleUpClick = () => {
     const newIndex = (selectedIndex + 1) % searchOptions.length;
     setSelectedWord(searchOptions[newIndex]);

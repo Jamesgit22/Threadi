@@ -10,6 +10,7 @@ const Home = () => {
   const [moviePosters, setMoviePosters] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //comment
   useEffect(() => {
     axios
       .get('/api/third-party/popularMovies')
