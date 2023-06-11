@@ -22,9 +22,15 @@ const SignUpModal = ({ closeModal }) => {
     addUser({ variables: { username, email, password } })
       .then((result) => {
         // Handle successful mutation
-        console.log("User added successfully:", result.data.addUser);
-        // Redirect the user to a different route
-        history.push("/profile");
+        console.log("User added successfully:", result.data);
+  
+        if (result.data.addUser) {
+          console.log("Username:", username);
+          // Redirect the user to the profile page with the username
+          history.push(`/profile/${username}`);
+        } else {
+          console.error("Failed to add user:", result.data);
+        }
       })
       .catch((error) => {
         // Handle mutation error
