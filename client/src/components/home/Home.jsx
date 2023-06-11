@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLaptop } from "@fortawesome/free-solid-svg-icons";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { faPerson } from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios';
-
+import axios from "axios";
 
 const Home = () => {
   const [moviePosters, setMoviePosters] = useState([]);
@@ -15,22 +14,24 @@ const Home = () => {
   useEffect(() => {
     const fetchPopularMovies = async () => {
       axios
-        .get(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${process.env.REACT_APP_TMDB_API_KEY}`, {
-          headers: {
-            accept: "application/json",
-            Authorization:
-              `Bearer ${process.env.REACT_APP_TMDB_BEARER_TOKEN}`
+        .get(
+          `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${process.env.REACT_APP_TMDB_API_KEY}`,
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${process.env.REACT_APP_TMDB_BEARER_TOKEN}`,
+            },
           }
-        })
+        )
         .then((res) => {
           setMoviePosters(res.data.results.slice(0, 3));
         })
         .catch((err) => {
           console.log(err);
         });
-      };
+    };
 
-      fetchPopularMovies();
+    fetchPopularMovies();
   }, []);
 
   const openModal = () => {
@@ -46,9 +47,12 @@ const Home = () => {
     <div className="home-container">
       <div className="top">
         <div className="subtitleOne">
-          <h1 className="firstHeader">Rate all the entertainment you watch</h1>
+          <h1 className="firstHeader">
+            <span className="red-text">Rate</span> all the entertainment you
+            watch
+          </h1>
           <button className="firstButton" onClick={openModal}>
-            Sign Up
+            Start Rating Now
           </button>
         </div>
         {moviePosters.length > 0 && (
@@ -69,18 +73,21 @@ const Home = () => {
         )}
         <div className="subtitleTwo">
           <h1 className="secondHeader">
-            Share what you watch with your friends
+            <span className="red-text">Share </span>what you watch with your
+            friends
           </h1>
           <button className="secondButton" onClick={openModal}>
-            Sign Up
+            Start Sharing Now
           </button>
         </div>
       </div>
       <div className="bottom">
         <div className="subtitleThree">
-          <h1 className="thirdHeader">See what your friends rated</h1>
+          <h1 className="thirdHeader">
+            <span className="red-text">See </span>what your friends rated
+          </h1>
           <button className="thirdButton" onClick={openModal}>
-            Sign Up
+            Sign Up Now
           </button>
         </div>
         {moviePosters.length > 2 && (
@@ -114,7 +121,7 @@ const Home = () => {
             <div className="howsignUpText">Review your Entertainment</div>
           </div>
           <div className="howsignUpContainer">
-          <FontAwesomeIcon
+            <FontAwesomeIcon
               icon={faPerson}
               className="computerSymbol"
               size="2xl"

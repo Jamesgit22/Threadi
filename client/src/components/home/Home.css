@@ -11,13 +11,13 @@
 }
 
 .firstHeader {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
   text-align: left;
   margin: 0 auto;
-  width: 30%
+  width: 30%;
 }
 
 .subtitleOne {
@@ -25,7 +25,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
 }
 
 .firstButton {
@@ -33,15 +32,16 @@
   margin-bottom: 10px;
   margin-left: 25%;
   margin-right: 25%;
-  background-color: var(--gray-col);
-  border: 1px solid var(--dark-col);
-  border-radius: 10px;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  color: var(--light-col);
-  font-family: var(--font);
+  padding-right: 5px;
+  padding-left: ;
+  background-color: var(--primary-col);
+  padding: 10px;
+  border-radius: 5em;
+  border: none;
   font-size: 1.5em;
-  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
+  color: var(--light-col);
+  transition: 0.1s;
+  margin-top: 25px;
 }
 
 .movie-poster1 {
@@ -60,7 +60,7 @@
   width: 100%;
   height: 70vh;
   object-fit: cover;
-  object-position: top; 
+  object-position: top;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   mask-image: linear-gradient(
@@ -104,7 +104,7 @@
   width: 100%;
   height: 70vh;
   object-fit: cover;
-  object-position: top; 
+  object-position: top;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   mask-image: linear-gradient(
@@ -120,13 +120,13 @@
 }
 
 .secondHeader {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
   text-align: left;
   margin: 0 auto;
-  width: 30%
+  width: 30%;
 }
 
 .secondButton {
@@ -134,15 +134,16 @@
   margin-bottom: 10px;
   margin-left: 25%;
   margin-right: 25%;
-  background-color: var(--gray-col);
-  border: 1px solid var(--dark-col);
-  border-radius: 10px;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  color: var(--light-col);
-  font-family: var(--font);
+  padding-right: 5px;
+  padding-left: ;
+  background-color: var(--primary-col);
+  padding: 10px;
+  border-radius: 5em;
+  border: none;
   font-size: 1.5em;
-  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
+  color: var(--light-col);
+  transition: 0.1s;
+  margin-top: 25px;
 }
 
 .bottom {
@@ -169,7 +170,7 @@
   width: 100%;
   height: 70vh;
   object-fit: cover;
-  object-position: top; 
+  object-position: top;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   mask-image: linear-gradient(
@@ -185,13 +186,13 @@
 }
 
 .thirdHeader {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
   text-align: left;
   margin: 0 auto;
-  width: 30%
+  width: 30%;
 }
 
 .thirdButton {
@@ -199,15 +200,16 @@
   margin-bottom: 10px;
   margin-left: 25%;
   margin-right: 25%;
-  background-color: var(--gray-col);
-  border: 1px solid var(--dark-col);
-  border-radius: 10px;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  color: var(--light-col);
-  font-family: var(--font);
+  padding-right: 5px;
+  padding-left: ;
+  background-color: var(--primary-col);
+  padding: 10px;
+  border-radius: 5em;
+  border: none;
   font-size: 1.5em;
-  box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3);
+  color: var(--light-col);
+  transition: 0.1s;
+  margin-top: 25px;
 }
 
 .subtitleThree {
@@ -221,9 +223,9 @@
   background-color: rgb(0, 0, 0);
   height: 50vh;
   border-bottom: 4px solid #212122;
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 }
 
@@ -231,7 +233,7 @@
   font-family: "Brice";
   color: white;
   font-size: 40px;
-  text-align: center; 
+  text-align: center;
   padding-top: 20px;
 }
 
@@ -243,14 +245,14 @@
 .howsignUpContainer {
   padding-top: 20px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   padding-right: 10px;
   padding-left: 10px;
 }
 
-.howsignUpText{
+.howsignUpText {
   color: white;
   font-size: 20px;
 }
