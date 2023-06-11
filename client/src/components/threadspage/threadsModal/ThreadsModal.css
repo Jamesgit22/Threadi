@@ -1,10 +1,4 @@
 #modal-component {
-  /* background: linear-gradient(
-    to bottom,
-    rgb(0, 0, 0),
-    rgb(23, 23, 23) 50%,
-    rgb(4, 4, 4) */
-  /* ); */
   background-color: rgb(19, 19, 19);
   z-index: 3;
   width: 95%;
