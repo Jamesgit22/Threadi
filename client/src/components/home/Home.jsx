@@ -12,28 +12,14 @@ const Home = () => {
 
   //comment
   useEffect(() => {
-    // Fetch popular movies from Movie Database API
-    const fetchPopularMovies = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${process.env.TMDB_API_KEY}`,
-          {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              Authorization:
-                process.env.TMDB_BEARER_TOKEN,
-            },
-          }
-        );
-        const data = await response.json();
-        setMoviePosters(data.results.slice(0, 3)); // Retrieve only the first 3 movies
-      } catch (error) {
-        console.log("Error fetching popular movies:", error);
-      }
-    };
-
-    fetchPopularMovies();
+    axios
+      .get('/api/third-party/popularMovies')
+      .then((res) => {
+        setMoviePosters(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const openModal = () => {

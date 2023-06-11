@@ -3,17 +3,36 @@ import { useState } from 'react';
 import './Browse.css';
 import { motion } from 'framer-motion';
 import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+
 
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const searchOptions = [
+    'Movies',
+    'Shows',
+    'Books',
+    'Video Games',
+    'Anime',
+    'Manga',
+  ];
 
-  //MAL API URL: https://api.myanimelist.net/v2/(manga or anime)?q=(name of show or manga)
-  //TMDB API URL: https://api.themoviedb.org/3/search/('tv' or 'movie')?query=(name of show or movie)&include_adult=false&language=en-US&page=1
-  //RAWG API URL: `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=1&search=(name of game)&exclude_additions=true&page_size=10`
-  //Google Books API URL: https://www.googleapis.com/books/v1/volumes?q=(name of book)
-
+  const callAPI = (e) => {
+    axios
+      .post('/api/third-party/browseSearch', {
+        searchInput: searchInput,
+        selectedWord: selectedWord
+      })
+      .then((res) => {
+        setSearchResults(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleWordChange = (e) => {
     setSelectedWord(e.target.value);
@@ -148,6 +167,7 @@ export default function Browse() {
     setSelectedWord(searchOptions[newIndex]);
     setSelectedIndex(newIndex);
   };
+
 
   return (
     <>
