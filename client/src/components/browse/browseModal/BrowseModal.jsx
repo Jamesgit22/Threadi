@@ -33,7 +33,7 @@ export default function BrowseModal({ closeModal, modalTog, searchResults }) {
               <div className='row justify-content-center'>
                 {searchResults.map((result) => (
                   <BModalCard
-                    key={result.id}
+                    key={result.uuid}
                     image={result.image}
                     title={result.title}
                     releaseDate={result.releaseDate}
