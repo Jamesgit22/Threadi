@@ -32,10 +32,8 @@
   margin-bottom: 10px;
   margin-left: 25%;
   margin-right: 25%;
-  padding-right: 5px;
-  padding-left: ;
   background-color: var(--primary-col);
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5em;
   border: none;
   font-size: 1.5em;
@@ -134,10 +132,8 @@
   margin-bottom: 10px;
   margin-left: 25%;
   margin-right: 25%;
-  padding-right: 5px;
-  padding-left: ;
   background-color: var(--primary-col);
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5em;
   border: none;
   font-size: 1.5em;
@@ -200,10 +196,8 @@
   margin-bottom: 10px;
   margin-left: 25%;
   margin-right: 25%;
-  padding-right: 5px;
-  padding-left: ;
   background-color: var(--primary-col);
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5em;
   border: none;
   font-size: 1.5em;
