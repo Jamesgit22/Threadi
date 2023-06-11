@@ -275,4 +275,8 @@ button {
     font-size: 1em;
     z-index: 1;
   }
+  .howSectionContainer {
+    display: flex;
+    flex-direction: column;
+  }
 }
