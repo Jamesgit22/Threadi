@@ -61,9 +61,11 @@ const resolvers = {
       }
     },
 
-    userThreads: async (_, { userId }) => {
+    userThreads: async (parent, args, context) => {
+      console.log('backend')
+      console.log(context.user)
       try {
-        const userThreads = await Thread.find({ author: userId });
+        const userThreads = await Thread.find({author: context.user._id});
         return userThreads;
       } catch (error) {
         console.error(error);

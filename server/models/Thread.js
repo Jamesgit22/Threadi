@@ -7,6 +7,7 @@ const threadSchema = new Schema({
   },
   timestamp: {
     type: String,
+    default: Date.now(),
     required: true
   },
   author: {
@@ -20,8 +21,7 @@ const threadSchema = new Schema({
   },
   description: {
     type: String,
-    default: "",
-    maxlength: 280
+    default: "No description",
   },
   reviews: [
     {

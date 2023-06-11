@@ -97,8 +97,8 @@ query Query {
 
 
 export const USER_THREADS = gql`
-query Query($userId: ID!) {
-  userThreads(userId: $userId) {
+query Query {
+  userThreads {
     _id
     timestamp
     title
