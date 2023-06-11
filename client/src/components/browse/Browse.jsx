@@ -5,10 +5,20 @@ import { motion } from 'framer-motion';
 import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
+
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const searchOptions = [
+    'Movies',
+    'Shows',
+    'Books',
+    'Video Games',
+    'Anime',
+    'Manga',
+  ];
 
   const callAPI = (e) => {
     axios
@@ -40,6 +50,7 @@ export default function Browse() {
     setSelectedWord(searchOptions[newIndex]);
     setSelectedIndex(newIndex);
   };
+
 
   return (
     <>
