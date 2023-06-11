@@ -4,13 +4,14 @@ import './Browse.css';
 import { motion } from 'framer-motion';
 import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-
+import BrowseModal from './browseModal/BrowseModal';
 
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [modalTog, setModalTog] = useState(false);
   const searchOptions = [
     'Movies',
     'Shows',
@@ -20,125 +21,11 @@ export default function Browse() {
     'Manga',
   ];
 
-  const handleWordChange = (e) => {
-    setSelectedWord(e.target.value);
-  };
-
-  //comment
-  const handleAPICall = (e) => {
-    switch (selectedWord) {
-      case 'Video Games': {
-        axios
-          .get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_RAWG_API_KEY}&page=1&search=${searchInput}&exclude_additions=true&page_size=10`)
-          .then((res) => {
-
-            if (!res.ok) {
-              throw new Error('RAWG API ERROR: Something went wrong.');
-            };
-
-            const rawgData = res.results.map((game) => ({
-              type: selectedWord,
-              image: game.background_image,
-              title: game.name,
-              releaseDate: game.released,
-              id: game.id
-            }));
-
-            setSearchResults(rawgData);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        break;
-      }
-      case 'Movie' || 'Show': {
-        var searchType;
-        
-        if (selectedWord === 'Movie') {
-          searchType = 'movie';
-        } else {
-          searchType = 'tv';
-        };
-
-        axios
-          .get(`https://api.themoviedb.org/3/search/${searchType}?query=${searchInput}&include_adult=false&language=en-US&page=1`)
-          .then((res) => {
-
-            if (!res.ok) {
-              throw new Error('TMDb ERROR: Something went wrong.');
-            };
-
-            const tmdbData = res.results.map((media) => ({
-              type: selectedWord,
-              backdrop: `https://image.tmdb.org/t/p/w500/${media.backdrop_path}` || 'No backdrop.',
-              image: `https://image.tmdb.org/t/p/w500/${media.poster_path}` || 'No image.',
-              title: media.name,
-              description: media.overview || 'No description.',
-              releaseDate: media.first_air_date || 'Release date unavailable.'
-            }));
-
-            setSearchResults(tmdbData);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        break;
-      }
-      case 'Anime' || 'Manga': {
-        axios
-          .get(`https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput}`, {
-            headers: {
-              'X-MAL-CLIENT-ID':`${process.env.REACT_APP_MAL_CLIENT_ID}`
-            }
-          })
-          .then((res) => {
-
-            if (!res.ok) {
-              throw new Error('MAL_API ERROR: Something went wrong.');
-            };
-
-            const weebData = res.data.map((media) => ({
-              type: selectedWord,
-              title: media.node.title,
-              image: media.node?.main_picture.large || 'No image.'
-            }));
-
-            setSearchResults(weebData);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        break;
-      }
-      case 'Book': {
-        axios
-          .get(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`)
-          .then((res) => {
-
-            if (!res.ok) {
-              throw new Error('BookAPI ERROR: Something went wrong.');
-            };
-
-            const bookData = res.items.map((book) => ({
-              type: selectedWord,
-              authors: book.volumeInfo.authors || ['No author to display'],
-              title: book.volumeInfo.title,
-              description: book.volumeInfo.description,
-              image: book.volumeInfo.imageLinks?.thumbnail || ''
-            }));
-
-            setSearchResults(bookData);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-          
-        break;
-      }
-    }
+  const searchClick = async () => {
+    console.log(selectedWord);
+    console.log(searchInput);
+    handleAPICall();
+    console.log(searchResults);
   };
 
   const handleUpClick = () => {
@@ -154,6 +41,163 @@ export default function Browse() {
     setSelectedIndex(newIndex);
   };
 
+  const handleWordChange = (e) => {
+    setSelectedWord(e.target.value);
+  };
+
+  const handleModalTog = () => {
+    setModalTog((open) => !open);
+  };
+
+  const closeModal = () => {
+    setModalTog(false);
+  };
+
+  //comment
+  const handleAPICall = (e) => {
+    // eslint-disable-next-line default-case
+    switch (selectedWord) {
+      case 'Video Games': {
+        axios
+          .get(
+            `https://api.rawg.io/api/games?key=${process.env.REACT_APP_RAWG_API_KEY}&page=1&search=${searchInput}&exclude_additions=true&page_size=10`
+          )
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('RAWG API ERROR: Something went wrong.');
+            }
+
+            const rawgData = res.results.map((game) => ({
+              type: selectedWord,
+              image: game.background_image,
+              title: game.name,
+              releaseDate: game.released,
+              id: game.id,
+              backdrop: undefined,
+              authors: undefined,
+              description: undefined,
+              i: rawgData.length
+            }));
+
+            setSearchResults(rawgData);
+            console.log(searchResults);
+            handleModalTog(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Movie' || 'Show': {
+        var searchType;
+
+        if (selectedWord === 'Movie') {
+          searchType = 'movie';
+        } else {
+          searchType = 'tv';
+        }
+
+        axios
+          .get(
+            `https://api.themoviedb.org/3/search/${searchType}?query=${searchInput}&include_adult=false&language=en-US&page=1`
+          )
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('TMDb ERROR: Something went wrong.');
+            }
+
+            const tmdbData = res.results.map((media) => ({
+              type: selectedWord,
+              image: `https://image.tmdb.org/t/p/w500/${media.poster_path}` || 'No image.',
+              title: media.name,
+              releaseDate: media.first_air_date || 'Release date unavailable.',
+              id: undefined,
+              backdrop: `https://image.tmdb.org/t/p/w500/${media.backdrop_path}` || 'No backdrop.',
+              authors: undefined,
+              description: media.overview || undefined,
+              i: tmdbData.length
+            }));
+
+            setSearchResults(tmdbData);
+            console.log(searchResults);
+            handleModalTog(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Anime' || 'Manga': {
+        axios
+          .get(
+            `https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput}`,
+            {
+              headers: {
+                'X-MAL-CLIENT-ID': `${process.env.REACT_APP_MAL_CLIENT_ID}`,
+              },
+            }
+          )
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('MAL_API ERROR: Something went wrong.');
+            }
+
+            const weebData = res.data.map((media) => ({
+              type: selectedWord,
+              image: media.node?.main_picture.large || 'No image.',
+              title: media.node.title,
+              releaseDate: undefined,
+              id: undefined,
+              backdrop: undefined,
+              authors: undefined,
+              description: undefined,
+              i: weebData.length
+            }));
+
+            setSearchResults(weebData);
+            console.log(searchResults);
+            handleModalTog(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+      case 'Book': {
+        axios
+          .get(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('BookAPI ERROR: Something went wrong.');
+            }
+
+            const bookData = res.items.map((book) => ({
+              type: selectedWord,
+              image: book.volumeInfo.imageLinks?.thumbnail || '',
+              title: book.volumeInfo.title,
+              releaseDate: undefined,
+              id: undefined,
+              backdrop: undefined,
+              authors: book.volumeInfo.authors || ['No author to display'],
+              description: book.volumeInfo.description,
+              i: bookData.length
+            }));
+
+            setSearchResults(bookData);
+            console.log(searchResults);
+            handleModalTog(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        break;
+      }
+    }
+  };
 
   return (
     <>
@@ -230,7 +274,12 @@ export default function Browse() {
                   </div>
                   <div className='row justify-content-center'>
                     <div className='col-12'>
-                      <button id='browse-search-btn'>Search</button>
+                      <button
+                        id='browse-search-btn'
+                        onClick={() => searchClick()}
+                      >
+                        Search
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -412,6 +461,13 @@ export default function Browse() {
             </div>
           </div>
         </div>
+        {modalTog && (
+          <BrowseModal
+            closeModal={closeModal}
+            modalTog={modalTog}
+            searchResults={searchResults}
+          />
+        )}
       </div>
     </>
   );

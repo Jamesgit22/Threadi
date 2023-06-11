@@ -4,7 +4,7 @@ import './ThreadsPage.css';
 import ThreadsModal from './threadsModal/ThreadsModal';
 
 export default function ThreadsPage() {
-  const [modalTog, setModalTog] = useState('false')
+  const [modalTog, setModalTog] = useState(false)
 
   const handleModalTog = () => {
     setModalTog((open) => !open);

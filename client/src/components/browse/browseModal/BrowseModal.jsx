@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import BModalCard from '../bmodalcard/BModalCard';
 
-export default function BrowseModal(closeModal, modalTog) {
+export default function BrowseModal({ closeModal, modalTog, searchResults }) {
   return (
     <>
       <motion.div
@@ -30,34 +31,18 @@ export default function BrowseModal(closeModal, modalTog) {
                 </div>
               </div>
               <div className='row justify-content-center'>
-                <div className='col-11 item-container'>
-                  <div className='row'>
-                    <div className='col-12 p-0'>
-                      <p className='item-title'>(item title)</p>
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col-12'>
-                      <div className='row'>
-                        <div className='col-6 item-img-container'>
-                          <img className='item-img' src='' alt='' />
-                        </div>
-                        <div className='col-6'>
-                          <div className='row'>
-                            <div className='col-12'>
-                              <p className='item-desc'>(item desc)</p>
-                            </div>
-                          </div>
-                          <div className='row'>
-                            <div className='col-12 text-end'>
-                              <button className='item-btn'>Open</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {searchResults.map((result) => (
+                  <BModalCard
+                    key={result.id}
+                    image={result.image}
+                    title={result.title}
+                    releaseDate={result.releaseDate}
+                    backDrop={result.backDrop}
+                    author={result.author}
+                    description={result.description}
+                    type={result.type}
+                  />
+                ))}
               </div>
             </div>
           </div>
