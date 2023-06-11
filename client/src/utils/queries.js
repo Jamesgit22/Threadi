@@ -177,7 +177,7 @@ query SingleReview($reviewId: ID!) {
   }
 }`
 
-REVIEW_COMS = gql`
+export const REVIEW_COMS = gql`
 query ReviewComs($reviewId: ID!) {
   reviewComs(reviewId: $reviewId) {
     author {
@@ -190,7 +190,7 @@ query ReviewComs($reviewId: ID!) {
   }
 }`
 
-THREAD_COMS = gql`
+export const THREAD_COMS = gql`
 query ThreadComs($threadId: ID!) {
   threadComs(threadId: $threadId) {
     author {

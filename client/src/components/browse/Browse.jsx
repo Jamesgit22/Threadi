@@ -3,13 +3,22 @@ import { useState } from 'react';
 import './Browse.css';
 import { motion } from 'framer-motion';
 import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
-import { axios } from 'axios';
-require('dotenv').config();
+import  axios  from 'axios';
+
 
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const searchOptions = [
+    'Movies',
+    'Shows',
+    'Books',
+    'Video Games',
+    'Anime',
+    'Manga',
+  ];
 
   //MAL API URL: https://api.myanimelist.net/v2/(manga or anime)?q=(name of show or manga)
   //TMDB API URL: https://api.themoviedb.org/3/search/('tv' or 'movie')?query=(name of show or movie)&include_adult=false&language=en-US&page=1
@@ -19,6 +28,19 @@ export default function Browse() {
 
   const handleWordChange = (e) => {
     setSelectedWord(e.target.value);
+  };
+
+  const handleUpClick = () => {
+    const newIndex = (selectedIndex + 1) % searchOptions.length;
+    setSelectedWord(searchOptions[newIndex]);
+    setSelectedIndex(newIndex);
+  };
+
+  const handleDownClick = () => {
+    const newIndex =
+      (selectedIndex - 1 + searchOptions.length) % searchOptions.length;
+    setSelectedWord(searchOptions[newIndex]);
+    setSelectedIndex(newIndex);
   };
 
 
@@ -138,18 +160,6 @@ export default function Browse() {
     }
   };
 
-  const handleUpClick = () => {
-    const newIndex = (selectedIndex + 1) % searchOptions.length;
-    setSelectedWord(searchOptions[newIndex]);
-    setSelectedIndex(newIndex);
-  };
-
-  const handleDownClick = () => {
-    const newIndex =
-      (selectedIndex - 1 + searchOptions.length) % searchOptions.length;
-    setSelectedWord(searchOptions[newIndex]);
-    setSelectedIndex(newIndex);
-  };
 
   return (
     <>
