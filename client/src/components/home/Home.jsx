@@ -5,21 +5,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLaptop } from "@fortawesome/free-solid-svg-icons";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { faPerson } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
+
 
 const Home = () => {
   const [moviePosters, setMoviePosters] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  //comment
   useEffect(() => {
-    axios
-      .get('/api/third-party/popularMovies')
-      .then((res) => {
-        setMoviePosters(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const fetchPopularMovies = async () => {
+      axios
+        .get(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${process.env.REACT_APP_TMDB_API_KEY}`, {
+          headers: {
+            accept: "application/json",
+            Authorization:
+              `Bearer ${process.env.REACT_APP_TMDB_BEARER_TOKEN}`
+          }
+        })
+        .then((res) => {
+          setMoviePosters(res.data.results.slice(0, 3));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      };
+
+      fetchPopularMovies();
   }, []);
 
   const openModal = () => {

@@ -15,9 +15,9 @@ function Footer() {
         <img className="githubLogo" src="/images/square-github.svg" alt="" />
       </div>
       <div className="secondFooter">
-        <button class="footerSubTitle">Social</button>
-        <button class="footerSubTitle">Profile</button>
-        <button class="footerSubTitle">Browse</button>
+        <button className="footerSubTitle">Social</button>
+        <button className="footerSubTitle">Profile</button>
+        <button className="footerSubTitle">Browse</button>
       </div>
       <div className="firstFooter">
         <div className="firstSubFooter">

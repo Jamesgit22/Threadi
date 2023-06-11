@@ -20,20 +20,6 @@ export default function Browse() {
     'Manga',
   ];
 
-  const callAPI = (e) => {
-    axios
-      .post('/api/third-party/browseSearch', {
-        searchInput: searchInput,
-        selectedWord: selectedWord
-      })
-      .then((res) => {
-        setSearchResults(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handleWordChange = (e) => {
     setSelectedWord(e.target.value);
   };
@@ -43,7 +29,7 @@ export default function Browse() {
     switch (selectedWord) {
       case 'Video Games': {
         axios
-          .get(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=1&search=${searchInput}&exclude_additions=true&page_size=10`)
+          .get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_RAWG_API_KEY}&page=1&search=${searchInput}&exclude_additions=true&page_size=10`)
           .then((res) => {
 
             if (!res.ok) {
@@ -104,7 +90,7 @@ export default function Browse() {
         axios
           .get(`https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput}`, {
             headers: {
-              'X-MAL-CLIENT-ID':`${process.env.MAL_CLIENT_ID}`
+              'X-MAL-CLIENT-ID':`${process.env.REACT_APP_MAL_CLIENT_ID}`
             }
           })
           .then((res) => {
@@ -205,7 +191,7 @@ export default function Browse() {
                                 id='browse-switch'
                                 value={selectedWord}
                                 onChange={handleWordChange}
-                                disabled='true'
+                                disabled={true}
                               >
                                 {searchOptions.map((option) => (
                                   <option key={option} value={option}>

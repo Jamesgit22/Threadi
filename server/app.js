@@ -5,6 +5,9 @@ const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 const routes = require("./routes");
 const { authMiddleware } = require('./utils/auth');
+require('dotenv').config();
+
+console.log(process.env.PORT);
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -20,8 +23,6 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
-
-app.use(routes);
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
