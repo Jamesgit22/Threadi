@@ -133,7 +133,7 @@ export default function Nav() {
         <div className="header container-fluid">
           <div className="row">
             <nav id="nav-container" className="col-12">
-              <div id="logo-container" className="col-2 d-flex">
+              <div id="logo-container" className="col-3 d-flex">
                 <div className="col-12 d-flex align-items-center">
                   <h2 id="nav-logo" className="light-txt">
                     THREADI
@@ -145,7 +145,7 @@ export default function Nav() {
                   />
                 </div>
               </div>
-              <div className="desktop col-8 d-flex">
+              <div className="desktop col-6 d-flex">
                 <div className="desktopNav col-12 d-flex align-items-center justify-content-center">
                   {isShown ? (
                     <>
@@ -165,8 +165,8 @@ export default function Nav() {
                   </div>
                 </div>
               </div>
-              <div className="desktopSignOn col-2 d-flex justify-content-evenly">
-                <button className="desktop-signin-btns">Sign In</button>
+              <div className="desktopSignOn col-3 d-flex justify-content-end">
+                <button className="desktop-signin-btns me-3">Sign In</button>
                 <button
                   className="desktop-signup-btns"
                   onClick={handleSignupClick}
