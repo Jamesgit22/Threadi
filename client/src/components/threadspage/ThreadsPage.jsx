@@ -2,17 +2,31 @@ import React from 'react';
 import { useState } from 'react';
 import './ThreadsPage.css';
 import ThreadsModal from './threadsModal/ThreadsModal';
+import { useMutation } from '@apollo/client';
+import { ADD_THREAD } from '../../utils/mutations';
+import ThreadAddReviewModal from './threadsaddreviewmodal/ThreadAddReviewModal';
 
 export default function ThreadsPage() {
-  const [modalTog, setModalTog] = useState(false)
+  const [modalTog, setModalTog] = useState(false);
+  const [reviewModalTog, setreviewModalTog] = useState(false);
+  const [addThread, { error }] = useMutation(ADD_THREAD)
+
 
   const handleModalTog = () => {
     setModalTog((open) => !open);
   };
 
+  const handlereviewModalTog = () => {
+    setreviewModalTog((open) => !open);
+  };
+
   const closeModal = () => {
     setModalTog(false);
-  }
+  };
+
+  const closeReviewModal = () => {
+    setreviewModalTog(false);
+  };
 
   return (
     <>
@@ -32,7 +46,12 @@ export default function ThreadsPage() {
                 </div>
                 <div className='row justify-content-center'>
                   <div className='col-8 text-center'>
-                    <button id='new-thread-btn'>New Thread</button>
+                    <button
+                      id='new-thread-btn'
+                      onClick={() => handleModalTog(true)}
+                    >
+                      New Thread
+                    </button>
                   </div>
                 </div>
               </div>
@@ -76,125 +95,31 @@ export default function ThreadsPage() {
                 <div className='row'>
                   <div className='col-12 d-flex justify-content-evenly align-items-center thread-btns-container'>
                     <p className='m-0 pt-1 pb-1'>(edit)</p>
-                    <button className='thread-open-btn' onClick={() => handleModalTog(true)}>Open</button>
+                    <button
+                      className='thread-open-btn'
+                      onClick={() => handlereviewModalTog(true)}
+                    >
+                      Open
+                    </button>
                     <p className='m-0 pt-1 pb-1'>(delete)</p>
                   </div>
                 </div>
                 {/* end */}
               </div>
               {/* end thread 1 */}
-              {/* thread 2 */}
-              <div className='col-11 thread-card'>
-                <div className='row'>
-                  <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
-                    <h3 className='thread-card-title m-0'>title</h3>
-                    <p className='m-0'>(date)</p>
-                  </div>
-                </div>
-                {/* content row */}
-                <div className='row'>
-                  <div id='box-container' className='col-12 d-flex '>
-                    {/* scroll row */}
-                    <div className='col-12 box'>
-                      <div className='row'>
-                        <div className='col-4'>
-                          <h4 className='item-titles'>item Title</h4>
-                        </div>
-                        <div className='col-8'>
-                          <img
-                            className='threads-imgs'
-                            src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                            alt=''
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {/* scroll row end */}
-                    <div className='col-12 box'>
-                      <div className='row'>
-                        <div className='col-4'>
-                          <h4 className='item-titles'>item Title</h4>
-                        </div>
-                        <div className='col-8'>
-                          <img
-                            className='threads-imgs'
-                            src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                            alt=''
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-12 d-flex justify-content-evenly align-items-center thread-btns-container'>
-                    <p className='m-0 pt-1 pb-1'>(edit)</p>
-                    <button className='thread-open-btn'>Open</button>
-                    <p className='m-0 pt-1 pb-1'>(delete)</p>
-                  </div>
-                </div>
-                {/* end */}
-              </div>
-              {/* end thread 2 */}
-              {/* thread 3 */}
-              <div className='col-11 thread-card'>
-                <div className='row'>
-                  <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
-                    <h3 className='thread-card-title m-0'>title</h3>
-                    <p className='m-0'>(date)</p>
-                  </div>
-                </div>
-                {/* content row */}
-                <div className='row'>
-                  <div id='box-container' className='col-12 d-flex '>
-                    {/* scroll row */}
-                    <div className='col-12 box'>
-                      <div className='row'>
-                        <div className='col-4'>
-                          <h4 className='item-titles'>item Title</h4>
-                        </div>
-                        <div className='col-8'>
-                          <img
-                            className='threads-imgs'
-                            src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                            alt=''
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {/* scroll row end */}
-                    <div className='col-12 box'>
-                      <div className='row'>
-                        <div className='col-4'>
-                          <h4 className='item-titles'>item Title</h4>
-                        </div>
-                        <div className='col-8'>
-                          <img
-                            className='threads-imgs'
-                            src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                            alt=''
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-12 d-flex justify-content-evenly align-items-center thread-btns-container'>
-                    <p className='m-0 pt-1 pb-1'>(edit)</p>
-                    <button className='thread-open-btn'>Open</button>
-                    <p className='m-0 pt-1 pb-1'>(delete)</p>
-                  </div>
-                </div>
-                {/* end */}
-              </div>
-              {/* end thread 3 */}
             </div>
           </div>
         </div>
 
-        {modalTog && <ThreadsModal closeModal={closeModal} modalTog={modalTog}/>}
-
+        {modalTog && (
+          <ThreadsModal closeModal={closeModal} modalTog={modalTog} />
+        )}
+        {reviewModalTog && (
+          <ThreadAddReviewModal
+            closeReviewModal={closeReviewModal}
+            reviewModalTog={reviewModalTog}
+          />
+        )}
       </div>
     </>
   );
