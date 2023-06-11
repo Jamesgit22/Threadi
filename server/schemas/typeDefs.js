@@ -69,6 +69,47 @@ const typeDefs = gql`
     coms: [Com]
   }
 
+  type Book {
+    type: String!
+    authors: [String!]!
+    title: String!
+    description: String
+    image: String
+  }
+
+  type AnimeManga {
+    type: String!
+    title: String!
+    image: String!
+  }
+
+  type MovieShow {
+    type: String!
+    backdrop: String!
+    image: String!
+    title: String!
+    description: String
+    releaseDate: String
+  }
+
+  type VideoGame {
+    type: String!
+    image: String!
+    title: String!
+    releaseDate: String
+    id: Int!
+  }
+
+  union SearchResult = Book | AnimeManga | MovieShow | VideoGame
+
+  type PopularMovies {
+    id: Int!
+    title: String!
+    overview: String
+    posterPath: String
+    releaseDate: String
+  }
+
   type Query {
     me: User
     threads: [Thread]
@@ -79,6 +120,8 @@ const typeDefs = gql`
     reviewComs(reviewId: ID!): [Com]
     threadComs(threadId: ID!): [Com]
     replyComs(comId: ID!): [Com]
+    handleAPICall(searchInput: String!, selectedWord: String!): [SearchResult!]!
+    fetchPopularMovies: [Movie!]!
   }
 
   type Mutation {
