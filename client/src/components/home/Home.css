@@ -275,6 +275,10 @@ button {
     font-size: 1em;
     z-index: 1;
   }
+  .howSection {
+    height: fit-content;
+    padding-bottom: 15px;
+  }
   .howSectionContainer {
     display: flex;
     flex-direction: column;
