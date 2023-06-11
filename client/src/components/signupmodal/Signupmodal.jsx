@@ -25,30 +25,24 @@ const SignUpModal = ({ closeModal }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log({...userFormData});
-
+    console.log({ ...userFormData });
+  
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
+  
     try {
-      const { data } = await createUser({variables: {...userFormData}});
-      console.log('here is the data' + data)
+      const { data } = await createUser({ variables: { ...userFormData } });
+      console.log('here is the data' + data);
       Auth.login(data.addUser.token);
-      
+      window.location.href = `/profile/${data.addUser.username}`;
     } catch (err) {
       console.log(err);
       setShowAlert(true);
     }
-
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
   };
 
   return (
@@ -104,8 +98,7 @@ const SignUpModal = ({ closeModal }) => {
         <Button
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'
-          onClick={() => history.push(`/profile/${userFormData.username}`)}>
+          variant='success'>
           Submit
         </Button>
       </Form>
