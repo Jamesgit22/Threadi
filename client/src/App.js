@@ -12,7 +12,7 @@ import Browse from './components/browse/Browse';
 import Social from './components/social/Social';
 import ThreadsPage from './components/threadspage/ThreadsPage';
 import { setContext } from '@apollo/client/link/context';
-import SingleThread from './components/threadspage/singlethread/SingleThread';
+// import SingleThread from './components/threadspage/singlethread/SingleThread';
 import Feed from './components/activityfeed/Feed'
 
 
@@ -60,9 +60,9 @@ function App() {
               <Route path='/threadspage'>
                 <ThreadsPage />
               </Route>
-              <Route path='/singlethread'>
+              {/* <Route path='/singlethread'>
                 <SingleThread />
-              </Route>
+              </Route> */}
               <Route path='/browse'>
                 <Browse />
               </Route>

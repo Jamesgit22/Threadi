@@ -27,13 +27,16 @@ const resolvers = {
       .populate('savedThreads'); // Assuming the reviews are stored as references in the user model
       return user;
     },
-    getReviewsByThread: async (_, { threadId }) => {
+     getReviewsByThread: async (_, { threadId }) => {
       try {
-        const reviews = await Review.find({ thread: threadId });
-        return reviews;
+        const thread = await Thread.findById(threadId).populate('reviews');
+        if (!thread) {
+          throw new Error(`Cannot find thread with ID ${threadId}`);
+        }
+        return { reviews: thread.reviews };
       } catch (error) {
-        console.error(error);
-        throw new Error('Failed to retrieve reviews');
+        console.error(error.message);
+        throw new Error('Failed to fetch reviews');
       }
     },
     threads: async () => {
@@ -63,22 +66,22 @@ const resolvers = {
     singleThread: async (_, { threadId }) => {
       try {
         const thread = await Thread.findById(threadId)
-          .populate('author')
-          .populate({
-            path: 'reviews',
-            populate: {
-              path: 'coms',
-              populate: {
-                path: 'author',
-              },
-            },
-          })
-          .populate({
-            path: 'coms',
-            populate: {
-              path: 'author',
-            },
-          });
+          // .populate('author')
+          // .populate({
+          //   path: 'reviews',
+          //   populate: {
+          //     path: 'coms',
+          //     populate: {
+          //       path: 'author',
+          //     },
+          //   },
+          // })
+          // .populate({
+          //   path: 'coms',
+          //   populate: {
+          //     path: 'author',
+          //   },
+          // });
         return thread;
       } catch (error) {
         console.error(error);
