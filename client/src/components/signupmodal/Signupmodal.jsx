@@ -18,6 +18,7 @@ const SignUpModal = ({ closeModal }) => {
 
   const [createUser, { error }] = useMutation(ADD_USER);
 
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });

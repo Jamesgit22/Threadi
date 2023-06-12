@@ -8,7 +8,7 @@ import Auth from '../../../utils/auth';
 
 export default function ThreadsModal({ closeModal, modalTog }) {
   const [addThread, { error }] = useMutation(ADD_THREAD);
-  const [userFormData, setUserFormData] = useState({ title: '', desc: '' });
+  const [userFormData, setUserFormData] = useState({ title: '', description: '' });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -25,11 +25,17 @@ export default function ThreadsModal({ closeModal, modalTog }) {
     }
 
     try {
-      const { data } = await addThread({ variables: { ...userFormData } });
-      console.log(data);
-
-      setUserFormData({ title: '', desc: '' });
-      // window.location.reload(false);
+      console.log({ ...userFormData });
+      addThread({ variables: { ...userFormData } })
+        .then((res) => {
+          if (res.data.addThread) {
+            console.log('Thread added successfully: ');
+            //setUserFormData({ title: '', description: '' });
+            window.location.reload(false);
+          } else {
+            console.error("Failed to add thread: " + res.data);
+          }
+        });
     } catch (error) {
       console.log(error);
     }
@@ -86,9 +92,9 @@ export default function ThreadsModal({ closeModal, modalTog }) {
                         <div className='row'>
                           <div className='col-12 text-center'>
                             <textarea
-                              name='desc'
+                              name='description'
                               id='new-desc'
-                              value={userFormData.desc}
+                              value={userFormData.description}
                               onChange={handleInputChange}
                               placeholder='Description'
                               cols='40'

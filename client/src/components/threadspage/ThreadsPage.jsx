@@ -11,7 +11,7 @@ import UserThreads from './userthreads/UserThreads';
 
 export default function ThreadsPage() {
   const [modalTog, setModalTog] = useState(false);
-  const [reviewModalTog, setreviewModalTog] = useState(false);
+  const [reviewModalTog, setReviewModalTog] = useState(false);
   const [addThread, { error }] = useMutation(ADD_THREAD);
   const { loading, data } = useQuery(USER_THREADS);
   const userData = data?.userThreads || {};
@@ -25,8 +25,8 @@ export default function ThreadsPage() {
     setModalTog((open) => !open);
   };
 
-  const handlereviewModalTog = () => {
-    setreviewModalTog((open) => !open);
+  const handleReviewModalTog = () => {
+    setReviewModalTog((open) => !open);
   };
 
   const closeModal = () => {
@@ -34,7 +34,7 @@ export default function ThreadsPage() {
   };
 
   const closeReviewModal = () => {
-    setreviewModalTog(false);
+    setReviewModalTog(false);
   };
 
   return (
@@ -78,7 +78,7 @@ export default function ThreadsPage() {
                   key={res._id}
                   title={res.title}
                   date={res.timestamp}
-                  handlereviewModalTog={handlereviewModalTog}
+                  handlereviewModalTog={handleReviewModalTog}
                 />
               ))}
 
