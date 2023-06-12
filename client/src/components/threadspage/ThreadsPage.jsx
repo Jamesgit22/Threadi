@@ -11,6 +11,7 @@ import MainThreads from './mainthreads/MainThreads';
 import SingleThreadPage from './mainthreads/SingleThreadPage';
 
 export default function ThreadsPage() {
+
   const [currentView, setCurrentView] = useState('main');
   // const [modalTog, setModalTog] = useState(false);
   // const [reviewModalTog, setreviewModalTog] = useState(false);

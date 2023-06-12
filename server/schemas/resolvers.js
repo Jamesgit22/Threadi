@@ -18,37 +18,14 @@ const resolvers = {
     //   return User.findOne({ _id: userId }).populate('friends');
     // },
 
-    me: async () => {
-      try {
-        const user = await User.findById(userId)
-          .populate('friends', '_id username')
-          .populate('reviews', '_id timestamp type title text rating likes')
-          .populate('userThreads', '_id timestamp title likes')
-          .populate('savedThreads', '_id timestamp title likes')
-          .populate({
-            path: 'likes',
-            populate: {
-              path: 'likedContent',
-              select: '_id timestamp title likes',
-              populate: [
-                { path: 'author', select: '_id username' },
-                { path: 'parent', select: '_id timestamp title likes' },
-              ],
-            },
-          })
-          .populate({
-            path: 'coms',
-            populate: [
-              { path: 'author', select: '_id username' },
-              { path: 'parent', select: '_id timestamp title likes' },
-            ],
-          });
-
-        return user;
-      } catch (error) {
-        console.error(error);
-        throw new Error('Failed to fetch user');
+    me: async (parent, args, context) => {
+      if (!context.user) {
+        return null;
       }
+      const user = await User.findOne({ _id: context.user._id })
+      .populate('userThreads') // Assuming the threads are stored as references in the user model
+      .populate('savedThreads'); // Assuming the reviews are stored as references in the user model
+      return user;
     },
 
     threads: async () => {
@@ -298,9 +275,12 @@ const resolvers = {
     },
 
     // WORKS---------------------------------------------------------------------
-    deleteThread: async (parent, { threadId }) => {
+    deleteThread: async (_, { threadId }) => {
       try {
         const deletedThread = await Thread.findOneAndDelete({ _id: threadId });
+        await Review.deleteMany({ thread: threadId });
+        await Comment.deleteMany({ parent: threadId, parentType: 'Thread' });
+
         return deletedThread;
       } catch (err) {
         console.error(err);
@@ -372,7 +352,7 @@ const resolvers = {
 
     // create a thread
     // WORKS---------------------------------------------------------------------
-    addThread: async (parent, { title }, context) => {
+    addThread: async (parent, { title, description }, context) => {
       console.log(title);
       console.log(context.user);
 
@@ -386,6 +366,7 @@ const resolvers = {
       try {
         const newThread = new Thread({
           title: title,
+          description: description,
           author: context.user._id,
           timestamp: new Date()
         });

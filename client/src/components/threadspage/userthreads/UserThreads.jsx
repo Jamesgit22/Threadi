@@ -1,7 +1,9 @@
 import React from 'react';
 
 
+
 export default function UserThreads(props, { handlereviewModalTog }) {
+
 
     console.log(typeof(props.date));
       const date = props.date.split(' ');
@@ -44,7 +46,9 @@ export default function UserThreads(props, { handlereviewModalTog }) {
             <p className='m-0 pt-1 pb-1'>(edit)</p>
             <button
               className='thread-open-btn'
+
               onClick={props.onViewChange}
+
             >
               Open
             </button>

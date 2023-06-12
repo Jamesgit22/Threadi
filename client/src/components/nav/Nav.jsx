@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import SignupModal from "../signupmodal/Signupmodal";
+import { useHistory } from "react-router-dom";
+import Auth from '../../utils/auth';
 
 // resolve conflicts.
 export default function Nav() {
@@ -14,6 +16,8 @@ export default function Nav() {
   const [isSearch, setIsSearch] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isShown, setIsShown] = useState(true);
+
+  const history = useHistory();
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,6 +45,41 @@ export default function Nav() {
     setShowModal(true);
   };
 
+  const handleSignInClick = () => {
+    window.location.href = `/login`;
+  };
+
+  const handleHomeClick = () => {
+    window.location.href = `/`;
+  };
+
+  const handleBrowseClick = () => {
+    window.location.href = `/browse`;
+  };
+
+  
+
+const handleProfileClick = () => {
+  if (Auth.loggedIn()) {
+    const username = Auth.getProfile().data.username;
+    window.location.href = `/profile/${username}`;
+  } else {
+    // Redirect to the login page or show an error message
+    window.location.href = '/login';
+  }
+};
+
+
+const handleSocialClick = () => {
+  if (Auth.loggedIn()) {
+    const username = Auth.getProfile().data.username;
+    window.location.href = `/threadspage`;
+  } else {
+    // Redirect to the login page or show an error message
+    window.location.href = '/login';
+  }
+};
+
   return (
     <>
       {isMobile ? (
@@ -51,9 +90,11 @@ export default function Nav() {
               className="col-12 d-flex justify-content-between"
             >
               <div id="logo-container" className="col-6 d-flex">
+                <a href="/" onClick={handleHomeClick}>
                 <h2 id="mobile-nav-logo" className="light-txt ">
                   THREADI
                 </h2>
+                </a>
               </div>
               <div className="mobile">
                 <div id="nav-links" className="col-6">
@@ -135,9 +176,11 @@ export default function Nav() {
             <nav id="nav-container" className="col-12">
               <div id="logo-container" className="col-3 d-flex">
                 <div className="col-12 d-flex align-items-center">
+                  <a href="/">
                   <h2 id="nav-logo" className="light-txt">
                     THREADI
                   </h2>
+                  </a>
                   <img
                     id="nav-img-logo"
                     src="/images/threadLogo.png"
@@ -149,9 +192,14 @@ export default function Nav() {
                 <div className="desktopNav col-12 d-flex align-items-center justify-content-center">
                   {isShown ? (
                     <>
-                      <button className="desktop-nav-btns">Social</button>
-                      <button className="desktop-nav-btns">Profile</button>
-                      <button className="desktop-nav-btns">Browse</button>
+                      <button className="desktop-nav-btns"
+                      onClick={handleSocialClick}
+                      >Social</button>
+                      <button className="desktop-nav-btns"
+                      onClick={handleProfileClick}>Profile</button>
+                      <button className="desktop-nav-btns"
+                      onClick={handleBrowseClick}
+                      >Browse</button>
                     </>
                   ) : null}
                   <button className="desktop-nav-btns" onClick={toggleSearch}>
@@ -166,7 +214,10 @@ export default function Nav() {
                 </div>
               </div>
               <div className="desktopSignOn col-3 d-flex justify-content-end">
-                <button className="desktop-signin-btns me-3">Sign In</button>
+                <button className="desktop-signin-btns me-3"
+                onClick={handleSignInClick}
+                >
+                  Sign In</button>
                 <button
                   className="desktop-signup-btns"
                   onClick={handleSignupClick}
