@@ -1,31 +1,37 @@
 import React from 'react'
-import ThreadsModal from '../threadsModal/ThreadsModal';
+// import ThreadsModal from '../threadsModal/ThreadsModal';
 import { useState, useEffect } from 'react';
 import '../ThreadsPage.css';
 import { useMutation } from '@apollo/client';
 import { ADD_THREAD } from '../../../utils/mutations';
 import ThreadAddReviewModal from '../threadsaddreviewmodal/ThreadAddReviewModal';
 import { useQuery } from '@apollo/client';
-import { USER_THREADS } from '../../../utils/queries';
-import UserThreads from '../userthreads/UserThreads';
-import MainThreads from '../mainthreads/MainThreads';
+import { SINGLE_THREAD, THREAD_REVIEWS } from '../../../utils/queries';
+// import UserThreads from '../userthreads/UserThreads';
+// import MainThreads from '../mainthreads/MainThreads';
 
 export default function SingleThreadPage({ threadData, getWriteReview }) {
 
 const [currentView, setCurrentView] = useState('main');
   const [reviewModalTog, setReviewModalTog] = useState(false);
   const [addThread, { error }] = useMutation(ADD_THREAD);
-//   const { loading, data } = useQuery(USER_THREADS);
-//   const userData = data?.userThreads || {};
-//   console.log('log me');
-//   console.log(data);
 
-//   if (loading) return <h2>LOADING...</h2>;
-//   if (error) return `Error! ${error.message}`;
-
-  const handleReviewModalTog = () => {
-    setReviewModalTog((open) => !open);
-  };
+  const { loading, data } = useQuery(THREAD_REVIEWS, {
+    variables: {threadId: threadData._id}
+  });
+  console.log(data);
+  console.log(data?.getReviewsByThread?.reviews)
+  if (loading) {
+    return <p>loading...</p>
+  }
+  const userData = data?.getReviewsByThread?.reviews;
+  // console.log('threadData');
+  // console.log(threadData);
+console.log(userData);
+  const formatTimestamp = (timestamp) => {
+    let date = timestamp.split(' ');
+    return (date[1] + ' ' + date[2] + ' ' + date[3]);
+  }
 
 
   const closeReviewModal = () => {
@@ -60,6 +66,35 @@ const [currentView, setCurrentView] = useState('main');
               </div>
             </div>
             {/* top section end */}
+            <div className='row p-0 justify-content-center'>
+              {userData.map((thread) => (
+                console.log(thread._id),
+                <div key={thread._id} id='feed-container' className='col-11 mb-3'>
+                  <div className='row p-0'>
+                    <div className='col-12 feed-username d-flex justify-content-between align-items-center'>
+                      <p className='social-username m-0 p-1'>{thread.title}</p>
+                      <img className='like-btn' src="/images/thumbs-up-regular.svg" alt="" />
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-12 d-flex pt-2 justify-content-between align-items-center'>
+                      <p>{formatTimestamp(thread.date)}</p>
+                      <p>{thread.rating}</p>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-12 content-container'>
+                      <p className='content-desc'>{thread.text}</p>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12">
+                      <button className='social-btns'>delete</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         {/* 2nd section */}

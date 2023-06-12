@@ -70,6 +70,10 @@ const typeDefs = gql`
     coms: [Com]
   }
 
+  type ThreadReviewResponse {
+    reviews: [Review!]!
+  }
+
   type Query {
     me: User
     threads: [Thread]
@@ -80,7 +84,7 @@ const typeDefs = gql`
     reviewComs(reviewId: ID!): [Com]
     threadComs(threadId: ID!): [Com]
     replyComs(comId: ID!): [Com]
-    getReviewsByThread(threadId: ID!): [Review]
+    getReviewsByThread(threadId: ID!): ThreadReviewResponse!
   }
 
   type Mutation {
