@@ -11,6 +11,7 @@ query Query {
       title
       text
       rating
+      __typename
     }
     userThreads {
       _id
@@ -18,17 +19,21 @@ query Query {
       title
       likes
       description
+      __typename
     }
     savedThreads {
       _id
       timestamp
       title
       author {
-        username
+        _id
+        __typename
       }
       likes
       description
+      __typename
     }
+    __typename
   }
 }`
 
@@ -162,3 +167,4 @@ query Query {
     timestamp
   }
 }`
+

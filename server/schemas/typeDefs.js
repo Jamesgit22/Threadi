@@ -95,7 +95,7 @@ const typeDefs = gql`
     unlikeCom(comId: ID!): Com
     likeReview(reviewId: ID!): Review
     unlikeReview(reviewId: ID!): Review
-    saveThread(userId: ID!, threadTitle: String!): User
+    saveThread(threadId: ID!): User!
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
     addThread(title: String!, description: String!): Thread
     addReview(authorId: ID!, title: String!, text: String!, threadId: ID!): Review!

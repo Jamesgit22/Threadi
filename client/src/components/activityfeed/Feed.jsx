@@ -19,7 +19,8 @@ export default function Feed() {
           key={thread._id}
           date={thread.timestamp}
           title={thread.title}
-          description={thread.description}
+          author={thread.author}
+          id={thread._id}
         />
       ))}
     </div>

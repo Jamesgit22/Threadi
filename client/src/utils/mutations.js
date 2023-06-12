@@ -134,3 +134,9 @@ mutation DeleteReviewCom($reviewId: ID!, $comId: ID!) {
 }`;
 
 
+export const SAVE_THREAD = gql`
+mutation Mutation($threadId: ID!) {
+  saveThread(threadId: $threadId) {
+    _id
+  }
+}`
