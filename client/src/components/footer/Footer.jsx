@@ -2,12 +2,18 @@ import React from "react";
 import "./Footer.css";
 import Auth from "../../utils/auth";
 import FooterNav from "./footerNav/FooterNav";
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../../utils/queries';
 
 function Footer() {
   const loggedIn = Auth.loggedIn();
+  const { loading, data } = useQuery(GET_ME);
+  const userData = data?.me;
 
-  if(!(loggedIn) && !(window.location.pathname === '/login') && !(window.location.pathname === '/')) {
+  if((!(loggedIn) && !(window.location.pathname === '/login') && !(window.location.pathname === '/'))) {
     window.location.replace('/');
+  } else if ((loggedIn) && (userData) && (window.location.pathname === '/login')) {
+    window.location.replace(`/profile/${userData.username}`);
   }
 
   return (

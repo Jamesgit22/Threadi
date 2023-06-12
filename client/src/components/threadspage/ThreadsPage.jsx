@@ -9,17 +9,18 @@ import { USER_THREADS } from '../../utils/queries';
 // import UserThreads from './userthreads/UserThreads';
 import MainThreads from './mainthreads/MainThreads';
 import SingleThreadPage from './mainthreads/SingleThreadPage';
-import WriteReview from './writereview/WriteReview.jsx';
+import WriteReview from './writereview/WriteReview';
 
 export default function ThreadsPage() {
   const [currentView, setCurrentView] = useState('main');
   const [currentThread, setCurrentThread] = useState({});
+  const [chosenMedia, setChosenMedia] = useState({});
   // const [modalTog, setModalTog] = useState(false);
   // const [reviewModalTog, setreviewModalTog] = useState(false);
   // const [addThread, { error }] = useMutation(ADD_THREAD);
   const { loading, data } = useQuery(USER_THREADS);
   const userData = data?.userThreads || {};
-  
+
   const getSingleThread = (threadID) => {
     userData.forEach((thread) => {
       console.log(thread._id, threadID);
@@ -30,7 +31,10 @@ export default function ThreadsPage() {
     
     setCurrentView('single');
   };
-  const getWriteReview = () => setCurrentView('write');
+  const getWriteReview = (media) => {
+    setChosenMedia(media);
+    setCurrentView('write');
+  };
 
   if (loading) return <h2>LOADING...</h2>;
 
@@ -47,7 +51,7 @@ export default function ThreadsPage() {
       );
     }
     if (currentView === 'write') {
-      return <WriteReview userData={userData} />;
+      return <WriteReview media={chosenMedia} />;
     }
   };
 

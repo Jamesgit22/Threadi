@@ -16,6 +16,11 @@ export default function TModalCard(props, { userData, getWriteReview }) {
 
   // }
 
+  const handleTransition = () => {
+    console.log(props);
+    props.getWriteReview(props);
+  }
+
 
   return (
     <>
@@ -34,12 +39,12 @@ export default function TModalCard(props, { userData, getWriteReview }) {
               <div className='col-6'>
                 <div className='row'>
                   <div className='col-12'>
-                    <p className='item-desc'>{props.desc || ''}</p>
+                    <p className='item-desc'>{props.description || ''}</p>
                   </div>
                 </div>
                 <div className='row'>
                   <div className='col-12 text-end'>
-                    <button className='item-btn' onClick={props.getWriteReview}>Add</button>
+                    <button className='item-btn' onClick={handleTransition}>Add</button>
                   </div>
                 </div>
               </div>

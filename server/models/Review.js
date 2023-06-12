@@ -7,11 +7,15 @@ const reviewSchema = new Schema({
   },
   timestamp: {
     type: String,
-    required: true
+    required: true,
+    default: new Date()
   },
   type: {
     type: String,
     required: true
+  },
+  image: {
+    type: String
   },
   title: {
     type: String,

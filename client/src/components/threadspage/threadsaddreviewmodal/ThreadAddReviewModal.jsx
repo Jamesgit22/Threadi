@@ -77,7 +77,7 @@ export default function ThreadAddReviewModal({
           tmdbData.push({
             type: selectedWord,
             image: `https://image.tmdb.org/t/p/w500/${media.poster_path}` || 'No image.',
-            title: media.name,
+            title: media.title,
             releaseDate: media.first_air_date || 'Release date unavailable.',
             id: undefined,
             backdrop: `https://image.tmdb.org/t/p/w500/${media.backdrop_path}` || 'No backdrop.',
@@ -297,6 +297,7 @@ export default function ThreadAddReviewModal({
               {/* Search Results Section */}
               <div className='row justify-content-center'>
                 {searchResults.map((result) => (
+                  console.log(result),
                   <TModalCard
                     key={result.uuid}
                     image={result.image}
