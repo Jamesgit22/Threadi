@@ -298,9 +298,12 @@ const resolvers = {
     },
 
     // WORKS---------------------------------------------------------------------
-    deleteThread: async (parent, { threadId }) => {
+    deleteThread: async (_, { threadId }) => {
       try {
         const deletedThread = await Thread.findOneAndDelete({ _id: threadId });
+        await Review.deleteMany({ thread: threadId });
+        await Comment.deleteMany({ parent: threadId, parentType: 'Thread' });
+
         return deletedThread;
       } catch (err) {
         console.error(err);
@@ -372,7 +375,7 @@ const resolvers = {
 
     // create a thread
     // WORKS---------------------------------------------------------------------
-    addThread: async (parent, { title }, context) => {
+    addThread: async (parent, { title, description }, context) => {
       console.log(title);
       console.log(context.user);
 
@@ -386,6 +389,7 @@ const resolvers = {
       try {
         const newThread = new Thread({
           title: title,
+          description: description,
           author: context.user._id,
           timestamp: new Date()
         });
