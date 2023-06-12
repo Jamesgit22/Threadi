@@ -42,6 +42,12 @@
   align-items: center;
 }
 
+.logo {
+  background-image: url(../../assets/images/github-mark-white.png);
+  background-size: contain;
+  height: 50px;
+  width: 50px;
+}
 .githubLogo {
   height: 70px;
   margin-top: 10px;
