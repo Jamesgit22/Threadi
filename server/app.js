@@ -1,5 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+import { startStandaloneServer } from '@apollo/server/standalone';
 const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -28,6 +29,7 @@ const startApolloServer = async () => {
   
   const { url } = await startStandaloneServer(server, { listen: { PORT }});
   server.applyMiddleware({ app });
+  console.log(`🚀  Server ready at ${url}`);
   //db.once('open', () => {
     // app.listen(PORT, () => {
     //   console.log(`API server running on port ${PORT}!`);
