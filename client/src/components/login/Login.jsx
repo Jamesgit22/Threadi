@@ -34,7 +34,7 @@ export default function Login() {
       });
       console.log(data);
       Auth.login(data.login.token);
-      window.location.href = `/profile/${data.login.username}`;
+      window.location.href = `/profile/${userFormData.username}`;
     } catch (err) {
       console.log(err);
     }
