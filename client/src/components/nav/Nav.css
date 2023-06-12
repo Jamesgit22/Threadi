@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Brice";
+  src: url(../../assets/fonts/Brice-RegularSemiExpanded.woff) format('woff');
+}
+
 nav {
   background-color: #000000;
   width: 100%;

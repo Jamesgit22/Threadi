@@ -7,6 +7,7 @@ import { ADD_REVIEW } from '../../../utils/mutations';
 export default function WriteReview(props) {
   const [addReview, { error }] = useMutation(ADD_REVIEW);
   const [userFormData, setUserFormData] = useState({ review: '', date: '', rating: 0 });
+
   console.log(userFormData);
 
   const date = new Date();
@@ -32,6 +33,7 @@ export default function WriteReview(props) {
           if (res.data.addReview) {
             console.log('Thread added successfully: ');
             //setUserFormData({ title: '', description: '' });\
+            threadReload();
           } else {
             console.error("Failed to add thread: " + res.data);
           }
@@ -41,6 +43,10 @@ export default function WriteReview(props) {
     }
   }
 
+  const threadReload = () => {
+    window.location.reload(false);
+  };
+  
   return (
     <>
       <div id='write-main' className='container-fluid p-0 m-0'>
@@ -59,19 +65,39 @@ export default function WriteReview(props) {
                   <div id='form-container' className='col-8 text-center'>
                     <form>
                       <h2 id='write-h2'>Add Review</h2>
-                      <div className='row justify-content-between'>
+                      <button onClick={threadReload}>
+                        <img
+                          id='write-exit'
+                          src='./images/circle-xmark-regular.svg'
+                          alt='exit button'
+                        />
+                      </button>
+                      <div
+                        id='top-card-border'
+                        className='row justify-content-between'
+                      >
                         <div className='col-12'>
                           <div className='row'>
-                            <div className='col-6'>
+                            <div className='col-6 item-img-container'>
+                              <img
+                                className='item-img'
+                                src={mediaData.image}
+                                alt='movie poster'
+                              />
+                            </div>
+                            <div className='rightSide col-6'>
                               <div className='row'>
                                 <div className='col-12'>
-                                  <h2 id="review-title" className="item-title">{mediaData.title}</h2>
+                                  <h2 id='review-title' className='item-title'>
+                                    {mediaData.title}
+                                  </h2>
                                 </div>
                               </div>
                               <div className='row'>
                                 <div className='col-12'>
                                   <div>Date watched: </div>
                                   <input
+                                    className='dateInput'
                                     type='date'
                                     name='date'
                                     id='watch-date'
@@ -85,6 +111,7 @@ export default function WriteReview(props) {
                                 <div className='col-12'>
                                   <div>Rating: </div>
                                   <select
+                                    className='ratingInput'
                                     name='rating'
                                     id='review-rating'
                                     placeholder='1'
@@ -99,32 +126,25 @@ export default function WriteReview(props) {
                                   </select>
                                 </div>
                               </div>
-                            </div>
-                            <div className='col-6'>
-                              <div className='row'>
-                                <div className='col-6'>
+                              <div className='thought row'>
+                                <div className='col-12'>
                                   <div>Tell us what you thought about it: </div>
                                   <textarea
                                     name='review'
                                     id='review-text'
-                                    cols='30'
+                                    cols='100'
                                     rows='10'
                                     value={userFormData.review}
                                     onChange={handleInputChange}
+                                    placeholder='review'
                                   ></textarea>
-                                </div>
-                                <div className='col-6 item-img-container'>
-                                  <img
-                                    className='item-img'
-                                    src={mediaData.image}
-                                  />
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-12">
-                              <button id='review-submit' onClick={submitReview}>Submit</button>
+                            <div id='submit-container' className="col-12">
+                              <button id='review-submit'type='submit' onClick={submitReview}>Submit</button>
                             </div>
                           </div>
                         </div>

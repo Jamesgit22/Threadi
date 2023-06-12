@@ -39,6 +39,10 @@ export default function ThreadsPage() {
     setCurrentView('write');
   };
 
+  const getMainThread = () => {
+    setCurrentView('main');
+  }
+
   if (loading) return <h2>LOADING...</h2>;
 
   
