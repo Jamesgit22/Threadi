@@ -30,7 +30,9 @@ const resolvers = {
 
     threads: async () => {
       try {
-        const allThreads = await Thread.find(); // Assuming you have a model called "Thread"
+        const allThreads = await Thread.find()
+        .sort({ timestamp: -1 })
+        .populate('author'); // Assuming you have a model called "Thread"
         return allThreads;
       } catch (error) {
         console.error(error);
