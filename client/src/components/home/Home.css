@@ -42,6 +42,15 @@
   margin-top: 25px;
 }
 
+.firstButton:hover {
+  background-color: #c44657;
+}
+
+.firstButton:active {
+  scale: 0.9;
+  background-color: rgb(186, 186, 255);
+}
+
 .movie-poster1 {
   display: flex;
   flex-direction: column;
@@ -142,6 +151,15 @@
   margin-top: 25px;
 }
 
+.secondButton:hover {
+  background-color: #c44657;
+}
+
+.secondButton:active {
+  scale: 0.9;
+  background-color: rgb(186, 186, 255);
+}
+
 .bottom {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -204,6 +222,15 @@
   color: var(--light-col);
   transition: 0.1s;
   margin-top: 25px;
+}
+
+.thirdButton:hover {
+  background-color: #c44657;
+}
+
+.thirdButton:active {
+  scale: 0.9;
+  background-color: rgb(186, 186, 255);
 }
 
 .subtitleThree {
