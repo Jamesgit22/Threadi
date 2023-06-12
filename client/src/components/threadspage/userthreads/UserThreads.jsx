@@ -31,7 +31,7 @@ export default function UserThreads(props, { handlereviewModalTog, getSingleThre
             <div className='col-12 threads-box p-0'>
               <div className='row'>
                 <div className='col-6'>
-                  <h4 className='thread-description'>{}</h4>
+                  <h4 className='thread-description'>{props.description || 'No description'}</h4>
                 </div>
                 <div className='col-6 p-0 m-0'>
                   <img

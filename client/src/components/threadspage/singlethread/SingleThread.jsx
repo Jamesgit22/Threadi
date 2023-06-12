@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import ThreadAddReviewModal from '../threadsaddreviewmodal/ThreadAddReviewModal';
 import { useQuery } from '@apollo/client';
-import { THREAD_REVIEWS } from '../../utils/queries';
+import { THREAD_REVIEWS } from '../../../utils/queries';
 
 export default function SingleThread() {
   const [reviewModalTog, setReviewModalTog] = useState(false);
