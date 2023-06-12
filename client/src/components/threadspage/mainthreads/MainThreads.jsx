@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ThreadsModal from '../threadsModal/ThreadsModal';
 import { useState } from 'react';
 import '../ThreadsPage.css';
@@ -10,34 +10,33 @@ import { USER_THREADS } from '../../../utils/queries';
 import UserThreads from '../userthreads/UserThreads';
 // import SingleThreadPage from './mainthreads/SingleThreadPage';
 
+export default function MainThreads({ onViewChange, userData, data }) {
+  const [modalTog, setModalTog] = useState(false);
 
-export default function MainThreads({ onViewChange }) {
-    const [modalTog, setModalTog] = useState(false);
-    // const [currentView, setCurrentView] = useState('main');
-    // const [reviewModalTog, setreviewModalTog] = useState(false);
-    const [addThread, { error }] = useMutation(ADD_THREAD);
-    const { loading, data } = useQuery(USER_THREADS);
-    const userData = data?.userThreads || {};
-    console.log('log me');
-    console.log(data);
-  
-    if (loading) return <h2>LOADING...</h2>;
-    if (error) return `Error! ${error.message}`;
-  
-    const handleModalTog = () => {
-      setModalTog((open) => !open);
-    };
-  
-  
-    const closeModal = () => {
-      setModalTog(false);
-    };
-  
-  
+  // const [currentView, setCurrentView] = useState('main');
+  // const [reviewModalTog, setreviewModalTog] = useState(false);
+  // const [addThread, { error }] = useMutation(ADD_THREAD);
+
+  // console.log('log me');
+
+  // if (loading) return <h2>LOADING...</h2>;
+  // if (error) return `Error! ${error.message}`;
+
+  const handleModalTog = () => {
+    setModalTog((open) => !open);
+  };
+
+  const closeModal = () => {
+    setModalTog(false);
+  };
+
+  const handlePageChange = (type) => {
+    onViewChange(type);
+  };
 
   return (
     <>
-        <div id='threads-main' className='container-fluid p-0 m-0'>
+      <div id='threads-main' className='container-fluid p-0 m-0'>
         <div id='thread-background'>
           <div id='threads-overlay'>
             {/* top section */}
@@ -76,7 +75,7 @@ export default function MainThreads({ onViewChange }) {
                   key={res._id}
                   title={res.title}
                   date={res.timestamp}
-                  onViewChange={onViewChange}
+                  handlePageChange={handlePageChange}
                 />
               ))}
 
@@ -84,10 +83,14 @@ export default function MainThreads({ onViewChange }) {
             </div>
           </div>
         </div>
-
+{/* 
         {modalTog && (
-          <ThreadsModal closeModal={closeModal} onViewChange={onViewChange} modalTog={modalTog} />
-        )}
+          <ThreadsModal
+            closeModal={closeModal}
+            onViewChange={onViewChange}
+            modalTog={modalTog}
+          />
+        )} */}
         {/* {reviewModalTog && (
           <ThreadAddReviewModal
             closeReviewModal={closeReviewModal}
@@ -96,5 +99,5 @@ export default function MainThreads({ onViewChange }) {
         )} */}
       </div>
     </>
-  )
+  );
 }

@@ -10,18 +10,18 @@ import { USER_THREADS } from '../../../utils/queries';
 import UserThreads from '../userthreads/UserThreads';
 import MainThreads from '../mainthreads/MainThreads';
 
-export default function SingleThreadPage() {
+export default function SingleThreadPage({ userData, onViewChange }) {
 
 const [currentView, setCurrentView] = useState('main');
   const [reviewModalTog, setReviewModalTog] = useState(false);
   const [addThread, { error }] = useMutation(ADD_THREAD);
-  const { loading, data } = useQuery(USER_THREADS);
-  const userData = data?.userThreads || {};
-  console.log('log me');
-  console.log(data);
+//   const { loading, data } = useQuery(USER_THREADS);
+//   const userData = data?.userThreads || {};
+//   console.log('log me');
+//   console.log(data);
 
-  if (loading) return <h2>LOADING...</h2>;
-  if (error) return `Error! ${error.message}`;
+//   if (loading) return <h2>LOADING...</h2>;
+//   if (error) return `Error! ${error.message}`;
 
   const handleReviewModalTog = () => {
     setReviewModalTog((open) => !open);
@@ -67,9 +67,9 @@ const [currentView, setCurrentView] = useState('main');
           <div id='thread-container' className='col-12'>
             <div className='row'>
               {/* thread 1 */}
-              {/* {userData.data.map((res) => {
-                <UserThreads props={res} handlereviewModalTog={handlereviewModalTog} />
-              })} */}
+               {userData.map((res) => {
+                <UserThreads props={res} handlereviewModalTog={handleReviewModalTog} />
+              })} 
               {/* end thread 1 */}
             </div>
           </div>
@@ -82,6 +82,8 @@ const [currentView, setCurrentView] = useState('main');
           <ThreadAddReviewModal
             closeReviewModal={closeReviewModal}
             reviewModalTog={reviewModalTog}
+            userData={userData}
+            onViewChange={onViewChange}
           />
         )}
       </div>

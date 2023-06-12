@@ -9,6 +9,8 @@ import axios from 'axios';
 export default function ThreadAddReviewModal({
   reviewModalTog,
   closeReviewModal,
+  userData,
+  onViewChange
 }) {
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -304,6 +306,8 @@ export default function ThreadAddReviewModal({
                     author={result.author}
                     description={result.description}
                     type={result.type}
+                    userData={userData}
+                    onViewChange={onViewChange}
                   />
                 ))}
               </div>
