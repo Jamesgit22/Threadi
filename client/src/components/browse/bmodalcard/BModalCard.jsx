@@ -12,6 +12,7 @@ export default function BModalCard(props) {
               <div className="col-4 item-img-container">
                 <img className="item-img" src={props.image} alt="" />
               </div>
+
               <div className="col-6">
                 <div className="row">
                   <div className="col-12 p-0">
