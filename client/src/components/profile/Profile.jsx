@@ -6,11 +6,29 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_ME, GET_USER } from '../../utils/queries';
+import { useMutation } from '@apollo/client';
+import { DELETE_SAVED_THREAD } from '../../utils/mutations';
 
 function Profile() {
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me ||{};
   console.log(userData);
+
+  const [deleteSavedThread] = useMutation(DELETE_SAVED_THREAD);
+
+  const handleDelete = async (threadId) => {
+    try {
+      await deleteSavedThread({
+        variables: { threadId },
+      });
+      
+      // Reload the page to reflect the changes
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return (
     <>
       <div id='profile-parent' className='container-fluid'>
@@ -92,6 +110,7 @@ function Profile() {
                               />
                             </div>
                           </div>
+                          <button className='del-sav-btn' onClick={() => handleDelete(thread._id)}>Delete</button>
                         </div>
                       </li>
                     </div>

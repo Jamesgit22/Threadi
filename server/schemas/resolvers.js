@@ -283,6 +283,29 @@ const resolvers = {
       }
     },
 
+    deleteSavedThread: async (parent, { threadId }, context) => {
+      if (!context.user) {
+        throw new Error('You need to be logged in to perform this action.');
+      }
+      if (!threadId) {
+        throw new Error('Invalid thread ID.');
+      }
+      try {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedThreads: threadId } },
+          { new: true }
+        );
+        return updatedUser;
+      } catch (err) {
+        console.error(err);
+        throw new Error('Failed to delete the saved thread.');
+      }
+    },
+
+
+
+
     // WORKS---------------------------------------------------------------------
     deleteThread: async (_, { threadId }) => {
       try {
