@@ -12,10 +12,10 @@ import UserThreads from '../userthreads/UserThreads';
 
 export default function MainThreads({ getSingleThread, userData, data }) {
   const [modalTog, setModalTog] = useState(false);
+  const [addThread, { error }] = useMutation(ADD_THREAD);
 
   // const [currentView, setCurrentView] = useState('main');
   // const [reviewModalTog, setreviewModalTog] = useState(false);
-  // const [addThread, { error }] = useMutation(ADD_THREAD);
 
   // console.log('log me');
 
@@ -82,20 +82,19 @@ export default function MainThreads({ getSingleThread, userData, data }) {
             </div>
           </div>
         </div>
-{/* 
         {modalTog && (
           <ThreadsModal
             closeModal={closeModal}
-            onViewChange={onViewChange}
+            //onViewChange={onViewChange}
             modalTog={modalTog}
           />
-        )} */}
-        {/* {reviewModalTog && (
+        )}
+        {/*reviewModalTog && (
           <ThreadAddReviewModal
             closeReviewModal={closeReviewModal}
             reviewModalTog={reviewModalTog}
           />
-        )} */}
+        )*/}
       </div>
     </>
   );
