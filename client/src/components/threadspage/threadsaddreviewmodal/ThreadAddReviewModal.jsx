@@ -10,7 +10,7 @@ export default function ThreadAddReviewModal({
   reviewModalTog,
   closeReviewModal,
   userData,
-  onViewChange
+  getWriteReview
 }) {
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -307,7 +307,7 @@ export default function ThreadAddReviewModal({
                     description={result.description}
                     type={result.type}
                     userData={userData}
-                    onViewChange={onViewChange}
+                    getWriteReview={getWriteReview}
                   />
                 ))}
               </div>

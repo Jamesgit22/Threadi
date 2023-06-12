@@ -12,32 +12,33 @@ import SingleThreadPage from './mainthreads/SingleThreadPage';
 import WriteReview from './writereview/WriteReview';
 
 export default function ThreadsPage() {
-
   const [currentView, setCurrentView] = useState('main');
   // const [modalTog, setModalTog] = useState(false);
   // const [reviewModalTog, setreviewModalTog] = useState(false);
   // const [addThread, { error }] = useMutation(ADD_THREAD);
   const { loading, data } = useQuery(USER_THREADS);
   const userData = data?.userThreads || {};
- 
+  const getSingleThread = () => setCurrentView('single');
+  const getWriteReview = () => setCurrentView('write');
 
   if (loading) return <h2>LOADING...</h2>;
-  
-  const onViewChange = (page) => setCurrentView(page);
 
+  
   const switchView = () => {
     if (currentView === 'main') {
-      return <MainThreads onViewChange={onViewChange} userData={userData} />;
+      return (
+        <MainThreads getSingleThread={getSingleThread} userData={userData} />
+      );
     }
     if (currentView === 'single') {
-      return <SingleThreadPage onViewChange={onViewChange} userData={userData}/>;
+      return (
+        <SingleThreadPage getWriteReview={getWriteReview} userData={userData} />
+      );
     }
     if (currentView === 'write') {
-      return <WriteReview userData={userData}/>
+      return <WriteReview userData={userData} />;
     }
-}
-
-
+  };
 
   return <>{switchView()}</>;
-};
+}

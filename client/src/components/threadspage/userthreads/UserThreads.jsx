@@ -3,7 +3,7 @@ import React from 'react';
 
 
 
-export default function UserThreads(props, { handlereviewModalTog, onViewChange }) {
+export default function UserThreads(props, { handlereviewModalTog, getSingleThread }) {
 
 
     console.log(typeof(props.date));
@@ -48,7 +48,7 @@ export default function UserThreads(props, { handlereviewModalTog, onViewChange 
             <button
               className='thread-open-btn'
 
-              onClick={onViewChange}
+              onClick={props.getSingleThread}
 
             >
               Open

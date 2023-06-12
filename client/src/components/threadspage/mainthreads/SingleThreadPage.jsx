@@ -10,7 +10,7 @@ import { USER_THREADS } from '../../../utils/queries';
 import UserThreads from '../userthreads/UserThreads';
 import MainThreads from '../mainthreads/MainThreads';
 
-export default function SingleThreadPage({ userData, onViewChange }) {
+export default function SingleThreadPage({ userData, getWriteReview }) {
 
 const [currentView, setCurrentView] = useState('main');
   const [reviewModalTog, setReviewModalTog] = useState(false);
@@ -83,7 +83,7 @@ const [currentView, setCurrentView] = useState('main');
             closeReviewModal={closeReviewModal}
             reviewModalTog={reviewModalTog}
             userData={userData}
-            onViewChange={onViewChange}
+            getWriteReview={getWriteReview}
           />
         )}
       </div>
