@@ -1,7 +1,16 @@
 import React from 'react';
 import './WriteReview.css';
+import { useState } from 'react';
 
-export default function WriteReview() {
+export default function WriteReview(media) {
+  const mediaData = media.media;
+  const [userFormData, setUserFormData] = useState({ title: '', review: '', date: '', rating: 0, image: '', type: mediaData.type});
+  console.log(mediaData);
+  console.log(userFormData);
+
+  const date = new Date();
+  const fDate = date.toISOString().split('T')[0];
+
   return (
     <>
       <div id='write-main' className='container-fluid p-0 m-0'>
@@ -19,32 +28,30 @@ export default function WriteReview() {
                 <div className='row justify-content-center'>
                   <div id='form-container' className='col-8 text-center'>
                     <form>
-                      <h2 id='write-h2'>Review</h2>
+                      <h2 id='write-h2'>Add Review</h2>
                       <div className='row justify-content-between'>
                         <div className='col-12'>
                           <div className='row'>
                             <div className='col-6'>
                               <div className='row'>
                                 <div className='col-12'>
-                                  <input
-                                    type='text'
-                                    name='review-title'
-                                    placeholder='Title'
-                                  />
+                                  <h2 id="review-title" className="item-title">{mediaData.title}</h2>
                                 </div>
                               </div>
                               <div className='row'>
                                 <div className='col-12'>
+                                  <div>Date watched: </div>
                                   <input
                                     type='date'
                                     name='watch-date'
                                     id='watch-date'
-                                    placeholder={`${Date.now}`}
+                                    defaultValue={fDate}
                                   />
                                 </div>
                               </div>
                               <div className='row'>
                                 <div className='col-12'>
+                                  <div>Rating: </div>
                                   <select
                                     name='rating'
                                     id='review-rating'
@@ -61,13 +68,20 @@ export default function WriteReview() {
                             </div>
                             <div className='col-6'>
                               <div className='row'>
-                                <div className='col-12'>
+                                <div className='col-6'>
+                                  <div>Tell us what you thought about it: </div>
                                   <textarea
                                     name='review-text'
                                     id='review-text'
                                     cols='30'
                                     rows='10'
                                   ></textarea>
+                                </div>
+                                <div className='col-6 item-img-container'>
+                                  <img
+                                    className='item-img'
+                                    src={mediaData.image}
+                                  />
                                 </div>
                               </div>
                             </div>
