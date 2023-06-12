@@ -36,6 +36,10 @@ export default function ThreadsPage() {
     setCurrentView('write');
   };
 
+  const getMainThread = () => {
+    setCurrentView('main');
+  }
+
   if (loading) return <h2>LOADING...</h2>;
 
   
@@ -51,7 +55,7 @@ export default function ThreadsPage() {
       );
     }
     if (currentView === 'write') {
-      return <WriteReview media={chosenMedia} />;
+      return <WriteReview media={chosenMedia} getMainThread={getMainThread}/>;
     }
   };
 
