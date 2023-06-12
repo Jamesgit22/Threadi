@@ -44,7 +44,7 @@ export default function UserThreads(props, { handlereviewModalTog}) {
             <p className='m-0 pt-1 pb-1'>(edit)</p>
             <button
               className='thread-open-btn'
-              onClick={() => handlereviewModalTog(true)}
+              onClick={() => handlereviewModalTog(props.key)}
             >
               Open
             </button>

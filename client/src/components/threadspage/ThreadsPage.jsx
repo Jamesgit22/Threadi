@@ -57,7 +57,7 @@ export default function ThreadsPage() {
                   <div className='col-8 text-center'>
                     <button
                       id='new-thread-btn'
-                      onClick={() => handleModalTog(true)}
+                      onClick={() => handleModalTog()}
                     >
                       New Thread
                     </button>

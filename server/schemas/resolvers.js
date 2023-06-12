@@ -440,25 +440,27 @@ const resolvers = {
     },
 
     // WORKS---------------------------------------------------------------------
-    addReview: async (_, { authorId, title, text, threadId }, { models }) => {
+    addReview: async (_, { title, text, threadId, date, rating }, context) => {
       try {
-        const author = await User.findById(authorId);
-        if (!author) {
-          throw new Error('Author not found');
-        }
+      //   const author = await User.findById({authorId: context.user._id});
+      //   if (!author) {
+      //     throw new Error('Author not found');
+      //   }
 
         const thread = await Thread.findById(threadId);
         if (!thread) {
           throw new Error('Thread not found');
         }
 
+
+
         const review = new Review({
-          author,
+          author: context.user._id,
           title,
           text,
           thread,
-          date: new Date(), // Example: Set the current date as the value for the 'date' field
-          rating: 0, // Example: Set a rating value
+          date, // Example: Set the current date as the value for the 'date' field
+          rating: rating ? rating : 0, // Example: Set a rating value
           type: 'Media', // Example: Set a type value
           timestamp: Date.now(), // Example: Set the current timestamp as the value for the 'timestamp' field
         });

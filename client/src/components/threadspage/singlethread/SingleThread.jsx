@@ -1,9 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
+import ThreadAddReviewModal from '../threadsaddreviewmodal/ThreadAddReviewModal';
 
 export default function SingleThread() {
+  const [reviewModalTog, setReviewModalTog] = useState(false);
+
+
+  const closeReviewModal = () => {
+    setReviewModalTog(false);
+  };
+
+
+  const handleReviewModalTog = () => {
+    setReviewModalTog((open) => !open);
+  };
   return (
     <>
-        <div id='threads-main' className='container-fluid p-0 m-0'>
+      <div id='threads-main' className='container-fluid p-0 m-0'>
         <div id='thread-background'>
           <div id='threads-overlay'>
             {/* top section */}
@@ -21,9 +34,9 @@ export default function SingleThread() {
                   <div className='col-8 text-center'>
                     <button
                       id='new-thread-btn'
-                    //   onClick={() => handleModalTog(true)}
+                      onClick={() => setReviewModalTog(true)}
                     >
-                      New Thread
+                      New Review
                     </button>
                   </div>
                 </div>
@@ -47,14 +60,14 @@ export default function SingleThread() {
 
         {/* {modalTog && (
           <ThreadsModal closeModal={closeModal} modalTog={modalTog} />
-        )}
+        )} */}
         {reviewModalTog && (
           <ThreadAddReviewModal
             closeReviewModal={closeReviewModal}
             reviewModalTog={reviewModalTog}
           />
-        )} */}
+        )}
       </div>
     </>
-  )
+  );
 }
