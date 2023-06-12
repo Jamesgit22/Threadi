@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 // import ThreadsModal from '../threadsModal/ThreadsModal';
 import { useState, useEffect } from 'react';
 import '../ThreadsPage.css';
@@ -7,39 +7,38 @@ import { ADD_THREAD } from '../../../utils/mutations';
 import ThreadAddReviewModal from '../threadsaddreviewmodal/ThreadAddReviewModal';
 import { useQuery } from '@apollo/client';
 import { SINGLE_THREAD, THREAD_REVIEWS } from '../../../utils/queries';
+import './SingleThreadPage.css';
 // import UserThreads from '../userthreads/UserThreads';
 // import MainThreads from '../mainthreads/MainThreads';
 
 export default function SingleThreadPage({ threadData, getWriteReview }) {
-
-const [currentView, setCurrentView] = useState('main');
+  const [currentView, setCurrentView] = useState('main');
   const [reviewModalTog, setReviewModalTog] = useState(false);
   const [addThread, { error }] = useMutation(ADD_THREAD);
 
   const { loading, data } = useQuery(THREAD_REVIEWS, {
-    variables: {threadId: threadData._id}
+    variables: { threadId: threadData._id },
   });
   console.log(data);
-  console.log(data?.getReviewsByThread?.reviews)
+  console.log(data?.getReviewsByThread?.reviews);
   if (loading) {
-    return <p>loading...</p>
+    return <p>loading...</p>;
   }
   const userData = data?.getReviewsByThread?.reviews;
   // console.log('threadData');
   // console.log(threadData);
-console.log(userData);
+  console.log(userData);
   const formatTimestamp = (timestamp) => {
     let date = timestamp.split(' ');
-    return (date[1] + ' ' + date[2] + ' ' + date[3]);
-  }
-
+    return date[1] + ' ' + date[2] + ' ' + date[3];
+  };
 
   const closeReviewModal = () => {
     setReviewModalTog(false);
   };
   return (
     <>
-        <div id='threads-main' className='container-fluid p-0 m-0'>
+      <div id='threads-main' className='container-fluid p-0 m-0'>
         <div id='thread-background'>
           <div id='threads-overlay'>
             {/* top section */}
@@ -67,33 +66,66 @@ console.log(userData);
             </div>
             {/* top section end */}
             <div className='row p-0 justify-content-center'>
-              {userData.map((thread) => (
-                console.log(thread._id),
-                <div key={thread._id} id='feed-container' className='col-11 mb-3'>
-                  <div className='row p-0'>
-                    <div className='col-12 feed-username d-flex justify-content-between align-items-center'>
-                      <p className='social-username m-0 p-1'>{thread.title}</p>
-                      <img className='like-btn' src="/images/thumbs-up-regular.svg" alt="" />
+              {userData.map(
+                (thread) => (
+                  console.log(thread._id),
+                  (
+                    <div
+                      key={thread._id}
+                      id='feed-container'
+                      className='col-8 mb-3'
+                    >
+                      <div className='row p-0'>
+                        <div className='col-12 feed-username d-flex justify-content-between align-items-center'>
+                          <p className='social-username m-0 p-1'>
+                            {thread.title}
+                          </p>
+                          <img
+                            className='like-btn'
+                            src='/images/thumbs-up-regular.svg'
+                            alt=''
+                          />
+                        </div>
+                      </div>
+                      <div className='col-12'>
+                        <div className='row'>
+                          <div className='col-4'>
+                            <img id='imageLeft' src={thread.image} alt='' />
+                          </div>
+                          <div
+                            id='review-text-container'
+                            className='col-8 pt-2 justify-content-between align-items-center'
+                          >
+                            <div className='row'>
+                              <div className='col-12'>
+                                <p>{formatTimestamp(thread.date)}</p>
+                              </div>
+                            </div>
+                            <div className='row'>
+                              <div className='col-12'>
+                                <p>{'Rating: ' + thread.rating}</p>
+                              </div>
+                            </div>
+                            <div className='row'>
+                              <div className='col-12'>
+                                <p className='content-desc'>{thread.text}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className='row'>
+                          <div className='col-6 content-container'></div>
+                        </div>
+                        <div className='row'>
+                          <div className='col-6'>
+                            <button className='social-btns'>delete</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col-12 d-flex pt-2 justify-content-between align-items-center'>
-                      <p>{formatTimestamp(thread.date)}</p>
-                      <p>{thread.rating}</p>
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col-12 content-container'>
-                      <p className='content-desc'>{thread.text}</p>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12">
-                      <button className='social-btns'>delete</button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  )
+                )
+              )}
             </div>
           </div>
         </div>
@@ -102,7 +134,7 @@ console.log(userData);
           <div id='thread-container' className='col-12'>
             <div className='row'>
               {/* thread 1 */}
-               {/* {threadData.map((res) => {
+              {/* {threadData.map((res) => {
                 <UserThreads props={res} handlereviewModalTog={handleReviewModalTog} />
               })}  */}
               {/* end thread 1 */}
@@ -123,9 +155,8 @@ console.log(userData);
         )}
       </div>
     </>
-  )
+  );
 }
-
 
 // {reviewModalTog && (
 //     <ThreadAddReviewModal
