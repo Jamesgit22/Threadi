@@ -1,14 +1,35 @@
 import React from 'react';
 import './Activityitem.css'
+import { useMutation } from '@apollo/client';
+import { SAVE_THREAD } from '../../utils/mutations';
 
 export default function ActivityItem(props, { handleReviewModalTog }) {
-    // console.log(typeof(props.date));
+   
       const date = props.date.split(' ');
       const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
-      console.log(props);
+      
       const {  title, author } = props;
       const username = author ? author.username : '';
-      console.log(username);
+
+      console.log(props.id);
+
+      const [saveThread] = useMutation(SAVE_THREAD);
+
+      const handleSaveThread = async () => {
+        try {
+          const threadId = props.id; // Declare the threadId variable here
+          const { data } = await saveThread({
+            variables: { threadId },
+          });
+    
+          // Additional logic if needed
+    
+          console.log(data); // Optional: Log the response data
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
 
 
   return (
@@ -53,7 +74,8 @@ export default function ActivityItem(props, { handleReviewModalTog }) {
             </button>
             </div>
             <div className="col-6 text-end">
-            <button className='thread-save-btn'>Save</button>
+            <button className='thread-save-btn'
+            onClick={handleSaveThread}>Save</button>
             </div>
           </div>
         </div>

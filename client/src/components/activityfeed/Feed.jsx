@@ -11,8 +11,6 @@ export default function Feed() {
 
   const threads = data?.threads || [];
 
-  console.log(threads);
-
   return (
     <div>
       <h2>Activity Feed</h2>
@@ -22,6 +20,7 @@ export default function Feed() {
           date={thread.timestamp}
           title={thread.title}
           author={thread.author}
+          id={thread._id}
         />
       ))}
     </div>
