@@ -52,7 +52,8 @@ const Home = () => {
             className="firstHeader"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.7 }}
           >
             <span className="red-text">Rate</span> all the entertainment you
             watch
@@ -62,7 +63,8 @@ const Home = () => {
             onClick={openModal}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.7 }}
           >
             Start Rating Now
           </motion.button>
@@ -84,23 +86,46 @@ const Home = () => {
           />
         )}
         <div className="subtitleTwo">
-          <h1 className="secondHeader">
+        <motion.h1
+            className="secondHeader"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.7 }}
+          >
             <span className="red-text">Share </span>what you watch with your
             friends
-          </h1>
-          <button className="desktop-signup-btns" onClick={openModal}>
+          </motion.h1><motion.button
+            className="desktop-signup-btns"
+            onClick={openModal}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.7 }}
+          >
             Start Sharing Now
-          </button>
+          </motion.button>
         </div>
       </div>
       <div className="bottom">
-        <div className="subtitleThree">
-          <h1 className="thirdHeader">
+        <div className="subtitleThree"><motion.h1
+            className="thirdHeader"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.7 }}
+          >
             <span className="red-text">See </span>what your friends rated
-          </h1>
-          <button className="desktop-signup-btns" onClick={openModal}>
+          </motion.h1><motion.button
+            className="desktop-signup-btns"
+            onClick={openModal}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.7 }}
+          >
             Sign Up Now
-          </button>
+          </motion.button>
         </div>
         {moviePosters.length > 2 && (
           <img
