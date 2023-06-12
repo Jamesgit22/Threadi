@@ -53,6 +53,7 @@ query Query {
     timestamp
     title
     likes
+    description
   }
 }`
 

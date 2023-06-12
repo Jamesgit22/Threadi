@@ -6,7 +6,7 @@ import UserThreads from '../userthreads/UserThreads';
 
 export default function MainThreads({ getSingleThread, userData, data }) {
   const [modalTog, setModalTog] = useState(false);
-
+  console.log(userData);
   const handleModalTog = () => {
     setModalTog((open) => !open);
   };
@@ -57,6 +57,7 @@ export default function MainThreads({ getSingleThread, userData, data }) {
                   id={res._id}
                   title={res.title}
                   date={res.timestamp}
+                  description={res.description}
                   getSingleThread={getSingleThread}
                 />
               ))}
