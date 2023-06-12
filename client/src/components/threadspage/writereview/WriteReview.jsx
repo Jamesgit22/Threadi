@@ -29,13 +29,14 @@ export default function WriteReview(media) {
                   <div id='form-container' className='col-8 text-center'>
                     <form>
                       <h2 id='write-h2'>Add Review</h2>
-                      <div className='row justify-content-between'>
+                      <div id='top-card-border' className='row justify-content-between'>
                         <div className='col-12'>
                           <div className='row'>
                           <div className='col-6 item-img-container'>
                                   <img
                                     className='item-img'
                                     src={mediaData.image}
+                                    alt='movie poster'
                                   />
                                 </div>
                             <div className='rightSide col-6'>
@@ -74,21 +75,22 @@ export default function WriteReview(media) {
                                 </div>
                               </div>
                               <div className='thought row'>
-                                <div className='col-6'>
+                                <div className='col-12'>
                                   <div>Tell us what you thought about it: </div>
                                   <textarea
                                     className='reviewInput'
                                     name='review-text'
                                     id='review-text'
-                                    cols='30'
+                                    cols='100'
                                     rows='10'
+                                    placeholder='review'
                                   ></textarea>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-12">
+                            <div id='submit-container' className="col-12">
                                 <button id='review-submit' type="submit">Submit</button>
                             </div>
                           </div>

@@ -4,26 +4,61 @@
 
 #form-container {
     margin-top: 10em;
-    border: 1px solid gray;
+    border: 1px solid rgb(61, 61, 61);
     color: black;
     border-radius: 8px;
     height: fit-content;
+    background-color: rgb(33, 33, 33);
 }
 
 #review-rating {
-    color: black;
+    color: white;
+    background-color: black;
+    border-color: rgb(61, 61, 61);
+
+}
+
+#review-rating:focus {
+    outline-color: var(--primary-col);
 }
 
 #review-rating option {
-    color: black;
+    color: white;
+    background-color: black;
+    border-color: rgb(61, 61, 61);
+
+}
+
+#write-h2 {
+   margin: 4px 0!important;
+   padding: 4px 0;
+}
+
+#top-card-border {
+    border-top: 1px solid rgb(61, 61, 61);
+
 }
 
 #watch-date {
-    color: black;
+    color: white;
+    background-color: black;
+    border-color: rgb(61, 61, 61);
+
+}
+
+#watch-date:focus {
+    outline-color: var(--primary-col);
 }
 
 #review-text {
-    color: black;
+    color: white;
+    background-color: black;
+    border-color: rgb(61, 61, 61);
+    width: 100%;
+}
+
+#review-text:focus {
+    outline-color: var(--primary-col);
 }
 
 #review-title {
@@ -60,7 +95,6 @@
     align-items: center;
 }
 
-/* Target the input element within the .date-input container */
 .dateInput,
 .ratingInput,
 .reviewInput {
@@ -71,7 +105,17 @@
     color: #000000;
     width: 100%;
 }
-  
-.reviewInput {
-    width: 100%;
+
+#submit-container {
+    border-top: 1px solid rgb(61, 61, 61);
+
 }
+
+#review-submit {
+    background-color: var(--primary-col);
+    border-radius: 8px;
+    padding: 4px 10px;
+    margin: 10px;
+    width: 40%;
+}
+  
