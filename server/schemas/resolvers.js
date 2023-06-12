@@ -27,7 +27,15 @@ const resolvers = {
       .populate('savedThreads'); // Assuming the reviews are stored as references in the user model
       return user;
     },
-
+    getReviewsByThread: async (_, { threadId }) => {
+      try {
+        const reviews = await Review.find({ thread: threadId });
+        return reviews;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to retrieve reviews');
+      }
+    },
     threads: async () => {
       try {
         const allThreads = await Thread.find()

@@ -26,6 +26,11 @@ export default function Social() {
     }
   };
 
+  const formatTimestamp = (timestamp) => {
+    let date = timestamp.split(' ');
+    return (date[1] + ' ' + date [2] + ' ' + date[3]);
+  }
+
   return (
     <>
       <div id='social-main' className='container-fluid d-flex p-0 m-0 justify-content-center'>
@@ -44,7 +49,7 @@ export default function Social() {
                 <div className='row'>
                   <div className='col-12 text-center'>
                     <p id='social-msg'>
-                      Explore and stay up to date<br></br>with your <span id='social-friends'>FRIENDS</span> the content<br></br> they love
+                      Explore and stay up to date<br></br>with your <span id='social-friends'>FRIENDS</span> and the content<br></br> they love
                     </p>
                   </div>
                 </div>
@@ -58,14 +63,14 @@ export default function Social() {
                 <div key={thread._id} id='feed-container' className='col-11 mb-3'>
                   <div className='row p-0'>
                     <div className='col-12 feed-username d-flex justify-content-between align-items-center'>
-                      <p className='social-username m-0 p-1'>{thread.author.username}</p>
+                      <p className='social-username m-0 p-1'>A {thread.__typename} by {thread.author.username}</p>
                       <img className='like-btn' src="/images/thumbs-up-regular.svg" alt="" />
                     </div>
                   </div>
                   <div className='row'>
                     <div className='col-12 d-flex pt-2 justify-content-between align-items-center'>
                       <p>{thread.title}</p>
-                      <p>{thread.timestamp}</p>
+                      <p>{formatTimestamp(thread.timestamp)}</p>
                     </div>
                   </div>
                   <div className='row'>
