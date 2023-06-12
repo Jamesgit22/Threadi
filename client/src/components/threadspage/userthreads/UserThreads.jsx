@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import React from 'react';
 
 
 
-export default function UserThreads(props, { handlereviewModalTog }) {
+export default function UserThreads(props, { handlereviewModalTog, onViewChange }) {
 
 
     console.log(typeof(props.date));
@@ -47,7 +48,7 @@ export default function UserThreads(props, { handlereviewModalTog }) {
             <button
               className='thread-open-btn'
 
-              onClick={props.onViewChange}
+              onClick={onViewChange}
 
             >
               Open

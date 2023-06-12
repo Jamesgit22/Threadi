@@ -2,9 +2,21 @@ import React from 'react';
 import './TModalCard.css';
 import { ADD_REVIEW } from '../../../utils/mutations';
 import { useMutation } from '@apollo/client';
+import Auth from '../../../utils/auth'
 
-export default function TModalCard(props) {
+export default function TModalCard(props, { userData, onViewChange }) {
   const [addReview, { error }] = useMutation(ADD_REVIEW)
+
+
+  // const addReviewHandler = async () => {
+
+  //   const { data } = await addReview({
+  //     variables: {}
+  //   })
+
+  // }
+
+
   return (
     <>
     <div className='col-11 item-container'>
@@ -27,7 +39,7 @@ export default function TModalCard(props) {
                 </div>
                 <div className='row'>
                   <div className='col-12 text-end'>
-                    <button className='item-btn' onClick>Add</button>
+                    <button className='item-btn' onClick={onViewChange('write')}>Add</button>
                   </div>
                 </div>
               </div>
