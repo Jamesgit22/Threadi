@@ -30,8 +30,6 @@ export default function MainThreads({ getSingleThread, userData, data }) {
     setModalTog(false);
   };
 
- 
-
   return (
     <>
       <div id='threads-main' className='container-fluid p-0 m-0'>
@@ -69,8 +67,11 @@ export default function MainThreads({ getSingleThread, userData, data }) {
             <div className='row'>
               {/* thread 1 */}
               {userData.map((res) => (
+                console.log(res._id),
+
                 <UserThreads
-                  key={res._id}
+                  key={res._id.toString()}
+                  id={res._id}
                   title={res.title}
                   date={res.timestamp}
                   getSingleThread={getSingleThread}

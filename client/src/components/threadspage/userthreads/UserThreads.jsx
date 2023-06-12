@@ -10,7 +10,9 @@ export default function UserThreads(props, { handlereviewModalTog, getSingleThre
       const date = props.date.split(' ');
       const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
     
-
+    const sendData = () => {
+      props.getSingleThread(props.id);
+    }
 
   return (
     <>
@@ -28,7 +30,7 @@ export default function UserThreads(props, { handlereviewModalTog, getSingleThre
             <div className='col-12 threads-box p-0'>
               <div className='row'>
                 <div className='col-4'>
-                  <h4 className='item-titles' key={props.key}></h4>
+                  <h4 className='item-titles'></h4>
                 </div>
                 <div className='col-8 p-0 m-0'>
                   <img
@@ -48,7 +50,7 @@ export default function UserThreads(props, { handlereviewModalTog, getSingleThre
             <button
               className='thread-open-btn'
 
-              onClick={props.getSingleThread}
+              onClick={sendData}
 
             >
               Open
