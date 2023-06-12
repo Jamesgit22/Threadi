@@ -9,7 +9,7 @@ import { USER_THREADS } from '../../utils/queries';
 // import UserThreads from './userthreads/UserThreads';
 import MainThreads from './mainthreads/MainThreads';
 import SingleThreadPage from './mainthreads/SingleThreadPage';
-import WriteReview from './writereview/WriteReview';
+import WriteReview from './writereview/WriteReview.jsx';
 
 export default function ThreadsPage() {
   const [currentView, setCurrentView] = useState('main');
