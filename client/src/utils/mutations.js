@@ -82,19 +82,9 @@ mutation DeleteThreadCom($threadId: ID!, $comId: ID!) {
 }`;
 
 export const ADD_REVIEW = gql`
-mutation Mutation($authorId: ID!, $title: String!, $text: String!, $threadId: ID!) {
-  addReview(authorId: $authorId, title: $title, text: $text, threadId: $threadId) {
+mutation Mutation($title: String!, $text: String!, $threadId: ID!, $date: String!, $image: String, $rating: Int) {
+  addReview(title: $title, text: $text, threadId: $threadId, date: $date, image: $image, rating: $rating) {
     _id
-    author {
-      _id
-    }
-    timestamp
-    type
-    title
-    text
-    rating
-    likes
-    date
   }
 }`;
 

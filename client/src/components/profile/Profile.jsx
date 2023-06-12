@@ -10,7 +10,7 @@ import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
 
 function Profile() {
-  const { loading, data } = useQuery(GET_ME);
+  const {  data } = useQuery(GET_ME);
   const userData = data?.me ||{};
   console.log(userData);
 

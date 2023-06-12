@@ -7,7 +7,7 @@ import { GET_ME } from '../../utils/queries';
 
 function Footer() {
   const loggedIn = Auth.loggedIn();
-  const { loading, data } = useQuery(GET_ME);
+  const { data } = useQuery(GET_ME);
   const userData = data?.me;
 
   if((!(loggedIn) && !(window.location.pathname === '/login') && !(window.location.pathname === '/'))) {
