@@ -1,0 +1,22 @@
+#write-main {
+    height: 100vh;
+}
+
+#form-container {
+    margin-top: 10em;
+    border: 1px solid gray;
+    color: black;
+    border-radius: 8px;
+}
+
+#review-rating {
+    color: black;
+}
+
+#watch-date {
+    color: black;
+}
+
+#review-text {
+    color: black;
+}
