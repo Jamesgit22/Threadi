@@ -9,9 +9,10 @@ function HeaderNav() {
 
     return (
         <>
-            <a className="desktop-nav-btns" href="">Social</a>
+            <a className="desktop-nav-btns" href="/social">Social</a>
             <a className="desktop-nav-btns" href={`/profile/${userData.username}`}>Profile</a>
             <a className="desktop-nav-btns" href="/browse">Browse</a>
+            <a className="desktop-nav-btns" href="/threadspage">My Threads</a>
         </>
     );
 };
