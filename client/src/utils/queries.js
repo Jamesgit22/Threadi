@@ -4,27 +4,30 @@ export const GET_ME = gql`
 query Query {
   me {
     _id
-    email
     username
-    userThreads
+    reviews {
+      _id
+      timestamp
+      title
+      text
+      rating
+    }
+    userThreads {
+      _id
+      timestamp
+      title
+      likes
+      description
+    }
     savedThreads {
       _id
+      timestamp
+      title
       author {
         username
       }
+      likes
       description
-      likes
-      timestamp
-      title
-    }
-    reviews {
-      _id
-      date
-      likes
-      rating
-      text
-      timestamp
-      title
     }
   }
 }`
