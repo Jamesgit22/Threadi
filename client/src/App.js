@@ -13,6 +13,7 @@ import Social from './components/social/Social';
 import ThreadsPage from './components/threadspage/ThreadsPage';
 import { setContext } from '@apollo/client/link/context';
 import SingleThread from './components/threadspage/singlethread/SingleThread';
+import Feed from './components/activityfeed/Feed'
 
 
 // Construct our main GraphQL API endpoint
@@ -67,6 +68,9 @@ function App() {
               </Route>
               <Route exact path='/social'>
                 <Social/>
+              </Route>
+              <Route path='/feed'>
+                <Feed/>
               </Route>
             </Switch>
           </div>

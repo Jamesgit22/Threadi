@@ -148,3 +148,17 @@ query ThreadComs($threadId: ID!) {
   }
 }`
 
+export const GET_THREADS = gql`
+query Query {
+  threads {
+    _id
+    author {
+      _id
+      username
+    }
+    title
+    likes
+    description
+    timestamp
+  }
+}`

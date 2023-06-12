@@ -15,6 +15,8 @@ export default function Nav() {
   const [isMobile, setIsMobile] = useState(false);
   const loggedIn = Auth.loggedIn();
 
+  const history = useHistory();
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 821) {
@@ -33,6 +35,41 @@ export default function Nav() {
   };
 
 
+  const handleSignInClick = () => {
+    window.location.href = `/login`;
+  };
+
+  const handleHomeClick = () => {
+    window.location.href = `/`;
+  };
+
+  const handleBrowseClick = () => {
+    window.location.href = `/browse`;
+  };
+
+  
+
+const handleProfileClick = () => {
+  if (Auth.loggedIn()) {
+    const username = Auth.getProfile().data.username;
+    window.location.href = `/profile/${username}`;
+  } else {
+    // Redirect to the login page or show an error message
+    window.location.href = '/login';
+  }
+};
+
+
+const handleSocialClick = () => {
+  if (Auth.loggedIn()) {
+    const username = Auth.getProfile().data.username;
+    window.location.href = `/threadspage`;
+  } else {
+    // Redirect to the login page or show an error message
+    window.location.href = '/login';
+  }
+};
+
   return (
     <>
       {isMobile ? (
@@ -43,9 +80,11 @@ export default function Nav() {
               className="col-12 d-flex justify-content-between"
             >
               <div id="logo-container" className="col-6 d-flex">
+                <a href="/" onClick={handleHomeClick}>
                 <h2 id="mobile-nav-logo" className="light-txt ">
                   THREADI
                 </h2>
+                </a>
               </div>
               <div className="mobile">
                 <div id="nav-links" className="col-6">
@@ -127,9 +166,11 @@ export default function Nav() {
             <nav id="nav-container" className="col-12">
               <div id="logo-container" className="col-3 d-flex">
                 <div className="col-12 d-flex align-items-center">
+                  <a href="/">
                   <h2 id="nav-logo" className="light-txt">
                     THREADI
                   </h2>
+                  </a>
                   <img
                     id="nav-img-logo"
                     src="/images/threadLogo.png"
