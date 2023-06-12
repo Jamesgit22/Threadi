@@ -140,3 +140,10 @@ mutation Mutation($threadId: ID!) {
     _id
   }
 }`
+
+export const DELETE_SAVED_THREAD = gql`
+mutation DeleteSavedThread($threadId: ID!) {
+  deleteSavedThread(threadId: $threadId) {
+    _id
+  }
+}`

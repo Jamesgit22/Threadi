@@ -87,6 +87,14 @@
 	font-size: 15px;
 }
 
+.del-sav-btn {
+	background-color: var(--primary-col);
+    border-radius: 8px;
+    padding: 5px 10px;
+	margin-bottom: 10px;
+    width: 20%;
+}
+
 @media screen and (min-width: 850px) {
 	#profile-container {
 		width: 80%!important;

@@ -104,6 +104,7 @@ const typeDefs = gql`
     deleteReviewCom(reviewId: ID!, comId: ID!): Review
     updateReview(reviewId: ID!, title: String!, text: String!): Review
     updateThread(threadId: ID!, title: String!): Thread
+    deleteSavedThread(threadId: ID!): User!
   }
 `;
 
