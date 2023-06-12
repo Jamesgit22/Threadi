@@ -80,6 +80,7 @@ const typeDefs = gql`
     reviewComs(reviewId: ID!): [Com]
     threadComs(threadId: ID!): [Com]
     replyComs(comId: ID!): [Com]
+    getReviewsByThread(threadId: ID!): [Review]
   }
 
   type Mutation {

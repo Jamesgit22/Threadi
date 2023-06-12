@@ -1,19 +1,21 @@
 import React from 'react';
 import { useState } from 'react';
 import ThreadAddReviewModal from '../threadsaddreviewmodal/ThreadAddReviewModal';
+import { useQuery } from '@apollo/client';
+import { THREAD_REVIEWS } from '../../utils/queries';
 
 export default function SingleThread() {
   const [reviewModalTog, setReviewModalTog] = useState(false);
+  const { loading, data } = useQuery(THREAD_REVIEWS);
+  const userData = data?.userThreads || {};
 
 
   const closeReviewModal = () => {
     setReviewModalTog(false);
   };
+  
+  if (loading) return <h2>LOADING...</h2>;
 
-
-  const handleReviewModalTog = () => {
-    setReviewModalTog((open) => !open);
-  };
   return (
     <>
       <div id='threads-main' className='container-fluid p-0 m-0'>
@@ -50,17 +52,11 @@ export default function SingleThread() {
           <div id='thread-container' className='col-12'>
             <div className='row'>
               {/* thread 1 */}
-              {/* {userData.data.map((res) => {
-                <UserThreads props={res} handlereviewModalTog={handlereviewModalTog} />
-              })} */}
+              
               {/* end thread 1 */}
             </div>
           </div>
         </div>
-
-        {/* {modalTog && (
-          <ThreadsModal closeModal={closeModal} modalTog={modalTog} />
-        )} */}
         {reviewModalTog && (
           <ThreadAddReviewModal
             closeReviewModal={closeReviewModal}

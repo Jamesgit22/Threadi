@@ -56,6 +56,20 @@ query Query {
   }
 }`
 
+export const THREAD_REVIEWS = gql`
+query Query($threadId: ID!) {
+  getReviewsByThread(threadId: $threadId) {
+    _id
+    timestamp
+    image
+    title
+    text
+    rating
+    date
+  }
+}
+`
+
 export const SINGLE_THREAD = gql`
 query Query($threadId: ID!) {
   singleThread(threadId: $threadId) {
