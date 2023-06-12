@@ -14,11 +14,11 @@
   font-family: "Poppins", sans-serif;
   color: white;
   grid-column-start: 1;
-  grid-column-end: 3;
-  text-align: left;
+  grid-column-end: 4;
+  text-align: center;
   margin: 0 auto;
   margin-bottom: 30px;
-  width: 30%;
+  width: 50%;
 }
 
 .subtitleOne {
@@ -132,10 +132,10 @@
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
-  text-align: left;
+  text-align: center;
   margin: 0 auto;
   margin-bottom: 30px;
-  width: 30%;
+  width: 70%;
 }
 
 .secondButton {
@@ -206,10 +206,10 @@
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
-  text-align: left;
+  text-align: center;
   margin: 0 auto;
   margin-bottom: 30px;
-  width: 30%;
+  width: 40%;
 }
 
 .thirdButton {
