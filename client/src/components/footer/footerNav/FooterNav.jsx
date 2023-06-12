@@ -9,9 +9,10 @@ function FooterNav() {
 
     return (
         <>
-            <a href="" className="footerSubTitle">Social</a>
-            <a href={`/profile/${userData.username}`} className="footerSubTitle">Profile</a>
-            <a href="/browse" className="footerSubTitle">Browse</a>  
+            <a href="/social">Social</a>
+            <a href={`/profile/${userData.username}`}>Profile</a>
+            <a href="/browse">Browse</a>
+            <a href="/threadspage">My Threads</a>
         </>
     );
 };
