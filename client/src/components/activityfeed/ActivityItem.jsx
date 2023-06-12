@@ -2,10 +2,13 @@ import React from 'react';
 import './Activityitem.css'
 
 export default function ActivityItem(props, { handleReviewModalTog }) {
-
-    console.log(typeof(props.date));
+    // console.log(typeof(props.date));
       const date = props.date.split(' ');
       const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
+      console.log(props);
+      const {  title, author } = props;
+      const username = author ? author.username : '';
+      console.log(username);
 
 
   return (
@@ -14,6 +17,7 @@ export default function ActivityItem(props, { handleReviewModalTog }) {
         <div className='row'>
           <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
             <h3 className='thread-card-title m-0'>{props.title}</h3>
+            <h2>Created By: {username}</h2>
             <p className='m-0'>{fDate}</p>
           </div>
         </div>

@@ -10,8 +10,8 @@ export default function Feed() {
   if (error) return `Error! ${error.message}`;
 
   const threads = data?.threads || [];
+
   console.log(threads);
-  console.log(threads[0].title);
 
   return (
     <div>
@@ -21,6 +21,7 @@ export default function Feed() {
           key={thread._id}
           date={thread.timestamp}
           title={thread.title}
+          author={thread.author}
         />
       ))}
     </div>
