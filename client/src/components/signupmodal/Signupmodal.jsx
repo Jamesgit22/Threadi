@@ -38,7 +38,7 @@ const SignUpModal = ({ closeModal }) => {
       const { data } = await createUser({ variables: { ...userFormData } });
       console.log('here is the data' + data);
       Auth.login(data.addUser.token);
-      window.location.href = `/profile/${data.addUser.username}`;
+      window.location.href = `/profile/${userFormData.username}`;
     } catch (err) {
       console.log(err);
       setShowAlert(true);
