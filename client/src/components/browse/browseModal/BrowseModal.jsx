@@ -24,7 +24,7 @@ export default function BrowseModal({ closeModal, modalTog, searchResults }) {
                   className='col-12 d-flex justify-content-center text-center'
                   id='modal-title'
                 >
-                  <h2 className='modal-title'>(thread title)</h2>
+                  <h2 className='modal-title'>Results</h2>
                   <button id='modal-close' onClick={closeModal}>
                     <img src='./images/circle-xmark-regular.svg' alt='' />
                   </button>

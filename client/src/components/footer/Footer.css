@@ -6,6 +6,15 @@
   
 }
 
+a {
+  color: white!important;
+  transition: 0.1s!important;
+}
+
+a:hover {
+  color: var(--primary-col)!important;
+}
+
 .firstFooter {
   color: white;
   display: flex;
@@ -43,12 +52,13 @@
 }
 
 .githubLogo {
-  height: 70px;
-  margin-top: 10px;
-  background-color: rgb(255, 255, 255);
-  object-fit: cover;
-  object-position: top; 
-  clip-path: inset(8px 2px 8px 2px);
+  margin-top: 15px;
+  width: 60px;
+  transition: 0.3s;
+}
+
+.githubLogo:hover {
+  scale: 1.1;
 }
 
 @media (max-width: 850px) {

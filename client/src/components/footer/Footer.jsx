@@ -3,6 +3,7 @@ import "./Footer.css";
 import Search from "../search/Search";
 
 function Footer() {
+
   return (
     <div className="footerContainer">
       <div className="firstFooter">
@@ -12,7 +13,9 @@ function Footer() {
         <div className="footerSubTitle">
           Follow Threadi for more exciting content
         </div>
-        <img className="githubLogo" src="/images/square-github.svg" alt="" />
+        <a id="gitContainer" href='https://github.com/Jamesgit22/Threadi'>
+          <img className="githubLogo" src="/images/circle-github.svg" alt="" />
+        </a>
       </div>
       <div className="secondFooter">
         <button className="footerSubTitle">Social</button>
@@ -23,10 +26,10 @@ function Footer() {
         <div className="firstSubFooter">
           <div className="footerTitle">Contributors</div>
         </div>
-        <button>James Schoeder</button>
-        <button>Kolt Bodzo</button>
-        <button>Roy Hargrave</button>
-        <button>Xaviar Witherspoon</button>
+        <a href='https://github.com/Jamesgit22'>James Schoeder</a>
+        <a href='https://github.com/Elfelfa'>Kolt Bodzo</a>
+        <a href='https://github.com/rahargrave'>Roy Hargrave</a>
+        <a href='https://github.com/codemonkeyspoon'>Xaviar Witherspoon</a>
       </div>
     </div>
   );
