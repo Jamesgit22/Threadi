@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_THREAD } from '../../../utils/mutations';
 import Auth from '../../../utils/auth';
 
-export default function ThreadsModal({ closeModal, modalTog }) {
+export default function ThreadsModal({ closeModal, modalTog, onViewChange }) {
   const [addThread, { error }] = useMutation(ADD_THREAD);
   const [userFormData, setUserFormData] = useState({ title: '', description: '' });
 

@@ -1,22 +1,39 @@
-import React from 'react';
-import { useState } from 'react';
+import React from 'react'
+import ThreadsModal from '../threadsModal/ThreadsModal';
+import { useState, useEffect } from 'react';
+import '../ThreadsPage.css';
+import { useMutation } from '@apollo/client';
+import { ADD_THREAD } from '../../../utils/mutations';
 import ThreadAddReviewModal from '../threadsaddreviewmodal/ThreadAddReviewModal';
+import { useQuery } from '@apollo/client';
+import { USER_THREADS } from '../../../utils/queries';
+import UserThreads from '../userthreads/UserThreads';
+import MainThreads from '../mainthreads/MainThreads';
 
-export default function SingleThread() {
+export default function SingleThreadPage() {
+
+const [currentView, setCurrentView] = useState('main');
   const [reviewModalTog, setReviewModalTog] = useState(false);
+  const [addThread, { error }] = useMutation(ADD_THREAD);
+  const { loading, data } = useQuery(USER_THREADS);
+  const userData = data?.userThreads || {};
+  console.log('log me');
+  console.log(data);
+
+  if (loading) return <h2>LOADING...</h2>;
+  if (error) return `Error! ${error.message}`;
+
+  const handleReviewModalTog = () => {
+    setReviewModalTog((open) => !open);
+  };
 
 
   const closeReviewModal = () => {
     setReviewModalTog(false);
   };
-
-
-  const handleReviewModalTog = () => {
-    setReviewModalTog((open) => !open);
-  };
   return (
     <>
-      <div id='threads-main' className='container-fluid p-0 m-0'>
+        <div id='threads-main' className='container-fluid p-0 m-0'>
         <div id='thread-background'>
           <div id='threads-overlay'>
             {/* top section */}
@@ -69,5 +86,13 @@ export default function SingleThread() {
         )}
       </div>
     </>
-  );
+  )
 }
+
+
+// {reviewModalTog && (
+//     <ThreadAddReviewModal
+//       closeReviewModal={closeReviewModal}
+//       reviewModalTog={reviewModalTog}
+//     />
+//   )}
