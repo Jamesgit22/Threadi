@@ -8,7 +8,7 @@ const typeDefs = gql`
     password: String!
     friends: [User]
     reviews: [Review]
-    userThreads: [String]
+    userThreads: [Thread]
     savedThreads: [Thread]
     likes: [Like!]!
     coms: [Com]
@@ -72,7 +72,7 @@ const typeDefs = gql`
   type Query {
     me: User
     threads: [Thread]
-    userThreads(userId: ID!): [Thread]
+    userThreads: [Thread]
     singleThread(threadId: ID!): Thread
     reviews: [Review]
     singleReview(reviewId: ID!): Review

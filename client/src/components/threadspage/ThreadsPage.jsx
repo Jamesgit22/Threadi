@@ -1,16 +1,25 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './ThreadsPage.css';
 import ThreadsModal from './threadsModal/ThreadsModal';
 import { useMutation } from '@apollo/client';
 import { ADD_THREAD } from '../../utils/mutations';
 import ThreadAddReviewModal from './threadsaddreviewmodal/ThreadAddReviewModal';
+import { useQuery } from '@apollo/client';
+import { USER_THREADS } from '../../utils/queries';
+import UserThreads from './userthreads/UserThreads';
 
 export default function ThreadsPage() {
   const [modalTog, setModalTog] = useState(false);
   const [reviewModalTog, setreviewModalTog] = useState(false);
-  const [addThread, { error }] = useMutation(ADD_THREAD)
+  const [addThread, { error }] = useMutation(ADD_THREAD);
+  const { loading, data } = useQuery(USER_THREADS);
+  const userData = data?.userThreads || {};
+  console.log('log me');
+  console.log(data);
 
+  if (loading) return <h2>LOADING...</h2>;
+  if (error) return `Error! ${error.message}`;
 
   const handleModalTog = () => {
     setModalTog((open) => !open);
@@ -64,48 +73,15 @@ export default function ThreadsPage() {
           <div id='thread-container' className='col-12'>
             <div className='row'>
               {/* thread 1 */}
-              <div className='col-11 thread-card'>
-                <div className='row'>
-                  <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
-                    <h3 className='thread-card-title m-0'>title</h3>
-                    <p className='m-0'>(date)</p>
-                  </div>
-                </div>
-                {/* content row */}
-                <div className='row'>
-                  <div id='box-container' className='col-12 d-flex '>
-                    {/* scroll row */}
-                    <div className='col-12 threads-box p-0'>
-                      <div className='row'>
-                        <div className='col-4'>
-                          <h4 className='item-titles'>item Title</h4>
-                        </div>
-                        <div className='col-8 p-0 m-0'>
-                          <img
-                            className='threads-imgs'
-                            src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                            alt=''
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {/* scroll row end */}
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-12 d-flex justify-content-evenly align-items-center thread-btns-container'>
-                    <p className='m-0 pt-1 pb-1'>(edit)</p>
-                    <button
-                      className='thread-open-btn'
-                      onClick={() => handlereviewModalTog(true)}
-                    >
-                      Open
-                    </button>
-                    <p className='m-0 pt-1 pb-1'>(delete)</p>
-                  </div>
-                </div>
-                {/* end */}
-              </div>
+              {userData.map((res) => (
+                <UserThreads
+                  key={res._id}
+                  title={res.title}
+                  date={res.timestamp}
+                  handlereviewModalTog={handlereviewModalTog}
+                />
+              ))}
+
               {/* end thread 1 */}
             </div>
           </div>
