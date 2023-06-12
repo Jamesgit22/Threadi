@@ -4,7 +4,7 @@ import { ADD_REVIEW } from '../../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../../../utils/auth'
 
-export default function TModalCard(props, { userData, onViewChange }) {
+export default function TModalCard(props, { userData, getWriteReview }) {
   const [addReview, { error }] = useMutation(ADD_REVIEW)
 
 
@@ -39,7 +39,7 @@ export default function TModalCard(props, { userData, onViewChange }) {
                 </div>
                 <div className='row'>
                   <div className='col-12 text-end'>
-                    <button className='item-btn' onClick={onViewChange('write')}>Add</button>
+                    <button className='item-btn' onClick={props.getWriteReview}>Add</button>
                   </div>
                 </div>
               </div>

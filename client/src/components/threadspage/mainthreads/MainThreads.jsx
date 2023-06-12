@@ -10,7 +10,7 @@ import { USER_THREADS } from '../../../utils/queries';
 import UserThreads from '../userthreads/UserThreads';
 // import SingleThreadPage from './mainthreads/SingleThreadPage';
 
-export default function MainThreads({ onViewChange, userData, data }) {
+export default function MainThreads({ getSingleThread, userData, data }) {
   const [modalTog, setModalTog] = useState(false);
 
   // const [currentView, setCurrentView] = useState('main');
@@ -30,9 +30,7 @@ export default function MainThreads({ onViewChange, userData, data }) {
     setModalTog(false);
   };
 
-  const handlePageChange = (type) => {
-    onViewChange(type);
-  };
+ 
 
   return (
     <>
@@ -75,7 +73,7 @@ export default function MainThreads({ onViewChange, userData, data }) {
                   key={res._id}
                   title={res.title}
                   date={res.timestamp}
-                  handlePageChange={handlePageChange}
+                  getSingleThread={getSingleThread}
                 />
               ))}
 

@@ -15,7 +15,7 @@ export default function Nav() {
   const [isMobile, setIsMobile] = useState(false);
   const loggedIn = Auth.loggedIn();
 
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     const handleResize = () => {
