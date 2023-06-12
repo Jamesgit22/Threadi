@@ -2,9 +2,15 @@ import React from 'react';
 import './Profile.css';
 import ProfileComments from '../profilecomments/ProfileComments.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../../utils/queries';
 
 function Profile() {
+  const { loading, data } = useQuery(GET_ME);
+  const userData = data?.me ||{};
+  console.log(userData);
   return (
     <>
       <div id='profile-parent' className='container-fluid'>
@@ -25,7 +31,7 @@ function Profile() {
                   id='username-container'
                   className='col-12 pt-2 pb-3 text-center'
                 >
-                  <h3>username</h3>
+                  <h3>{userData.username}</h3>
                 </div>
               </div>
             </div>

@@ -53,7 +53,7 @@ function App() {
               <Route exact path='/login'>
                 <Login />
               </Route>
-              <Route path='/profile/:username'>
+              <Route exact path='/profile/:username'>
                 <Profile />
               </Route>
               <Route path='/threadspage'>
@@ -65,8 +65,8 @@ function App() {
               <Route path='/browse'>
                 <Browse />
               </Route>
-              <Route>
-                <Social path='/social'/>
+              <Route exact path='/social'>
+                <Social/>
               </Route>
             </Switch>
           </div>
