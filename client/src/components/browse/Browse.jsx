@@ -345,10 +345,10 @@ export default function Browse() {
                   </div>
                 </div>
                 <div className='col-12 pt-3 text-center'>
-                  <p id='browse-intro'>
+                  {/* <p id='browse-intro'>
                     Scroll through<br></br>custom threads to discover <br></br>
                     <span id='new'>NEW</span> content below.
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
@@ -356,8 +356,8 @@ export default function Browse() {
         </div>
         {/* section end */}
         {/* Browse Threads */}
-        <div className='row pt-5'>
-          {/* section */}
+        {/* <div className='row pt-5'>
+          
           <div className='col-12 pt-5'>
             <div className='row'>
               <div className='col-5 text-center'>
@@ -521,7 +521,7 @@ export default function Browse() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {modalTog && (
           <BrowseModal
             closeModal={closeModal}
