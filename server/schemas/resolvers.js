@@ -263,16 +263,23 @@ const resolvers = {
         console.error(err);
       }
     },
-    saveThread: async (parent, { userId, threadId }) => {
+    saveThread: async (parent, { threadId }, context) => {
+      if (!context.user) {
+        throw new Error('You need to be logged in to perform this action.');
+      }
+      if (!threadId) {
+        throw new Error('Invalid thread ID.');
+      }
       try {
-        const savedThread = await User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { savedThreads: { _id: threadId } } },
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedThreads: threadId } },
           { new: true }
         );
-        return savedThread;
+        return updatedUser;
       } catch (err) {
         console.error(err);
+        throw new Error('Failed to save the thread.');
       }
     },
 

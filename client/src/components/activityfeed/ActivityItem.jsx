@@ -1,12 +1,11 @@
 import React from 'react';
+import './Activityitem.css'
 
-
-export default function UserThreads(props, { handleReviewModalTog }) {
+export default function ActivityItem(props, { handleReviewModalTog }) {
 
     console.log(typeof(props.date));
       const date = props.date.split(' ');
       const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
-    
 
 
   return (
@@ -25,7 +24,7 @@ export default function UserThreads(props, { handleReviewModalTog }) {
             <div className='col-12 threads-box p-0'>
               <div className='row'>
                 <div className='col-4'>
-                  <h4 className='item-titles' key={props.key}></h4>
+                  <h4 className='item-titles' key={props.threadKey}></h4>
                 </div>
                 <div className='col-8 p-0 m-0'>
                   <img
@@ -50,10 +49,7 @@ export default function UserThreads(props, { handleReviewModalTog }) {
             </button>
             </div>
             <div className="col-6 text-end">
-            <button
-              className='thread-open-btn'
-            //   onClick={() => handleReviewModalTog(true)}
-            >Save</button>
+            <button className='thread-save-btn'>Save</button>
             </div>
           </div>
         </div>
