@@ -9,15 +9,14 @@ import { useQuery } from '@apollo/client';
 import { USER_THREADS } from '../../utils/queries';
 import UserThreads from './userthreads/UserThreads';
 
-
 export default function ThreadsPage() {
   const [modalTog, setModalTog] = useState(false);
   const [reviewModalTog, setreviewModalTog] = useState(false);
   const [addThread, { error }] = useMutation(ADD_THREAD);
   const { loading, data } = useQuery(USER_THREADS);
-  const userData = data?.username || {};
+  const userData = data?.userThreads || {};
   console.log('log me');
-  console.log(userData);
+  console.log(data);
 
   if (loading) return <h2>LOADING...</h2>;
   if (error) return `Error! ${error.message}`;
@@ -74,9 +73,15 @@ export default function ThreadsPage() {
           <div id='thread-container' className='col-12'>
             <div className='row'>
               {/* thread 1 */}
-              {/* {userData.data.map((res) => {
-                <UserThreads props={res} handlereviewModalTog={handlereviewModalTog} />
-              })} */}
+              {userData.map((res) => (
+                <UserThreads
+                  key={res._id}
+                  title={res.title}
+                  date={res.timestamp}
+                  handlereviewModalTog={handlereviewModalTog}
+                />
+              ))}
+
               {/* end thread 1 */}
             </div>
           </div>

@@ -1,13 +1,21 @@
 import React from 'react';
 
+
 export default function UserThreads(props, { handlereviewModalTog}) {
+
+    console.log(typeof(props.date));
+      const date = props.date.split(' ');
+      const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
+    
+
+
   return (
     <>
       <div className='col-11 thread-card'>
         <div className='row'>
           <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
-            <h3 className='thread-card-title m-0'>title</h3>
-            <p className='m-0'>(date)</p>
+            <h3 className='thread-card-title m-0'>{props.title}</h3>
+            <p className='m-0'>{fDate}</p>
           </div>
         </div>
         {/* content row */}
@@ -17,7 +25,7 @@ export default function UserThreads(props, { handlereviewModalTog}) {
             <div className='col-12 threads-box p-0'>
               <div className='row'>
                 <div className='col-4'>
-                  <h4 className='item-titles'>item Title</h4>
+                  <h4 className='item-titles' key={props.key}></h4>
                 </div>
                 <div className='col-8 p-0 m-0'>
                   <img

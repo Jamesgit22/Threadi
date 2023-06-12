@@ -387,7 +387,7 @@ const resolvers = {
         const newThread = new Thread({
           title: title,
           author: context.user._id,
-          timestamp: new Date().toISOString(),
+          timestamp: new Date()
         });
 
         await newThread.save();

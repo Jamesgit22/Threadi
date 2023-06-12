@@ -15,11 +15,11 @@ export default function ThreadsModal({ closeModal, modalTog }) {
     setUserFormData({ ...userFormData, [name]: value });
   };
 
-  const handleFormSubmit = async (e) => {
+  async function handleFormSubmit(e) {
     e.preventDefault();
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-  
+
     if (!token || !userFormData) {
       return false;
     }
@@ -29,10 +29,11 @@ export default function ThreadsModal({ closeModal, modalTog }) {
       console.log(data);
 
       setUserFormData({ title: '', desc: '' });
+      // window.location.reload(false);
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   return (
     <>
