@@ -18,37 +18,14 @@ const resolvers = {
     //   return User.findOne({ _id: userId }).populate('friends');
     // },
 
-    me: async () => {
-      try {
-        const user = await User.findById(userId)
-          .populate('friends', '_id username')
-          .populate('reviews', '_id timestamp type title text rating likes')
-          .populate('userThreads', '_id timestamp title likes')
-          .populate('savedThreads', '_id timestamp title likes')
-          .populate({
-            path: 'likes',
-            populate: {
-              path: 'likedContent',
-              select: '_id timestamp title likes',
-              populate: [
-                { path: 'author', select: '_id username' },
-                { path: 'parent', select: '_id timestamp title likes' },
-              ],
-            },
-          })
-          .populate({
-            path: 'coms',
-            populate: [
-              { path: 'author', select: '_id username' },
-              { path: 'parent', select: '_id timestamp title likes' },
-            ],
-          });
-
-        return user;
-      } catch (error) {
-        console.error(error);
-        throw new Error('Failed to fetch user');
+    me: async (parent, args, context) => {
+      if (!context.user) {
+        return null;
       }
+      const user = await User.findOne({ _id: context.user._id })
+      .populate('userThreads') // Assuming the threads are stored as references in the user model
+      .populate('savedThreads'); // Assuming the reviews are stored as references in the user model
+      return user;
     },
 
     threads: async () => {

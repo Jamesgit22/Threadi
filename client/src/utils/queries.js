@@ -4,96 +4,40 @@ export const GET_ME = gql`
 query Query {
   me {
     _id
-    username
     email
-    friends {
+    username
+    userThreads
+    savedThreads {
       _id
-      username
+      author {
+        username
+      }
+      description
+      likes
+      timestamp
+      title
     }
     reviews {
       _id
-      timestamp
-      type
-      title
-      text
+      date
+      likes
       rating
-      likes
-    }
-    userThreads {
-      _id
-      timestamp
-      title
-      likes
-    }
-    savedThreads {
-      _id
-      timestamp
-      title
-      likes
-    }
-    likes {
-      _id
-      likedContent {
-        ... on Thread {
-          _id
-          timestamp
-          title
-          likes
-        }
-        ... on Review {
-          _id
-          timestamp
-          type
-          title
-          text
-          rating
-          likes
-        }
-        ... on Com {
-          _id
-          timestamp
-          text
-          likes
-        }
-      }
-      parentType
-    }
-    coms {
-      _id
-      author {
-        _id
-        username
-      }
-      timestamp
       text
-      likes
-      parent {
-        ... on Thread {
-          _id
-          timestamp
-          title
-          likes
-        }
-        ... on Review {
-          _id
-          timestamp
-          type
-          title
-          text
-          rating
-          likes
-        }
-        ... on Com {
-          _id
-          timestamp
-          text
-          likes
-        }
-      }
-      parentType
+      timestamp
+      title
     }
   }
 }`
+
+// export const GET_ME = gql`
+// query Query {
+//   me {
+//     _id
+//     email
+//     username
+//   }
+// }`
+    
 
 
 export const USER_THREADS = gql`
