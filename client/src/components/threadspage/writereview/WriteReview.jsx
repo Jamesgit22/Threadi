@@ -32,7 +32,13 @@ export default function WriteReview(media) {
                       <div className='row justify-content-between'>
                         <div className='col-12'>
                           <div className='row'>
-                            <div className='col-6'>
+                          <div className='col-6 item-img-container'>
+                                  <img
+                                    className='item-img'
+                                    src={mediaData.image}
+                                  />
+                                </div>
+                            <div className='rightSide col-6'>
                               <div className='row'>
                                 <div className='col-12'>
                                   <h2 id="review-title" className="item-title">{mediaData.title}</h2>
@@ -42,6 +48,7 @@ export default function WriteReview(media) {
                                 <div className='col-12'>
                                   <div>Date watched: </div>
                                   <input
+                                    className='dateInput'
                                     type='date'
                                     name='watch-date'
                                     id='watch-date'
@@ -53,6 +60,7 @@ export default function WriteReview(media) {
                                 <div className='col-12'>
                                   <div>Rating: </div>
                                   <select
+                                    className='ratingInput'
                                     name='rating'
                                     id='review-rating'
                                     placeholder='1'
@@ -65,23 +73,16 @@ export default function WriteReview(media) {
                                   </select>
                                 </div>
                               </div>
-                            </div>
-                            <div className='col-6'>
-                              <div className='row'>
+                              <div className='thought row'>
                                 <div className='col-6'>
                                   <div>Tell us what you thought about it: </div>
                                   <textarea
+                                    className='reviewInput'
                                     name='review-text'
                                     id='review-text'
                                     cols='30'
                                     rows='10'
                                   ></textarea>
-                                </div>
-                                <div className='col-6 item-img-container'>
-                                  <img
-                                    className='item-img'
-                                    src={mediaData.image}
-                                  />
                                 </div>
                               </div>
                             </div>
