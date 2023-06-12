@@ -1,20 +1,20 @@
 import React from 'react'
-import ThreadsModal from './threadsModal/ThreadsModal';
-import { useState, useEffect } from 'react';
-import './ThreadsPage.css';
+import ThreadsModal from '../threadsModal/ThreadsModal';
+import { useState } from 'react';
+import '../ThreadsPage.css';
 import { useMutation } from '@apollo/client';
-import { ADD_THREAD } from '../../utils/mutations';
-import ThreadAddReviewModal from './threadsaddreviewmodal/ThreadAddReviewModal';
+import { ADD_THREAD } from '../../../utils/mutations';
+// import ThreadAddReviewModal from './threadsaddreviewmodal/ThreadAddReviewModal';
 import { useQuery } from '@apollo/client';
-import { USER_THREADS } from '../../utils/queries';
-import UserThreads from './userthreads/UserThreads';
-import SingleThreadPage from './mainthreads/SingleThreadPage';
+import { USER_THREADS } from '../../../utils/queries';
+import UserThreads from '../userthreads/UserThreads';
+// import SingleThreadPage from './mainthreads/SingleThreadPage';
 
 
 export default function MainThreads({ onViewChange }) {
     const [modalTog, setModalTog] = useState(false);
-    const [currentView, setCurrentView] = useState('main');
-    const [reviewModalTog, setreviewModalTog] = useState(false);
+    // const [currentView, setCurrentView] = useState('main');
+    // const [reviewModalTog, setreviewModalTog] = useState(false);
     const [addThread, { error }] = useMutation(ADD_THREAD);
     const { loading, data } = useQuery(USER_THREADS);
     const userData = data?.userThreads || {};
@@ -85,9 +85,9 @@ export default function MainThreads({ onViewChange }) {
           </div>
         </div>
 
-        {/* {modalTog && (
+        {modalTog && (
           <ThreadsModal closeModal={closeModal} onViewChange={onViewChange} modalTog={modalTog} />
-        )} */}
+        )}
         {/* {reviewModalTog && (
           <ThreadAddReviewModal
             closeReviewModal={closeReviewModal}

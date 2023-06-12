@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './ThreadsPage.css';
 // import { useMutation } from '@apollo/client';
 // import { ADD_THREAD } from '../../utils/mutations';
@@ -51,5 +51,5 @@ export default function ThreadsPage() {
 
 
 
-  return <>{switchView}</>;
+  return <>{switchView()}</>;
 };
