@@ -26,12 +26,13 @@
   flex-direction: column;
   text-align: left;
   margin-top: 8em;
-  
 }
 
 #browse-switch {
   display: flex;
   flex-direction: column;
+  appearance: none!important;
+  -webkit-appearance: none!important;
   text-align: left;
   color: black;
   font-size: 4em;
@@ -43,7 +44,6 @@
 .arrow {
   width: 30px;
   margin-left: 90px;
-  
 }
 
 #browse-msg {

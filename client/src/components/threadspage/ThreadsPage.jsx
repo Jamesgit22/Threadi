@@ -31,7 +31,10 @@ export default function ThreadsPage() {
     
     setCurrentView('single');
   };
-  const getWriteReview = (media) => {
+
+  const getWriteReview = (media, thread) => {
+    console.log(currentThread);
+    //setCurrentThread(thread);
     setChosenMedia(media);
     setCurrentView('write');
   };
@@ -51,7 +54,7 @@ export default function ThreadsPage() {
       );
     }
     if (currentView === 'write') {
-      return <WriteReview media={chosenMedia} />;
+      return <WriteReview media={chosenMedia} thread={currentThread} />;
     }
   };
 

@@ -1,15 +1,45 @@
 import React from 'react';
 import './WriteReview.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
+import { ADD_REVIEW } from '../../../utils/mutations';
 
-export default function WriteReview(media) {
-  const mediaData = media.media;
-  const [userFormData, setUserFormData] = useState({ title: '', review: '', date: '', rating: 0, image: '', type: mediaData.type});
-  console.log(mediaData);
+export default function WriteReview(props) {
+  const [addReview, { error }] = useMutation(ADD_REVIEW);
+  const [userFormData, setUserFormData] = useState({ review: '', date: '', rating: 0 });
   console.log(userFormData);
 
   const date = new Date();
   const fDate = date.toISOString().split('T')[0];
+
+  const mediaData = props.media;
+  const threadData = props.thread;
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+    console.log({ title: mediaData.title, text: userFormData.review, image: mediaData.image, threadId: threadData._id, date: userFormData.date, rating: userFormData.rating });
+  };
+
+  console.log(mediaData, threadData);
+
+  //console.log({ title: 'Test Review', text: 'test', image: '', threadId: threadData._id, date: fDate, rating: 0 });
+
+  const submitReview = () => {
+    try {
+      addReview({ variables: { title: mediaData.title, text: userFormData.review, image: mediaData.image, threadId: threadData._id, date: userFormData.date, rating: parseInt(userFormData.rating) } })
+        .then((res) => {
+          if (res.data.addReview) {
+            console.log('Thread added successfully: ');
+            //setUserFormData({ title: '', description: '' });\
+          } else {
+            console.error("Failed to add thread: " + res.data);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -43,8 +73,10 @@ export default function WriteReview(media) {
                                   <div>Date watched: </div>
                                   <input
                                     type='date'
-                                    name='watch-date'
+                                    name='date'
                                     id='watch-date'
+                                    value={userFormData.date}
+                                    onChange={handleInputChange}
                                     defaultValue={fDate}
                                   />
                                 </div>
@@ -56,6 +88,8 @@ export default function WriteReview(media) {
                                     name='rating'
                                     id='review-rating'
                                     placeholder='1'
+                                    value={userFormData.rating}
+                                    onChange={handleInputChange}
                                   >
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>
@@ -71,10 +105,12 @@ export default function WriteReview(media) {
                                 <div className='col-6'>
                                   <div>Tell us what you thought about it: </div>
                                   <textarea
-                                    name='review-text'
+                                    name='review'
                                     id='review-text'
                                     cols='30'
                                     rows='10'
+                                    value={userFormData.review}
+                                    onChange={handleInputChange}
                                   ></textarea>
                                 </div>
                                 <div className='col-6 item-img-container'>
@@ -88,7 +124,7 @@ export default function WriteReview(media) {
                           </div>
                           <div className="row">
                             <div className="col-12">
-                                <button id='review-submit' type="submit">Submit</button>
+                              <button id='review-submit' onClick={submitReview}>Submit</button>
                             </div>
                           </div>
                         </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import './TModalCard.css';
 import { ADD_REVIEW } from '../../../utils/mutations';
 import { useMutation } from '@apollo/client';
-import Auth from '../../../utils/auth'
 
 export default function TModalCard(props, { userData, getWriteReview }) {
   const [addReview, { error }] = useMutation(ADD_REVIEW)

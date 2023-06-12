@@ -25,6 +25,7 @@ const typeDefs = gql`
     _id: ID!
     author: User
     timestamp: String
+    image: String
     type: String!
     title: String!
     text: String!
@@ -98,7 +99,7 @@ const typeDefs = gql`
     saveThread(threadId: ID!): User!
     addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
     addThread(title: String!, description: String!): Thread
-    addReview(authorId: ID!, title: String!, text: String!, threadId: ID!): Review!
+    addReview(title: String!, text: String!, image: String, threadId: ID!, date: String!, rating: Int): Review!
     addReviewCom(reviewId: ID!, comText: String!, comAuthor: ID!): Review
     deleteReview(reviewId: ID!): Review
     deleteReviewCom(reviewId: ID!, comId: ID!): Review

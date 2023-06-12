@@ -9,7 +9,7 @@ import axios from 'axios';
 export default function ThreadAddReviewModal({
   reviewModalTog,
   closeReviewModal,
-  userData,
+  threadData,
   getWriteReview
 }) {
   const [searchInput, setSearchInput] = useState('');
@@ -307,7 +307,7 @@ export default function ThreadAddReviewModal({
                     author={result.author}
                     description={result.description}
                     type={result.type}
-                    userData={userData}
+                    userData={threadData}
                     getWriteReview={getWriteReview}
                   />
                 ))}

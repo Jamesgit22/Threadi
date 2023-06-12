@@ -2,25 +2,10 @@ import React from 'react';
 import ThreadsModal from '../threadsModal/ThreadsModal';
 import { useState } from 'react';
 import '../ThreadsPage.css';
-import { useMutation } from '@apollo/client';
-import { ADD_THREAD } from '../../../utils/mutations';
-// import ThreadAddReviewModal from './threadsaddreviewmodal/ThreadAddReviewModal';
-import { useQuery } from '@apollo/client';
-import { USER_THREADS } from '../../../utils/queries';
 import UserThreads from '../userthreads/UserThreads';
-// import SingleThreadPage from './mainthreads/SingleThreadPage';
 
 export default function MainThreads({ getSingleThread, userData, data }) {
   const [modalTog, setModalTog] = useState(false);
-  const [addThread, { error }] = useMutation(ADD_THREAD);
-
-  // const [currentView, setCurrentView] = useState('main');
-  // const [reviewModalTog, setreviewModalTog] = useState(false);
-
-  // console.log('log me');
-
-  // if (loading) return <h2>LOADING...</h2>;
-  // if (error) return `Error! ${error.message}`;
 
   const handleModalTog = () => {
     setModalTog((open) => !open);
@@ -67,8 +52,6 @@ export default function MainThreads({ getSingleThread, userData, data }) {
             <div className='row'>
               {/* thread 1 */}
               {userData.map((res) => (
-                console.log(res._id),
-
                 <UserThreads
                   key={res._id.toString()}
                   id={res._id}

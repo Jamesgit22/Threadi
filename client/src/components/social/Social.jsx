@@ -15,7 +15,7 @@ export default function Social() {
   const handleSaveThread = async (threadId) => {
     try {
       const { data } = await saveThread({
-        variables: { threadId },
+        variables: { threadId }
       });
 
       // Additional logic if needed
