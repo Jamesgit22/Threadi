@@ -1,19 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Nav.css";
-import Search from "../search/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import SignupModal from "../signupmodal/Signupmodal";
+import Auth from "../../utils/auth";
+import HeaderNav from "./headernav/HeaderNav";
+import NavSIButtons from "./navbuttons/NavSOButtons";
+import NavSOButtons from "./navbuttons/NavSIButtons";
 
 // resolve conflicts.
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isSearch, setIsSearch] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [isShown, setIsShown] = useState(true);
+  const loggedIn = Auth.loggedIn();
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,14 +32,6 @@ export default function Nav() {
     setIsOpen((open) => !open);
   };
 
-  const toggleSearch = () => {
-    setIsSearch((open) => !open);
-    setIsShown(!isShown);
-  };
-
-  const handleSignupClick = () => {
-    setShowModal(true);
-  };
 
   return (
     <>
@@ -147,34 +139,10 @@ export default function Nav() {
               </div>
               <div className="desktop col-6 d-flex">
                 <div className="desktopNav col-12 d-flex align-items-center justify-content-center">
-                  {isShown ? (
-                    <>
-                      <button className="desktop-nav-btns">Social</button>
-                      <button className="desktop-nav-btns">Profile</button>
-                      <button className="desktop-nav-btns">Browse</button>
-                    </>
-                  ) : null}
-                  <button className="desktop-nav-btns" onClick={toggleSearch}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-                  </button>
-                  <div
-                    id="search-bar"
-                    className={`desktop-nav-btns ${isSearch ? "open" : ""}`}
-                  >
-                    <Search />
-                  </div>
+                  { loggedIn ? <HeaderNav /> : null}
                 </div>
               </div>
-              <div className="desktopSignOn col-3 d-flex justify-content-end">
-                <button className="desktop-signin-btns me-3">Sign In</button>
-                <button
-                  className="desktop-signup-btns"
-                  onClick={handleSignupClick}
-                >
-                  Sign Up
-                </button>
-                {showModal && <SignupModal setShowModal={setShowModal} />}
-              </div>
+              { loggedIn ? <NavSIButtons /> : <NavSOButtons /> }
             </nav>
           </div>
         </div>
