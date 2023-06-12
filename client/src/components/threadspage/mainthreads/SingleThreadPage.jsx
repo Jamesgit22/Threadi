@@ -10,7 +10,7 @@ import { USER_THREADS } from '../../../utils/queries';
 import UserThreads from '../userthreads/UserThreads';
 import MainThreads from '../mainthreads/MainThreads';
 
-export default function SingleThreadPage({ userData, getWriteReview }) {
+export default function SingleThreadPage({ threadData, getWriteReview }) {
 
 const [currentView, setCurrentView] = useState('main');
   const [reviewModalTog, setReviewModalTog] = useState(false);
@@ -44,7 +44,7 @@ const [currentView, setCurrentView] = useState('main');
                     id='threads-page-title'
                     className='col-12 text-center pt5'
                   >
-                    <h2 id='my-threads-h2'>(Thread title)</h2>
+                    <h2 id='my-threads-h2'>{threadData.title}</h2>
                   </div>
                 </div>
                 <div className='row justify-content-center'>
@@ -67,9 +67,9 @@ const [currentView, setCurrentView] = useState('main');
           <div id='thread-container' className='col-12'>
             <div className='row'>
               {/* thread 1 */}
-               {userData.map((res) => {
+               {/* {threadData.map((res) => {
                 <UserThreads props={res} handlereviewModalTog={handleReviewModalTog} />
-              })} 
+              })}  */}
               {/* end thread 1 */}
             </div>
           </div>
@@ -82,7 +82,7 @@ const [currentView, setCurrentView] = useState('main');
           <ThreadAddReviewModal
             closeReviewModal={closeReviewModal}
             reviewModalTog={reviewModalTog}
-            userData={userData}
+            threadData={threadData}
             getWriteReview={getWriteReview}
           />
         )}

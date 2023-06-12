@@ -13,12 +13,23 @@ import WriteReview from './writereview/WriteReview';
 
 export default function ThreadsPage() {
   const [currentView, setCurrentView] = useState('main');
+  const [currentThread, setCurrentThread] = useState({});
   // const [modalTog, setModalTog] = useState(false);
   // const [reviewModalTog, setreviewModalTog] = useState(false);
   // const [addThread, { error }] = useMutation(ADD_THREAD);
   const { loading, data } = useQuery(USER_THREADS);
   const userData = data?.userThreads || {};
-  const getSingleThread = () => setCurrentView('single');
+  
+  const getSingleThread = (threadID) => {
+    userData.forEach((thread) => {
+      console.log(thread._id, threadID);
+      if (thread._id === threadID) {
+        setCurrentThread(thread);
+      }
+    });
+    
+    setCurrentView('single');
+  };
   const getWriteReview = () => setCurrentView('write');
 
   if (loading) return <h2>LOADING...</h2>;
@@ -32,7 +43,7 @@ export default function ThreadsPage() {
     }
     if (currentView === 'single') {
       return (
-        <SingleThreadPage getWriteReview={getWriteReview} userData={userData} />
+        <SingleThreadPage getWriteReview={getWriteReview} threadData={currentThread} />
       );
     }
     if (currentView === 'write') {
