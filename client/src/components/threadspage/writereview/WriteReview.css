@@ -18,6 +18,13 @@
 
 }
 
+#write-exit {
+    width: 30px;
+    position: relative;
+    top: -40px;
+    right: -450px;
+}   
+
 #review-rating:focus {
     outline-color: var(--primary-col);
 }
