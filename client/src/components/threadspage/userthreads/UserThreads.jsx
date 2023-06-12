@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import React from 'react';
+import './UserThreads.css'
 
 
 
@@ -16,7 +17,7 @@ export default function UserThreads(props, { handlereviewModalTog, getSingleThre
 
   return (
     <>
-      <div className='col-11 thread-card'>
+      <div className='col-8 thread-card mt-3'>
         <div className='row'>
           <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
             <h3 className='thread-card-title m-0'>{props.title}</h3>
@@ -29,10 +30,10 @@ export default function UserThreads(props, { handlereviewModalTog, getSingleThre
             {/* scroll row */}
             <div className='col-12 threads-box p-0'>
               <div className='row'>
-                <div className='col-4'>
-                  <h4 className='item-titles'></h4>
+                <div className='col-6'>
+                  <h4 className='thread-description'>{}</h4>
                 </div>
-                <div className='col-8 p-0 m-0'>
+                <div className='col-6 p-0 m-0'>
                   <img
                     className='threads-imgs'
                     src='/images/pexels-tima-miroshnichenko-7991579.jpg'
