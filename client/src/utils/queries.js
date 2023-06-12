@@ -40,8 +40,6 @@ query Query {
 //     username
 //   }
 // }`
-    
-
 
 export const USER_THREADS = gql`
 query Query {

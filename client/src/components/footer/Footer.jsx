@@ -1,8 +1,14 @@
 import React from "react";
 import "./Footer.css";
-import Search from "../search/Search";
+import Auth from "../../utils/auth";
+import FooterNav from "./footerNav/FooterNav";
 
 function Footer() {
+  const loggedIn = Auth.loggedIn();
+
+  if(!(loggedIn) && !(window.location.pathname === '/login') && !(window.location.pathname === '/')) {
+    window.location.replace('/');
+  }
 
   return (
     <div className="footerContainer">
@@ -18,9 +24,7 @@ function Footer() {
         </a>
       </div>
       <div className="secondFooter">
-        <button className="footerSubTitle">Social</button>
-        <button className="footerSubTitle">Profile</button>
-        <button className="footerSubTitle">Browse</button>
+         { loggedIn ? <FooterNav /> : null }
       </div>
       <div className="firstFooter">
         <div className="firstSubFooter">
