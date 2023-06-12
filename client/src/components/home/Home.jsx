@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLaptop } from "@fortawesome/free-solid-svg-icons";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { faPerson } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 const Home = () => {
@@ -47,13 +48,24 @@ const Home = () => {
     <div className="home-container">
       <div className="top">
         <div className="subtitleOne">
-          <h1 className="firstHeader">
+          <motion.h1
+            className="firstHeader"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 1 }}
+          >
             <span className="red-text">Rate</span> all the entertainment you
             watch
-          </h1>
-          <button className="firstButton" onClick={openModal}>
+          </motion.h1>
+          <motion.button
+            className="firstButton"
+            onClick={openModal}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 1 }}
+          >
             Start Rating Now
-          </button>
+          </motion.button>
         </div>
         {moviePosters.length > 0 && (
           <img

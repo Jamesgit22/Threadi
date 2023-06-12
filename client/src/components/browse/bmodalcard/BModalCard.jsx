@@ -18,7 +18,7 @@ export default function BModalCard(props) {
               <div className='col-6'>
                 <div className='row'>
                   <div className='col-12'>
-                    <p className='item-desc'>{props.desc || ''}</p>
+                    <p className='item-desc'>{props.description || "No Description Available"}</p>
                   </div>
                 </div>
                 <div className='row'>
