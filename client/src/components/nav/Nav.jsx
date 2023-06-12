@@ -13,6 +13,8 @@ import NavSOButtons from "./navbuttons/NavSIButtons";
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [logoState, setLogoState] = useState('/images/threadLogo.png');
+  const [isHovered, setIsHovered] = useState(false);
   const loggedIn = Auth.loggedIn();
 
   // const history = useHistory();
@@ -30,45 +32,19 @@ export default function Nav() {
     handleResize();
   }, []);
 
+  const onHover = () => {
+    setIsHovered(true);
+    setLogoState("/images/threadLogoRed.png");
+  };
+
+  const onNoHover = () => {
+    setIsHovered(false);
+    setLogoState("/images/threadLogo.png");
+  };
+
   const toggleMenu = () => {
     setIsOpen((open) => !open);
   };
-
-
-  const handleSignInClick = () => {
-    window.location.href = `/login`;
-  };
-
-  const handleHomeClick = () => {
-    window.location.href = `/`;
-  };
-
-  const handleBrowseClick = () => {
-    window.location.href = `/browse`;
-  };
-
-  
-
-const handleProfileClick = () => {
-  if (Auth.loggedIn()) {
-    const username = Auth.getProfile().data.username;
-    window.location.href = `/profile/${username}`;
-  } else {
-    // Redirect to the login page or show an error message
-    window.location.href = '/login';
-  }
-};
-
-
-const handleSocialClick = () => {
-  if (Auth.loggedIn()) {
-    const username = Auth.getProfile().data.username;
-    window.location.href = `/threadspage`;
-  } else {
-    // Redirect to the login page or show an error message
-    window.location.href = '/login';
-  }
-};
 
   return (
     <>
@@ -80,10 +56,8 @@ const handleSocialClick = () => {
               className="col-12 d-flex justify-content-between"
             >
               <div id="logo-container" className="col-6 d-flex">
-                <a href="/" onClick={handleHomeClick}>
-                <h2 id="mobile-nav-logo" className="light-txt ">
+                <a href="/" id="mobile-nav-logo" className="light-txt ">
                   THREADI
-                </h2>
                 </a>
               </div>
               <div className="mobile">
@@ -166,14 +140,14 @@ const handleSocialClick = () => {
             <nav id="nav-container" className="col-12">
               <div id="logo-container" className="col-3 d-flex">
                 <div className="col-12 d-flex align-items-center">
-                  <a href="/">
-                  <h2 id="nav-logo" className="light-txt">
+                  <a id="nav-logo" href="/" className="light-txt" 
+                  onMouseEnter={onHover}
+                  onMouseLeave={onNoHover}>
                     THREADI
-                  </h2>
                   </a>
                   <img
                     id="nav-img-logo"
-                    src="/images/threadLogo.png"
+                    src={logoState}
                     alt="broken"
                   />
                 </div>
