@@ -58,7 +58,7 @@ const Home = () => {
             watch
           </motion.h1>
           <motion.button
-            className="firstButton"
+            className="desktop-signup-btns"
             onClick={openModal}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -88,7 +88,7 @@ const Home = () => {
             <span className="red-text">Share </span>what you watch with your
             friends
           </h1>
-          <button className="secondButton" onClick={openModal}>
+          <button className="desktop-signup-btns" onClick={openModal}>
             Start Sharing Now
           </button>
         </div>
@@ -98,7 +98,7 @@ const Home = () => {
           <h1 className="thirdHeader">
             <span className="red-text">See </span>what your friends rated
           </h1>
-          <button className="thirdButton" onClick={openModal}>
+          <button className="desktop-signup-btns" onClick={openModal}>
             Sign Up Now
           </button>
         </div>
