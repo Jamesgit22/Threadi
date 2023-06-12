@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../../utils/queries';
+import { GET_ME, GET_USER } from '../../utils/queries';
 
 function Profile() {
   const { loading, data } = useQuery(GET_ME);
@@ -62,40 +62,43 @@ function Profile() {
           <div className='row pt-5 justify-content-center'>
             <div id='threads-container' className='col-11'>
               <ul>
-                <div className='d-flex'>
-                  <div className='col-1'>
-                    <div className='row'>
-                      <div className='col-12 gold-border'></div>
-                    </div>
-                    <div className='row'>
-                      <div className='col-12'></div>
-                    </div>
-                  </div>
-                  <li className='row mb-3'>
-                    <div className='col-11 li-thread '>
-                      <div className='row '>
-                        <div className='col-6'>
-                          <div className='row'>
-                            <h4 className='thread-title'>Thread Title</h4>
-                          </div>
-                          <div className='row'>
-                            <p className='thread-p'>
-                              Description Lorem ipsum dolor sit amet consectetur
-                              adipisicing elit.{' '}
-                            </p>
-                          </div>
+                {userData.savedThreads ? (
+                  userData.savedThreads.map((thread) => (
+                    <div className='d-flex' key={thread._id}>
+                      <div className='col-1'>
+                        <div className='row'>
+                          <div className='col-12 gold-border'></div>
                         </div>
-                        <div className='col-6 thread-img-container'>
-                          <img
-                            className='thread-img'
-                            src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                            alt=''
-                          />
+                        <div className='row'>
+                          <div className='col-12'></div>
                         </div>
                       </div>
+                      <li className='row mb-3'>
+                        <div className='col-11 li-thread'>
+                          <div className='row '>
+                            <div className='col-6'>
+                              <div className='row'>
+                                <h4 className='thread-title'>{thread.title}</h4>
+                              </div>
+                              <div className='row'>
+                                <p className='thread-p'>{thread.description}</p>
+                              </div>
+                            </div>
+                            <div className='col-6 thread-img-container'>
+                              <img
+                                className='thread-img'
+                                src='/images/pexels-tima-miroshnichenko-7991579.jpg'
+                                alt=''
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </li>
                     </div>
-                  </li>
-                </div>
+                  ))
+                ) : (
+                  <p>Loading saved threads...</p>
+                )}
               </ul>
             </div>
           </div>
