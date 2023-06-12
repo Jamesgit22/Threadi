@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import BModalCard from '../bmodalcard/BModalCard';
+import "./BrowseModal.css"
 
 export default function BrowseModal({ closeModal, modalTog, searchResults }) {
   return (
