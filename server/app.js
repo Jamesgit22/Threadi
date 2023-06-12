@@ -7,8 +7,6 @@ const routes = require("./routes");
 const { authMiddleware } = require('./utils/auth');
 require('dotenv').config();
 
-console.log(process.env.PORT);
-
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({

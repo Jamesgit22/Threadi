@@ -1,9 +1,7 @@
 import React from 'react';
 
 
-
-export default function UserThreads(props, { handlereviewModalTog }) {
-
+export default function UserThreads(props, { handleReviewModalTog }) {
 
     console.log(typeof(props.date));
       const date = props.date.split(' ');
@@ -42,17 +40,21 @@ export default function UserThreads(props, { handlereviewModalTog }) {
           </div>
         </div>
         <div className='row'>
-          <div className='col-12 d-flex justify-content-evenly align-items-center thread-btns-container'>
-            <p className='m-0 pt-1 pb-1'>(edit)</p>
+          <div className='col-12 justify-content-between d-flex align-items-center thread-btns-container'>
+            <div className="col-6">
             <button
               className='thread-open-btn'
-
-              onClick={props.onViewChange}
-
+              onClick={() => handleReviewModalTog(true)}
             >
               Open
             </button>
-            <p className='m-0 pt-1 pb-1'>(delete)</p>
+            </div>
+            <div className="col-6 text-end">
+            <button
+              className='thread-open-btn'
+            //   onClick={() => handleReviewModalTog(true)}
+            >Save</button>
+            </div>
           </div>
         </div>
         {/* end */}

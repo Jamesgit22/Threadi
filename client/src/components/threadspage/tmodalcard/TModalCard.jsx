@@ -1,7 +1,10 @@
 import React from 'react';
 import './TModalCard.css';
+import { ADD_REVIEW } from '../../../utils/mutations';
+import { useMutation } from '@apollo/client';
 
 export default function TModalCard(props) {
+  const [addReview, { error }] = useMutation(ADD_REVIEW)
   return (
     <>
     <div className='col-11 item-container'>
@@ -24,7 +27,7 @@ export default function TModalCard(props) {
                 </div>
                 <div className='row'>
                   <div className='col-12 text-end'>
-                    <button className='item-btn'>Add</button>
+                    <button className='item-btn' onClick>Add</button>
                   </div>
                 </div>
               </div>

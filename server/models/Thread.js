@@ -3,12 +3,11 @@ const {Schema, model, SchemaTypes} = require('mongoose');
 const threadSchema = new Schema({
   title: {
     type: String,
-    required: true,
+    default: 'No title.'
   },
   timestamp: {
     type: String,
-    default: Date.now(),
-    required: true
+    default: Date.now()
   },
   author: {
     type: SchemaTypes.ObjectId,
@@ -21,7 +20,7 @@ const threadSchema = new Schema({
   },
   description: {
     type: String,
-    default: "No description",
+    default: "No description"
   },
   reviews: [
     {
