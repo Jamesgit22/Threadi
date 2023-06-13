@@ -18,8 +18,6 @@ export default function Browse() {
     'Shows',
     'Books',
     'Video Games',
-    'Anime',
-    'Manga',
   ];
 
   const searchClick = async () => {
