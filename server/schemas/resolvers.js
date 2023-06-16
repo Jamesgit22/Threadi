@@ -18,6 +18,8 @@ const resolvers = {
     //   return User.findOne({ _id: userId }).populate('friends');
     // },
 
+    //comment
+
     me: async (parent, args, context) => {
       if (!context.user) {
         return null;
