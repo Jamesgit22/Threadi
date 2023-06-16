@@ -14,7 +14,7 @@ import ThreadsPage from './components/threadspage/ThreadsPage';
 import { setContext } from '@apollo/client/link/context';
 // import SingleThread from './components/threadspage/singlethread/SingleThread';
 import Feed from './components/activityfeed/Feed'
-
+import { HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -45,36 +45,36 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <Nav />
-        <BrowserRouter>
+        <HashRouter>
           <div className='App'>
             <Switch>
-              <Route exact path='/'>
+              <Route exact path='/' component={Home}>
                 <Home />
               </Route>
-              <Route exact path='/login'>
+              <Route exact path='/login' component={Login}>
                 <Login />
               </Route>
-              <Route exact path='/profile/:username'>
+              <Route exact path='/profile/:username' component={Profile}>
                 <Profile />
               </Route>
-              <Route path='/threadspage'>
+              <Route path='/threadspage' component={ThreadsPage}>
                 <ThreadsPage />
               </Route>
               {/* <Route path='/singlethread'>
                 <SingleThread />
               </Route> */}
-              <Route path='/browse'>
+              <Route path='/browse' component={Browse}> 
                 <Browse />
               </Route>
-              <Route exact path='/social'>
+              <Route exact path='/social' component={Social}>
                 <Social/>
               </Route>
-              <Route path='/feed'>
+              <Route path='/feed' component={Feed}>
                 <Feed/>
               </Route>
             </Switch>
           </div>
-        </BrowserRouter>
+        </HashRouter>
         <Footer />
         <style>
           @import
