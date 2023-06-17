@@ -11,7 +11,7 @@
 }
 
 .firstHeader {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Archivo Black', sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 4;
@@ -19,6 +19,10 @@
   margin: 0 auto;
   margin-bottom: 30px;
   width: 50%;
+}
+
+.firstHeader span {
+  font-family: 'Archivo Black', sans-serif;
 }
 
 .subtitleOne {
@@ -128,7 +132,7 @@
 }
 
 .secondHeader {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Archivo Black', sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -136,6 +140,10 @@
   margin: 0 auto;
   margin-bottom: 30px;
   width: 70%;
+}
+
+.secondHeader span {
+  font-family: 'Archivo Black', sans-serif;
 }
 
 .secondButton {
@@ -202,7 +210,7 @@
 }
 
 .thirdHeader {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Archivo Black', sans-serif;
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -210,6 +218,10 @@
   margin: 0 auto;
   margin-bottom: 30px;
   width: 40%;
+}
+
+.thirdHeader span {
+  font-family: 'Archivo Black', sans-serif;
 }
 
 .thirdButton {
@@ -254,7 +266,7 @@
 }
 
 .howSectionTitle {
-  font-family: "Brice";
+  font-family: 'Archivo Black', sans-serif;
   color: white;
   font-size: 40px;
   text-align: center;

@@ -20,7 +20,7 @@ function Footer() {
     <div className="footerContainer">
       <div className="firstFooter">
         <div className="firstSubFooter">
-          <div className="footerTitle">Threadi</div>
+          <div className="footerTitle1">THREADI</div>
         </div>
         <div className="footerSubTitle">
           Follow Threadi for more exciting content
@@ -34,7 +34,7 @@ function Footer() {
       </div>
       <div className="firstFooter">
         <div className="firstSubFooter">
-          <div className="footerTitle">Contributors</div>
+          <div className="footerTitle2">Contributors</div>
         </div>
         <a href='https://github.com/Jamesgit22'>James Schoeder</a>
         <a href='https://github.com/Elfelfa'>Kolt Bodzo</a>
