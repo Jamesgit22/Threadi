@@ -136,7 +136,7 @@ export default function Nav() {
         <div className="header container-fluid">
           <div className="row">
             <nav id="nav-container" className="col-12">
-              <div id="logo-container" className="col-3 d-flex">
+              <div id="logo-container" className="col-2 d-flex">
                 <div className="col-12 d-flex align-items-center">
                   <a
                     id="nav-logo"
@@ -150,12 +150,14 @@ export default function Nav() {
                   <img id="nav-img-logo" src={logoState} alt="broken" />
                 </div>
               </div>
-              <div className="desktop col-6 d-flex">
+              <div className="desktop col-8 d-flex">
                 <div className="desktopNav col-12 d-flex align-items-center justify-content-center">
                   {loggedIn ? <HeaderNav /> : null}
                 </div>
               </div>
+              <div className="col-2">
               {loggedIn ? <NavSIButtons /> : <NavSOButtons />}
+              </div>
             </nav>
           </div>
         </div>
