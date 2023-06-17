@@ -38,6 +38,44 @@ export const GET_ME = gql`
   }
 `;
 
+export const GET_PROFILE = gql`
+  query Query ($username: String!) {
+    getProfile (username: $username) {
+      _id
+      username
+      reviews {
+        _id
+        timestamp
+        title
+        text
+        rating
+        __typename
+      }
+      userThreads {
+        _id
+        timestamp
+        title
+        likes
+        description
+        __typename
+      }
+      savedThreads {
+        _id
+        timestamp
+        title
+        author {
+          _id
+          __typename
+        }
+        likes
+        description
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+
 // export const GET_ME = gql`
 // query Query {
 //   me {

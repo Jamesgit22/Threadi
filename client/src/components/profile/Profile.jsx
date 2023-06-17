@@ -5,22 +5,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_ME, GET_USER } from '../../utils/queries';
+import { GET_PROFILE, GET_USER } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
 
 function Profile() {
-  const { loading, data, error } = useQuery(GET_ME);
-  const userData = data?.me || {};
+  let { username } = useParams();
+  console.log(username);
+  const { loading, data, error } = useQuery(GET_PROFILE, {
+    variables: { username: username }
+  });
+  const userData = data?.getProfile || {};
   const [deleteSavedThread] = useMutation(DELETE_SAVED_THREAD);
+
   if(loading) {
     return <p>...loading</p>
   };
-
-  console.log(userData);
-  console.log(data);
-
-
 
   const handleDelete = async (threadId) => {
     try {

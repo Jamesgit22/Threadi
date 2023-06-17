@@ -77,6 +77,7 @@ const typeDefs = gql`
   type Query {
     me: User
     threads: [Thread]
+    getProfile(username: String!): User
     userThreads: [Thread]
     singleThread(threadId: ID!): Thread
     reviews: [Review]
