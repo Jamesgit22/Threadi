@@ -25,13 +25,13 @@ const resolvers = {
         return null;
       }
       const user = await User.findOne({ _id: context.user._id })
-      .populate('reviews')
-      .populate('userThreads') // Assuming the threads are stored as references in the user model
-      .populate('savedThreads'); // Assuming the reviews are stored as references in the user model
-      
+        .populate('reviews')
+        .populate('userThreads') // Assuming the threads are stored as references in the user model
+        .populate('savedThreads'); // Assuming the reviews are stored as references in the user model
+
       return user;
     },
-     getReviewsByThread: async (_, { threadId }) => {
+    getReviewsByThread: async (_, { threadId }) => {
       try {
         const thread = await Thread.findById(threadId).populate('reviews');
         if (!thread) {
@@ -46,8 +46,8 @@ const resolvers = {
     threads: async () => {
       try {
         const allThreads = await Thread.find()
-        .sort({ timestamp: -1 })
-        .populate('author'); // Assuming you have a model called "Thread"
+          .sort({ timestamp: -1 })
+          .populate('author'); // Assuming you have a model called "Thread"
         return allThreads;
       } catch (error) {
         console.error(error);
@@ -59,7 +59,7 @@ const resolvers = {
       console.log('backend')
       console.log(context.user)
       try {
-        const userThreads = await Thread.find({author: context.user._id});
+        const userThreads = await Thread.find({ author: context.user._id });
         return userThreads;
       } catch (error) {
         console.error(error);
@@ -71,9 +71,9 @@ const resolvers = {
       console.log(username);
 
       const user = await User.findOne({ username: username })
-      .populate('reviews')
-      .populate('userThreads') 
-      .populate('savedThreads');
+        .populate('reviews')
+        .populate('userThreads')
+        .populate('savedThreads');
 
       return user;
     },
@@ -81,22 +81,22 @@ const resolvers = {
     singleThread: async (_, { threadId }) => {
       try {
         const thread = await Thread.findById(threadId)
-          // .populate('author')
-          // .populate({
-          //   path: 'reviews',
-          //   populate: {
-          //     path: 'coms',
-          //     populate: {
-          //       path: 'author',
-          //     },
-          //   },
-          // })
-          // .populate({
-          //   path: 'coms',
-          //   populate: {
-          //     path: 'author',
-          //   },
-          // });
+        // .populate('author')
+        // .populate({
+        //   path: 'reviews',
+        //   populate: {
+        //     path: 'coms',
+        //     populate: {
+        //       path: 'author',
+        //     },
+        //   },
+        // })
+        // .populate({
+        //   path: 'coms',
+        //   populate: {
+        //     path: 'author',
+        //   },
+        // });
         return thread;
       } catch (error) {
         console.error(error);
@@ -133,6 +133,45 @@ const resolvers = {
       }
     },
 
+    getThreadComs: async (parent, { id }, context) => {
+      try {
+        const thread = await Thread.findById(id)
+          .populate({
+            path: 'coms',
+            populate: { path: 'coms' }
+          });
+
+        return thread;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    getReviewComs: async (parent, { id }, context) => {
+      try {
+        const review = await Review.findById(id)
+          .populate({
+            path: 'coms',
+            populate: { path: 'coms' }
+          });
+
+        return review;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    getComComs: async (parent, { id }, context) => {
+      try {
+        const com = await Com.findById(id)
+          .populate({
+            path: 'coms',
+            populate: { path: 'coms' }
+          });
+
+        return com;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     reviewComs: async (_, { reviewId }) => {
       try {
         const review = await Review.findById(reviewId);

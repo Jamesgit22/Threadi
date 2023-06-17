@@ -38,6 +38,62 @@ export const GET_ME = gql`
   }
 `;
 
+export const GET_THREAD_COMMENTS = gql`
+  query Query($id: ID!) {
+    getThreadComs(id: $id) {
+      title
+      timestamp
+      author
+      likes
+      description
+      coms {
+        author
+        timestamp
+        text
+        likes
+      }
+    }
+  }
+`
+
+export const GET_REVIEW_COMMENTS = gql`
+  query Query($id: ID!) {
+    getReviewComs(id: $id) {
+      author
+      timestamp
+      image
+      title
+      text
+      rating
+      likes
+      date
+      coms {
+        author
+        timestamp
+        text
+        likes
+      }
+    }
+  }
+`
+
+export const GET_COM_COMMENTS = gql`
+  query Query($id: ID!) {
+    getComComs(id: $id) {
+      author
+      timestamp
+      text
+      likes
+      coms {
+        author
+        timestamp
+        text
+        likes
+      }
+    }
+  }
+`
+
 export const GET_PROFILE = gql`
   query Query ($username: String!) {
     getProfile (username: $username) {
@@ -96,6 +152,7 @@ export const USER_THREADS = gql`
     }
   }
 `;
+
 
 export const THREAD_REVIEWS = gql`
   query Query($threadId: ID!) {
