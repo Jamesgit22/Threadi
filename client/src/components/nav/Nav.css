@@ -158,7 +158,8 @@ nav {
 }
 
 .desktopNav {
-  flex: 1;
+  /* flex: 1; */
+  width: 100%;
 }
 
 #mobile-nav {
@@ -191,4 +192,25 @@ nav {
 .open#search-bar {
   display: block;
   font-size: 1em;
+}
+
+#eye-glass {
+  width: 20px;
+  cursor: pointer;
+}
+
+#search-username {
+  display: none;
+}
+
+.open#search-username {
+  display: inline;
+}
+
+.open#search-username-btn {
+  display: inline;
+}
+
+#search-username-btn {
+  display: none;
 }
