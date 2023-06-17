@@ -9,11 +9,13 @@ import HeaderNav from "./headernav/HeaderNav";
 import NavSIButtons from "./navbuttons/NavSOButtons";
 import NavSOButtons from "./navbuttons/NavSIButtons";
 
+
+
 // resolve conflicts.
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [logoState, setLogoState] = useState('/images/threadLogo.png');
+  const [logoState, setLogoState] = useState("/images/threadLogo.png");
   const [isHovered, setIsHovered] = useState(false);
   const loggedIn = Auth.loggedIn();
 
@@ -74,60 +76,56 @@ export default function Nav() {
                     id="mobile-menu"
                     className={`${isOpen ? "open" : ""}`}
                   >
-                    <motion.button
+                    <motion.a
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.4, delay: 0.4 }}
                       className="mobile-nav-btns"
-                      href="/"
-                      onClick={() => {
-                        // handleViewChange('Projects');
-                        toggleMenu();
-                      }}
+                      href="/social"
                     >
-                      My Lists
-                    </motion.button>
+                      Social
+                    </motion.a>
 
-                    <motion.button
+                    <motion.a
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.4, delay: 0.6 }}
                       className="mobile-nav-btns"
-                      href="/"
+                      href="/profile/${userData.username}"
                       onClick={() => {
                         // handleViewChange('About');
                         toggleMenu();
                       }}
                     >
-                      Friends
-                    </motion.button>
+                      Profile
+                    </motion.a>
 
-                    <motion.button
+                    <motion.a
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.4, delay: 0.8 }}
                       className="mobile-nav-btns"
-                      href="/"
+                      href="/browse"
                       onClick={() => {
                         // handleViewChange('Contact');
                         toggleMenu();
                       }}
                     >
-                      Following
-                    </motion.button>
-                    <motion.button
+                      Browse
+                    </motion.a>
+                    <motion.a
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.4, delay: 1 }}
                       className="mobile-nav-btns"
-                      href="/"
+                      href="/threadspage"
                       onClick={() => {
                         // handleViewChange('Home');
                         toggleMenu();
                       }}
                     >
                       Logout
-                    </motion.button>
+                    </motion.a>
                   </motion.div>
                 </div>
               </div>
@@ -140,24 +138,24 @@ export default function Nav() {
             <nav id="nav-container" className="col-12">
               <div id="logo-container" className="col-3 d-flex">
                 <div className="col-12 d-flex align-items-center">
-                  <a id="nav-logo" href="/" className="light-txt" 
-                  onMouseEnter={onHover}
-                  onMouseLeave={onNoHover}>
+                  <a
+                    id="nav-logo"
+                    href="/"
+                    className="light-txt"
+                    onMouseEnter={onHover}
+                    onMouseLeave={onNoHover}
+                  >
                     THREADI
                   </a>
-                  <img
-                    id="nav-img-logo"
-                    src={logoState}
-                    alt="broken"
-                  />
+                  <img id="nav-img-logo" src={logoState} alt="broken" />
                 </div>
               </div>
               <div className="desktop col-6 d-flex">
                 <div className="desktopNav col-12 d-flex align-items-center justify-content-center">
-                  { loggedIn ? <HeaderNav /> : null}
+                  {loggedIn ? <HeaderNav /> : null}
                 </div>
               </div>
-              { loggedIn ? <NavSIButtons /> : <NavSOButtons /> }
+              {loggedIn ? <NavSIButtons /> : <NavSOButtons />}
             </nav>
           </div>
         </div>
