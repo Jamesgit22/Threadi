@@ -76,7 +76,7 @@ export default function UserThreads(
                 src='/images/trash-can-solid.svg'
                 alt='delete button'
                 className='m-0 pt-1 pb-1 trash-can'
-                onClick={handleDelete(props.id)}
+                onClick={() => handleDelete(props.id)}
               />
             </div>
           </div>
