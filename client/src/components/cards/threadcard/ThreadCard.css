@@ -1,0 +1,26 @@
+.threads-imgs {
+    max-height: 300px;
+    max-width: 500px;
+}
+
+.thread-description {
+   padding-top: 1em!important;
+}
+
+.thread-open-btn {
+    width: 100%;
+}
+
+.trash-can {
+    width: 20px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.trash-can:hover {
+    scale: 1.1;
+}
+
+.trash-can:active {
+    scale:0.9;
+}
