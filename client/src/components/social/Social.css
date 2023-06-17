@@ -52,8 +52,14 @@
   margin-top: 3em;
 }
 
+.likes-count{
+  margin-bottom: 0;
+  font-size: 1.2em;
+}
+
 .like-btn {
     width: 20px;
+    cursor: pointer;
 
 }
 
@@ -78,6 +84,17 @@
     margin: 6px 8px 4px 0;
     font-size: 1em;
 }
+
+.comments-count {
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+
+.comments-btn {
+  width: 20px;
+  cursor: pointer;
+}
+
 
 @media screen and (min-width: 850px) {
     

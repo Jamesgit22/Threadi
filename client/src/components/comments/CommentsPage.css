@@ -1,0 +1,118 @@
+#comments-main {
+    overflow-x: hidden !important;
+  }
+  
+  #comments-background {
+    background-image: url(../../../public/images/pexels-helena-lopes-3215527.jpg);
+    background-size: cover;
+    margin: -120px 0 0 0 !important;
+    padding: 0 !important;
+    
+  }
+  
+  #comments-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgb(8, 8, 8),
+      rgba(0, 0, 0, 0.668) 80%,
+      rgb(0, 0, 0)
+    );
+  }
+  
+  .comments-imgs {
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent, black 50%, transparent);
+  }
+  
+  .comments-card {
+    border: 1px solid rgb(38, 38, 38);
+    margin: 1em auto;
+    border-radius: 8px;
+  }
+  
+  #comments-page-title {
+    margin-top: 22em;
+    margin-bottom: 3em;
+  }
+  
+  #new-comments-btn {
+    background-color: var(--primary-col);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-bottom: 5em;
+  }
+  
+  #new-comments-btn:hover {
+    background-color: #c6495a;
+  }
+  
+  .comments-title-sec {
+    border-bottom: 1px solid rgb(38, 38, 38) !important;
+    background-color: rgb(24, 24, 24);
+    padding: 4px 10px 4px 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .comments-btns-container {
+    background-color: rgb(24, 24, 24);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  #box-container {
+    border-top: 3px solid rgb(38, 38, 38);
+    border-bottom: 3px solid rgb(38, 38, 38);
+    background-color: rgb(12, 12, 12) !important;
+    /* background-color: darkgrey;
+    outline: 1px solid slategrey; */
+   }
+  
+  .comments-open-btn {
+    background-color: var(--primary-col);
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin: 4px 0;
+    transition: 0.2s;
+  }
+  
+  .comments-open-btn:hover {
+    background-color: #c6495a;
+  }
+  
+  .item-titles {
+    padding: 5px 5px 5px 10px;
+  }
+  
+  @media screen and (min-width: 850px) {
+  
+      .comments-card {
+          margin-bottom: 4em;
+      }
+  
+    #my-comments-h2 {
+      font-size: 3.5em;
+      margin-bottom: 1.5em;
+    }
+  
+    #new-comments-btn {
+      font-size: 1.5em;
+    }
+  
+    #new-comments-btn {
+      margin-bottom: 10em;
+    }
+  
+    .comments-imgs {
+      width: 100%;
+      mask-image: linear-gradient(to right, transparent, black 50%, transparent);
+      border-radius: 8px;
+      padding: 0 !important;
+      max-height: 470px;
+    }
+  
+    .comments-open-btn {
+      width: 40%;
+    }
+  } 
+  
