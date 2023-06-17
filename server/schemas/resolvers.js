@@ -67,6 +67,17 @@ const resolvers = {
       }
     },
 
+    getProfile: async (parent, { username }, context) => {
+      console.log(username);
+
+      const user = await User.findOne({ username: username })
+      .populate('reviews')
+      .populate('userThreads') 
+      .populate('savedThreads');
+
+      return user;
+    },
+
     singleThread: async (_, { threadId }) => {
       try {
         const thread = await Thread.findById(threadId)
