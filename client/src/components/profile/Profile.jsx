@@ -10,13 +10,15 @@ import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
 
 function Profile() {
-  const { loading, data } = useQuery(GET_ME);
-  const userData = data?.me ||{};
-  console.log(userData);
+  const { loading, data, error } = useQuery(GET_ME);
+  const userData = data?.me || {};
   const [deleteSavedThread] = useMutation(DELETE_SAVED_THREAD);
   if(loading) {
     return <p>...loading</p>
-  }
+  };
+
+  console.log(userData);
+  console.log(data);
 
 
 

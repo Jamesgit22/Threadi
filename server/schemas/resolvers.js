@@ -25,8 +25,10 @@ const resolvers = {
         return null;
       }
       const user = await User.findOne({ _id: context.user._id })
+      .populate('reviews')
       .populate('userThreads') // Assuming the threads are stored as references in the user model
       .populate('savedThreads'); // Assuming the reviews are stored as references in the user model
+      
       return user;
     },
      getReviewsByThread: async (_, { threadId }) => {
