@@ -257,36 +257,40 @@ export default function ThreadAddReviewModal({
                   id='modal-title'
                 >
                   <div className='row'>
-                    <div className='col-12'>
-                      <h2 className='modal-title'>Search</h2>
-                    </div>
                   </div>
                   <div className='row'>
-                    <div className='col-12'>
+                    <div id='t-title-container' className='col-12 col-md-6'>
+                      <h2 id='t-modal-title' className='modal-title align-self-center'>Search for a</h2>
+                    </div>
+                    <div id='t-switch-container' className='col-12 col-md-6'>
                       <select
-                        id='browse-switch'
+                        id='thread-switch'
                         value={selectedWord}
                         onChange={handleWordChange}
                       >
                         <option value='movie'>Movie</option>
                         <option value='show'>Show</option>
                         <option value='book'>Book</option>
-                        <option value='games'>Video Games</option>
+                        <option value='games'>Video Game</option>
                         <option value='anime'>Anime</option>
                         <option value='manga'>Manga</option>
                       </select>
                     </div>
                   </div>
                   <div className='row'>
-                    <div className='col-12'>
+                    <div id='search-row' className='col-12 d-flex'>
+                      <div className="col-12 col-md-6">
                       <input
                         type='text'
-                        id='modal-input'
+                        id='thread-modal-input'
                         onChange={handleInputChange}
                         name='search'
                         placeholder='enter a title'
                       />
-                      <button onClick={searchClick}>Search</button>
+                      </div>
+                      <div className="col-12 col-md-3">
+                      <button id='thread-search-btn' onClick={searchClick}>Search</button>
+                      </div>
                     </div>
                   </div>
                   <button id='modal-close' onClick={closeReviewModal}>
