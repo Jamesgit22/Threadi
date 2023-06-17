@@ -17,7 +17,7 @@ export default function Browse() {
     'Movies',
     'Shows',
     'Books',
-    'Video Games',
+    'Games',
   ];
 
   const searchClick = async () => {
@@ -268,10 +268,10 @@ export default function Browse() {
                   <div className='col-12 pb-3'>
                     <div
                       id='switch-main'
-                      className='d-flex justify-content-center align-items-center'
+                      className='d-flex col-12 justify-content-center align-items-center'
                     >
                       <div className='row justify-content-center'>
-                        <div className='col-6 d-flex justify-content-end align-items-center'>
+                        <div className='col-8 d-flex justify-content-end align-items-center'>
                           <h2 id='browse-msg'>Search for</h2>
                         </div>
                         <div id='browse-switch-container' className='col-4'>
