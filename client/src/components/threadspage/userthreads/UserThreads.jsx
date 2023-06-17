@@ -1,17 +1,32 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import React from 'react';
 import './UserThreads.css';
+import { useMutation } from '@apollo/client';
+import { DELETE_THREAD } from '../../../utils/mutations';
 
 export default function UserThreads(
   props,
   { handlereviewModalTog, getSingleThread }
 ) {
-  console.log(typeof props.date);
+  const [deleteThread] = useMutation(DELETE_THREAD);
   const date = props.date.split(' ');
   const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
 
   const sendData = () => {
     props.getSingleThread(props.id);
+  };
+
+  const handleDelete = async (threadId) => {
+    try {
+      await deleteThread({
+        variables: { threadId },
+      });
+      
+      // Reload the page to reflect the changes
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -61,7 +76,7 @@ export default function UserThreads(
                 src='/images/trash-can-solid.svg'
                 alt='delete button'
                 className='m-0 pt-1 pb-1 trash-can'
-                onClick={console.log('delete')}
+                onClick={handleDelete(props.id)}
               />
             </div>
           </div>
