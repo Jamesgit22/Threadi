@@ -8,33 +8,39 @@ import { useQuery } from '@apollo/client';
 import { GET_PROFILE, GET_USER } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 function Profile() {
   let { username } = useParams();
   console.log(username);
   const { loading, data, error } = useQuery(GET_PROFILE, {
-    variables: { username: username }
+    variables: { username: username },
   });
   const userData = data?.getProfile || {};
   const [deleteSavedThread] = useMutation(DELETE_SAVED_THREAD);
 
-  if(loading) {
-    return <p>...loading</p>
-  };
+  if (loading) {
+    return <p>...loading</p>;
+  }
+
+  const myData = Auth.getProfile();
+
+  console.log(myData);
+  console.log(userData.username);
 
   const handleDelete = async (threadId) => {
     try {
       await deleteSavedThread({
         variables: { threadId },
       });
-      
+
       // Reload the page to reflect the changes
       window.location.reload();
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <>
       <div id='profile-parent' className='container-fluid'>
@@ -47,7 +53,11 @@ function Profile() {
                   id='profile-img-container'
                   className='col-10 pt-5 pb-5 text-center'
                 >
-                  <FontAwesomeIcon id='profile-default' icon={faCircleUser} style={{color: "#393939",}}></FontAwesomeIcon>
+                  <FontAwesomeIcon
+                    id='profile-default'
+                    icon={faCircleUser}
+                    style={{ color: '#393939' }}
+                  ></FontAwesomeIcon>
                 </div>
               </div>
               <div className='row'>
@@ -116,7 +126,16 @@ function Profile() {
                               />
                             </div>
                           </div>
-                          <button className='del-sav-btn' onClick={() => handleDelete(thread._id)}>Delete</button>
+                          {myData.data.username === userData.username ? (
+                            <button
+                              className='del-sav-btn'
+                              onClick={() => handleDelete(thread._id)}
+                            >
+                              Delete
+                            </button>
+                          ) : (
+                            <></>
+                          )}
                         </div>
                       </li>
                     </div>
