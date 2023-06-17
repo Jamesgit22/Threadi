@@ -1,3 +1,66 @@
 #modal-input {
     color: black;
 }
+
+#search-row {
+    flex-direction: column;
+}
+
+#thread-switch {
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#thread-modal-input {
+    font-size: 1.5em;
+    border-radius: 8px;
+    padding: 4px 10px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+#thread-search-btn {
+    background-color: var(--primary-col);
+    border-radius: 8px;
+    font-size: 1.5em;
+    width: 80%;
+    margin: 10px auto;
+}
+
+@media screen and (min-width: 650px) {
+    #search-row {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #t-modal-title {
+        font-size: 2em;
+    }
+
+    #t-title-container {
+        display: flex;
+        justify-content: end;
+        text-align: end;
+    }
+
+    #t-switch-container {
+        align-content: center;
+        justify-content: left;
+    }
+
+    #thread-switch {
+        display: flex;
+        text-align: start;
+        font-size: 2em;
+        padding: 0;
+    }
+
+    #thread-modal-input {
+        width: 100%;
+    }
+
+
+}
