@@ -1,0 +1,28 @@
+.thread-title{
+	padding-top: 5px;
+}
+
+.thread-img-container {
+	padding: 0!important;
+
+}
+
+.thread-img {
+	width: 100%;
+	mask-image: linear-gradient(to right, transparent, black 60%, transparent);
+	border-radius: 8px;
+	padding: 0!important;
+
+}
+
+.thread-p {
+	font-size: 15px;
+}
+
+.del-sav-btn {
+	background-color: var(--primary-col);
+    border-radius: 8px;
+    padding: 5px 10px;
+	margin-bottom: 10px;
+    width: 20%;
+}

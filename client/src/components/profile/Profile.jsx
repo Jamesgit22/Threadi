@@ -1,6 +1,7 @@
 import React from 'react';
 import './Profile.css';
 import ProfileComments from '../profilecomments/ProfileComments.jsx';
+import '../cards/threadcard/cardtheme/ProfileTheme.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
@@ -8,25 +9,19 @@ import { useQuery } from '@apollo/client';
 import { GET_PROFILE, GET_USER } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
-import Auth from '../../utils/auth';
+import ThreadCard from '../cards/threadcard/ThreadCard';
 
 function Profile() {
   let { username } = useParams();
-  console.log(username);
   const { loading, data, error } = useQuery(GET_PROFILE, {
-    variables: { username: username },
+    variables: { username: username }
   });
   const userData = data?.getProfile || {};
   const [deleteSavedThread] = useMutation(DELETE_SAVED_THREAD);
 
   if (loading) {
-    return <p>...loading</p>;
-  }
-
-  const myData = Auth.getProfile();
-
-  console.log(myData);
-  console.log(userData.username);
+    return <p>...loading</p>
+  };
 
   const handleDelete = async (threadId) => {
     try {
@@ -53,11 +48,7 @@ function Profile() {
                   id='profile-img-container'
                   className='col-10 pt-5 pb-5 text-center'
                 >
-                  <FontAwesomeIcon
-                    id='profile-default'
-                    icon={faCircleUser}
-                    style={{ color: '#393939' }}
-                  ></FontAwesomeIcon>
+                  <FontAwesomeIcon id='profile-default' icon={faCircleUser} style={{ color: "#393939", }}></FontAwesomeIcon>
                 </div>
               </div>
               <div className='row'>
@@ -98,47 +89,13 @@ function Profile() {
               <ul>
                 {userData.savedThreads ? (
                   userData.savedThreads.map((thread) => (
-                    <div className='d-flex' key={thread._id}>
-                      <div className='col-1'>
-                        <div className='row'>
-                          <div className='col-12 gold-border'></div>
-                        </div>
-                        <div className='row'>
-                          <div className='col-12'></div>
-                        </div>
-                      </div>
-                      <li className='row mb-3'>
-                        <div className='col-11 li-thread'>
-                          <div className='row '>
-                            <div className='col-6'>
-                              <div className='row'>
-                                <h4 className='thread-title'>{thread.title}</h4>
-                              </div>
-                              <div className='row'>
-                                <p className='thread-p'>{thread.description}</p>
-                              </div>
-                            </div>
-                            <div className='col-6 thread-img-container'>
-                              <img
-                                className='thread-img'
-                                src='/images/pexels-tima-miroshnichenko-7991579.jpg'
-                                alt=''
-                              />
-                            </div>
-                          </div>
-                          {myData.data.username === userData.username ? (
-                            <button
-                              className='del-sav-btn'
-                              onClick={() => handleDelete(thread._id)}
-                            >
-                              Delete
-                            </button>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      </li>
-                    </div>
+                    <ThreadCard
+                      key={thread._id}
+                      id={thread._id}
+                      title={thread.title}
+                      date={thread.timestamp}
+                      description={thread.description}
+                    />
                   ))
                 ) : (
                   <p>Loading saved threads...</p>

@@ -2,7 +2,7 @@ import React from 'react';
 import ThreadsModal from '../threadsModal/ThreadsModal';
 import { useState } from 'react';
 import '../ThreadsPage.css';
-import UserThreads from '../userthreads/UserThreads';
+import ThreadCard from '../../cards/threadcard/ThreadCard';
 
 export default function MainThreads({ getSingleThread, userData, data }) {
   const [modalTog, setModalTog] = useState(false);
@@ -52,7 +52,7 @@ export default function MainThreads({ getSingleThread, userData, data }) {
             <div className='row'>
               {/* thread 1 */}
               {userData.map((res) => (
-                <UserThreads
+                <ThreadCard
                   key={res._id.toString()}
                   id={res._id}
                   title={res.title}
@@ -73,12 +73,6 @@ export default function MainThreads({ getSingleThread, userData, data }) {
             modalTog={modalTog}
           />
         )}
-        {/*reviewModalTog && (
-          <ThreadAddReviewModal
-            closeReviewModal={closeReviewModal}
-            reviewModalTog={reviewModalTog}
-          />
-        )*/}
       </div>
     </>
   );

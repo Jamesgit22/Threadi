@@ -74,6 +74,20 @@ const typeDefs = gql`
     reviews: [Review!]!
   }
 
+  type SingleThreadComResponse {
+    author: User
+  }
+
+  type SingleThreadResponse {
+    title: String!
+    timestamp: String!
+    author: User!
+    likes: Int
+    description: String
+    reviews: [Review!]!
+    coms: [Com!]!
+  }
+
   type Query {
     me: User
     threads: [Thread]

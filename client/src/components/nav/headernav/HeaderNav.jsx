@@ -48,7 +48,7 @@ function HeaderNav() {
       <a className='desktop-nav-btns' href='/browse'>
         Browse
       </a>
-      <a className='desktop-nav-btns' href='/threadspage'>
+      <a className='desktop-nav-btns' href='/mythreads'>
         My Threads
       </a>
       <div id='nav-search-box' className='ms-3'>

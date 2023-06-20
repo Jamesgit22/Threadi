@@ -145,8 +145,8 @@ export const USER_THREADS = gql`
   query Query {
     userThreads {
       _id
-      timestamp
       title
+      timestamp
       likes
       description
     }
@@ -170,7 +170,7 @@ export const THREAD_REVIEWS = gql`
   }
 `;
 
-export const SINGLE_THREAD = gql`
+export const GET_THREAD = gql`
   query Query($threadId: ID!) {
     singleThread(threadId: $threadId) {
       _id
@@ -181,21 +181,30 @@ export const SINGLE_THREAD = gql`
         username
       }
       likes
+      description
       reviews {
         _id
+        author {
+          _id
+          username
+        }
         timestamp
+        image
         title
         text
         rating
         likes
-        description
+        date
+        __typename
       }
       coms {
         author {
           _id
           username
         }
+        __typename
       }
+      __typename
     }
   }
 `;

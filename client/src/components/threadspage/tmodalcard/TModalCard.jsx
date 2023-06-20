@@ -3,23 +3,13 @@ import './TModalCard.css';
 import { ADD_REVIEW } from '../../../utils/mutations';
 import { useMutation } from '@apollo/client';
 
-export default function TModalCard(props, { userData, getWriteReview }) {
+export default function TModalCard(props) {
   const [addReview, { error }] = useMutation(ADD_REVIEW)
-
-
-  // const addReviewHandler = async () => {
-
-  //   const { data } = await addReview({
-  //     variables: {}
-  //   })
-
-  // }
 
   const handleTransition = () => {
     console.log(props);
     props.getWriteReview(props);
   }
-
 
   return (
     <>
