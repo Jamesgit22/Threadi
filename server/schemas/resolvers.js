@@ -60,6 +60,8 @@ const resolvers = {
       console.log(context.user)
       try {
         const userThreads = await Thread.find({ author: context.user._id });
+        console.log(userThreads);
+
         return userThreads;
       } catch (error) {
         console.error(error);
@@ -72,30 +74,34 @@ const resolvers = {
       const user = await User.findOne({ username: username })
         .populate('reviews')
         .populate('userThreads')
-        .populate('savedThreads');
+        .populate({
+          path: 'savedThreads',
+          populate: { path: 'author' }
+        });
 
       return user;
     },
 
-    singleThread: async (_, { threadId }) => {
+    singleThread: async (parent, { threadId }, context) => {
       try {
+        console.log(threadId);
         const thread = await Thread.findById(threadId)
-        // .populate('author')
-        // .populate({
-        //   path: 'reviews',
-        //   populate: {
-        //     path: 'coms',
-        //     populate: {
-        //       path: 'author',
-        //     },
-        //   },
-        // })
-        // .populate({
-        //   path: 'coms',
-        //   populate: {
-        //     path: 'author',
-        //   },
-        // });
+          .populate('author')
+          .populate({
+            path: 'reviews',
+            populate: { 
+              path: 'author' 
+            }
+          })
+          .populate({
+            path: 'coms',
+            populate: {
+              path: 'author'
+            }
+          });
+
+          console.log(thread);
+
         return thread;
       } catch (error) {
         console.error(error);

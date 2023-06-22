@@ -2,7 +2,7 @@ import React from 'react';
 import './WriteReview.css';
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_REVIEW } from '../../../utils/mutations';
+import { ADD_REVIEW } from '../../../../utils/mutations';
 
 export default function WriteReview(props) {
   const [addReview, { error }] = useMutation(ADD_REVIEW);

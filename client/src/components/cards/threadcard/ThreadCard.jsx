@@ -1,7 +1,48 @@
-import React from 'react'
-import './ThreadCard.css'
+import React from 'react';
+import '../../profile/Profile.css';
+// import NormalTheme from './cardtheme/NormalTheme'
+// import ProfileTheme from './cardtheme/ProfileTheme'
+import { useMutation } from '@apollo/client';
+import { DELETE_THREAD } from '../../../utils/mutations';
 
-export default function ThreadCard() {
+//ThreadCard needs these props to work properly
+//key
+//id
+//title
+//date
+//description
+//getSingleThread method
+
+export default function ThreadCard(props, { getSingleThread }) {
+  const [deleteThread] = useMutation(DELETE_THREAD);
+  const date = props.date.split(' ');
+  const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
+
+  let isNormal;
+
+  if (!(window.location.href.split('/')[1] === "profile")) {
+    isNormal = true;
+  } else {
+    isNormal = false;
+  }
+
+  const sendData = () => {
+    window.location.href = `/thread/${props.id}`;
+  };
+
+  const handleDelete = async (threadId) => {
+    try {
+      await deleteThread({
+        variables: { threadId },
+      });
+      
+      // Reload the page to reflect the changes
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
         <div className='col-8 thread-card mt-3'>

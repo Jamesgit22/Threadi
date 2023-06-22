@@ -13,6 +13,7 @@ import Social from './components/social/Social';
 import ThreadsPage from './components/threadspage/ThreadsPage';
 import { setContext } from '@apollo/client/link/context';
 import CommentsPage from './components/comments/CommentsPage';
+import SingleThreadPage from './components/threadspage/singlethreadpage/SingleThreadPage'
 // import SingleThread from './components/threadspage/singlethread/SingleThread';
 import Feed from './components/activityfeed/Feed';
 
@@ -57,12 +58,12 @@ function App() {
               <Route exact path='/profile/:username'>
                 <Profile />
               </Route>
-              <Route path='/threadspage'>
+              <Route path='/mythreads'>
                 <ThreadsPage />
               </Route>
-              {/* <Route path='/singlethread'>
-                <SingleThread />
-              </Route> */}
+              <Route path='/thread/:id'>
+                <SingleThreadPage />
+              </Route>
               <Route path='/browse'>
                 <Browse />
               </Route>
