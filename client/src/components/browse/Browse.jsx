@@ -6,6 +6,7 @@ import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import BrowseModal from './browseModal/BrowseModal';
 
+
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('Movies');
   const [searchInput, setSearchInput] = useState('');

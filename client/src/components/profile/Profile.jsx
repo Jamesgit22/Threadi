@@ -10,6 +10,7 @@ import { GET_PROFILE, GET_USER } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
 import ThreadCard from '../cards/threadcard/ThreadCard';
+import {delay, motion} from 'framer-motion';
 
 function Profile() {
   let { username } = useParams();
@@ -56,7 +57,11 @@ function Profile() {
                   id='username-container'
                   className='col-12 pt-2 pb-3 text-center'
                 >
-                  <h3>{userData.username}</h3>
+                  <motion.h3
+                  initial={{opacity: 0, y: '30px'}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{duration: 0.8,delay: 0.6}}
+                  >{userData.username}</motion.h3>
                 </div>
               </div>
             </div>
@@ -67,17 +72,29 @@ function Profile() {
             <div id='menu-container' className='col-11'>
               <div className='row'>
                 <div id='menu-s-threads' className='col-12'>
-                  <p className='menu-btns p-1 m-0'>Saved Threads</p>
+                  <motion.p
+                  initial={{opacity: 0}}
+                  animate={{opacity: 1}}
+                  transition={{duration: 0.2, delay: 0.1}}
+                  className='menu-btns p-1 m-0'>Saved Threads</motion.p>
                 </div>
               </div>
               <div className='row'>
                 <div id='menu-comments' className='col-12'>
-                  <p className='menu-btns p-1 m-0'>Comments</p>
+                  <motion.p
+                  initial={{opacity: 0}}
+                  animate={{opacity: 1}}
+                  transition={{duration: 0.2, delay: 0.3}}
+                  className='menu-btns p-1 m-0'>Comments</motion.p>
                 </div>
               </div>
               <div className='row'>
                 <div id='menu-friends' className='col-12'>
-                  <p className='menu-btns p-1 m-0'>Friends</p>
+                  <motion.p
+                  initial={{opacity: 0}}
+                  animate={{opacity: 1}}
+                  transition={{duration: 0.2, delay: 0.5}}
+                  className='menu-btns p-1 m-0'>Friends</motion.p>
                 </div>
               </div>
             </div>
