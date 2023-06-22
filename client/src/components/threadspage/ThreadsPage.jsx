@@ -5,13 +5,14 @@ import { useQuery } from '@apollo/client';
 import { USER_THREADS } from '../../utils/queries';
 import './ThreadsPage.css';
 import ThreadCard from '../cards/threadcard/ThreadCard';
+import Loading from '../loading/Loading';
 
 export default function ThreadsPage() {
   const [modalTog, setModalTog] = useState(false);
   const { loading, data } = useQuery(USER_THREADS);
 
   if (loading) {
-    return <p>loading...</p>;
+    return <Loading />;
   }
 
   const userData = data?.userThreads || {};

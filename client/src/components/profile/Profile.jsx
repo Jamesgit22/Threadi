@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
 import ThreadCard from '../cards/threadcard/ThreadCard';
 import {delay, motion} from 'framer-motion';
+import Loading from '../loading/Loading';
 
 function Profile() {
   let { username } = useParams();
@@ -21,7 +22,7 @@ function Profile() {
   const [deleteSavedThread] = useMutation(DELETE_SAVED_THREAD);
 
   if (loading) {
-    return <p>...loading</p>
+    return <Loading />
   };
 
   const handleDelete = async (threadId) => {

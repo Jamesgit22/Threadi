@@ -16,6 +16,7 @@ import CommentsPage from './components/comments/CommentsPage';
 import SingleThreadPage from './components/threadspage/singlethreadpage/SingleThreadPage'
 // import SingleThread from './components/threadspage/singlethread/SingleThread';
 import Feed from './components/activityfeed/Feed';
+import Loading from './components/loading/Loading.jsx';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -76,6 +77,9 @@ function App() {
               <Route path='/feed'>
                 <Feed />
               </Route>
+              <Route path='/loading'>
+                <Loading />
+              </Route> 
             </Switch>
           </div>
         </BrowserRouter>
