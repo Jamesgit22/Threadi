@@ -15,7 +15,7 @@ import NavSOButtons from "./navbuttons/NavSIButtons";
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [logoState, setLogoState] = useState("/images/threadLogo.png");
+  const [logoState, setLogoState] = useState("/images/ThreadiLogo.png");
   const [isHovered, setIsHovered] = useState(false);
   const loggedIn = Auth.loggedIn();
 
@@ -36,12 +36,12 @@ export default function Nav() {
 
   const onHover = () => {
     setIsHovered(true);
-    setLogoState("/images/threadLogoRed.png");
+    setLogoState("/images/ThreadiLogoRed.png");
   };
 
   const onNoHover = () => {
     setIsHovered(false);
-    setLogoState("/images/threadLogo.png");
+    setLogoState("/images/ThreadiLogo.png");
   };
 
   const toggleMenu = () => {
@@ -155,9 +155,8 @@ export default function Nav() {
                     onMouseEnter={onHover}
                     onMouseLeave={onNoHover}
                   >
-                    THREADI
+                    <img id="nav-img-logo" src={logoState} alt="broken" />
                   </a>
-                  <img id="nav-img-logo" src={logoState} alt="broken" />
                 </div>
               </div>
               <div className="desktop col-8 d-flex">
