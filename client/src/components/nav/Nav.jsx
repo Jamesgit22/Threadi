@@ -91,7 +91,7 @@ export default function Nav() {
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.4, delay: 0.6 }}
                       className="mobile-nav-btns"
-                      href="/profile/${userData.username}"
+                      href='{`/profile/${userData.username}`}'
                       onClick={() => {
                         // handleViewChange('About');
                         toggleMenu();
@@ -118,7 +118,7 @@ export default function Nav() {
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.4, delay: 1 }}
                       className="mobile-nav-btns"
-                      href="/threadspage"
+                      href="/mythreads"
                       onClick={() => {
                         // handleViewChange('About');
                         toggleMenu();

@@ -1,0 +1,34 @@
+#follow-card {
+    background-color: rgb(18, 18, 18);
+    border: 1px solid #393939;
+    border-radius: 8px;
+    
+}
+
+.follow-inner {
+    height: 50px;
+}
+
+#follow-username {
+    padding: 4px 6px;
+    text-align: start;
+}
+
+#follow-p-btn {
+    height: 100%;
+    width: 20%;
+    cursor: pointer;
+    background-color: var(--primary-col);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    transition: 0.2s;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#follow-p-btn:hover {
+    background-color: var(--primary-btn-hover);
+}
