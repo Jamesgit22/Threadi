@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Profile.css';
 import ProfileComments from '../profilecomments/ProfileComments.jsx';
-import '../cards/threadcard/cardtheme/ProfileTheme.css'
+import '../cards/threadcard/cardtheme/ProfileTheme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
@@ -10,20 +10,23 @@ import { GET_PROFILE, GET_USER } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { DELETE_SAVED_THREAD } from '../../utils/mutations';
 import ThreadCard from '../cards/threadcard/ThreadCard';
-import {delay, motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import Loading from '../loading/Loading';
+import SavedThreads from './savedthreads/SavedThreads';
+import Following from './following/Following';
 
 function Profile() {
   let { username } = useParams();
   const { loading, data, error } = useQuery(GET_PROFILE, {
-    variables: { username: username }
+    variables: { username: username },
   });
   const userData = data?.getProfile || {};
   const [deleteSavedThread] = useMutation(DELETE_SAVED_THREAD);
+  const [currentScreen, setCurrentScreen] = useState('threads');
 
   if (loading) {
-    return <Loading />
-  };
+    return <Loading />;
+  }
 
   const handleDelete = async (threadId) => {
     try {
@@ -35,6 +38,22 @@ function Profile() {
       window.location.reload();
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  // menu click handler to set the current screen
+  const handleMenuSwitch = (e) => setCurrentScreen(e);
+
+  const renderSwitch = (currentScreen) => {
+    switch (currentScreen) {
+      case 'threads':
+        return <SavedThreads userData={userData} handleDelete={handleDelete}/>;
+      case 'comments':
+        return <ProfileComments />;
+      case 'following':
+        return <Following userData={userData}/>;
+      default:
+        return <SavedThreads />;
     }
   };
 
@@ -50,7 +69,11 @@ function Profile() {
                   id='profile-img-container'
                   className='col-10 pt-5 pb-5 text-center'
                 >
-                  <FontAwesomeIcon id='profile-default' icon={faCircleUser} style={{ color: "#393939", }}></FontAwesomeIcon>
+                  <FontAwesomeIcon
+                    id='profile-default'
+                    icon={faCircleUser}
+                    style={{ color: '#393939' }}
+                  ></FontAwesomeIcon>
                 </div>
               </div>
               <div className='row'>
@@ -59,10 +82,12 @@ function Profile() {
                   className='col-12 pt-2 pb-3 text-center'
                 >
                   <motion.h3
-                  initial={{opacity: 0, y: '30px'}}
-                  animate={{opacity: 1, y: 0}}
-                  transition={{duration: 0.8,delay: 0.6}}
-                  >{userData.username}</motion.h3>
+                    initial={{ opacity: 0, y: '30px' }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                  >
+                    {userData.username}
+                  </motion.h3>
                 </div>
               </div>
             </div>
@@ -70,57 +95,51 @@ function Profile() {
           {/* section end */}
           {/* section */}
           <div className='row pt-5 justify-content-center'>
-            <div id='menu-container' className='col-11'>
+            <div id='menu-container' className='col-11 mb-5'>
               <div className='row'>
                 <div id='menu-s-threads' className='col-12'>
                   <motion.p
-                  initial={{opacity: 0}}
-                  animate={{opacity: 1}}
-                  transition={{duration: 0.2, delay: 0.1}}
-                  className='menu-btns p-1 m-0'>Saved Threads</motion.p>
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: 0.1 }}
+                    onClick={() => handleMenuSwitch('threads')}
+                    className='menu-btns p-1 m-0'
+                  >
+                    Saved Threads
+                  </motion.p>
                 </div>
               </div>
               <div className='row'>
                 <div id='menu-comments' className='col-12'>
                   <motion.p
-                  initial={{opacity: 0}}
-                  animate={{opacity: 1}}
-                  transition={{duration: 0.2, delay: 0.3}}
-                  className='menu-btns p-1 m-0'>Comments</motion.p>
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: 0.3 }}
+                    onClick={() => handleMenuSwitch('comments')}
+                    className='menu-btns p-1 m-0'
+                  >
+                    Comments
+                  </motion.p>
                 </div>
               </div>
               <div className='row'>
                 <div id='menu-friends' className='col-12'>
                   <motion.p
-                  initial={{opacity: 0}}
-                  animate={{opacity: 1}}
-                  transition={{duration: 0.2, delay: 0.5}}
-                  className='menu-btns p-1 m-0'>Friends</motion.p>
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: 0.5 }}
+                    onClick={() => handleMenuSwitch('following')}
+                    className='menu-btns p-1 m-0'
+                  >
+                    Following
+                  </motion.p>
                 </div>
               </div>
             </div>
           </div>
           {/* section end */}
           {/* section */}
-          <div className='row pt-5 justify-content-center'>
-            <div id='threads-container' className='col-11'>
-              <ul>
-                {userData.savedThreads ? (
-                  userData.savedThreads.map((thread) => (
-                    <ThreadCard
-                      key={thread._id}
-                      id={thread._id}
-                      title={thread.title}
-                      date={thread.timestamp}
-                      description={thread.description}
-                    />
-                  ))
-                ) : (
-                  <p>Loading saved threads...</p>
-                )}
-              </ul>
-            </div>
-          </div>
+          {renderSwitch(currentScreen)}
           {/* section end */}
         </div>
       </div>
