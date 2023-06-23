@@ -229,3 +229,27 @@ nav {
   display: none;
 }
 
+.mobileSign {
+  display: flex;
+  flex-direction: row;
+}
+
+.mobileSignIn {
+  padding: 4px;
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-right: 28px;
+  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.mobileSignUp {
+  padding: 4px;
+  padding-right: 8px;
+  padding-left: 8px;
+  font-size: 20px;
+  color: #AF3E4D;
+  border: 1px solid #AF3E4D;
+  border-radius: 10px;
+}
