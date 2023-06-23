@@ -28,6 +28,7 @@ function Profile() {
     return <Loading />;
   }
 
+    console.log(userData);
   const handleDelete = async (threadId) => {
     try {
       await deleteSavedThread({

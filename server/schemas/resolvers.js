@@ -77,8 +77,9 @@ const resolvers = {
         .populate({
           path: 'savedThreads',
           populate: { path: 'author' }
-        });
-
+        })
+        .populate({path: 'following', select: 'username'});
+        console.log(user);
       return user;
     },
 

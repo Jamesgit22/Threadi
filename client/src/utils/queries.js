@@ -107,6 +107,10 @@ export const GET_PROFILE = gql`
         rating
         __typename
       }
+      following {
+        _id
+        username
+      }
       userThreads {
         _id
         timestamp

@@ -10,7 +10,7 @@ export default function Following({userData}) {
           <div className="col-10">
             <div className="row">
               <div className="col-12 text-center">
-                <h2 id="following-h2">Following <span id='following-count'>{0}</span></h2>
+                <h2 id="following-h2">Following <span id='following-count'>{userData.following.length}</span></h2>
               </div>
             </div>
             <div className="row justify-content-center">

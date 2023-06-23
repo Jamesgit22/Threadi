@@ -6,7 +6,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    friends: [User]
+    following: [User]
     reviews: [Review]
     userThreads: [Thread]
     savedThreads: [Thread]

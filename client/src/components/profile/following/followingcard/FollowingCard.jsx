@@ -5,7 +5,13 @@ export default function FollowingCard({userData}) {
     <div className="container-fluid">
       <div className="col-12">
         <div className="row justify-content-cneter">
-          <div className="col-11"></div>
+          <div className="col-11">
+            <div className="row">
+              <div className="col-12">
+                <p id="follow-username">{userData.following[0].username}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
