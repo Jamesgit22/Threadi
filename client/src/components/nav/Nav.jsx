@@ -50,7 +50,7 @@ export default function Nav() {
 
   return (
     <>
-      {isMobile ? (
+      {isMobile && loggedIn ? (
         <div className="header container-fluid">
           <div className="row">
             <nav
