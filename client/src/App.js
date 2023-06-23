@@ -16,6 +16,8 @@ import CommentsPage from './components/comments/CommentsPage';
 import SingleThreadPage from './components/threadspage/singlethreadpage/SingleThreadPage'
 // import SingleThread from './components/threadspage/singlethread/SingleThread';
 import Feed from './components/activityfeed/Feed';
+import Loading from './components/loading/Loading.jsx';
+import AnimatedRoutes from './components/AnimatedRoutes';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -47,37 +49,7 @@ function App() {
       <ApolloProvider client={client}>
         <Nav />
         <BrowserRouter>
-          <div className='App'>
-            <Switch>
-              <Route exact path='/'>
-                <Home />
-              </Route>
-              <Route exact path='/login'>
-                <Login />
-              </Route>
-              <Route exact path='/profile/:username'>
-                <Profile />
-              </Route>
-              <Route path='/mythreads'>
-                <ThreadsPage />
-              </Route>
-              <Route path='/thread/:id'>
-                <SingleThreadPage />
-              </Route>
-              <Route path='/browse'>
-                <Browse />
-              </Route>
-              <Route exact path='/social'>
-                <Social />
-              </Route>
-              <Route exact path='/comments/:type/:id'>
-                <CommentsPage />
-              </Route>
-              <Route path='/feed'>
-                <Feed />
-              </Route>
-            </Switch>
-          </div>
+          <AnimatedRoutes />
         </BrowserRouter>
         <Footer />
         <style>

@@ -4,11 +4,12 @@ import { GET_THREADS } from '../../utils/queries';
 import { SAVE_THREAD } from '../../utils/mutations';
 import { GET_COMMENT} from '../../utils/queries';
 import './Social.css';
+import Loading from '../loading/Loading';
 
 export default function Social() {
   const { loading, error, data } = useQuery(GET_THREADS);
   const [saveThread] = useMutation(SAVE_THREAD);
-  if (loading) return <h2>LOADING...</h2>;
+  if (loading) return <Loading />;
   if (error) return `Error! ${error.message}`;
 
   const threads = data?.threads || [];

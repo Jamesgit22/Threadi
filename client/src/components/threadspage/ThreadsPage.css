@@ -43,7 +43,7 @@
 }
 
 #new-thread-btn:hover {
-  background-color: #c6495a;
+  background-color: var(--primary-btn-hover)
 }
 
 .thread-title-sec {

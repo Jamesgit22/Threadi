@@ -53,6 +53,7 @@
 
 .menu-btns {
 	color: var(--light-col);
+	cursor: pointer;
 }
 
 

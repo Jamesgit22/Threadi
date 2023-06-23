@@ -11,7 +11,7 @@ function NavSIButtons() {
     };
 
     return (
-        <div className="desktopSignOn col-3 d-flex justify-content-end">
+        <div className="desktopSignOn col-12 d-flex justify-content-end">
             <a href="/login" className="desktop-signin-btns me-3">Sign In</a>
             <button
                 className="desktop-signup-btns"

@@ -13,10 +13,11 @@
   --primary-col: #af3e4d;
   --secondary-col: #fff7ae;
   --font: 'Mallanna', sans-serif;
+  --primary-btn-hover: #c6495a;
 }
 
 body {
-  background-color: var(--dark-col) !important;
+  background-color: black !important;
   overflow-x: hidden !important;
 }
 

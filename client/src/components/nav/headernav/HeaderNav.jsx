@@ -21,7 +21,7 @@ function HeaderNav() {
   const goToProfile = async () => {
     try {
       const result = await getProfile({ variables: { username: searchInput } });
-      
+
       if (!result.data.getProfile.username) {
         console.log('no user exists');
       } else {
@@ -31,7 +31,6 @@ function HeaderNav() {
       console.log(error);
     }
   };
-  
 
   const handleSearchTog = () => {
     setIsOpen((open) => !open);
@@ -58,7 +57,11 @@ function HeaderNav() {
           alt=''
           onClick={() => handleSearchTog()}
         />
-        <input
+        <motion.input
+          initial={{ width: 0 }}
+          whileInView={{ width: '65%' }}
+          exit={{ width: 0 }}
+          transition={{ duration: 0.5 }}
           id='search-username'
           className={`${isOpen ? 'open' : ''}`}
           type='text'
