@@ -143,10 +143,7 @@ export default function Nav() {
                     </motion.a>
                   </motion.div>
                 </div> ) : (
-                  <div className="mobileSign">
-                    <div className="mobileSignIn">Sign In</div>
-                    <div className="mobileSignUp">Sign Up</div>
-                  </div>
+                   <NavSOButtons />
                 )}
               </div>
             </nav>
