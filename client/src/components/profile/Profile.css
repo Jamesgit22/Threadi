@@ -96,6 +96,23 @@
     width: 20%;
 }
 
+#following-btn
+{
+	background-color: var(--primary-col);
+	padding: 4px 6px;
+	width: 40%;
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+#following-btn:hover {
+	background-color: var(--primary-btn-hover);
+}
+
+.same#following-btn { 
+	display: none;
+}
+
 @media screen and (min-width: 850px) {
 	#profile-container {
 		width: 80%!important;
