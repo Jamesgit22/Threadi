@@ -9,8 +9,6 @@ import HeaderNav from "./headernav/HeaderNav";
 import NavSIButtons from "./navbuttons/NavSOButtons";
 import NavSOButtons from "./navbuttons/NavSIButtons";
 
-
-
 // resolve conflicts.
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +48,7 @@ export default function Nav() {
 
   return (
     <>
-      {isMobile && loggedIn ? (
+      {isMobile ? (
         <div className="header container-fluid">
           <div className="row">
             <nav
@@ -58,11 +56,18 @@ export default function Nav() {
               className="col-12 d-flex justify-content-between"
             >
               <div id="logo-container" className="col-6 d-flex">
-                <a href="/" id="mobile-nav-logo" className="light-txt ">
-                  THREADI
+                <a
+                  id="nav-logo"
+                  href="/"
+                  className="light-txt"
+                  onMouseEnter={onHover}
+                  onMouseLeave={onNoHover}
+                >
+                  <img id="nav-img-logo" src={logoState} alt="broken" />
                 </a>
               </div>
               <div className="mobile">
+                {loggedIn ? (
                 <div id="nav-links" className="col-6">
                   <div id="hamburger-icon" onClick={() => toggleMenu()}>
                     <div className={`bar1 bars ${isOpen ? "open" : ""}`}></div>
@@ -91,7 +96,7 @@ export default function Nav() {
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.4, delay: 0.6 }}
                       className="mobile-nav-btns"
-                      href='{`/profile/${userData.username}`}'
+                      href="{`/profile/${userData.username}`}"
                       onClick={() => {
                         // handleViewChange('About');
                         toggleMenu();
@@ -137,7 +142,9 @@ export default function Nav() {
                       Logout
                     </motion.a>
                   </motion.div>
-                </div>
+                </div> ) : (
+                   <NavSOButtons />
+                )}
               </div>
             </nav>
           </div>
@@ -165,7 +172,7 @@ export default function Nav() {
                 </div>
               </div>
               <div className="col-2">
-              {loggedIn ? <NavSIButtons /> : <NavSOButtons />}
+                {loggedIn ? <NavSIButtons /> : <NavSOButtons />}
               </div>
             </nav>
           </div>
