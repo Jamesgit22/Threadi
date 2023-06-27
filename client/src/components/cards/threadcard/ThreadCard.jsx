@@ -4,6 +4,7 @@ import '../../profile/Profile.css';
 // import ProfileTheme from './cardtheme/ProfileTheme'
 import { useMutation } from '@apollo/client';
 import { DELETE_THREAD } from '../../../utils/mutations';
+import { motion } from 'framer-motion';
 
 //ThreadCard needs these props to work properly
 //key
@@ -20,7 +21,7 @@ export default function ThreadCard(props, { getSingleThread }) {
 
   let isNormal;
 
-  if (!(window.location.href.split('/')[1] === "profile")) {
+  if (!(window.location.href.split('/')[1] === 'profile')) {
     isNormal = true;
   } else {
     isNormal = false;
@@ -35,7 +36,7 @@ export default function ThreadCard(props, { getSingleThread }) {
       await deleteThread({
         variables: { threadId },
       });
-      
+
       // Reload the page to reflect the changes
       window.location.reload();
     } catch (error) {
@@ -45,7 +46,13 @@ export default function ThreadCard(props, { getSingleThread }) {
 
   return (
     <>
-        <div className='col-8 thread-card mt-3'>
+      <motion.div
+        className='col-8 thread-card mt-3'
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
         <div className='row'>
           <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
             <h3 className='thread-card-title m-0'>{props.title}</h3>
@@ -96,7 +103,7 @@ export default function ThreadCard(props, { getSingleThread }) {
           </div>
         </div>
         {/* end */}
-      </div>
+      </motion.div>
     </>
-  )
+  );
 }

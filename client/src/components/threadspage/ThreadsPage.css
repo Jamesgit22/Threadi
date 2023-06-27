@@ -39,7 +39,7 @@
   background-color: var(--primary-col);
   border-radius: 8px;
   padding: 5px 10px;
-  margin-bottom: 5em;
+  margin-bottom: 3em;
 }
 
 #new-thread-btn:hover {
@@ -100,7 +100,7 @@
   }
 
   #new-thread-btn {
-    margin-bottom: 10em;
+    margin-bottom: 4em;
   }
 
   .threads-imgs {

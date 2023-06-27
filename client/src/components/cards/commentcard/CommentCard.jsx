@@ -10,7 +10,7 @@ export default function CommentCard() {
         initial={{ opacity: 0, x: '-100px' }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         
       >
         <div className='col-8 comment-card'>
