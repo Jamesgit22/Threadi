@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import ProfileComments from '../profilecomments/ProfileComments.jsx';
 import '../cards/threadcard/cardtheme/ProfileTheme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { GET_PROFILE } from '../../utils/queries';
-import { useMutation } from '@apollo/client';
-import {
-  DELETE_SAVED_THREAD,
-  ADD_FRIEND,
-  UNFOLLOW_USER,
-} from '../../utils/mutations';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_PROFILE, CHECK_FOLLOWERS } from '../../utils/queries';
+import { DELETE_SAVED_THREAD, ADD_FRIEND, UNFOLLOW_USER } from '../../utils/mutations';
 import ThreadCard from '../cards/threadcard/ThreadCard';
 import { motion } from 'framer-motion';
 import Loading from '../loading/Loading';
@@ -21,7 +16,7 @@ import Following from './following/Following';
 import Auth from '../../utils/auth';
 
 function Profile() {
-  let { username } = useParams();
+  const { username } = useParams();
   const { loading, data, error } = useQuery(GET_PROFILE, {
     variables: { username: username },
   });
@@ -31,17 +26,52 @@ function Profile() {
   const [followBtnText, setFollowBtnText] = useState('Follow');
   const [addFriend] = useMutation(ADD_FRIEND);
   const [unfollowUser] = useMutation(UNFOLLOW_USER);
-  const currentUser = Auth.getProfile()
+  const {
+    data: followersData,
+    loading: followersLoading,
+    error: followersError,
+  } = useQuery(CHECK_FOLLOWERS, {
+    variables: { followId: userData._id },
+  });
 
-  if (loading) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const profile = await Auth.getProfile();
+      setCurrentUser(profile);
+    };
+
+    fetchProfile();
+  }, []);
+
+  const checkData = followersData?.checkFollowers;
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    if (checkData) {
+      setFollowBtnText('Unfollow');
+    } else {
+      setFollowBtnText('Follow');
+    }
+  }, [checkData]);
+
+  const handleFollowBtn = async () => {
+    try {
+      if (!checkData) {
+        await addFriend({ variables: { userId: userData._id } });
+      } else {
+        await unfollowUser({ variables: { userId: userData._id } });
+      }
+
+      // Toggle the follow button text
+      setFollowBtnText(checkData ? 'Follow' : 'Unfollow');
+    } catch (err) {
+      console.error('There was an error changing the follow button:', err);
+    }
+  };
 
   const handleDelete = async (threadId) => {
     try {
-      await deleteSavedThread({
-        variables: { threadId },
-      });
+      await deleteSavedThread({ variables: { threadId } });
 
       // Reload the page to reflect the changes
       window.location.reload();
@@ -50,58 +80,8 @@ function Profile() {
     }
   };
 
-  // query to check if you already have followed a user.
-  
-  
+  const isSameUser = currentUser && currentUser.data._id === userData._id;
 
-  // hide follow button from a user's own profile page.
-  let isSameUser
-  if (currentUser.data._id === userData._id) {
-    isSameUser = true;
-  } else {
-    isSameUser = false;
-  }
-
-  // function to change the text in the follow button.
-  const handleFollowBtn = async () => {
-    try {
-      const btn = document.querySelector('#following-btn');
-      
-      if (btn.dataset.text === 'Follow') {
-        await addFriend({ variables: { userId: userData._id } });
-        setFollowBtnText('Unfollow');
-        return;
-      }
-      if (btn.dataset.text === 'Unfollow') {
-        const updatedFollow = await unfollowUser({ variables: { userId: userData._id } });
-        console.log(updatedFollow);
-        setFollowBtnText('Follow');
-        return;
-      }
-    } catch (err) {
-      console.error({
-        message: 'there was an error changing the follow button. ' + err,
-      });
-    }
-  };
-
-  // const handleFollowBtn = async () => {
-  //   console.log('this is userdata ' + userData._id);
-  //   try {
-  //     if (btn.dataset.text === 'Follow') {
-  //       console.log(userData)
-  //       await followUser({ variables: { userId: userData._id } });
-  //       setFollowBtnText('Unfollow');
-  //     } else if (btn.dataset.text === 'Unfollow') {
-  //       await unfollowUser({ variables: { userId: userData.id } });
-  //       setFollowBtnText('Follow');
-  //     }
-  //   } catch (err) {
-  //     console.error({message: 'there was an error changing the follow button. ' + err});
-  //   }
-  // };
-
-  // menu click handler to set the current screen
   const handleMenuSwitch = (e) => setCurrentScreen(e);
 
   const renderSwitch = (currentScreen) => {
@@ -109,6 +89,7 @@ function Profile() {
       case 'threads':
         return <SavedThreads userData={userData} handleDelete={handleDelete} />;
       case 'comments':
+
         return <ProfileComments />;
       case 'following':
         return (
@@ -166,7 +147,7 @@ function Profile() {
                     id='following-btn'
                     className={`${isSameUser ? 'same' : ''}`}
                     data-text={`${followBtnText}`}
-                    onClick={() => handleFollowBtn()}
+                    onClick={handleFollowBtn}
                   >
                     {followBtnText}
                   </motion.button>

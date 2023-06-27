@@ -229,6 +229,25 @@ const resolvers = {
         throw new Error('Failed to fetch comments');
       }
     },
+
+    checkFollowers: async (parent, { followId }, context) => {
+      try {
+        const currentUser = await User.findById(context.user._id);
+        if (currentUser.following.includes(followId)) {
+          return {
+            _id: followId
+          };
+        }
+        return null; // Return null if the followId is not found in the currentUser's following array
+      } catch (err) {
+        console.log({
+          message: 'There was an error while checking to see if the current profile screen matches the current user ' + err,
+        });
+        throw err; // Rethrow the error to handle it appropriately
+      }
+    }
+    
+    
   },
   Mutation: {
     // WORKS---------------------------------------------------------------------

@@ -136,6 +136,14 @@ export const GET_PROFILE = gql`
   }
 `;
 
+export const CHECK_FOLLOWERS = gql`
+  query CheckFollowers($followId: ID!) {
+    checkFollowers(followId: $followId) {
+      _id
+    }
+  }
+`;
+
 // export const GET_ME = gql`
 // query Query {
 //   me {

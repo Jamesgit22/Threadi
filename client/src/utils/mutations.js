@@ -38,7 +38,6 @@ mutation Mutation($username: String!, $password: String!) {
 }
 `;
 
-export const CHECK_FOLLOWERS = gql``
 
 
 export const ADD_THREAD = gql`

@@ -103,6 +103,7 @@ const typeDefs = gql`
     threadComs(threadId: ID!): [Com]
     replyComs(comId: ID!): [Com]
     getReviewsByThread(threadId: ID!): ThreadReviewResponse!
+    checkFollowers(followId: ID!): User
   }
 
   type Mutation {
