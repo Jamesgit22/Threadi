@@ -26,15 +26,15 @@ export default function CommentCard() {
           {/* content section of card */}
           <div className='row'>
             <div className='col-12 d-flex pt-2 justify-content-between align-items-center'>
-              <h3 className='com-card-username'>{'username'}</h3>{' '}
+              <h3 className='com-card-username'>{'username'}</h3>
               {/* -----------username of the comments owner here */}
-              <p>{'formatTimestamp(thread.timestamp)'}</p>{' '}
+              <p>{'formatTimestamp(thread.timestamp)'}</p>
               {/* ----------Timestamp */}
             </div>
           </div>
           <div className='row'>
             <div className='col-12 content-container'>
-              <p className='content-desc'>{'comment content'}</p>{' '}
+              <p className='content-desc'>{'comment content'}</p>
               {/* ------------content of comment goes here */}
             </div>
           </div>
@@ -48,14 +48,15 @@ export default function CommentCard() {
               </button>
             </div>
             <div className='col-1 d-flex align-items-center'>
-              <p className='comments-count p-2'>{0}</p>{' '}
+              <p className='comments-count p-2'>{0}</p>
               {/* ---------- Amount of comments */}
               <img
                 className='comments-btn'
                 src='/images/comments-regular.svg'
                 alt='comment button'
                 onClick={'handleCommentBtn'}
-              />
+              />{' '}
+              {/* ----------Comments bubble button */}
             </div>
           </div>
         </div>
