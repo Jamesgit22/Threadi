@@ -1,0 +1,19 @@
+
+#comments-main {
+    margin-bottom: 4em!important;
+}
+
+#new-coms-btn {
+    background-color: var(--primary-col);
+    border-radius: 8px;
+    padding: 4px;
+    width: 25%;
+    font-size: 1.5em;
+    margin-bottom: 2em;
+    transition: 0.2s;
+}
+
+#new-coms-btn:hover {
+    background-color: var(--primary-btn-hover);
+}
+

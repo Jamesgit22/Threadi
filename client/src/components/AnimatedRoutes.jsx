@@ -11,6 +11,9 @@ import CommentsPage from './comments/CommentsPage';
 import SingleThreadPage from './threadspage/singlethreadpage/SingleThreadPage';
 import Feed from './activityfeed/Feed';
 import Loading from './loading/Loading'
+import ThreadComment from './comments/threadcomments/ThreadComment';
+import ReviewComment from './comments/reviewcomments/ReviewComment';
+import ComComment from './comments/comcomments/ComComment';
 
 // Define the page transition variants
 const pageVariants = {
@@ -113,6 +116,36 @@ export default function AnimatedRoutes() {
               exit='exit'
             >
               <CommentsPage />
+            </motion.div>
+          </Route>
+          <Route exact path='/threadcomments'>
+            <motion.div
+              variants={pageVariants}
+              initial='initial'
+              animate='animate'
+              exit='exit'
+            >
+              <ThreadComment />
+            </motion.div>
+          </Route>
+          <Route exact path='/reviewcomments'>
+            <motion.div
+              variants={pageVariants}
+              initial='initial'
+              animate='animate'
+              exit='exit'
+            >
+              <ReviewComment />
+            </motion.div>
+          </Route>
+          <Route exact path='/comcomments'>
+            <motion.div
+              variants={pageVariants}
+              initial='initial'
+              animate='animate'
+              exit='exit'
+            >
+              <ComComment />
             </motion.div>
           </Route>
           <Route path='/feed'>

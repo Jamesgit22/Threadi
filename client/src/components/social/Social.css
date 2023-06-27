@@ -13,7 +13,7 @@
   background-repeat: no-repeat;
   margin: 0 !important;
   padding: 0 !important;
-  border-bottom: 1px solid rgb(42, 42, 42);
+  border-bottom: 1px solid #2a2a2a;
 }
 
 #social-overlay {
@@ -46,9 +46,9 @@
 }
 
 #feed-container {
-  border: 1px solid rgb(73, 73, 73);
+  border: 1px solid var(--card-border-col);
   border-radius: 8px;
-  background-color: rgb(38, 38, 38);
+  background-color: var(--card-bg-col);
   margin-top: 3em;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .feed-username {
-  border-bottom: 1px solid rgb(73, 73, 73);
+  border-bottom: 1px solid var(--card-border-col);
 }
 
 #social-container2 {
@@ -73,7 +73,7 @@
 }
 
 .content-container {
-    border-bottom: 1px solid rgb(73, 73, 73);
+    border-bottom: 1px solid var(--card-border-col);
 }
 
 .social-btns {

@@ -14,6 +14,8 @@
   --secondary-col: #fff7ae;
   --font: 'Mallanna', sans-serif;
   --primary-btn-hover: #c6495a;
+  --card-bg-col: #262626;
+  --card-border-col: #494949;
 }
 
 body {
