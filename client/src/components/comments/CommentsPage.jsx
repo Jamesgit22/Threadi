@@ -1,5 +1,6 @@
 import React from 'react';
 import './CommentsPage.css';
+import { motion } from 'framer-motion';
 
 export default function commentsPage() {
   return (
@@ -15,17 +16,19 @@ export default function commentsPage() {
                     id='comments-page-title'
                     className='col-12 text-center pt5'
                   >
-                    <h2 id='my-comments-h2'>My comments</h2>
+                    <motion.h2
+                      initial={{ opacity: 0, y: '20px' }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      id='my-comments-h2'
+                    >
+                      My comments
+                    </motion.h2>
                   </div>
                 </div>
                 <div className='row justify-content-center'>
                   <div className='col-8 text-center'>
-                    <button
-                      id='new-comments-btn'
-                      
-                    >
-                      New comments
-                    </button>
+                    <button id='new-comments-btn'>New comments</button>
                   </div>
                 </div>
               </div>

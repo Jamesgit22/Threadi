@@ -84,35 +84,4 @@
     padding: 5px 5px 5px 10px;
   }
   
-  @media screen and (min-width: 850px) {
-  
-      .comments-card {
-          margin-bottom: 4em;
-      }
-  
-    #my-comments-h2 {
-      font-size: 3.5em;
-      margin-bottom: 1.5em;
-    }
-  
-    #new-comments-btn {
-      font-size: 1.5em;
-    }
-  
-    #new-comments-btn {
-      margin-bottom: 10em;
-    }
-  
-    .comments-imgs {
-      width: 100%;
-      mask-image: linear-gradient(to right, transparent, black 50%, transparent);
-      border-radius: 8px;
-      padding: 0 !important;
-      max-height: 470px;
-    }
-  
-    .comments-open-btn {
-      width: 40%;
-    }
-  } 
-  
+ 

@@ -1,6 +1,7 @@
 import React from 'react';
 import './ThreadComment.css';
 import CommentCard from '../../cards/commentcard/CommentCard';
+import { motion } from 'framer-motion';
 
 export default function ThreadComment() {
   return (
@@ -16,15 +17,30 @@ export default function ThreadComment() {
                     id='comments-page-title'
                     className='col-12 text-center pt5'
                   >
-                    <h2 id='my-comments-h2'>Thread Comments</h2>
+                    <motion.h2
+                      id='my-comments-h2'
+                      initial={{ opacity: 0, y: '20px' }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      Thread Comments
+                    </motion.h2>
                   </div>
                 </div>
                 {/* New Comment Button */}
                 <div className='row justify-content-center'>
-                  <div className='col-8 text-center'>
-                    <button id='new-coms-btn' onClick={''}>
+                  <div className='col-8 mb-3 text-center'>
+                    <motion.button
+                      id='new-coms-btn'
+                      onClick={''}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
                       New Comment
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
                 {/* OG Comment */}

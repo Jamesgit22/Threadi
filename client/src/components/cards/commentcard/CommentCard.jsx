@@ -1,10 +1,18 @@
 import React from 'react';
 import './CommentCard.css';
+import { motion } from 'framer-motion';
 
 export default function CommentCard() {
   return (
     <>
-      <div className='row justify-content-center'>
+      <motion.div
+        className='row justify-content-center'
+        initial={{ opacity: 0, x: '-100px' }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        
+      >
         <div className='col-8 comment-card'>
           {/* Top row of card */}
           <div className='row p-0 '>
@@ -60,7 +68,7 @@ export default function CommentCard() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
