@@ -112,7 +112,7 @@
 
 #box-container {
   overflow-x: auto;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   border-top: 3px solid rgb(38, 38, 38);
   border-bottom: 3px solid rgb(38, 38, 38);
   background-color: rgb(12, 12, 12) !important;

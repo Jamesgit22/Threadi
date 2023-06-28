@@ -3,12 +3,20 @@
     max-width: 500px;
 }
 
-.thread-description {
+#thread-description {
    padding-top: 1em!important;
+   word-wrap:break-word!important;
+   font-size: 20px;
+   text-align: start;
+}
+
+#thread-card-date {
+    font-size: 25px!important;
 }
 
 .thread-open-btn {
     width: 100%;
+    font-size: 30px;
 }
 
 .trash-can {
