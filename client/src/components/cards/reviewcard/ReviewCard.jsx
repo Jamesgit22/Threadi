@@ -10,7 +10,9 @@ export default function ReviewCard(props) {
 
   console.log(props);
 
-  // const handleCommentClick = () => {}
+  const handleCommentClick = () => {
+    window.location.href = `/comments/review/${props.id}`
+  }
 
   return (
     <>
@@ -30,7 +32,7 @@ export default function ReviewCard(props) {
               className='like-btn'
               src='/images/comments-regular.svg'
               alt='Comment button'
-              // onClick={()=> handleCommentClick()}
+              onClick={()=> handleCommentClick()}
             />
           </div>
         </div>

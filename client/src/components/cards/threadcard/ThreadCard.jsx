@@ -29,6 +29,10 @@ export default function ThreadCard(props) {
     window.location.href = `/thread/${props.id}`;
   };
 
+  const handleCommentClick = () => {
+    window.location.href = `/comments/thread/${props.id}`
+  }
+
   const handleDelete = async (threadId) => {
     try {
       await deleteThread({
@@ -64,7 +68,7 @@ export default function ThreadCard(props) {
             <div className='col-12 threads-box p-0'>
               <div className='row'>
                 <div className='col-6 d-flex'>
-                <p id='thread-description' style={{ width: '100%', wordWrap: 'break-word' }}>
+                  <p id='thread-description' style={{ width: '100%', wordWrap: 'break-word' }}>
                     {props.description || 'No description'}
                   </p>
                 </div>
@@ -91,6 +95,12 @@ export default function ThreadCard(props) {
               </button>
             </div>
             <div className='col-4 justify-content-end d-flex align-items-center'>
+              <img
+                className='like-btn'
+                src='/images/comments-regular.svg'
+                alt='Comment button'
+                onClick={() => handleCommentClick()}
+              />
               <img
                 src='/images/trash-can-solid.svg'
                 alt='delete button'
