@@ -60,8 +60,8 @@ mutation Mutation($threadId: ID!) {
 }`;
 
 export const ADD_THREAD_COM = gql`
-mutation Mutation($threadId: ID!, $comText: String!, $comAuthor: ID!) {
-  addThreadCom(threadId: $threadId, comText: $comText, comAuthor: $comAuthor) {
+mutation Mutation($threadId: ID!, $comText: String!) {
+  addThreadCom(threadId: $threadId, comText: $comText) {
     _id
     timestamp
     author {
@@ -70,6 +70,19 @@ mutation Mutation($threadId: ID!, $comText: String!, $comAuthor: ID!) {
     likes
   }
 }`;
+
+export const ADD_REVIEW_COM = gql`
+mutation Mutation($reviewId: ID!, $comText: String!) {
+  addReviewCom(reviewId: $reviewId, comText: $comText) {
+    _id
+    timestamp
+    author {
+      _id
+    }
+    likes
+  }
+}`;
+
 
 export const UPDATE_THREAD = gql`
 mutation Mutation($threadId: ID!, $title: String!) {
@@ -105,18 +118,6 @@ mutation Mutation($reviewId: ID!, $title: String!, $text: String!) {
   updateReview(reviewId: $reviewId, title: $title, text: $text) {
     _id
     title
-    text
-  }
-}`;
-
-export const ADD_REVIEW_COM = gql`
-mutation Mutation($reviewId: ID!, $comText: String!, $comAuthor: ID!) {
-  addReviewCom(reviewId: $reviewId, comText: $comText, comAuthor: $comAuthor) {
-    _id
-    author {
-      _id
-    }
-    timestamp
     text
   }
 }`;

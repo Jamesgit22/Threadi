@@ -1,34 +1,39 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useMutation } from '@apollo/client';
-import { ADD_THREAD_COM } from '../../../utils/mutations';
+import { useParams } from 'react-router-dom';
+import { ADD_THREAD_COM, ADD_REVIEW_COM } from '../../../utils/mutations';
 import Auth from '../../../utils/auth';
 
-export default function CommentModal({ modalTog, closeModal, threadId, threadAuthor}) {
-    const [addComment, {error}] = useMutation(ADD_THREAD_COM);
-    const [userFormData, setUserFormData] = useState({ comText: '' });
+export default function CommentModal({ modalTog, closeModal }) {
+  const { type, id } = useParams();
+  const [addTComment, { error: errorT }] = useMutation(ADD_THREAD_COM);
+  const [addRComment, { error: errorR }] = useMutation(ADD_REVIEW_COM);
+  const [userFormData, setUserFormData] = useState({ comText: '' });
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
-        
-      };    
-    
-    async function handleFormSubmit(e) {
-        e.preventDefault();
-    
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-    
-        if (!token || !userFormData) {
-          return false;
-        }
-    
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+
+  };
+
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token || !userFormData) {
+      return false;
+    }
+
+    switch(type) {
+      case 'thread': {
         try {
-            console.log({ ...userFormData });
-            console.log( threadId);
-            addComment({ variables: {threadId: threadId, ...userFormData, comAuthor: threadAuthor} })
+          console.log({ ...userFormData });
+          console.log(id);
+          addTComment({ variables: { threadId: id, ...userFormData } })
             .then((res) => {
-              if (res.data.addThread) {
+              if (res.data.addThreadCom) {
                 console.log('Comment added successfully: ');
                 window.location.reload(false);
               } else {
@@ -38,9 +43,35 @@ export default function CommentModal({ modalTog, closeModal, threadId, threadAut
             });
         } catch (error) {
           console.log(error);
+          break;
         }
       }
-    
+      case 'review': {
+        try {
+          console.log({ ...userFormData });
+          console.log(id);
+          addRComment({ variables: { reviewId: id, ...userFormData } })
+            .then((res) => {
+              if (res.data.addReviewCom) {
+                console.log('Comment added successfully: ');
+                window.location.reload(false);
+              } else {
+                console.error("Failed to add Comment: " + res.data);
+              }
+              window.location.reload(false);
+            });
+        } catch (error) {
+          console.log(error);
+          break;
+        }
+      }
+      case 'comment': {
+        break;
+      }
+    }
+  }
+
+  if (errorR) {console.log(errorR)};
 
   return (
     <>
@@ -98,7 +129,7 @@ export default function CommentModal({ modalTog, closeModal, threadId, threadAut
                           id='create-submit-btn'
                           type='button'
                           disabled={!userFormData.comText}
-                          onClick={handleFormSubmit}
+                          onClick={() => {handleFormSubmit()}}
                         >
                           Create
                         </button>

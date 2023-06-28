@@ -412,10 +412,10 @@ const resolvers = {
     // WORKS---------------------------------------------------------------------
     addThreadCom: async (
       parent,
-      { threadId, comText, comAuthor },
-      { models }
+      { threadId, comText},
+      context
     ) => {
-      console.log('comText:', comText, threadId, comAuthor)
+      console.log('comText:', comText, threadId)
       try {
         const thread = await Thread.findById(threadId);
         if (!thread) {
@@ -425,7 +425,7 @@ const resolvers = {
         // Create a new comment
         const comment = new Com({
           text: comText,
-          author: comAuthor,
+          author: context.user._id,
           parentType: 'Thread', // Provide the appropriate value for parentType
           parent: threadId, // Provide the appropriate value for parent
           timestamp: new Date(), // Provide the appropriate value for timestamp
@@ -611,9 +611,10 @@ const resolvers = {
     // WORKS---------------------------------------------------------------------
     addReviewCom: async (
       parent,
-      { reviewId, comText, comAuthor },
-      { models }
+      { reviewId, comText },
+      context
     ) => {
+      console.log('comText:', comText, reviewId)
       try {
         const review = await Review.findById(reviewId);
         if (!review) {
@@ -623,7 +624,7 @@ const resolvers = {
         // Create a new comment
         const comment = new Com({
           text: comText,
-          author: comAuthor,
+          author: context.user._id,
           parentType: 'Review', // Provide the appropriate value for parentType
           parent: reviewId, // Provide the appropriate value for parent
           timestamp: new Date(), // Provide the appropriate value for timestamp

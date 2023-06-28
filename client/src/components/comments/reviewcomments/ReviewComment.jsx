@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../CommentsPage.css';
-import ReviewCard from '../../cards/threadcard/ThreadCard';
+import ReviewCard from '../../cards/reviewcard/ReviewCard';
 import ComCard from '../../cards/commentcard/CommentCard';
 import { GET_REVIEW } from '../../../utils/queries';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useQuery } from '@apollo/client';
+import Loading from '../../loading/Loading';
+import CommentModal from '../../cards/newcommentmodal/CommentModal';
 
 export default function ReviewComment() {
   let { id } = useParams();
@@ -14,11 +16,20 @@ export default function ReviewComment() {
   })
 
   if(error) {console.log(error)};
+  const [modalTog, setModalTog] = useState(false);
 
 
-  if (loading) {return <>LOADING...</>}
+  if (loading) {return <Loading />}
   console.log(data);
   const reviewData = data?.singleReview || {};
+
+  const handleModalTog = () => {
+    setModalTog((open) => !open);
+  };
+
+  const closeModal = () => {
+    setModalTog(false);
+  };
 
   return (
     <>
@@ -41,7 +52,7 @@ export default function ReviewComment() {
                     >
                       <ReviewCard
                         key={reviewData._id}
-                        _id={reviewData._id}
+                        id={reviewData._id}
                         title={reviewData.title}
                         image={reviewData.image}
                         date={reviewData.date}
@@ -52,8 +63,8 @@ export default function ReviewComment() {
                   </div>
                 </div>
                 <div className='row justify-content-center'>
-                  <div className='col-8 text-center'>
-                    <button id='new-comments-btn'>New comments</button>
+                  <div className='col-6 text-center'>
+                  <button id='create-comment-btn' onClick={() => handleModalTog()}>New Comment</button>
                   </div>
                 </div>
               </div>
@@ -61,6 +72,8 @@ export default function ReviewComment() {
             {/* top section end */}
             {reviewData.coms.map((res) => (
               <ComCard 
+                key={res._id}
+                id={res._id}
                 author={res.author}
                 likes={res.likes}
                 text={res.text}
@@ -69,6 +82,13 @@ export default function ReviewComment() {
             ))}
           </div>
         </div>
+        {modalTog && (
+          <CommentModal
+            closeModal={closeModal}
+            //onViewChange={onViewChange}
+            modalTog={modalTog}
+          />
+        )}
       </div>
     </>
   );
