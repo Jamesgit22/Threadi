@@ -80,7 +80,7 @@ export default function SingleThreadPage({ threadData, getWriteReview }) {
                   (
                     <ReviewCard
                       key={review._id}
-                      _id={review._id}
+                      id={review._id}
                       title={review.title}
                       image={review.image}
                       date={review.date}
