@@ -14,7 +14,7 @@ export default function ThreadAddReviewModal({
 }) {
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedWord, setSelectedWord] = useState('Movies');
+  const [selectedWord, setSelectedWord] = useState('movies');
 
   const handleWordChange = (e) => {
     setSelectedWord(e.target.value);
@@ -46,7 +46,7 @@ export default function ThreadAddReviewModal({
   function movieShowSearch() {
     var searchType;
 
-    if (selectedWord === 'Movies') {
+    if (selectedWord === 'movies') {
       searchType = 'movie';
       console.log(selectedWord);
       console.log(searchType);
@@ -142,7 +142,7 @@ export default function ThreadAddReviewModal({
   const handleAPICall = async (e) => {
     // eslint-disable-next-line default-case
     switch (selectedWord) {
-      case 'Video Games': {
+      case 'video games': {
         axios
           .get(
             `https://api.rawg.io/api/games?key=${process.env.REACT_APP_RAWG_API_KEY}&page=1&search=${searchInput.replaceAll(' ', '%20')}&exclude_additions=true&page_size=10`
@@ -179,23 +179,23 @@ export default function ThreadAddReviewModal({
 
         break;
       }
-      case 'Movies': {
+      case 'movies': {
         movieShowSearch();
         break;
       }
-      case 'Shows': {
+      case 'shows': {
         movieShowSearch();
         break;
       }
-      case 'Anime': {
+      case 'anime': {
         animangaSearch();
         break;
       }
-      case 'Manga': {
+      case 'manga': {
         animangaSearch();
         break;
       }
-      case 'Books': {
+      case 'books': {
         axios
           .get(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`)
           .then((res) => {
@@ -268,10 +268,10 @@ export default function ThreadAddReviewModal({
                         value={selectedWord}
                         onChange={handleWordChange}
                       >
-                        <option value='movie'>Movie</option>
-                        <option value='show'>Show</option>
-                        <option value='book'>Book</option>
-                        <option value='games'>Video Game</option>
+                        <option value='movies'>Movies</option>
+                        <option value='shows'>Shows</option>
+                        <option value='books'>Books</option>
+                        <option value='video games'>Video Games</option>
                         <option value='anime'>Anime</option>
                         <option value='manga'>Manga</option>
                       </select>
