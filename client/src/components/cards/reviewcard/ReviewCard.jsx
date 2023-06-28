@@ -10,6 +10,8 @@ export default function ReviewCard(props) {
 
   console.log(props);
 
+  // const handleCommentClick = () => {}
+
   return (
     <>
       <motion.div
@@ -26,8 +28,9 @@ export default function ReviewCard(props) {
             <p className='social-username m-0 p-1'>{props.title}</p>
             <img
               className='like-btn'
-              src='/images/thumbs-up-regular.svg'
-              alt=''
+              src='/images/comments-regular.svg'
+              alt='Comment button'
+              // onClick={()=> handleCommentClick()}
             />
           </div>
         </div>
@@ -57,11 +60,9 @@ export default function ReviewCard(props) {
               </div>
             </div>
           </div>
+         
           <div className='row'>
-            <div className='col-6 content-container'></div>
-          </div>
-          <div className='row'>
-            <div className='col-6'>
+            <div className='col-12'>
               <button className='social-btns'>delete</button>
             </div>
           </div>

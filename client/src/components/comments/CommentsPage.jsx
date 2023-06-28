@@ -1,13 +1,13 @@
 import React from 'react';
 import './CommentsPage.css';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/client';
-import { useState, useEffect } from 'react';
-import { GET_THREAD, GET_REVIEW, GET_COMMENT } from '../../utils/queries';
+// import { useLazyQuery } from '@apollo/client';
+// import { useState, useEffect } from 'react';
+// import { GET_THREAD, GET_REVIEW, GET_COMMENT } from '../../utils/queries';
 import ThreadComment from './threadcomments/ThreadComment';
 import ReviewComment from './reviewcomments/ReviewComment';
-import ComComment from './comcomments/ComComment';
+// import ComComment from './comcomments/ComComment';
 
 export default function CommentsPage() {
   let { type } = useParams();

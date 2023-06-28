@@ -26,7 +26,7 @@ export default function SingleThreadPage({ threadData, getWriteReview }) {
   }
 
   const userData = data?.getReviewsByThread?.reviews;
-  console.log(userData);
+  console.log('singlethreadData:', userData);
 
   const closeReviewModal = () => {
     setReviewModalTog(false);
@@ -121,10 +121,3 @@ export default function SingleThreadPage({ threadData, getWriteReview }) {
     </>
   );
 }
-
-// {reviewModalTog && (
-//     <ThreadAddReviewModal
-//       closeReviewModal={closeReviewModal}
-//       reviewModalTog={reviewModalTog}
-//     />
-//   )}

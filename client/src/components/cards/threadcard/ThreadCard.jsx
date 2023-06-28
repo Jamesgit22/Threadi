@@ -52,9 +52,9 @@ export default function ThreadCard(props) {
         transition={{ duration: 0.5, delay: 0.1 }}
       >
         <div className='row'>
-          <div className='col-12 thread-title-sec d-flex justify-content-between align-content-center'>
+          <div className='col-12 thread-title-sec d-flex justify-content-between align-items-center'>
             <h3 className='thread-card-title m-0'>{props.title}</h3>
-            <p className='m-0'>{fDate}</p>
+            <p id='thread-card-date' className='m-0'>{fDate}</p>
           </div>
         </div>
         {/* content row */}
@@ -63,10 +63,10 @@ export default function ThreadCard(props) {
             {/* scroll row */}
             <div className='col-12 threads-box p-0'>
               <div className='row'>
-                <div className='col-6'>
-                  <h4 className='thread-description'>
+                <div className='col-6 d-flex'>
+                <p id='thread-description' style={{ width: '100%', wordWrap: 'break-word' }}>
                     {props.description || 'No description'}
-                  </h4>
+                  </p>
                 </div>
                 <div className='col-6 p-0 m-0'>
                   <img
@@ -85,12 +85,12 @@ export default function ThreadCard(props) {
             <div className='col-4'>
               <p className='m-0 pt-1 pb-1'></p>
             </div>
-            <div className='col-4'>
-              <button className='thread-open-btn' onClick={sendData}>
+            <div className='col-4 d-flex align-items-center'>
+              <button className='thread-open-btn m-2' onClick={sendData}>
                 Open
               </button>
             </div>
-            <div className='col-4 text-end'>
+            <div className='col-4 justify-content-end d-flex align-items-center'>
               <img
                 src='/images/trash-can-solid.svg'
                 alt='delete button'

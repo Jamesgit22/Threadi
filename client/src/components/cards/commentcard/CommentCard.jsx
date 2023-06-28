@@ -16,39 +16,25 @@ export default function CommentCard(props) {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        
       >
-        <div className='col-8 comment-card'>
+        <div className='col-8 comment-card mb-4'>
           {/* Top row of card */}
           <div className='row p-0 '>
             <div className='col-12 card-type d-flex align-items-center'>
-              <div className='col-11'>
-                <p className=' m-0 p-1'>{'type title placeholder'}</p>
+              <div className='col-10'>
+                <h3 className='com-card-username'>{props.author.username}</h3>
               </div>
-              <div className='col-1 d-flex align-items-center justify-content-center'>
-                <p className='likes-count'>{0}</p>
-                <img
-                  className='like-btn'
-                  src='/images/thumbs-up-regular.svg'
-                  alt='like button'
-                />
+              <div className='col-2 d-flex align-items-center justify-content-center'>
+                <p>{formatTimestamp(props.timestamp)}</p>
               </div>
             </div>
           </div>
           {/* end top row */}
           {/* content section of card */}
+          <div className='row'></div>
           <div className='row'>
-            <div className='col-12 d-flex pt-2 justify-content-between align-items-center'>
-              <h3 className='com-card-username'>{'username'}</h3>
-              {props.author.username}
-              <p>{'formatTimestamp(thread.timestamp)'}</p>
-              {formatTimestamp(props.timestamp)}
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-12 content-container'>
-              <p className='content-desc'>{'comment content'}</p>
-              {props.text}
+            <div className='col-12 content-container d-flex align-items-center'>
+              <p className='content-desc'>{props.text}</p>
             </div>
           </div>
           {/* End of content section */}
