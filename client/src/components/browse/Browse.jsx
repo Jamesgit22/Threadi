@@ -6,7 +6,6 @@ import { faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import BrowseModal from './browseModal/BrowseModal';
 
-
 export default function Browse() {
   const [selectedWord, setSelectedWord] = useState('Movies');
   const [searchInput, setSearchInput] = useState('');
@@ -14,12 +13,7 @@ export default function Browse() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [modalTog, setModalTog] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const searchOptions = [
-    'Movies',
-    'Shows',
-    'Books',
-    'Games',
-  ];
+  const searchOptions = ['Movies', 'Shows', 'Books', 'Games'];
 
   const searchClick = async () => {
     console.log(selectedWord);
@@ -56,15 +50,18 @@ export default function Browse() {
   const handleInputChange = (e) => {
     const { value } = e.target;
     setSearchInput(value);
-  }
+  };
 
   function createUUID() {
     var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+      /[xy]/g,
+      function (c) {
+        var r = (dt + Math.random() * 16) % 16 | 0;
+        dt = Math.floor(dt / 16);
+        return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      }
+    );
     return uuid;
   }
 
@@ -83,13 +80,13 @@ export default function Browse() {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/search/${searchType}?query=${searchInput}&include_adult=false&language=en-US&page=1&api_key=${process.env.REACT_APP_TMDB_API_KEY}`, {
-        headers: {
-          accept: "application/json",
-          Authorization:
-            `Bearer ${process.env.REACT_APP_TMDB_BEARER_TOKEN}`
+        `https://api.themoviedb.org/3/search/${searchType}?query=${searchInput}&include_adult=false&language=en-US&page=1&api_key=${process.env.REACT_APP_TMDB_API_KEY}`,
+        {
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${process.env.REACT_APP_TMDB_BEARER_TOKEN}`,
+          },
         }
-      }
       )
       .then((res) => {
         if (!(res.status === 200)) {
@@ -98,19 +95,23 @@ export default function Browse() {
 
         const tmdbData = [];
 
-        res.data.results.map((media) => (
+        res.data.results.map((media) =>
           tmdbData.push({
             type: selectedWord,
-            image: `https://image.tmdb.org/t/p/w500/${media.poster_path}` || 'No image.',
+            image:
+              `https://image.tmdb.org/t/p/w500/${media.poster_path}` ||
+              'No image.',
             title: media.title,
             releaseDate: media.first_air_date || 'Release date unavailable.',
             id: undefined,
-            backdrop: `https://image.tmdb.org/t/p/w500/${media.backdrop_path}` || 'No backdrop.',
+            backdrop:
+              `https://image.tmdb.org/t/p/w500/${media.backdrop_path}` ||
+              'No backdrop.',
             authors: undefined,
             description: media.overview || undefined,
-            uuid: createUUID()
+            uuid: createUUID(),
           })
-        ));
+        );
 
         setSearchResults(tmdbData);
         console.log(searchResults);
@@ -123,44 +124,44 @@ export default function Browse() {
 
   function animangaSearch() {
     axios
-          .get(
-            `https://floating-headland-95050.herokuapp.com/https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput}`,
-            {
-              headers: {
-                'X-MAL-CLIENT-ID': `${process.env.REACT_APP_MAL_CLIENT_ID}`,
-              },
-            }
-          )
-          .then((res) => {
-            if (!(res.status === 200)) {
-              throw new Error('MAL_API ERROR: Something went wrong.');
-            }
+      .get(
+        `https://floating-headland-95050.herokuapp.com/https://api.myanimelist.net/v2/${selectedWord.toLowerCase()}?q=${searchInput}`,
+        {
+          headers: {
+            'X-MAL-CLIENT-ID': `${process.env.REACT_APP_MAL_CLIENT_ID}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (!(res.status === 200)) {
+          throw new Error('MAL_API ERROR: Something went wrong.');
+        }
 
-            const weebData = [];
+        const weebData = [];
 
-            console.log(res);
+        console.log(res);
 
-            res.data.data.map((media) => (
-              weebData.push({
-                type: selectedWord,
-                image: media.node?.main_picture.large || 'No image.',
-                title: media.node.title,
-                releaseDate: undefined,
-                id: undefined,
-                backdrop: undefined,
-                authors: undefined,
-                description: undefined,
-                uuid: createUUID()
-              })
-            ));
-
-            setSearchResults(weebData);
-            console.log(searchResults);
-            handleModalTog(true);
+        res.data.data.map((media) =>
+          weebData.push({
+            type: selectedWord,
+            image: media.node?.main_picture.large || 'No image.',
+            title: media.node.title,
+            releaseDate: undefined,
+            id: undefined,
+            backdrop: undefined,
+            authors: undefined,
+            description: undefined,
+            uuid: createUUID(),
           })
-          .catch((err) => {
-            console.log(err);
-          });
+        );
+
+        setSearchResults(weebData);
+        console.log(searchResults);
+        handleModalTog(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   //comment
@@ -170,7 +171,12 @@ export default function Browse() {
       case 'Video Games': {
         axios
           .get(
-            `https://api.rawg.io/api/games?key=${process.env.REACT_APP_RAWG_API_KEY}&page=1&search=${searchInput.replaceAll(' ', '%20')}&exclude_additions=true&page_size=10`
+            `https://api.rawg.io/api/games?key=${
+              process.env.REACT_APP_RAWG_API_KEY
+            }&page=1&search=${searchInput.replaceAll(
+              ' ',
+              '%20'
+            )}&exclude_additions=true&page_size=10`
           )
           .then((res) => {
             if (!(res.status === 200)) {
@@ -178,9 +184,9 @@ export default function Browse() {
               throw new Error('RAWG API ERROR: Something went wrong.');
             }
 
-            const rawgData = []
+            const rawgData = [];
 
-            res.data.results.map((game) => (
+            res.data.results.map((game) =>
               rawgData.push({
                 type: selectedWord,
                 image: game.background_image,
@@ -190,9 +196,9 @@ export default function Browse() {
                 backdrop: undefined,
                 authors: undefined,
                 description: undefined,
-                uuid: createUUID()
+                uuid: createUUID(),
               })
-            ));
+            );
 
             setSearchResults(rawgData);
             console.log(searchResults);
@@ -230,7 +236,7 @@ export default function Browse() {
 
             const bookData = [];
 
-            res.data.items.map((book) => (
+            res.data.items.map((book) =>
               bookData.push({
                 type: selectedWord,
                 image: book.volumeInfo.imageLinks?.thumbnail || '',
@@ -240,9 +246,9 @@ export default function Browse() {
                 backdrop: undefined,
                 authors: book.volumeInfo.authors || ['No author to display'],
                 description: book.volumeInfo.description,
-                uuid: createUUID()
+                uuid: createUUID(),
               })
-            ));
+            );
 
             setSearchResults(bookData);
             console.log(searchResults);
@@ -271,7 +277,13 @@ export default function Browse() {
                       id='switch-main'
                       className='d-flex col-12 justify-content-center align-items-center'
                     >
-                      <div className='row justify-content-center'>
+                      <motion.div
+                        className='row justify-content-center'
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                      >
                         <div className='col-8 d-flex justify-content-end align-items-center'>
                           <h2 id='browse-msg'>Search for</h2>
                         </div>
@@ -315,16 +327,17 @@ export default function Browse() {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
                 <div className='row justify-content-center'>
                   <div className='col-10 p-0 m-0'>
                     <motion.input
-                      initial={{ width: '0%' }}
-                      whileInView={{ width: '100%' }}
-                      transition={{ duration: 0.8 }}
+                      initial={{ opacity: 0, y: '30px' }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
                       onChange={handleInputChange}
                       name='search'
                       id='browse-input'
@@ -334,12 +347,16 @@ export default function Browse() {
                   </div>
                   <div className='row justify-content-center'>
                     <div className='col-12'>
-                      <button
+                      <motion.button
                         id='browse-search-btn'
                         onClick={() => searchClick()}
+                        initial={{ opacity: 0, y: '30px' }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
                       >
                         Search
-                      </button>
+                      </motion.button>
                     </div>
                   </div>
                 </div>

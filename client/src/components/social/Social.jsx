@@ -2,9 +2,10 @@ import React from 'react';
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client';
 import { GET_THREADS } from '../../utils/queries';
 import { SAVE_THREAD } from '../../utils/mutations';
-import { GET_COMMENT} from '../../utils/queries';
+import { GET_COMMENT } from '../../utils/queries';
 import './Social.css';
 import Loading from '../loading/Loading';
+import { motion } from 'framer-motion';
 
 export default function Social() {
   const { loading, error, data } = useQuery(GET_THREADS);
@@ -27,11 +28,8 @@ export default function Social() {
     }
   };
 
-// Go to comments page for seleted item
-  const handleCommentBtn = (e) => {
-    
-
-  }
+  // Go to comments page for seleted item
+  const handleCommentBtn = (e) => {};
 
   const formatTimestamp = (timestamp) => {
     let date = timestamp.split(' ');
@@ -55,18 +53,32 @@ export default function Social() {
                 <div id='social-title-container' className='col-12'>
                   <div className='row'>
                     <div className='col-12 text-center'>
-                      <h2 id='social-title'>Recent Activity</h2>
+                      <motion.h2
+                        id='social-title'
+                        initial={{ opacity: 0, y: '20px' }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        Recent Activity
+                      </motion.h2>
                     </div>
                   </div>
                 </div>
                 <div className='row'>
-                  <div className='col-12 text-center'>
+                  <motion.div
+                    className='col-12 text-center'
+                    initial={{ opacity: 0, y: '20px' }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
                     <p id='social-msg'>
                       Explore and stay up to date<br></br>with your{' '}
                       <span id='social-friends'>FRIENDS</span> and the content
                       <br></br> they love
                     </p>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -77,10 +89,14 @@ export default function Social() {
                 (thread) => (
                   console.log(thread._id),
                   (
-                    <div
+                    <motion.div
                       key={thread._id}
                       id='feed-container'
                       className='col-11 col-md-8 mb-3'
+                      initial={{ opacity: 0, x: '-100px' }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
                     >
                       <div className='row p-0'>
                         <div className='col-12 feed-username d-flex align-items-center'>
@@ -95,7 +111,6 @@ export default function Social() {
                               className='like-btn'
                               src='/images/thumbs-up-regular.svg'
                               alt='like button'
-
                             />
                           </div>
                         </div>
@@ -130,7 +145,7 @@ export default function Social() {
                           />
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   )
                 )
               )}

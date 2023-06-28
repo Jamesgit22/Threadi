@@ -13,14 +13,18 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
 }`;
 
 export const ADD_FRIEND = gql`
-mutation Mutation($userId: ID!, $friendId: ID!) {
-    addFriend(userId: $userId, friendId: $friendId) {
+mutation Mutation($userId: ID!) {
+    addFriend(userId: $userId) {
       _id
-      email
-      password
-      username
     }
   }`;
+
+export const UNFOLLOW_USER = gql`
+mutation Mutation($userId: ID!) {
+  unfollowUser(userId: $userId) {
+    _id
+  }
+}`;
 
 export const LOGIN_USER = gql`
 mutation Mutation($username: String!, $password: String!) {
@@ -33,6 +37,7 @@ mutation Mutation($username: String!, $password: String!) {
   }
 }
 `;
+
 
 
 export const ADD_THREAD = gql`

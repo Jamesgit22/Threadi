@@ -56,8 +56,8 @@ const resolvers = {
     },
 
     userThreads: async (parent, args, context) => {
-      console.log('backend')
-      console.log(context.user)
+      console.log('backend');
+      console.log(context.user);
       try {
         const userThreads = await Thread.find({ author: context.user._id });
         console.log(userThreads);
@@ -70,16 +70,18 @@ const resolvers = {
     },
 
     getProfile: async (parent, { username }, context) => {
-      
       const user = await User.findOne({ username: username })
         .populate('reviews')
         .populate('userThreads')
         .populate({
           path: 'savedThreads',
-          populate: { path: 'author' }
+          populate: { path: 'author' },
         })
-        .populate({path: 'following', select: ['username', 'userThreads', 'reviews']});
-        console.log(user);
+        .populate({
+          path: 'following',
+          select: ['username', 'userThreads', 'reviews'],
+        });
+      console.log(user);
       return user;
     },
 
@@ -90,18 +92,18 @@ const resolvers = {
           .populate('author')
           .populate({
             path: 'reviews',
-            populate: { 
-              path: 'author' 
-            }
+            populate: {
+              path: 'author',
+            },
           })
           .populate({
             path: 'coms',
             populate: {
-              path: 'author'
-            }
+              path: 'author',
+            },
           });
 
-          console.log(thread);
+        console.log(thread);
 
         return thread;
       } catch (error) {
@@ -141,11 +143,10 @@ const resolvers = {
 
     getThreadComs: async (parent, { id }, context) => {
       try {
-        const thread = await Thread.findById(id)
-          .populate({
-            path: 'coms',
-            populate: { path: 'coms' }
-          });
+        const thread = await Thread.findById(id).populate({
+          path: 'coms',
+          populate: { path: 'coms' },
+        });
 
         return thread;
       } catch (err) {
@@ -154,11 +155,10 @@ const resolvers = {
     },
     getReviewComs: async (parent, { id }, context) => {
       try {
-        const review = await Review.findById(id)
-          .populate({
-            path: 'coms',
-            populate: { path: 'coms' }
-          });
+        const review = await Review.findById(id).populate({
+          path: 'coms',
+          populate: { path: 'coms' },
+        });
 
         return review;
       } catch (err) {
@@ -167,11 +167,10 @@ const resolvers = {
     },
     getComComs: async (parent, { id }, context) => {
       try {
-        const com = await Com.findById(id)
-          .populate({
-            path: 'coms',
-            populate: { path: 'coms' }
-          });
+        const com = await Com.findById(id).populate({
+          path: 'coms',
+          populate: { path: 'coms' },
+        });
 
         return com;
       } catch (err) {
@@ -230,6 +229,25 @@ const resolvers = {
         throw new Error('Failed to fetch comments');
       }
     },
+
+    checkFollowers: async (parent, { followId }, context) => {
+      try {
+        const currentUser = await User.findById(context.user._id);
+        if (currentUser.following.includes(followId)) {
+          return {
+            _id: followId
+          };
+        }
+        return null; // Return null if the followId is not found in the currentUser's following array
+      } catch (err) {
+        console.log({
+          message: 'There was an error while checking to see if the current profile screen matches the current user ' + err,
+        });
+        throw err; // Rethrow the error to handle it appropriately
+      }
+    }
+    
+    
   },
   Mutation: {
     // WORKS---------------------------------------------------------------------
@@ -374,9 +392,6 @@ const resolvers = {
       }
     },
 
-
-
-
     // WORKS---------------------------------------------------------------------
     deleteThread: async (_, { threadId }) => {
       try {
@@ -437,20 +452,32 @@ const resolvers = {
     // WORKS---------------------------------------------------------------------
 
     // Add a friend
-    addFriend: async (parent, { userId, friendId }) => {
+    addFriend: async (parent, { userId }, context) => {
+      console.log('backend of addFrend ' + userId);
+      console.log(context.user._id);
+
       return User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { friends: { _id: friendId } } },
+        { _id: context.user._id },
+        { $addToSet: { following: { _id: userId } } },
         { new: true }
       );
     },
     // Delete a friend
-    deleteFriend: async (parent, { userId, friendId }) => {
-      return User.findOneAndUpdate(
-        { _id: userId },
-        { $pull: { friends: { _id: friendId } } },
-        { new: true }
-      );
+    unfollowUser: async (parent, { userId }, context) => {
+      console.log('backend of unfollow ' + userId);
+      console.log('logged in user ' + context.user._id);
+      try {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { following: userId } }, // Remove the object wrapping `_id` if not necessary
+          { new: true }
+        );
+
+        return updatedUser;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Failed to unfollow user.');
+      }
     },
 
     // create a thread
@@ -471,7 +498,7 @@ const resolvers = {
           title: title,
           description: description,
           author: context.user._id,
-          timestamp: new Date()
+          timestamp: new Date(),
         });
 
         await newThread.save();
@@ -524,7 +551,11 @@ const resolvers = {
     },
 
     // WORKS---------------------------------------------------------------------
-    addReview: async (_, { title, text, threadId, date, rating, image }, context) => {
+    addReview: async (
+      _,
+      { title, text, threadId, date, rating, image },
+      context
+    ) => {
       try {
         const author = await User.findById(context.user._id);
         if (!author) {
@@ -536,8 +567,6 @@ const resolvers = {
           throw new Error('Thread not found');
         }
 
-
-
         const review = new Review({
           author: context.user._id,
           title,
@@ -547,7 +576,7 @@ const resolvers = {
           date: new Date(date), // Example: Set the current date as the value for the 'date' field
           rating: rating || 0, // Example: Set a rating value
           type: 'Media', // Example: Set a type value
-          timestamp: Date.now()
+          timestamp: Date.now(),
         });
 
         await review.save();

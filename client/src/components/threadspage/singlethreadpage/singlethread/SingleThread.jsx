@@ -2,7 +2,7 @@ import React from 'react';
 // import ThreadsModal from '../threadsModal/ThreadsModal';
 import { useState, useEffect } from 'react';
 import '../../ThreadsPage.css';
-import '../../../cards/threadcard/cardtheme/NormalTheme.css'
+import '../../../cards/threadcard/cardtheme/NormalTheme.css';
 import { useMutation } from '@apollo/client';
 import { ADD_THREAD } from '../../../../utils/mutations';
 import ThreadAddReviewModal from '../../threadsaddreviewmodal/ThreadAddReviewModal';
@@ -10,6 +10,7 @@ import ReviewCard from '../../../cards/reviewcard/ReviewCard';
 import { useQuery } from '@apollo/client';
 import { SINGLE_THREAD, THREAD_REVIEWS } from '../../../../utils/queries';
 import './SingleThread.css';
+import { motion } from 'framer-motion';
 // import UserThreads from '../userthreads/UserThreads';
 // import MainThreads from '../mainthreads/MainThreads';
 
@@ -44,17 +45,29 @@ export default function SingleThreadPage({ threadData, getWriteReview }) {
                     id='threads-page-title'
                     className='col-12 text-center pt5'
                   >
-                    <h2 id='my-threads-h2'>{threadData.title}</h2>
+                    <motion.h2
+                      id='my-threads-h2'
+                      initial={{ opacity: 0, y: '20px' }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {threadData.title}
+                    </motion.h2>
                   </div>
                 </div>
                 <div className='row justify-content-center'>
                   <div className='col-8 text-center'>
-                    <button
+                    <motion.button
                       id='new-thread-btn'
                       onClick={() => setReviewModalTog(true)}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
                     >
                       New Review
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -65,7 +78,7 @@ export default function SingleThreadPage({ threadData, getWriteReview }) {
                 (review) => (
                   console.log(review._id),
                   (
-                    <ReviewCard 
+                    <ReviewCard
                       key={review._id}
                       _id={review._id}
                       title={review.title}

@@ -1,5 +1,6 @@
-import React from 'react'
-import './ReviewCard.css'
+import React from 'react';
+import './ReviewCard.css';
+import { motion } from 'framer-motion';
 
 export default function ReviewCard(props) {
   const formatTimestamp = (timestamp) => {
@@ -11,16 +12,18 @@ export default function ReviewCard(props) {
 
   return (
     <>
-      <div
+      <motion.div
         key={props._id}
         id='feed-container'
         className='col-8 mb-3'
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1 }}
       >
         <div className='row p-0'>
           <div className='col-12 feed-username d-flex justify-content-between align-items-center'>
-            <p className='social-username m-0 p-1'>
-              {props.title}
-            </p>
+            <p className='social-username m-0 p-1'>{props.title}</p>
             <img
               className='like-btn'
               src='/images/thumbs-up-regular.svg'
@@ -63,7 +66,7 @@ export default function ReviewCard(props) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
-  )
+  );
 }

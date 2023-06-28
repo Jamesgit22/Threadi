@@ -103,6 +103,7 @@ const typeDefs = gql`
     threadComs(threadId: ID!): [Com]
     replyComs(comId: ID!): [Com]
     getReviewsByThread(threadId: ID!): ThreadReviewResponse!
+    checkFollowers(followId: ID!): User
   }
 
   type Mutation {
@@ -112,8 +113,8 @@ const typeDefs = gql`
     shareThread(friendId: ID!, threadId: ID!): Thread
     deleteThread(threadId: ID!): Thread
     deleteThreadCom(threadId: ID!, comId: ID!): Thread
-    addFriend(userId: ID!, friendId: ID!): User
-    deleteFriend(userId: ID!, friendId: ID!): User
+    addFriend(userId: ID!): User
+    unfollowUser(userId: ID!): User
     unlikeThread(threadId: ID!): Thread
     likeCom(comId: ID!): Com
     unlikeCom(comId: ID!): Com
