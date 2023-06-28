@@ -308,3 +308,12 @@ export const GET_THREADS = gql`
     }
   }
 `;
+
+export const CHECK_SAVED_THREAD = gql`
+query Query {
+me {
+  savedThreads {
+    _id
+  }
+}
+}`;
