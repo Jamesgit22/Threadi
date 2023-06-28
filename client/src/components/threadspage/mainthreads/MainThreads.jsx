@@ -4,7 +4,7 @@ import { useState } from 'react';
 import '../ThreadsPage.css';
 import ThreadCard from '../../cards/threadcard/ThreadCard';
 
-export default function MainThreads({ getSingleThread, userData, data }) {
+export default function MainThreads({ userData, data }) {
   const [modalTog, setModalTog] = useState(false);
   console.log(userData);
   const handleModalTog = () => {
@@ -58,7 +58,6 @@ export default function MainThreads({ getSingleThread, userData, data }) {
                   title={res.title}
                   date={res.timestamp}
                   description={res.description}
-                  getSingleThread={getSingleThread}
                 />
               ))}
 

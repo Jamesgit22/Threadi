@@ -31,7 +31,7 @@ const typeDefs = gql`
     text: String!
     rating: Int
     likes: Int!
-    thread: Thread!
+    thread: Thread
     coms: [Com]
     date: String!
   }
@@ -97,8 +97,8 @@ const typeDefs = gql`
     getProfile(username: String!): User
     userThreads: [Thread]
     singleThread(threadId: ID!): Thread
-    reviews: [Review]
     singleReview(reviewId: ID!): Review
+    reviews: [Review]
     reviewComs(reviewId: ID!): [Com]
     threadComs(threadId: ID!): [Com]
     replyComs(comId: ID!): [Com]

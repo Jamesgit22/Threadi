@@ -12,15 +12,13 @@ import { motion } from 'framer-motion';
 //title
 //date
 //description
-//getSingleThread method
 
-export default function ThreadCard(props, { getSingleThread }) {
+export default function ThreadCard(props) {
   const [deleteThread] = useMutation(DELETE_THREAD);
   const date = props.date.split(' ');
   const fDate = date[1] + ' ' + date[2] + ' ' + date[3];
 
   let isNormal;
-
   if (!(window.location.href.split('/')[1] === 'profile')) {
     isNormal = true;
   } else {

@@ -112,6 +112,28 @@ const resolvers = {
       }
     },
 
+    singleReview: async (parent, { reviewId }, context) => {
+      console.log(reviewId);
+      try {
+        const review = await Review.findById(reviewId)
+          .populate('author')
+          .populate('thread')
+          .populate({
+            path: 'coms',
+            populate: {
+              path: 'author',
+            },
+          });
+
+        console.log(review);
+
+        return review;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch review');
+      }
+    },
+
     reviews: async () => {
       try {
         const allReviews = await Review.find();
@@ -119,25 +141,6 @@ const resolvers = {
       } catch (error) {
         console.error(error);
         throw new Error('Failed to fetch reviews');
-      }
-    },
-
-    singleReview: async (_, { reviewId }) => {
-      try {
-        const review = await Review.findById(reviewId).populate({
-          path: 'coms',
-          populate: {
-            path: 'author',
-            model: 'User',
-          },
-        });
-        if (!review) {
-          throw new Error('Review not found');
-        }
-        return review;
-      } catch (error) {
-        console.error(error);
-        throw new Error('Failed to fetch review');
       }
     },
 

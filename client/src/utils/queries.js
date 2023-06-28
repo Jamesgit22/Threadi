@@ -214,6 +214,75 @@ export const GET_THREAD = gql`
           _id
           username
         }
+        likes
+        text
+        timestamp
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+
+export const GET_REVIEW = gql`
+  query Query($reviewId: ID!) {
+    singleReview(reviewId: $reviewId) {
+      _id
+      author {
+        _id
+        username
+      }
+      timestamp
+      image
+      title
+      text
+      rating
+      likes
+      date
+      thread {
+        _id
+      }
+      coms {
+        author {
+          _id
+          username
+        }
+        likes
+        text
+        timestamp
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+
+export const GET_COMMENT = gql`
+  query Query($commentId: ID!) {
+    singleComment(commentId: $commentId) {
+      _id
+      author {
+        _id
+        username
+      }
+      timestamp
+      image
+      title
+      text
+      rating
+      likes
+      date
+      thread {
+        _id
+      }
+      coms {
+        author {
+          _id
+          username
+        }
+        likes
+        text
+        timestamp
         __typename
       }
       __typename
@@ -238,32 +307,6 @@ export const REVIEWS = gql`
   }
 `;
 
-export const SINGLE_REVIEW = gql`
-  query SingleReview($reviewId: ID!) {
-    singleReview(reviewId: $reviewId) {
-      _id
-      author {
-        _id
-      }
-      timestamp
-      type
-      title
-      text
-      rating
-      likes
-      date
-      coms {
-        author {
-          _id
-          username
-        }
-        timestamp
-        text
-        likes
-      }
-    }
-  }
-`;
 
 export const REVIEW_COMS = gql`
   query ReviewComs($reviewId: ID!) {

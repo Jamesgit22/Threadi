@@ -2,7 +2,12 @@ import React from 'react';
 import './CommentCard.css';
 import { motion } from 'framer-motion';
 
-export default function CommentCard() {
+export default function CommentCard(props) {
+  const formatTimestamp = (timestamp) => {
+    let date = timestamp.split(' ');
+    return date[1] + ' ' + date[2] + ' ' + date[3];
+  };
+
   return (
     <>
       <motion.div
@@ -35,15 +40,15 @@ export default function CommentCard() {
           <div className='row'>
             <div className='col-12 d-flex pt-2 justify-content-between align-items-center'>
               <h3 className='com-card-username'>{'username'}</h3>
-              {/* -----------username of the comments owner here */}
+              {props.author.username}
               <p>{'formatTimestamp(thread.timestamp)'}</p>
-              {/* ----------Timestamp */}
+              {formatTimestamp(props.timestamp)}
             </div>
           </div>
           <div className='row'>
             <div className='col-12 content-container'>
               <p className='content-desc'>{'comment content'}</p>
-              {/* ------------content of comment goes here */}
+              {props.text}
             </div>
           </div>
           {/* End of content section */}
