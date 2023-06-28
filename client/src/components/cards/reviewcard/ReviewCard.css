@@ -1,0 +1,24 @@
+.review-username {
+    font-size: 20px;
+}
+
+#review-container {
+    margin: 0 auto;
+    background-color: var(--card-bg-col);
+    border-radius: 8px;
+    border: 1px solid var(--card-border-col);
+}
+
+#review-date{
+    font-size: 20px
+}
+
+
+#review-desc {
+    font-size: 20px;
+}
+
+#review-delete {
+    font-size: 25px;
+    width: 30%;
+}

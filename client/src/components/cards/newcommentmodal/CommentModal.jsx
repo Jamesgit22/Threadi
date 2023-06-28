@@ -1,3 +1,5 @@
+/* eslint-disable no-fallthrough */
+/* eslint-disable default-case */
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useMutation } from '@apollo/client';

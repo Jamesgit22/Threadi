@@ -18,16 +18,16 @@ export default function ReviewCard(props) {
     <>
       <motion.div
         key={props._id}
-        id='feed-container'
+        id='review-container'
         className='col-8 mb-3'
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <div className='row p-0'>
+        <div id='review-card' className='row p-0'>
           <div className='col-12 feed-username d-flex justify-content-between align-items-center'>
-            <p className='social-username m-0 p-1'>{props.title}</p>
+            <p className='review-username m-0 p-1'>{props.title}</p>
             <img
               className='like-btn'
               src='/images/comments-regular.svg'
@@ -47,17 +47,17 @@ export default function ReviewCard(props) {
             >
               <div className='row'>
                 <div className='col-12'>
-                  <p>{formatTimestamp(props.date)}</p>
+                  <p id='review-date'>{formatTimestamp(props.date)}</p>
                 </div>
               </div>
               <div className='row'>
                 <div className='col-12'>
-                  <p>{'Rating: ' + props.rating}</p>
+                  <p id='review-date'>{'Rating: ' + props.rating}</p>
                 </div>
               </div>
               <div className='row'>
                 <div className='col-12'>
-                  <p className='content-desc'>{props.text}</p>
+                  <p id='review-desc' className='content-desc'>{props.text}</p>
                 </div>
               </div>
             </div>
@@ -65,7 +65,7 @@ export default function ReviewCard(props) {
          
           <div className='row'>
             <div className='col-12'>
-              <button className='social-btns'>delete</button>
+              <button id='review-delete' className='social-btns'>delete</button>
             </div>
           </div>
         </div>
