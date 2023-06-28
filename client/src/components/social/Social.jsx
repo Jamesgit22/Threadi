@@ -29,7 +29,9 @@ export default function Social() {
   };
 
   // Go to comments page for seleted item
-  const handleCommentBtn = (e) => {};
+  const handleCommentBtn = (threadId) => {
+    window.location.href = `/comments/thread/${threadId}`;
+  };
 
   const formatTimestamp = (timestamp) => {
     let date = timestamp.split(' ');
@@ -141,7 +143,7 @@ export default function Social() {
                             className='comments-btn'
                             src='/images/comments-regular.svg'
                             alt='comment button'
-                            onClick={handleCommentBtn}
+                            onClick={() => handleCommentBtn(thread._id)}
                           />
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../CommentsPage.css';
 import ThreadCard from '../../cards/threadcard/ThreadCard';
 import ComCard from '../../cards/commentcard/CommentCard';
@@ -6,17 +6,32 @@ import { GET_THREAD } from '../../../utils/queries';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useQuery } from '@apollo/client';
+import './ThreadComment.css';
+import Loading from '../../loading/Loading';
+import CommentModal from '../../cards/newcommentmodal/CommentModal';
 
 export default function ThreadComment() {
   let { id } = useParams();
   const { loading, data, error } = useQuery(GET_THREAD, {
-    variables: { threadId: id }
-  })
+    variables: { threadId: id },
+  });
+  const [modalTog, setModalTog] = useState(false);
 
   const threadData = data?.singleThread || {};
 
-  if (loading) {return <>LOADING...</>}
+  if (loading) {
+    return <Loading />;
+  }
 
+  const handleModalTog = () => {
+    setModalTog((open) => !open);
+  };
+
+  const closeModal = () => {
+    setModalTog(false);
+  };
+
+  console.log('threadData:', threadData)
   return (
     <>
       <div id='comments-main' className='container-fluid p-0 m-0'>
@@ -30,32 +45,26 @@ export default function ThreadComment() {
                     id='comments-page-title'
                     className='col-12 text-center pt5'
                   >
-                    <motion.h2
-                      initial={{ opacity: 0, y: '20px' }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                      id='my-comments-h2'
-                    >
-                      <ThreadCard
-                        key={threadData._id}
-                        id={threadData._id}
-                        title={threadData.title}
-                        date={threadData.timestamp}
-                        description={threadData.description}
-                      />
-                    </motion.h2>
-                  </div>
-                </div>
-                <div className='row justify-content-center'>
-                  <div className='col-8 text-center'>
-                    <button id='new-comments-btn'>New comments</button>
+                    <ThreadCard
+                      key={threadData._id}
+                      id={threadData._id}
+                      title={threadData.title}
+                      date={threadData.timestamp}
+                      description={threadData.description}
+                    />
+
+                    <div className='row justify-content-center'>
+                      <div className='col-6 text-center'>
+                        <button id='create-comment-btn' onClick={() => handleModalTog()}>New Comment</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             {/* top section end */}
             {threadData.coms.map((res) => (
-              <ComCard 
+              <ComCard
                 author={res.author}
                 likes={res.likes}
                 text={res.text}
@@ -64,6 +73,15 @@ export default function ThreadComment() {
             ))}
           </div>
         </div>
+        {modalTog && (
+          <CommentModal
+            closeModal={closeModal}
+            //onViewChange={onViewChange}
+            modalTog={modalTog}
+            threadId={threadData._id}
+            threadAuthor={threadData.author._id}
+          />
+        )}
       </div>
     </>
   );

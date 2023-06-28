@@ -415,6 +415,7 @@ const resolvers = {
       { threadId, comText, comAuthor },
       { models }
     ) => {
+      console.log('comText:', comText, threadId, comAuthor)
       try {
         const thread = await Thread.findById(threadId);
         if (!thread) {

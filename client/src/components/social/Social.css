@@ -85,6 +85,10 @@
     font-size: 1em;
 }
 
+.content-desc {
+  word-wrap: break-word;
+}
+
 .comments-count {
   font-size: 1.2em;
   margin-bottom: 0;
