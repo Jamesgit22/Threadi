@@ -78,8 +78,6 @@ export default function ThreadComment() {
             closeModal={closeModal}
             //onViewChange={onViewChange}
             modalTog={modalTog}
-            threadId={threadData._id}
-            threadAuthor={threadData.author._id}
           />
         )}
       </div>

@@ -121,10 +121,10 @@ const typeDefs = gql`
     likeReview(reviewId: ID!): Review
     unlikeReview(reviewId: ID!): Review
     saveThread(threadId: ID!): User!
-    addThreadCom(threadId: ID!, comText: String!, comAuthor: ID!): Thread
+    addThreadCom(threadId: ID!, comText: String!): Thread
     addThread(title: String!, description: String!): Thread
     addReview(title: String!, text: String!, image: String, threadId: ID!, date: String!, rating: Int): Review!
-    addReviewCom(reviewId: ID!, comText: String!, comAuthor: ID!): Review
+    addReviewCom(reviewId: ID!, comText: String!): Review
     deleteReview(reviewId: ID!): Review
     deleteReviewCom(reviewId: ID!, comId: ID!): Review
     updateReview(reviewId: ID!, title: String!, text: String!): Review
