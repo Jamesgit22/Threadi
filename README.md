@@ -89,7 +89,7 @@ The following development dependencies are also required:
   - Github: [Elfelfa](https://github.com/Elfelfa)
   - Email: koltbodzo@gmail.com
   - Github: [jamesgit22](https://github.com/jamesgit22)
-  - Email: jamesschroedermail97@gmail.com
+  - Email: jschroeder2296@gmail.com
   - Github: [rahargrave](https://github.com/rahargrave)
   - Email: riverbendwarriors13@gmail.com
   - Github: [codemonkeyspoon](https://github.com/codemonkeyspoon)
