@@ -13,7 +13,7 @@ export default function Browse() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [modalTog, setModalTog] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const searchOptions = ['Movies', 'Shows', 'Books', 'Games'];
+  const searchOptions = ['Movies', 'Shows', 'Books', 'Games', 'Anime', 'Manga'];
 
   const searchClick = async () => {
     console.log(selectedWord);
