@@ -260,7 +260,7 @@ export default function ThreadAddReviewModal({
                   </div>
                   <div className='row'>
                     <div id='t-title-container' className='col-12 col-md-6'>
-                      <h2 id='t-modal-title' className='modal-title align-self-center'>Search for a</h2>
+                      <h2 id='t-modal-title' className='modal-title align-self-center'>Search for </h2>
                     </div>
                     <div id='t-switch-container' className='col-12 col-md-6'>
                       <select

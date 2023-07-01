@@ -20,7 +20,7 @@ export default function CommentModal({ modalTog, closeModal }) {
   };
 
   async function handleFormSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
