@@ -87,20 +87,20 @@ export default function ThreadCard(props) {
         <div className='row'>
           <div className='col-12 d-flex justify-content-evenly align-items-center thread-btns-container'>
             <div className='col-4'>
-              <p className='m-0 pt-1 pb-1'></p>
+            <img
+                className='like-btn'
+                src='/images/comments-regular.svg'
+                alt='Comment button'
+                onClick={() => handleCommentClick()}
+              />
             </div>
             <div className='col-4 d-flex align-items-center'>
               <button className='thread-open-btn m-2' onClick={sendData}>
                 Open
               </button>
             </div>
-            <div className='col-4 justify-content-end d-flex align-items-center'>
-              <img
-                className='like-btn'
-                src='/images/comments-regular.svg'
-                alt='Comment button'
-                onClick={() => handleCommentClick()}
-              />
+            <div className='col-4 justify-content-end gap-2 d-flex align-items-center'>
+              
               <img
                 src='/images/trash-can-solid.svg'
                 alt='delete button'
