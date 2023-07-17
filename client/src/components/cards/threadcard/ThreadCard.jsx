@@ -1,7 +1,5 @@
 import React from 'react';
 import '../../profile/Profile.css';
-// import NormalTheme from './cardtheme/NormalTheme'
-// import ProfileTheme from './cardtheme/ProfileTheme'
 import { useMutation } from '@apollo/client';
 import { DELETE_THREAD } from '../../../utils/mutations';
 import { motion } from 'framer-motion';
